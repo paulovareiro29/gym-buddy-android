@@ -6,6 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import ipvc.gymbuddy.api.models.requests.LoginRequest
 import ipvc.gymbuddy.api.services.AuthenticationService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
     fun handleButtonClick(v: View?) {
         CoroutineScope(Dispatchers.Main + Job()).launch(Dispatchers.Main) {
-            AuthenticationService().login()
+            AuthenticationService().login(LoginRequest("gymbuddy@ipvc.pt","gymbuddy"))
         }
     }
 }
