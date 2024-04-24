@@ -2,18 +2,17 @@ package ipvc.gymbuddy.app
 
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import ipvc.gymbuddy.api.models.requests.LoginRequest
-import ipvc.gymbuddy.api.services.AuthenticationService
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import androidx.lifecycle.ViewModelProvider
+import ipvc.gymbuddy.app.viewmodels.AuthenticationViewModel
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var authenticationViewModel: AuthenticationViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -24,11 +23,16 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-    }
 
-    fun handleButtonClick(v: View?) {
-        CoroutineScope(Dispatchers.Main + Job()).launch(Dispatchers.Main) {
-            AuthenticationService().login(LoginRequest("gymbuddy@ipvc.pt","gymbuddy"))
+        authenticationViewModel = ViewModelProvider(this)[AuthenticationViewModel::class.java]
+        authenticationViewModel.user.observe(this) {
+            findViewById<TextView>(R.id.text).text = it?.email ?: ""
         }
     }
+
+
+    fun handleButtonClick(v: View?) {
+        authenticationViewModel.login("gymbuddy@ipvc.pt", "gymbuddy")
+    }
 }
+
