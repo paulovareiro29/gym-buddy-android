@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.GymBuddy" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryVariant">@color/primaryDarkColor</item>
@@ -35,17 +35,25 @@
 
         <!-- Other default settings -->
         <item name="android:textSize">14sp</item>
+
+        <item name="android:buttonStyle">@style/Theme.Button</item>
+        <item name="android:textViewStyle">@style/Theme.TextView</item>
     </style>
 
     <!-- No ActionBar theme. -->
-    <style name="Theme.GymBuddy.NoActionBar">
+    <style name="Theme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <!-- App theme with a dark action bar. -->
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
+    <style name="Theme.TextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/accentColor</item>
+    </style>
 
-    <!-- Popup theme that overlays content for dialogues. -->
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
+    <style name="Theme.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">34sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="backgroundTint">@color/accentColor</item>
+    </style>
 </resources>
