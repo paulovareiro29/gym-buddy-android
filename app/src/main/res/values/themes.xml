@@ -35,18 +35,13 @@
 
         <!-- Other default settings -->
         <item name="android:textSize">14sp</item>
-        <item name="android:textViewStyle">@style/Theme.TextView</item>
+        <item name="android:textViewStyle">@style/Theme.Typography.Body</item>
     </style>
 
     <!-- No ActionBar theme. -->
     <style name="Theme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="Theme.TextView" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/textPrimary</item>
     </style>
 
     <!-- Buttons -->
@@ -92,5 +87,84 @@
         <item name="strokeColor">@color/error</item>
         <item name="backgroundTint">@color/white</item>
         <item name="rippleColor">@color/errorRipple</item>
+    </style>
+
+    <!-- Typography -->
+    <style name="Theme.GymBuddy.Typography" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/textPrimary</item>
+    </style>
+
+    <style name="Theme.GymBuddy.Typography.Medium" parent="Theme.GymBuddy.Typography">
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="Theme.GymBuddy.Typography.Black" parent="Theme.GymBuddy.Typography">
+        <item name="android:fontFamily">sans-serif-black</item>
+    </style>
+
+    <!-- Typography: Display-->
+    <style name="Theme.Typography.DisplayLarge" parent="Theme.GymBuddy.Typography.Black">
+        <item name="android:textSize">57sp</item>
+    </style>
+
+    <style name="Theme.Typography.Display" parent="Theme.GymBuddy.Typography.Black">
+        <item name="android:textSize">45sp</item>
+    </style>
+
+    <style name="Theme.Typography.DisplaySmall" parent="Theme.GymBuddy.Typography.Black">
+        <item name="android:textSize">36sp</item>
+    </style>
+
+    <!-- Typography: Headline -->
+    <style name="Theme.Typography.HeadlineLarge" parent="Theme.GymBuddy.Typography">
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="Theme.Typography.Headline" parent="Theme.GymBuddy.Typography">
+        <item name="android:textSize">28sp</item>
+    </style>
+
+    <style name="Theme.Typography.HeadlineSmall" parent="Theme.GymBuddy.Typography">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <!-- Typography: Title -->
+    <style name="Theme.Typography.TitleLarge" parent="Theme.GymBuddy.Typography">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="Theme.Typography.Title" parent="Theme.GymBuddy.Typography.Medium">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Theme.Typography.TitleSmall" parent="Theme.GymBuddy.Typography.Medium">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!-- Typography: Label -->
+    <style name="Theme.Typography.LabelLarge" parent="Theme.GymBuddy.Typography.Medium">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Theme.Typography.Label" parent="Theme.GymBuddy.Typography.Medium">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Theme.Typography.LabelSmall" parent="Theme.GymBuddy.Typography.Medium">
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <!-- Typography: Body -->
+    <style name="Theme.Typography.BodyLarge" parent="Theme.GymBuddy.Typography">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Theme.Typography.Body" parent="Theme.GymBuddy.Typography">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Theme.Typography.BodySmall" parent="Theme.GymBuddy.Typography">
+        <item name="android:textSize">12sp</item>
     </style>
 </resources>
