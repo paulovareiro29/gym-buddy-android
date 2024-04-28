@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     fun handleButtonClick(v: View?) {
         authenticationViewModel.login("gymbuddy@ipvc.pt", "gymbuddy")
     }
