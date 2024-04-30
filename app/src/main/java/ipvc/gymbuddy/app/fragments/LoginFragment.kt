@@ -1,18 +1,26 @@
 package ipvc.gymbuddy.app.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import ipvc.gymbuddy.app.R
+import ipvc.gymbuddy.app.databinding.FragmentLoginBinding
+import ipvc.gymbuddy.app.viewmodels.AuthenticationViewModel
 
-class LoginFragment : Fragment() {
+class LoginFragment : BaseFragment<FragmentLoginBinding>(
+    FragmentLoginBinding::inflate
+) {
+    private lateinit var viewModel: AuthenticationViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_login, container, false)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = getViewModel()
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.loginButton.setOnClickListener { handleLoginButtonClick() }
+    }
+
+    private fun handleLoginButtonClick() {
+        viewModel.login("gymbuddy@ipvc.pt", "gymbuddy")
     }
 }

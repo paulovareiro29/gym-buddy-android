@@ -7,6 +7,10 @@ android {
     namespace = "ipvc.gymbuddy.app"
     compileSdk = 34
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     defaultConfig {
         applicationId = "ipvc.gymbuddy.app"
         minSdk = 24
