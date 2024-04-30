@@ -1,10 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Primary Color -->
+    <color name="primaryColor">#264451</color>
+    <color name="primaryLightColor">#63898d</color>
+    <color name="primaryDarkColor">#30505f</color>
+
+    <!-- Secondary Color -->
+    <color name="secondaryColor">#8fcdc0</color>
+    <color name="secondaryLightColor">#b0ccc4</color>
+    <color name="secondaryDarkColor">#95dccc</color>
+
+    <!-- Accent Color -->
+    <color name="accentColor">#FFC107</color>
+
+    <!-- Neutral Colors -->
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="whiteRipple">#29ffffff</color>
+
+    <!-- Text Colors -->
+    <color name="textPrimary">#000000</color>
+    <color name="textSecondary">#264451</color>
+
+    <!-- Background Colors -->
+    <color name="background">#F2F1FA</color>
+    <color name="surface">#b0ccc4</color>
+
+    <!-- Error Colors -->
+    <color name="error">#B00020</color>
+    <color name="errorRipple">#29B00020</color>
 </resources>
