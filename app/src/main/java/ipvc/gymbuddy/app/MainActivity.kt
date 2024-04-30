@@ -25,9 +25,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         authenticationViewModel = ViewModelProvider(this)[AuthenticationViewModel::class.java]
-        authenticationViewModel.user.observe(this) {
+        /* authenticationViewModel.user.observe(this) {
             findViewById<TextView>(R.id.text).text = it?.email ?: ""
-        }
+        } */
     }
 
     fun handleButtonClick(v: View?) {

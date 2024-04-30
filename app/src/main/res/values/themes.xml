@@ -52,6 +52,8 @@
         <item name="android:paddingBottom">12dp</item>
         <item name="rippleColor">@color/whiteRipple</item>
 
+        <item name="shapeAppearance">@style/ShapeAppearance.Material3.SmallComponent</item>
+
         <item name="android:textSize">16sp</item>
     </style>
 

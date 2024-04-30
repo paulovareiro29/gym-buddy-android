@@ -23,7 +23,7 @@
     <color name="textSecondary">#264451</color>
 
     <!-- Background Colors -->
-    <color name="background">#ffffff</color>
+    <color name="background">#F2F1FA</color>
     <color name="surface">#b0ccc4</color>
 
     <!-- Error Colors -->
