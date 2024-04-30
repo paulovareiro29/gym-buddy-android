@@ -1,7 +1,6 @@
 package ipvc.gymbuddy.app.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import ipvc.gymbuddy.app.databinding.FragmentLoginBinding
 import ipvc.gymbuddy.app.viewmodels.AuthenticationViewModel

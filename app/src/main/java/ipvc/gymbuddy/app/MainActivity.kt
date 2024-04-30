@@ -10,7 +10,6 @@ import androidx.navigation.fragment.NavHostFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
-    // private lateinit var authenticationViewModel: AuthenticationViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,19 +24,10 @@ class MainActivity : AppCompatActivity() {
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
-
-        //
-        /* authenticationViewModel.user.observe(this) {
-            findViewById<TextView>(R.id.text).text = it?.email ?: ""
-        } */
     }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
-
-    /* fun handleButtonClick(v: View?) {
-        authenticationViewModel.login("gymbuddy@ipvc.pt", "gymbuddy")
-    } */
 }
 
