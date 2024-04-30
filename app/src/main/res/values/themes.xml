@@ -36,6 +36,7 @@
         <!-- Other default settings -->
         <item name="android:textSize">14sp</item>
         <item name="android:textViewStyle">@style/Theme.Typography.Body</item>
+        <item name="textInputStyle">@style/Theme.Input</item>
     </style>
 
     <!-- No ActionBar theme. -->
@@ -52,6 +53,7 @@
         <item name="android:paddingBottom">12dp</item>
         <item name="rippleColor">@color/whiteRipple</item>
 
+        <item name="textAllCaps">true</item>
         <item name="shapeAppearance">@style/ShapeAppearance.Material3.SmallComponent</item>
 
         <item name="android:textSize">16sp</item>
@@ -62,6 +64,9 @@
         <item name="android:paddingLeft">24dp</item>
         <item name="android:paddingTop">12dp</item>
         <item name="android:paddingBottom">12dp</item>
+
+        <item name="textAllCaps">true</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Material3.SmallComponent</item>
 
         <item name="android:textSize">16sp</item>
     </style>
@@ -90,6 +95,12 @@
         <item name="backgroundTint">@color/white</item>
         <item name="rippleColor">@color/errorRipple</item>
     </style>
+
+    <!-- Inputs -->
+    <style name="Theme.Input" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxBackgroundColor">@color/white</item>
+    </style>
+
 
     <!-- Typography -->
     <style name="Theme.GymBuddy.Typography" parent="Widget.MaterialComponents.TextView">
