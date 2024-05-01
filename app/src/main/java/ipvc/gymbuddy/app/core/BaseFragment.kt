@@ -1,4 +1,4 @@
-package ipvc.gymbuddy.app.fragments
+package ipvc.gymbuddy.app.core
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,6 +14,7 @@ abstract class BaseFragment<VB : ViewBinding>(
 ) : Fragment() {
     private var _binding: VB? = null
     protected val binding get() = _binding!!
+    protected val context = requireContext()
 
 
     protected inline fun <reified T : ViewModel> getViewModel(): T = ViewModelProvider(this)[T::class.java]
