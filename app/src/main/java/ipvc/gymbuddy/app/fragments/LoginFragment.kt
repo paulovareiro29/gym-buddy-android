@@ -1,7 +1,6 @@
 package ipvc.gymbuddy.app.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.core.Validator
@@ -12,16 +11,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
     FragmentLoginBinding::inflate
 ) {
     private lateinit var viewModel: AuthenticationViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = getViewModel()
-
-        viewModel.user.observe(this) {
-            if (it != null) {
-                Log.d("GYM BUDDY", "User logged in: ${it.email}")
-            }
-        }
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,8 +26,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
 
         if (email == null || password == null) return
 
-        if (!Validator.validateEmailField(email, context)) return
-        if (!Validator.validatePasswordField(password, context)) return
+        if (!Validator.validateEmailField(email, requireContext())) return
+        if (!Validator.validatePasswordField(password, requireContext())) return
 
         viewModel.login(email.text.toString(), password.text.toString())
     }
