@@ -26,8 +26,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
 
         if (email == null || password == null) return
 
-        if (!Validator.validateEmailField(email, requireContext())) return
-        if (!Validator.validatePasswordField(password, requireContext())) return
+        if (!Validator.validateRequiredField(email, requireContext())) return
+        if (!Validator.validateRequiredField(password, requireContext())) return
 
         viewModel.login(email.text.toString(), password.text.toString())
     }

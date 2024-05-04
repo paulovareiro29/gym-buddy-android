@@ -2,8 +2,8 @@
     <string name="app_name">Gym Buddy</string>
     <string name="gym_buddy_logo">Gym Buddy Logo</string>
     <string name="log_in_to_your_account">Log in to your account</string>
+    <string name="submit">Submit</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="email_is_required">Email is required</string>
-    <string name="password_is_required">Password is required</string>
+    <string name="field_is_required">Field is required</string>
 </resources>

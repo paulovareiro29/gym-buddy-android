@@ -10,22 +10,11 @@ object Validator {
         return email.matches(emailRegex.toRegex())
     }
 
-    fun validateEmailField(field: EditText, context: Context): Boolean {
-        val email = field.text.toString()
-
-        if (email.isBlank()) {
-            field.error = context.getString(R.string.email_is_required)
-            return false
-        }
-
-        return true
-    }
-
-    fun validatePasswordField(field: EditText, context: Context): Boolean {
+    fun validateRequiredField(field: EditText, context: Context): Boolean {
         val text = field.text.toString()
 
         if (text.isBlank()) {
-            field.error = context.getString(R.string.password_is_required)
+            field.error = context.getString(R.string.field_is_required)
             return false
         }
 
