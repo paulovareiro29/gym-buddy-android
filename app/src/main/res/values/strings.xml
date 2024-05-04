@@ -2,8 +2,11 @@
     <string name="app_name">Gym Buddy</string>
     <string name="gym_buddy_logo">Gym Buddy Logo</string>
     <string name="log_in_to_your_account">Log in to your account</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
     <string name="submit">Submit</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="field_is_required">Field is required</string>
+    <string name="app_description">Lorem ipsum dolor sit amet, consecrate disciplining elite.</string>
 </resources>
