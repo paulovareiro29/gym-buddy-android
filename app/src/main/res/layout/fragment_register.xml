@@ -9,7 +9,7 @@
     android:paddingHorizontal="24dp"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context=".fragments.LoginFragment">
+    tools:context=".fragments.RegisterFragment">
 
     <!-- HEADER -->
     <LinearLayout
@@ -47,10 +47,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/primaryColor"
-            android:text="@string/log_in_to_your_account"/>
+            android:text="@string/set_up_your_account"/>
     </LinearLayout>
 
-    <!-- LOGIN FORM -->
+    <!-- REGISTER FORM -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -81,6 +81,19 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/register_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/register_code"
+            android:layout_marginBottom="16dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <Button
             android:id="@+id/submit_button"

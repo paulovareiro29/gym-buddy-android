@@ -7,6 +7,10 @@
     <string name="submit">Submit</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="register_code">Register Code</string>
     <string name="field_is_required">Field is required</string>
+    <string name="invalid_email_format">Invalid email format</string>
+    <string name="minimum_x_characters">Minimum of %1$d characters</string>
     <string name="app_description">Lorem ipsum dolor sit amet, consecrate disciplining elite.</string>
+    <string name="set_up_your_account">Set up your account</string>
 </resources>

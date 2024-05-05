@@ -17,7 +17,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.loginButton.setOnClickListener { handleLoginButtonClick() }
+        binding.submitButton.setOnClickListener { handleLoginButtonClick() }
     }
 
     private fun handleLoginButtonClick() {
