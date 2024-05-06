@@ -1,6 +1,6 @@
 package ipvc.gymbuddy.api.interfaces
 
-import ipvc.gymbuddy.api.core.Success
+import ipvc.gymbuddy.api.core.RequestResult
 import ipvc.gymbuddy.api.models.requests.ActivateRequest
 import ipvc.gymbuddy.api.models.requests.LoginRequest
 import ipvc.gymbuddy.api.models.responses.ActivateResponse
@@ -11,8 +11,8 @@ import retrofit2.http.POST
 
 interface IAuthenticationService {
     @POST("login")
-    fun login(@Body body: LoginRequest): Call<Success<LoginResponse>>
+    fun login(@Body body: LoginRequest): Call<RequestResult.Success<LoginResponse>>
 
     @POST("activate")
-    fun activate(@Body body: ActivateRequest): Call<Success<ActivateResponse>>
+    fun activate(@Body body: ActivateRequest): Call<RequestResult.Success<ActivateResponse>>
 }

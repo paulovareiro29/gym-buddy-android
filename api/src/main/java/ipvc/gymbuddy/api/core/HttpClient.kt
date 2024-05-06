@@ -18,7 +18,7 @@ open class HttpClient<T>(service: Class<T>) {
             .build()
             .create(service)
 
-    suspend fun <T> request(call: Call<T>): Resource {
+    suspend fun <T> request(call: Call<T>): RequestResult<*> {
         return try {
             val response = call.awaitResponse()
             if (response.isSuccessful) {
@@ -27,7 +27,7 @@ open class HttpClient<T>(service: Class<T>) {
                 ResponseParser.Error(response)
             }
         } catch (err: Exception) {
-            Error(
+            RequestResult.Error(
                 500,
                 "API REQUEST FAILED: " + err.message,
                 mapOf())

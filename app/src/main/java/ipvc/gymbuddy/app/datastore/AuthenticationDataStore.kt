@@ -3,6 +3,7 @@ package ipvc.gymbuddy.app.datastore
 import android.annotation.SuppressLint
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
+import ipvc.gymbuddy.api.core.RequestResult
 import ipvc.gymbuddy.api.models.User
 import ipvc.gymbuddy.api.models.requests.ActivateRequest
 import ipvc.gymbuddy.api.models.requests.LoginRequest
@@ -25,10 +26,9 @@ class AuthenticationDataStore(context: Context) : BaseDataStore(context) {
 
     fun login(email: String, password: String) {
         coroutine.launch {
-            val response = AuthenticationService().login(LoginRequest(email, password))
-
-            if (response != null) {
-                user.postValue(response.user)
+            when (val response = AuthenticationService().login(LoginRequest(email, password))) {
+                is RequestResult.Success -> user.postValue(response.data.user)
+                is RequestResult.Error -> user.postValue(null)
             }
         }
     }
@@ -37,8 +37,10 @@ class AuthenticationDataStore(context: Context) : BaseDataStore(context) {
         activateSuccess.postValue(null)
 
         coroutine.launch {
-            val response = AuthenticationService().activate(ActivateRequest(email, password, code))
-            activateSuccess.postValue(response != null)
+            when (AuthenticationService().activate(ActivateRequest(email, password, code))) {
+                is RequestResult.Success -> activateSuccess.postValue(true)
+                is RequestResult.Error -> activateSuccess.postValue(false)
+            }
         }
     }
 }
