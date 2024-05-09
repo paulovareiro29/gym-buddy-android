@@ -14,5 +14,9 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>(
         binding.loginButton.setOnClickListener {
             navController.navigate(R.id.action_welcomeFragment_to_loginFragment)
         }
+
+        binding.registerButton.setOnClickListener {
+            navController.navigate(R.id.action_welcomeFragment_to_registerFragment)
+        }
     }
 }

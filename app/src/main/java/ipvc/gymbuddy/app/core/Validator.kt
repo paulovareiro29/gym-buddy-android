@@ -20,4 +20,27 @@ object Validator {
 
         return true
     }
+
+    fun validateEmailField(field: EditText, context: Context): Boolean {
+        val email = field.text.toString()
+
+        if (!isEmail(email)) {
+            field.error = context.getString(R.string.invalid_email_format)
+            return false
+        }
+
+        return true
+    }
+
+    fun validatePasswordField(field: EditText, context: Context): Boolean {
+        val password = field.text.toString()
+        val minimumLength = 8
+
+        if (password.length < minimumLength) {
+            field.error = context.getString(R.string.minimum_x_characters, minimumLength)
+            return false
+        }
+
+        return true
+    }
 }

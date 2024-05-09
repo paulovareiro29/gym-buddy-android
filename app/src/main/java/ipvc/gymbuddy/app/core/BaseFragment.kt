@@ -15,6 +15,7 @@ import androidx.viewbinding.ViewBinding
 abstract class BaseFragment<VB : ViewBinding>(
     private val bindingInflater: (inflater: LayoutInflater, container: ViewGroup?, attachToRoot: Boolean) -> VB
 ) : Fragment() {
+
     private var _binding: VB? = null
     protected val binding get() = _binding!!
     protected lateinit var navController: NavController
