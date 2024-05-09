@@ -14,6 +14,14 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
 
         if (viewModel.user.value == null) {
             Navigator.resetNavigationTo(AuthenticationActivity::class.java, this)
+            return
+        }
+
+        when (viewModel.user.value!!.role.name) {
+            "admin" -> navController.setGraph(R.navigation.admin_navigation)
+            "trainer" -> navController.setGraph(R.navigation.not_found_navigation)
+            "client" -> navController.setGraph(R.navigation.not_found_navigation)
+            else -> navController.setGraph(R.navigation.not_found_navigation)
         }
     }
 }

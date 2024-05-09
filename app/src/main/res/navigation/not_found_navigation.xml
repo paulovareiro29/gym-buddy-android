@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/not_found_navigation"
+    app:startDestination="@id/notFoundFragment">
+
+    <fragment
+        android:id="@+id/notFoundFragment"
+        android:name="ipvc.gymbuddy.app.fragments.NotFoundFragment"
+        android:label="fragment_not_found"
+        tools:layout="@layout/fragment_not_found" />
+</navigation>
