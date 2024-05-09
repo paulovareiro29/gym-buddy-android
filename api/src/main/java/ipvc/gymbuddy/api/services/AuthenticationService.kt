@@ -1,6 +1,5 @@
 package ipvc.gymbuddy.api.services
 
-import android.util.Log
 import ipvc.gymbuddy.api.core.HttpClient
 import ipvc.gymbuddy.api.core.RequestResult
 import ipvc.gymbuddy.api.core.ResponseParser
@@ -24,18 +23,12 @@ class AuthenticationService: HttpClient<IAuthenticationService>(IAuthenticationS
 
     suspend fun activate(body: ActivateRequest): RequestResult<ActivateResponse> {
         return when (val response = request(api.activate(body))) {
-            is RequestResult.Success -> {
-                Log.d("test", "$response")
-                RequestResult.Success(
-                    code = response.code,
-                    message = response.message,
-                    data = ResponseParser.payload<ActivateResponse>(response)
-                )
-            }
-            is RequestResult.Error -> {
-                Log.d("test", "$response")
-                response
-            }
+            is RequestResult.Success -> RequestResult.Success(
+                code = response.code,
+                message = response.message,
+                data = ResponseParser.payload<ActivateResponse>(response)
+            )
+            is RequestResult.Error -> response
         }
     }
 }
