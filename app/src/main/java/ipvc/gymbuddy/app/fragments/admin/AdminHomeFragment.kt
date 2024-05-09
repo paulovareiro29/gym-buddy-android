@@ -1,6 +1,7 @@
 package ipvc.gymbuddy.app.fragments.admin
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentAdminHomeBinding
@@ -20,5 +21,10 @@ class AdminHomeFragment : BaseFragment<FragmentAdminHomeBinding>(
         super.onViewCreated(view, savedInstanceState)
         binding.name.text = viewModel.user.value!!.name
         binding.role.text = viewModel.user.value!!.role.name.replaceFirstChar { it.titlecase(Locale.ROOT) }
+        binding.generateUser.setOnClickListener { handleGenerateNewUserClick() }
+    }
+
+    private fun handleGenerateNewUserClick() {
+        Log.d("TODO", "Navigate to generate new user")
     }
 }

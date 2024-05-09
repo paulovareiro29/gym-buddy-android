@@ -19,4 +19,5 @@
     <string name="home">Home</string>
     <string name="welcome_back">Welcome back</string>
     <string name="avatar">Avatar</string>
+    <string name="generate_new_user">Generate new user</string>
 </resources>

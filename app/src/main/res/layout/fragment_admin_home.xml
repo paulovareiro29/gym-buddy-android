@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingVertical="32dp"
-        android:paddingHorizontal="24dp">
+        android:paddingHorizontal="24dp"
+        android:orientation="vertical">
 
         <!-- WELCOME BACK -->
         <LinearLayout
@@ -57,5 +58,14 @@
                 android:scaleType="centerInside"
                 android:contentDescription="@string/avatar"/>
         </LinearLayout>
+
+        <!-- GENERATE USER -->
+        <Button
+            android:id="@+id/generate_user"
+            style="@style/Theme.Button.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/generate_new_user"
+            android:layout_marginTop="54dp"/>
     </LinearLayout>
 </LinearLayout>
