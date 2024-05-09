@@ -16,4 +16,7 @@
     <string name="app_description">Lorem ipsum dolor sit amet, consecrate disciplining elite.</string>
     <string name="set_up_your_account">Set up your account</string>
     <string name="page_not_found">Page Not Found</string>
+    <string name="home">Home</string>
+    <string name="welcome_back">Welcome back</string>
+    <string name="avatar">Avatar</string>
 </resources>
