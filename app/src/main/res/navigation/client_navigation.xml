@@ -2,26 +2,26 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigation"
-    app:startDestination="@id/admin_home_fragment">
+    android:id="@+id/client_navigation"
+    app:startDestination="@id/client_home_fragment">
 
     <fragment
-        android:id="@+id/admin_home_fragment"
-        android:name="ipvc.gymbuddy.app.fragments.admin.AdminHomeFragment"
-        android:label="fragment_admin_home"
-        tools:layout="@layout/fragment_admin_home" />
+        android:id="@+id/client_home_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.client.ClientHomeFragment"
+        android:label="fragment_client_home"
+        tools:layout="@layout/fragment_client_home" />
     <fragment
-        android:id="@+id/admin_not_found_fragment"
+        android:id="@+id/client_not_found_fragment"
         android:name="ipvc.gymbuddy.app.fragments.NotFoundFragment"
         android:label="fragment_not_found"
         tools:layout="@layout/fragment_not_found" />
     <fragment
-        android:id="@+id/admin_profile_fragment"
+        android:id="@+id/client_profile_fragment"
         android:name="ipvc.gymbuddy.app.fragments.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
-        android:id="@+id/admin_settings_fragment"
+        android:id="@+id/client_settings_fragment"
         android:name="ipvc.gymbuddy.app.fragments.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />

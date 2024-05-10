@@ -25,8 +25,8 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
     private fun initializeNavigation() {
         when (viewModel.user.value!!.role.name) {
             "admin" -> navController.setGraph(R.navigation.admin_navigation)
-            "trainer" -> navController.setGraph(R.navigation.not_found_navigation)
-            "client" -> navController.setGraph(R.navigation.not_found_navigation)
+            "trainer" -> navController.setGraph(R.navigation.trainer_navigation)
+            "client" -> navController.setGraph(R.navigation.client_navigation)
             else -> navController.setGraph(R.navigation.not_found_navigation)
         }
     }
@@ -39,19 +39,29 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
             when(item.itemId) {
                 R.id.home_bottom_navigation -> {
                     when (viewModel.user.value!!.role.name) {
-                        "admin" -> navController.navigate(R.id.adminHomeFragment)
-                        "trainer" -> navController.setGraph(R.navigation.not_found_navigation)
-                        "client" -> navController.setGraph(R.navigation.not_found_navigation)
+                        "admin" -> navController.navigate(R.id.admin_home_fragment)
+                        "trainer" -> navController.navigate(R.id.trainer_home_fragment)
+                        "client" -> navController.navigate(R.id.client_home_fragment)
                         else -> navController.setGraph(R.navigation.not_found_navigation)
                     }
                     true
                 }
                 R.id.profile_bottom_navigation -> {
-                    navController.navigate(R.id.admin_not_found_fragment)
+                    when (viewModel.user.value!!.role.name) {
+                        "admin" -> navController.navigate(R.id.admin_profile_fragment)
+                        "trainer" -> navController.navigate(R.id.trainer_profile_fragment)
+                        "client" -> navController.navigate(R.id.client_profile_fragment)
+                        else -> navController.setGraph(R.navigation.not_found_navigation)
+                    }
                     true
                 }
                 R.id.settings_bottom_navigation -> {
-                    navController.navigate(R.id.admin_not_found_fragment)
+                    when (viewModel.user.value!!.role.name) {
+                        "admin" -> navController.navigate(R.id.admin_settings_fragment)
+                        "trainer" -> navController.navigate(R.id.trainer_settings_fragment)
+                        "client" -> navController.navigate(R.id.client_settings_fragment)
+                        else -> navController.setGraph(R.navigation.not_found_navigation)
+                    }
                     true
                 }
                 else -> false
