@@ -17,7 +17,7 @@ abstract class BaseActivity(
     @LayoutRes protected val layoutResId: Int,
     @IdRes protected val navResId: Int
 ) : AppCompatActivity() {
-    private lateinit var navController: NavController
+    protected lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/adminHomeFragment">
+
+    <fragment
+        android:id="@+id/adminHomeFragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.AdminHomeFragment"
+        android:label="fragment_admin_home"
+        tools:layout="@layout/fragment_admin_home" >
+        <action
+            android:id="@+id/action_adminHomeFragment_to_notFoundFragment2"
+            app:destination="@id/admin_not_found_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/admin_not_found_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.NotFoundFragment"
+        android:label="fragment_not_found"
+        tools:layout="@layout/fragment_not_found" />
+</navigation>
