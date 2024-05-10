@@ -6,7 +6,6 @@ import android.view.View
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentAdminHomeBinding
 import ipvc.gymbuddy.app.viewmodels.AuthenticationViewModel
-import java.util.Locale
 
 class AdminHomeFragment : BaseFragment<FragmentAdminHomeBinding>(
     FragmentAdminHomeBinding::inflate
@@ -20,7 +19,6 @@ class AdminHomeFragment : BaseFragment<FragmentAdminHomeBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.name.text = viewModel.user.value!!.name
-        binding.role.text = viewModel.user.value!!.role.name.replaceFirstChar { it.titlecase(Locale.ROOT) }
         binding.generateUser.setOnClickListener { handleGenerateNewUserClick() }
     }
 
