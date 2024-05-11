@@ -8,15 +8,235 @@
     android:gravity="center_horizontal"
     tools:context=".fragments.ProfileFragment">
 
-    <include layout="@layout/toolbar" />
+    <include layout="@layout/toolbar"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingVertical="32dp"
+        android:paddingVertical="52dp"
         android:paddingHorizontal="24dp"
         android:orientation="vertical">
 
-        <!-- SCREEN CONTENT -->
+        <!-- HEADER -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+            <ImageButton
+                android:id="@+id/avatar_image_button"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/round_image"
+                android:src="@drawable/gym_buddy_logo"
+                android:contentDescription="@string/avatar"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/name"
+                    style="@style/Theme.Typography.Headline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="15dp"
+                    android:paddingTop="15dp"
+                    android:textColor="@color/primaryColor"
+                    android:textStyle="bold"
+                    tools:ignore="RtlSymmetry" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingStart="15dp">
+
+                    <TextView
+                        android:id="@+id/contract_date"
+                        style="@style/Theme.Typography.BodySmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="01/04/2024"
+                        android:textColor="@color/gray"
+                        tools:ignore="RtlSymmetry" />
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/gray"
+                        android:layout_marginStart="16dp"/>
+
+                    <TextView
+                        android:id="@+id/role"
+                        style="@style/Theme.Typography.BodySmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:textColor="@color/gray"
+                        tools:ignore="RtlSymmetry" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+                
+        </LinearLayout>
+
+
+        <!-- CONTENT -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="64dp"
+                tools:ignore="UselessParent">
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="125dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/first_name"
+                        android:textStyle="bold"
+                        android:textColor="@color/primaryColor"
+                        android:padding="15dp"/>
+
+                    <EditText
+                        android:id="@+id/first_name"
+                        style="@style/Theme.Typography.BodySmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:paddingStart="10dp"
+                        tools:ignore="RtlSymmetry" />
+                </TableRow>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="125dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/last_name"
+                        android:textStyle="bold"
+                        android:textColor="@color/primaryColor"
+                        android:padding="15dp"/>
+
+                    <EditText
+                        android:id="@+id/last_name"
+                        style="@style/Theme.Typography.BodySmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:paddingStart="10dp"
+                        tools:ignore="RtlSymmetry"/>
+                </TableRow>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="125dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gender"
+                        android:textStyle="bold"
+                        android:textColor="@color/primaryColor"
+                        android:padding="15dp"/>
+
+                    <EditText
+                        android:id="@+id/gender"
+                        style="@style/Theme.Typography.BodySmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:paddingStart="10dp"
+                        tools:ignore="RtlSymmetry" />
+                </TableRow>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="125dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/nationality"
+                        android:textStyle="bold"
+                        android:textColor="@color/primaryColor"
+                        android:padding="15dp"/>
+
+                    <EditText
+                        android:id="@+id/nationality"
+                        style="@style/Theme.Typography.BodySmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:paddingStart="10dp"
+                        tools:ignore="RtlSymmetry"/>
+                </TableRow>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="125dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/birthdate"
+                        android:textStyle="bold"
+                        android:textColor="@color/primaryColor"
+                        android:padding="15dp"/>
+
+                    <EditText
+                        android:id="@+id/birthdate"
+                        style="@style/Theme.Typography.BodySmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:paddingStart="10dp"
+                        tools:ignore="RtlSymmetry"/>
+                </TableRow>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="125dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/address"
+                        android:textStyle="bold"
+                        android:textColor="@color/primaryColor"
+                        android:padding="15dp"/>
+
+                    <EditText
+                        android:id="@+id/address"
+                        style="@style/Theme.Typography.BodySmall"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:layout_weight="1"
+                        android:paddingStart="10dp"
+                        tools:ignore="RtlSymmetry"/>
+                </TableRow>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
+
+            </TableLayout>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
