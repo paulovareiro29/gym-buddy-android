@@ -22,24 +22,32 @@ class AuthenticationDataStore(context: Context) : BaseDataStore(context) {
     }
 
     var user = MutableLiveData<User?>()
-    var activateSuccess = MutableLiveData<Boolean?>()
+    var loginStatus = MutableLiveData("idle")
+    var activateStatus = MutableLiveData("idle")
 
     fun login(email: String, password: String) {
         coroutine.launch {
+            loginStatus.postValue("loading")
             when (val response = AuthenticationService().login(LoginRequest(email, password))) {
-                is RequestResult.Success -> user.postValue(response.data.user)
-                is RequestResult.Error -> user.postValue(null)
+                is RequestResult.Success -> {
+                    user.postValue(response.data.user)
+                    loginStatus.postValue("success")
+                }
+                is RequestResult.Error -> {
+                    user.postValue(null)
+                    loginStatus.postValue("error")
+                }
             }
         }
     }
 
     fun activate(email: String, password: String, code: String) {
-        activateSuccess.postValue(null)
+        activateStatus.postValue("loading")
 
         coroutine.launch {
             when (AuthenticationService().activate(ActivateRequest(email, password, code))) {
-                is RequestResult.Success -> activateSuccess.postValue(true)
-                is RequestResult.Error -> activateSuccess.postValue(false)
+                is RequestResult.Success -> activateStatus.postValue("success")
+                is RequestResult.Error -> activateStatus.postValue("error")
             }
         }
     }

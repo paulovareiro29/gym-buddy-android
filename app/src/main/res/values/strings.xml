@@ -12,6 +12,7 @@
     <string name="invalid_email_format">Invalid email format</string>
     <string name="minimum_x_characters">Minimum of %1$d characters</string>
     <string name="something_went_wrong">Something went wrong!</string>
+    <string name="wrong_credentials">Wrong credentials</string>
     <string name="account_activated">Account activated!</string>
     <string name="app_description">Lorem ipsum dolor sit amet, consecrate disciplining elite.</string>
     <string name="set_up_your_account">Set up your account</string>

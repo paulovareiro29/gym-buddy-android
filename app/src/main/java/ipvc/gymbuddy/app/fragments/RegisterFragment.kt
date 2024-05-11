@@ -19,25 +19,33 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.submitButton.setOnClickListener { handleRegisterButtonClick() }
-        viewModel.activateSuccess.observe(requireActivity()) { success ->
-            if (success == null) return@observe
+        viewModel.activateStatus.observe(requireActivity()) {
+            resetView()
 
-            if (success) {
-                binding.message.text = getString(R.string.account_activated)
-                binding.message.setTextColor(requireActivity().getColor(R.color.secondaryDarkColor))
-            } else {
-                binding.message.text = getString(R.string.something_went_wrong)
-                binding.message.setTextColor(requireActivity().getColor(R.color.error))
+            when (it) {
+                "loading" -> {
+                    binding.submitButton.isEnabled = false
+                    binding.submitButton.setBackgroundColor(requireContext().getColor(R.color.primaryLightColor))
+                }
+                "success" -> {
+                    binding.message.text = getString(R.string.account_activated)
+                    binding.message.setTextColor(requireActivity().getColor(R.color.secondaryDarkColor))
+                    binding.message.visibility = View.VISIBLE
+                }
+                "error" -> {
+                    binding.message.text = getString(R.string.something_went_wrong)
+                    binding.message.setTextColor(requireActivity().getColor(R.color.error))
+                    binding.message.visibility = View.VISIBLE
+                }
             }
-
-            binding.message.visibility = View.VISIBLE
         }
 
-        resetView()
+        viewModel.activateStatus.postValue("idle")
     }
 
     private fun resetView() {
-        viewModel.activateSuccess.postValue(null)
+        binding.submitButton.isEnabled = true
+        binding.submitButton.setBackgroundColor(requireContext().getColor(R.color.primaryColor))
         binding.message.visibility = View.INVISIBLE
     }
 
