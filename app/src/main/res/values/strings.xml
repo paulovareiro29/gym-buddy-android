@@ -23,10 +23,6 @@
     <string name="generate_new_user">Generate new user</string>
     <string name="profile">Profile</string>
     <string name="settings">Settings</string>
-    <string name="first_name">First Name</string>
-    <string name="last_name">Last Name</string>
-    <string name="birthdate">Birthdate</string>
-    <string name="gender">Gender</string>
-    <string name="nationality">Nationality</string>
-    <string name="address">Address</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="edit">Edit</string>
 </resources>

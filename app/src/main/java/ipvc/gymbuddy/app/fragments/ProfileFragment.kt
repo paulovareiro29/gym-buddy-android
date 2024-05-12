@@ -1,5 +1,6 @@
 package ipvc.gymbuddy.app.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
@@ -19,14 +20,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.user.observe(viewLifecycleOwner, Observer  { user ->
-            user?.let {
-                binding.apply {
-                    name.text = user.name?.toString() ?: ""
-                    firstName.setText(user.name?.toString() ?: "")
-                    gender.setText(user.email?.toString() ?: "")
-                    address.setText(user.address?.toString() ?: "")
-                    role.text = user.role?.name?.toString() ?: ""
-                }
+            if (user == null) return@Observer
+            binding.apply {
+                email.text = user.email
+                address.text = user.address
+                birthdate.text = user.activated.toString()
+                role.text = user.role?.name
             }
         })
     }
