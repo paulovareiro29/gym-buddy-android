@@ -22,9 +22,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         viewModel.user.observe(viewLifecycleOwner, Observer  { user ->
             if (user == null) return@Observer
             binding.apply {
+                name.text = user.name
                 email.text = user.email
                 address.text = user.address
-                birthdate.text = user.activated.toString()
+                //birthdate.text
                 role.text = user.role?.name
             }
         })
