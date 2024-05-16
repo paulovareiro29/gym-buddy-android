@@ -27,11 +27,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 email.text = user.email
                 address.text = user.address
                 //birthdate.text
-                val roleName = user.role?.name?.let { name ->
-                    name.takeIf { it.isNotEmpty() }?.let {
-                        it.substring(0, 1).uppercase(Locale.getDefault()) + it.substring(1)
-                    }
-                }
+                val roleName = user.role?.name?.takeIf { it.isNotEmpty() }?.replaceFirstChar { it.uppercaseChar() }
                 role.text = roleName
             }
         })
