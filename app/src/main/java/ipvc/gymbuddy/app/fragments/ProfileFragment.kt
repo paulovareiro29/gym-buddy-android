@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentProfileBinding
 import ipvc.gymbuddy.app.viewmodels.AuthenticationViewModel
+import java.util.Locale
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(
     FragmentProfileBinding::inflate
@@ -26,7 +27,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 email.text = user.email
                 address.text = user.address
                 //birthdate.text
-                role.text = user.role?.name
+                val roleName = user.role?.name?.let { name ->
+                    name.takeIf { it.isNotEmpty() }?.let {
+                        it.substring(0, 1).uppercase(Locale.getDefault()) + it.substring(1)
+                    }
+                }
+                role.text = roleName
             }
         })
     }
