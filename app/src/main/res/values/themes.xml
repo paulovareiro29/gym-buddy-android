@@ -39,6 +39,7 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textViewStyle">@style/Theme.Typography.Body</item>
         <item name="textInputStyle">@style/Theme.Input</item>
+        <item name="android:autoCompleteTextViewStyle">@style/Theme.Input</item>
     </style>
 
     <!-- No ActionBar theme. -->

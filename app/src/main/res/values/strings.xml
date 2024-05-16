@@ -23,4 +23,7 @@
     <string name="generate_new_user">Generate new user</string>
     <string name="profile">Profile</string>
     <string name="settings">Settings</string>
+    <string name="name">Name</string>
+    <string name="role">Role</string>
+    <string name="generate">Generate User</string>
 </resources>
