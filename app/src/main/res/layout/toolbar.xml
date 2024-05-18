@@ -35,7 +35,7 @@
                 android:textAlignment="center"
                 android:gravity="center"
                 android:layout_marginStart="8dp"
-                android:layout_marginEnd="56dp"
+                android:layout_marginEnd="64dp"
                 android:text="@string/home"/>
 
         </LinearLayout>
