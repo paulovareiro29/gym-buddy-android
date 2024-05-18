@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
@@ -17,6 +18,139 @@
         android:paddingHorizontal="24dp"
         android:orientation="vertical">
 
-        <!-- SCREEN CONTENT -->
+        <!-- HEADER -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_vertical|center_horizontal">
+
+            <ImageButton
+                android:id="@+id/avatar_image_button"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/circle"
+                android:src="@drawable/gym_buddy_logo"
+                android:contentDescription="@string/avatar" />
+
+            <TextView
+                android:id="@+id/name"
+                style="@style/Theme.Typography.Headline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primaryColor"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/email"
+                style="@style/Theme.Typography.Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+        <!-- PERSONAL INFORMATION -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="24dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/Theme.Typography.TitleLarge"
+                    android:text="@string/personal_information"
+                    android:textStyle="bold"
+                    android:textColor="@color/primaryColor"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Theme.Typography.LabelLarge"
+                    android:text="@string/edit"
+                    android:textStyle="bold"
+                    android:textColor="@color/primaryColor"
+                    android:drawablePadding="8dp"
+                    android:gravity="center_vertical"
+                    app:drawableEndCompat="@drawable/baseline_navigate_next_24" />
+            </LinearLayout>
+
+
+
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp"
+                        android:drawablePadding="8dp"
+                        android:gravity="center_vertical"
+                        app:drawableStartCompat="@drawable/baseline_supervisor_account_24"/>
+
+                    <TextView
+                        android:id="@+id/role"
+                        style="@style/Theme.Typography.Body"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="12dp"/>
+                </TableRow>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp"
+                        android:drawablePadding="8dp"
+                        android:gravity="center_vertical"
+                        app:drawableStartCompat="@drawable/baseline_cake_24"/>
+
+                    <TextView
+                        android:id="@+id/birthdate"
+                        style="@style/Theme.Typography.Body"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="12dp"/>
+                </TableRow>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp"
+                        android:drawablePadding="8dp"
+                        android:gravity="center_vertical"
+                        app:drawableStartCompat="@drawable/baseline_house_24" />
+
+                    <TextView
+                        android:id="@+id/address"
+                        style="@style/Theme.Typography.Body"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="12dp"/>
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

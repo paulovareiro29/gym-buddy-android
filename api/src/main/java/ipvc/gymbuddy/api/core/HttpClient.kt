@@ -1,6 +1,7 @@
 package ipvc.gymbuddy.api.core
 
 import ipvc.gymbuddy.api.BuildConfig
+import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.awaitResponse
@@ -12,8 +13,13 @@ open class HttpClient<T>(service: Class<T>) {
         private const val BASE_URL = BuildConfig.API_URL + "/api/"
     }
 
+    private val client = OkHttpClient.Builder()
+        .addInterceptor(AuthInterceptor())
+        .build()
+
     protected var api: T = Retrofit.Builder()
             .baseUrl(BASE_URL)
+            .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(service)

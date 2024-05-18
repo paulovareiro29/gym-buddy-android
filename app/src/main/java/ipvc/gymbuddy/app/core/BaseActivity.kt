@@ -1,6 +1,7 @@
 package ipvc.gymbuddy.app.core
 
 import android.os.Bundle
+import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
@@ -15,12 +16,15 @@ import ipvc.gymbuddy.app.R
 
 abstract class BaseActivity(
     @LayoutRes protected val layoutResId: Int,
-    @IdRes protected val navResId: Int
+    @IdRes protected val navResId: Int,
 ) : AppCompatActivity() {
     protected lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        enableEdgeToEdge()
+        enableEdgeToEdge(
+            SystemBarStyle.dark(getColor(R.color.primaryColor)),
+            SystemBarStyle.dark(getColor(R.color.black))
+        )
         super.onCreate(savedInstanceState)
         setContentView(layoutResId)
 

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import ipvc.gymbuddy.api.core.RequestResult
+import ipvc.gymbuddy.api.core.TokenStorage
 import ipvc.gymbuddy.api.models.User
 import ipvc.gymbuddy.api.models.requests.ActivateRequest
 import ipvc.gymbuddy.api.models.requests.LoginRequest
@@ -30,6 +31,7 @@ class AuthenticationDataStore(context: Context) : BaseDataStore(context) {
             loginStatus.postValue("loading")
             when (val response = AuthenticationService().login(LoginRequest(email, password))) {
                 is RequestResult.Success -> {
+                    TokenStorage.getInstance().setToken(response.data.token)
                     user.postValue(response.data.user)
                     loginStatus.postValue("success")
                 }

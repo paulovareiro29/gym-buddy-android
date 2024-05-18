@@ -1,7 +1,6 @@
 package ipvc.gymbuddy.app.fragments.admin
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.core.BaseFragment
@@ -19,6 +18,8 @@ class AdminHomeFragment : BaseFragment<FragmentAdminHomeBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        loadToolbar(getString(R.string.home), true)
+
         binding.name.text = viewModel.user.value!!.name
         binding.generateUser.setOnClickListener { handleGenerateNewUserClick() }
 

@@ -26,4 +26,6 @@
     <string name="name">Name</string>
     <string name="role">Role</string>
     <string name="generate">Generate User</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="edit">Edit</string>
 </resources>
