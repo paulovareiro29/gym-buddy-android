@@ -18,8 +18,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setTitle(getString(R.string.profile))
-        setRootFragment()
+        loadToolbar(getString(R.string.profile), true)
 
         viewModel.user.observe(viewLifecycleOwner, Observer  { user ->
             if (user == null) return@Observer
