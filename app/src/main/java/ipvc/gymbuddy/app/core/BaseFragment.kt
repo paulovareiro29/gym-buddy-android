@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
@@ -24,19 +25,13 @@ abstract class BaseFragment<VB : ViewBinding>(
     protected val binding get() = _binding!!
 
     private var _isRootFragment: Boolean = false
-    protected val isRootFragment get() = _isRootFragment
-
 
     protected inline fun <reified T : ViewModel> getViewModel(): T = ViewModelProvider(this)[T::class.java]
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         navController = findNavController()
-
-        activity?.onBackPressedDispatcher?.addCallback {
-            if (isRootFragment) return@addCallback
-            navController.navigateUp()
-        }
+        activity?.onBackPressedDispatcher?.addCallback { handleBackButton() }
     }
 
     override fun onCreateView(
@@ -44,6 +39,10 @@ abstract class BaseFragment<VB : ViewBinding>(
         savedInstanceState: Bundle?
     ): View? {
         _binding = bindingInflater.invoke(inflater, container, false)
+
+        val toolbarBackButton = view?.findViewById<Button>(R.id.toolbar_back)
+        toolbarBackButton?.setOnClickListener { handleBackButton() }
+
         return binding.root
     }
 
@@ -52,12 +51,18 @@ abstract class BaseFragment<VB : ViewBinding>(
         _binding = null
     }
 
-    fun setTitle(title: String) {
+    private fun handleBackButton() {
+        if (!_isRootFragment) {
+            navController.navigateUp()
+        }
+    }
+
+    protected fun setTitle(title: String) {
         val toolbar = view?.findViewById<TextView>(R.id.toolbar_title) ?: return
         toolbar.text = title
     }
 
-    fun setRootFragment() {
+    protected fun setRootFragment() {
         _isRootFragment = true
     }
 }
