@@ -19,9 +19,8 @@
         <item name="android:colorBackground">@color/background</item>
 
         <!-- Status bar and navigation bar colors -->
-        <item name="android:statusBarColor">@color/primaryDarkColor</item>
+        <item name="android:statusBarColor">@color/primaryColor</item>
         <item name="android:navigationBarColor">@color/black</item>
-
         <!-- Accent color -->
         <item name="colorAccent">@color/accentColor</item>
 
