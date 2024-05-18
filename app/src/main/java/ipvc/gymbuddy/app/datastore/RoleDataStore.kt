@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import ipvc.gymbuddy.api.core.RequestResult
-import ipvc.gymbuddy.api.models.responses.RoleResponse
+import ipvc.gymbuddy.api.models.Role
 import ipvc.gymbuddy.api.services.RoleService
 import kotlinx.coroutines.launch
 
@@ -19,7 +19,7 @@ class RoleDataStore(context: Context) : BaseDataStore(context) {
         }
     }
 
-    var roles = MutableLiveData<List<RoleResponse>?>()
+    var roles = MutableLiveData<List<Role>>(listOf())
     var roleStatus = MutableLiveData("idle")
 
     fun getRoles() {
@@ -27,11 +27,11 @@ class RoleDataStore(context: Context) : BaseDataStore(context) {
             roleStatus.postValue("loading")
             when(val response = RoleService().getRoles())  {
                 is RequestResult.Success -> {
-                    roles.postValue(response.data)
+                    roles.postValue(response.data.roles)
                     roleStatus.postValue("success")
                 }
                 is RequestResult.Error -> {
-                    roles.postValue(null)
+                    roles.postValue(listOf())
                     roleStatus.postValue("error")
                 }
             }

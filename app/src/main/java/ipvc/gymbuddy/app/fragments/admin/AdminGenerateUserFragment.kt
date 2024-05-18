@@ -1,12 +1,8 @@
 package ipvc.gymbuddy.app.fragments.admin
 
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentAdminGenerateUserBinding
@@ -15,40 +11,40 @@ import ipvc.gymbuddy.app.viewmodels.RoleViewModel
 class AdminGenerateUserFragment : BaseFragment<FragmentAdminGenerateUserBinding>(
     FragmentAdminGenerateUserBinding::inflate
 ) {
-    private lateinit var viewModel: RoleViewModel
-    private var roleAdapter: ArrayAdapter<String>? = null // Use nullable type
+    private lateinit var roleViewModel: RoleViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val view = super.onCreateView(inflater, container, savedInstanceState)!!
-
-        viewModel = getViewModel()
-
-        return view
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        roleViewModel = getViewModel()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        loadToolbar(getString(R.string.generate_new_user))
 
+        roleViewModel.getRoles()
+
+        roleViewModel.roles.observe(viewLifecycleOwner) { roles ->
+            Log.d("roles", roles?.size.toString())
+        }
+
+        /*
         if (roleAdapter == null) {
             roleAdapter = ArrayAdapter(requireContext(), R.layout.fragment_admin_generate_user, mutableListOf())
             binding.roleDropdown.setAdapter(roleAdapter)
         }
 
-        viewModel.roles.observe(viewLifecycleOwner, Observer { roleResponses ->
-            roleResponses?.forEach { roleResponse ->
+        roleViewModel.roles.observe(viewLifecycleOwner) { roles ->
+            roles?.forEach { roleResponse ->
                 roleResponse.roles.forEach { role ->
                     roleAdapter?.add(role.name)
                 }
             }
             roleAdapter?.notifyDataSetChanged()
-        })
+        }) */
 
-        if (savedInstanceState == null) {
+        /*if (savedInstanceState == null) {
             viewModel.getRoles()
-        }
+        } */
     }
 }
