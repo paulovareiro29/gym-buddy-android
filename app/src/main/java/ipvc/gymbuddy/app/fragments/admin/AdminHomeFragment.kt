@@ -22,7 +22,6 @@ class AdminHomeFragment : BaseFragment<FragmentAdminHomeBinding>(
 
         binding.name.text = viewModel.user.value!!.name
         binding.generateUser.setOnClickListener { handleGenerateNewUserClick() }
-
     }
 
     private fun handleGenerateNewUserClick() {
