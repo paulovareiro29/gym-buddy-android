@@ -17,6 +17,8 @@ class ClientHomeFragment : BaseFragment<FragmentClientHomeBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setRootFragment()
+
         binding.name.text = viewModel.user.value!!.name
     }
 }
