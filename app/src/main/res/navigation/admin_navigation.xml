@@ -9,7 +9,11 @@
         android:id="@+id/admin_home_fragment"
         android:name="ipvc.gymbuddy.app.fragments.admin.AdminHomeFragment"
         android:label="fragment_admin_home"
-        tools:layout="@layout/fragment_admin_home" />
+        tools:layout="@layout/fragment_admin_home" >
+        <action
+            android:id="@+id/action_admin_home_fragment_to_adminGenerateUserFragment"
+            app:destination="@id/adminGenerateUserFragment" />
+    </fragment>
     <fragment
         android:id="@+id/admin_not_found_fragment"
         android:name="ipvc.gymbuddy.app.fragments.NotFoundFragment"
@@ -25,4 +29,9 @@
         android:name="ipvc.gymbuddy.app.fragments.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/adminGenerateUserFragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.AdminGenerateUserFragment"
+        android:label="fragment_admin_generate_user"
+        tools:layout="@layout/fragment_admin_generate_user" />
 </navigation>
