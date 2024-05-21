@@ -9,6 +9,7 @@ import ipvc.gymbuddy.app.datastore.RoleDataStore
 class GenerateUserViewModel(application: Application) : BaseViewModel(application) {
     private val authenticationDataStore = AuthenticationDataStore.getInstance(application)
     private val roleDataStore = RoleDataStore.getInstance(application)
+    val registerData = authenticationDataStore.registerData
     val roles: LiveData<List<Role>> = roleDataStore.roles
 
     fun getRoles() {

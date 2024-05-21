@@ -10,6 +10,7 @@ import ipvc.gymbuddy.api.models.requests.ActivateRequest
 import ipvc.gymbuddy.api.models.requests.LoginRequest
 import ipvc.gymbuddy.api.models.requests.RegisterRequest
 import ipvc.gymbuddy.api.services.AuthenticationService
+import ipvc.gymbuddy.app.core.AsyncData
 import kotlinx.coroutines.launch
 
 class AuthenticationDataStore(context: Context) : BaseDataStore(context) {
@@ -26,6 +27,7 @@ class AuthenticationDataStore(context: Context) : BaseDataStore(context) {
     var user = MutableLiveData<User?>()
     var loginStatus = MutableLiveData("idle")
     var activateStatus = MutableLiveData("idle")
+    var registerData = MutableLiveData<AsyncData<User?>>(AsyncData())
 
     fun login(email: String, password: String) {
         coroutine.launch {
@@ -45,10 +47,15 @@ class AuthenticationDataStore(context: Context) : BaseDataStore(context) {
     }
 
     fun register(name: String, email: String, roleId: String) {
+        registerData.postValue(AsyncData(null, AsyncData.Status.LOADING))
         coroutine.launch {
-            when (AuthenticationService().register(RegisterRequest(name, email, roleId))) {
-                is RequestResult.Success -> activateStatus.postValue("success")
-                is RequestResult.Error -> activateStatus.postValue("error")
+            when (val response = AuthenticationService().register(RegisterRequest(name, email, roleId))) {
+                is RequestResult.Success -> {
+                    registerData.postValue(AsyncData(response.data.user, AsyncData.Status.SUCCESS))
+                }
+                is RequestResult.Error -> {
+                    registerData.postValue(AsyncData(null, AsyncData.Status.ERROR, response.errors))
+                }
             }
         }
     }
