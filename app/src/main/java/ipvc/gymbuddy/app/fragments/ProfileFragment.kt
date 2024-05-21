@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentProfileBinding
+import ipvc.gymbuddy.app.utils.StringUtils
 import ipvc.gymbuddy.app.viewmodels.AuthenticationViewModel
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(
@@ -26,7 +27,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 name.text = user.name
                 email.text = user.email
                 address.text = user.address
-                role.text  = user.role.name.takeIf { it.isNotEmpty() }?.replaceFirstChar { it.uppercaseChar() }
+                role.text  = StringUtils.capitalize(user.role.name)
             }
         })
     }

@@ -1,17 +1,20 @@
 package ipvc.gymbuddy.app.fragments.admin
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.ArrayAdapter
 import ipvc.gymbuddy.app.R
+import ipvc.gymbuddy.app.adapters.SpinnerAdapter
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentAdminGenerateUserBinding
+import ipvc.gymbuddy.app.utils.StringUtils
 import ipvc.gymbuddy.app.viewmodels.RoleViewModel
 
 class AdminGenerateUserFragment : BaseFragment<FragmentAdminGenerateUserBinding>(
     FragmentAdminGenerateUserBinding::inflate
 ) {
     private lateinit var roleViewModel: RoleViewModel
+    private lateinit var rolesAdapter: ArrayAdapter<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,29 +25,21 @@ class AdminGenerateUserFragment : BaseFragment<FragmentAdminGenerateUserBinding>
         super.onViewCreated(view, savedInstanceState)
         loadToolbar(getString(R.string.generate_new_user))
 
+        loadRoles()
+    }
+
+    private fun loadRoles() {
         roleViewModel.getRoles()
 
         roleViewModel.roles.observe(viewLifecycleOwner) { roles ->
-            Log.d("roles", roles?.size.toString())
-        }
-
-        /*
-        if (roleAdapter == null) {
-            roleAdapter = ArrayAdapter(requireContext(), R.layout.fragment_admin_generate_user, mutableListOf())
-            binding.roleDropdown.setAdapter(roleAdapter)
-        }
-
-        roleViewModel.roles.observe(viewLifecycleOwner) { roles ->
-            roles?.forEach { roleResponse ->
-                roleResponse.roles.forEach { role ->
-                    roleAdapter?.add(role.name)
-                }
+            rolesAdapter.clear()
+            roles.forEach { role ->
+                rolesAdapter.add(StringUtils.capitalize(role.name))
             }
-            roleAdapter?.notifyDataSetChanged()
-        }) */
+            rolesAdapter.notifyDataSetChanged()
+        }
 
-        /*if (savedInstanceState == null) {
-            viewModel.getRoles()
-        } */
+        rolesAdapter = SpinnerAdapter(requireContext(),mutableListOf())
+        binding.roleDropdown.adapter = rolesAdapter
     }
 }
