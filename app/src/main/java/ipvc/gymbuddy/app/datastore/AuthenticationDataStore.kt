@@ -8,6 +8,7 @@ import ipvc.gymbuddy.api.core.TokenStorage
 import ipvc.gymbuddy.api.models.User
 import ipvc.gymbuddy.api.models.requests.ActivateRequest
 import ipvc.gymbuddy.api.models.requests.LoginRequest
+import ipvc.gymbuddy.api.models.requests.RegisterRequest
 import ipvc.gymbuddy.api.services.AuthenticationService
 import kotlinx.coroutines.launch
 
@@ -39,6 +40,15 @@ class AuthenticationDataStore(context: Context) : BaseDataStore(context) {
                     user.postValue(null)
                     loginStatus.postValue("error")
                 }
+            }
+        }
+    }
+
+    fun register(name: String, email: String, roleId: String) {
+        coroutine.launch {
+            when (AuthenticationService().register(RegisterRequest(name, email, roleId))) {
+                is RequestResult.Success -> activateStatus.postValue("success")
+                is RequestResult.Error -> activateStatus.postValue("error")
             }
         }
     }

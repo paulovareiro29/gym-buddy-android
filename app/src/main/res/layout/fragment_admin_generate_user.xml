@@ -42,7 +42,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Spinner
-            android:id="@+id/roleDropdown"
+            android:id="@+id/role"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/input"
@@ -59,7 +59,7 @@
             android:textAlignment="center" />
 
         <Button
-            android:id="@+id/generateUserButton"
+            android:id="@+id/submit"
             style="@style/Theme.Button.Primary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
