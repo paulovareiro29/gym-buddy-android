@@ -17,6 +17,44 @@
         android:paddingHorizontal="24dp"
         android:orientation="vertical">
 
-        <!-- SCREEN CONTENT -->
+        <!-- CONTENT -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/change_language"
+                style="@style/Theme.Typography.TitleLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Change Language"
+                android:drawableEnd="@drawable/baseline_navigate_next_24"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:paddingVertical="16dp"
+                android:paddingHorizontal="24dp"
+                android:textColor="@color/primaryColor"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray" />
+
+            <TextView
+                android:id="@+id/logout"
+                style="@style/Theme.Typography.TitleLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                android:drawableEnd="@drawable/baseline_navigate_next_24"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:paddingVertical="16dp"
+                android:paddingHorizontal="24dp"
+                android:textColor="@color/primaryColor"
+                android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
