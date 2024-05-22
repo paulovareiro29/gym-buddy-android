@@ -75,6 +75,14 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
     private fun initializeSidebar() {
         val drawer = findViewById<DrawerLayout>(R.id.root)
         val sidebar = findViewById<NavigationView>(R.id.sidebar_navigation)
+
+        sidebar.menu.clear()
+        when (viewModel.user.value!!.role.name) {
+            "admin" -> sidebar.inflateMenu(R.menu.admin_sidebar_menu)
+            "trainer" -> sidebar.inflateMenu(R.menu.trainer_sidebar_menu)
+            "client" -> sidebar.inflateMenu(R.menu.client_sidebar_menu)
+        }
+
         sidebar.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.sidebar_item_home -> {
