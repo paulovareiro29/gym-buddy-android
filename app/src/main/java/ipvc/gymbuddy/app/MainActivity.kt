@@ -85,6 +85,9 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
 
         sidebar.setNavigationItemSelectedListener {
             when (it.itemId) {
+                R.id.sidebar_item_admin_generate_user -> navController.navigate(R.id.admin_generate_user_fragment)
+
+                // COMMON ROUTES
                 R.id.sidebar_item_home -> {
                     when (viewModel.user.value!!.role.name) {
                         "admin" -> navController.navigate(R.id.admin_home_fragment)

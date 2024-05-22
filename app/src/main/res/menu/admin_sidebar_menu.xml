@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="@string/general">
+    <group>
+        <item
+            android:id="@+id/sidebar_item_home"
+            android:icon="@drawable/baseline_home_24"
+            android:title="@string/home" />
+    </group>
+    <item android:title="@string/administrator">
         <menu>
             <group>
                 <item
-                    android:id="@+id/sidebar_item_home"
-                    android:icon="@drawable/baseline_home_24"
-                    android:title="@string/home" />
+                    android:id="@+id/sidebar_item_admin_generate_user"
+                    android:icon="@drawable/baseline_person_24"
+                    android:title="@string/generate_new_user" />
             </group>
         </menu>
     </item>

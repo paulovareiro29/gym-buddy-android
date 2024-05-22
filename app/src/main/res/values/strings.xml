@@ -30,4 +30,7 @@
     <string name="edit">Edit</string>
     <string name="general">General</string>
     <string name="account">Account</string>
+    <string name="administrator">Administrator</string>
+    <string name="client">Client</string>
+    <string name="trainer">Trainer</string>
 </resources>
