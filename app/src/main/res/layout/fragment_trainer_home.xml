@@ -53,5 +53,129 @@
                 android:scaleType="centerInside"
                 android:contentDescription="@string/avatar"/>
         </LinearLayout>
+
+        <!-- Shortcuts -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Theme.Typography.HeadlineSmall"
+                android:text="@string/shortcuts"
+                android:layout_marginBottom="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/listClients"
+                    style="@style/Theme.Button.Primary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/list_clients"
+                    android:textSize="15dp"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/trainingPlans"
+                    style="@style/Theme.Button.Primary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/training_plans"
+                    android:textSize="15dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Overview -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Theme.Typography.HeadlineSmall"
+                android:text="@string/overview"
+                android:layout_marginBottom="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Clients Card -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="8dp"
+                    android:padding="16dp"
+                    android:background="@color/secondaryLightColor">
+
+                    <TextView
+                        android:id="@+id/clientsCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="37"
+                        android:textSize="36sp"/>
+
+                    <TextView
+                        android:id="@+id/clients"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/Theme.Typography.Body"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:text="@string/clients"
+                        android:layout_marginTop="8dp"/>
+
+                </LinearLayout>
+
+                <!-- Training Plans Card -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="8dp"
+                    android:padding="16dp"
+                    android:background="@color/secondaryLightColor">
+
+                    <TextView
+                        android:id="@+id/trainingPlansCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="10"
+                        android:textSize="36sp" />
+
+                    <TextView
+                        android:id="@+id/trainingPlansTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/training_plans"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        style="@style/Theme.Typography.Body"
+                        android:layout_marginTop="8dp"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
