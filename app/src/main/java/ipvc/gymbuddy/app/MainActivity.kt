@@ -1,7 +1,9 @@
 package ipvc.gymbuddy.app
 
 import android.os.Bundle
+import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationBarView
+import com.google.android.material.navigation.NavigationView
 import ipvc.gymbuddy.app.core.BaseActivity
 import ipvc.gymbuddy.app.core.Navigator
 import ipvc.gymbuddy.app.viewmodels.AuthenticationViewModel
@@ -20,6 +22,7 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
 
         initializeNavigation()
         initializeBottomMenu()
+        initializeSidebar()
     }
 
     private fun initializeNavigation() {
@@ -66,6 +69,42 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
                 }
                 else -> false
             }
+        }
+    }
+
+    private fun initializeSidebar() {
+        val drawer = findViewById<DrawerLayout>(R.id.root)
+        val sidebar = findViewById<NavigationView>(R.id.sidebar_navigation)
+        sidebar.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.sidebar_item_home -> {
+                    when (viewModel.user.value!!.role.name) {
+                        "admin" -> navController.navigate(R.id.admin_home_fragment)
+                        "trainer" -> navController.navigate(R.id.trainer_home_fragment)
+                        "client" -> navController.navigate(R.id.client_home_fragment)
+                        else -> navController.setGraph(R.navigation.not_found_navigation)
+                    }
+                }
+                R.id.sidebar_item_profile -> {
+                    when (viewModel.user.value!!.role.name) {
+                        "admin" -> navController.navigate(R.id.admin_profile_fragment)
+                        "trainer" -> navController.navigate(R.id.trainer_profile_fragment)
+                        "client" -> navController.navigate(R.id.client_profile_fragment)
+                        else -> navController.setGraph(R.navigation.not_found_navigation)
+                    }
+                }
+                R.id.sidebar_item_settings -> {
+                    when (viewModel.user.value!!.role.name) {
+                        "admin" -> navController.navigate(R.id.admin_settings_fragment)
+                        "trainer" -> navController.navigate(R.id.trainer_settings_fragment)
+                        "client" -> navController.navigate(R.id.client_settings_fragment)
+                        else -> navController.setGraph(R.navigation.not_found_navigation)
+                    }
+                }
+            }
+
+            drawer.close()
+            true
         }
     }
 }

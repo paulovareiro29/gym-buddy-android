@@ -28,4 +28,6 @@
     <string name="role">Role</string>
     <string name="personal_information">Personal Information</string>
     <string name="edit">Edit</string>
+    <string name="general">General</string>
+    <string name="account">Account</string>
 </resources>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -53,14 +54,21 @@ abstract class BaseFragment<VB : ViewBinding>(
         }
     }
 
+    private fun handleOpenSidebar() {
+        val drawer = requireActivity().findViewById<DrawerLayout>(R.id.root) ?: return
+        drawer.open()
+    }
+
     protected fun loadToolbar(title: String, isRoot: Boolean = false) {
         toolbar = Toolbar(
             view?.findViewById(R.id.toolbar_title),
+            view?.findViewById(R.id.toolbar_menu),
             view?.findViewById(R.id.toolbar_back)
         )
 
         _isRootFragment = isRoot
         toolbar.title?.text = title
+        toolbar.menuButton?.setOnClickListener { handleOpenSidebar() }
 
         if (isRoot) {
             toolbar.backButton?.visibility = View.INVISIBLE
