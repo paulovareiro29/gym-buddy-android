@@ -2,6 +2,7 @@ package ipvc.gymbuddy.api.models
 
 
 data class User (
+    val id: String,
     val email: String,
     var role: Role,
     var name: String,
