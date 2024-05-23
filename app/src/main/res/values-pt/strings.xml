@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="log_in_to_your_account">Iniciar sessão na tua conta</string>
+    <string name="register">Registar</string>
+    <string name="submit">Submeter</string>
+    <string name="register_code">Código de Registo</string>
+    <string name="field_is_required">Campo Obrigatório</string>
+    <string name="invalid_email_format">Formato de email inválido</string>
+    <string name="minimum_x_characters">Mínimo de %1$d caracteres</string>
+    <string name="something_went_wrong">Erro inesperado!</string>
+    <string name="wrong_credentials">Credenciais erradas</string>
+    <string name="account_activated">Conta ativada</string>
+    <string name="app_description">Lorem ipsum dolor sit amet, consecrate disciplining elite.</string>
+    <string name="set_up_your_account">Cria a tua conta</string>
+    <string name="page_not_found">Página não encontrada</string>
+    <string name="welcome_back">Bem vindo de volta</string>
+    <string name="generate_new_user">Gerar novo utilizador</string>
+    <string name="profile">Perfil</string>
+    <string name="settings">Definições</string>
+    <string name="personal_information">Informação pessoal</string>
+    <string name="edit">Editar</string>
+</resources>

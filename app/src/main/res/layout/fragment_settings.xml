@@ -28,12 +28,13 @@
                 style="@style/Theme.Typography.TitleLarge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableStart="@drawable/globe"
                 android:text="Change Language"
                 android:drawableEnd="@drawable/baseline_navigate_next_24"
                 android:drawablePadding="8dp"
                 android:gravity="center_vertical"
                 android:paddingVertical="16dp"
-                android:paddingHorizontal="24dp"
+                android:paddingHorizontal="12dp"
                 android:textColor="@color/primaryColor"
                 android:textStyle="bold" />
 
@@ -47,12 +48,13 @@
                 style="@style/Theme.Typography.TitleLarge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableStart="@drawable/logout_button"
                 android:text="Logout"
                 android:drawableEnd="@drawable/baseline_navigate_next_24"
                 android:drawablePadding="8dp"
                 android:gravity="center_vertical"
                 android:paddingVertical="16dp"
-                android:paddingHorizontal="24dp"
+                android:paddingHorizontal="12dp"
                 android:textColor="@color/primaryColor"
                 android:textStyle="bold" />
         </LinearLayout>
