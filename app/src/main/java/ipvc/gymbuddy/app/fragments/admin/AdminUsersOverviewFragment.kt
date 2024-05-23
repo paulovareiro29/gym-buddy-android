@@ -1,9 +1,11 @@
 package ipvc.gymbuddy.app.fragments.admin
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import ipvc.gymbuddy.app.R
+import ipvc.gymbuddy.app.adapters.UserAdapter
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentAdminUsersOverviewBinding
 import ipvc.gymbuddy.app.viewmodels.admin.AdminUsersOverviewViewModel
@@ -24,7 +26,13 @@ class AdminUsersOverviewFragment : BaseFragment<FragmentAdminUsersOverviewBindin
         viewModel.getUsers()
 
         viewModel.usersData.observe(viewLifecycleOwner) {
-            Log.d("test", it.toString())
+            if (it.data != null) {
+                val customAdapter = UserAdapter(it.data)
+
+                val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
+                recyclerView.layoutManager = LinearLayoutManager(context)
+                recyclerView.adapter = customAdapter
+            }
         }
     }
 }
