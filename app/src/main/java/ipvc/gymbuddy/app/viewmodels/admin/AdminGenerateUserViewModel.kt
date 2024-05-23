@@ -1,12 +1,13 @@
-package ipvc.gymbuddy.app.viewmodels
+package ipvc.gymbuddy.app.viewmodels.admin
 
 import android.app.Application
 import androidx.lifecycle.LiveData
 import ipvc.gymbuddy.api.models.Role
 import ipvc.gymbuddy.app.datastore.AuthenticationDataStore
 import ipvc.gymbuddy.app.datastore.RoleDataStore
+import ipvc.gymbuddy.app.viewmodels.BaseViewModel
 
-class GenerateUserViewModel(application: Application) : BaseViewModel(application) {
+class AdminGenerateUserViewModel(application: Application) : BaseViewModel(application) {
     private val authenticationDataStore = AuthenticationDataStore.getInstance(application)
     private val roleDataStore = RoleDataStore.getInstance(application)
     val registerData = authenticationDataStore.registerData
