@@ -38,7 +38,8 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="12dp"
-                    android:background="@drawable/navigation_bar" />
+                    android:background="@drawable/navigation_bar"
+                    android:layout_marginTop="-12dp" />
 
                 <com.google.android.material.bottomnavigation.BottomNavigationView
                     android:id="@+id/bottom_navigation"

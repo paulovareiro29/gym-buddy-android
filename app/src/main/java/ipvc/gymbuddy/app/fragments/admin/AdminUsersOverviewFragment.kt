@@ -27,11 +27,9 @@ class AdminUsersOverviewFragment : BaseFragment<FragmentAdminUsersOverviewBindin
 
         viewModel.usersData.observe(viewLifecycleOwner) {
             if (it.data != null) {
-                val customAdapter = UserAdapter(it.data)
-
                 val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
                 recyclerView.layoutManager = LinearLayoutManager(context)
-                recyclerView.adapter = customAdapter
+                recyclerView.adapter = UserAdapter(it.data)
             }
         }
     }

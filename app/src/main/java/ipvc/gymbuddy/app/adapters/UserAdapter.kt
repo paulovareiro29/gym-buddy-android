@@ -10,7 +10,8 @@ import ipvc.gymbuddy.app.core.BaseViewHolder
 class UserAdapter(dataset: List<User>) : BaseRecyclerAdapter<User, UserAdapter.ViewHolder>(dataset) {
 
     class ViewHolder(view: View) : BaseViewHolder(view) {
-        val textView: TextView = view.findViewById(R.id.textView)
+        val name: TextView = view.findViewById(R.id.name)
+        val email: TextView = view.findViewById(R.id.email)
     }
 
     override fun getItemLayout(): Int = R.layout.recycler_adapter_user
@@ -20,6 +21,7 @@ class UserAdapter(dataset: List<User>) : BaseRecyclerAdapter<User, UserAdapter.V
     }
 
     override fun bindViewHolder(holder: ViewHolder, item: User) {
-        holder.textView.text = item.email
+        holder.name.text = item.name
+        holder.name.text = item.email
     }
 }
