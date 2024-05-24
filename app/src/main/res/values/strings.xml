@@ -39,4 +39,5 @@
     <string name="users_overview">Users Overview</string>
     <string name="arrow_right">Arrow Right</string>
     <string name="user_photo">User Photo</string>
+    <string name="search">Search</string>
 </resources>

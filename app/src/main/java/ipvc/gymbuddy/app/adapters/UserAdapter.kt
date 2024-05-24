@@ -22,6 +22,6 @@ class UserAdapter(dataset: List<User>) : BaseRecyclerAdapter<User, UserAdapter.V
 
     override fun bindViewHolder(holder: ViewHolder, item: User) {
         holder.name.text = item.name
-        holder.name.text = item.email
+        holder.email.text = item.email
     }
 }

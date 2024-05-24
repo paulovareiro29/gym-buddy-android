@@ -2,6 +2,7 @@ package ipvc.gymbuddy.app.fragments.admin
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ipvc.gymbuddy.app.R
@@ -14,6 +15,8 @@ class AdminUsersOverviewFragment : BaseFragment<FragmentAdminUsersOverviewBindin
     FragmentAdminUsersOverviewBinding::inflate
 ) {
     private lateinit var viewModel: AdminUsersOverviewViewModel
+    private lateinit var recyclerView: RecyclerView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = getViewModel()
@@ -23,14 +26,23 @@ class AdminUsersOverviewFragment : BaseFragment<FragmentAdminUsersOverviewBindin
         super.onViewCreated(view, savedInstanceState)
         loadToolbar(getString(R.string.users_overview))
 
-        viewModel.getUsers()
+        recyclerView = view.findViewById(R.id.recycler_view)
+        recyclerView.layoutManager = LinearLayoutManager(context)
 
+        viewModel.getUsers()
         viewModel.usersData.observe(viewLifecycleOwner) {
             if (it.data != null) {
-                val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
-                recyclerView.layoutManager = LinearLayoutManager(context)
                 recyclerView.adapter = UserAdapter(it.data)
             }
         }
+        
+        binding.searchInput.editText?.addTextChangedListener { handleSearch(it.toString()) }
+    }
+
+    private fun handleSearch(search: String) {
+        val filteredUsers = viewModel.usersData.value?.data?.filter {
+            it.name.contains(search, true) || it.email.contains(search, true)
+        } ?: listOf()
+        recyclerView.adapter = UserAdapter(filteredUsers)
     }
 }
