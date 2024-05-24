@@ -35,7 +35,8 @@ class AdminUsersOverviewFragment : BaseFragment<FragmentAdminUsersOverviewBindin
                 recyclerView.adapter = UserAdapter(it.data)
             }
         }
-        
+
+        binding.generateUser.setOnClickListener { navController.navigate(R.id.admin_generate_user_fragment) }
         binding.searchInput.editText?.addTextChangedListener { handleSearch(it.toString()) }
     }
 
