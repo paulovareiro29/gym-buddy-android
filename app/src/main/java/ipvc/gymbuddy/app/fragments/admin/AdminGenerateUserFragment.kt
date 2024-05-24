@@ -10,12 +10,12 @@ import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.core.Validator
 import ipvc.gymbuddy.app.databinding.FragmentAdminGenerateUserBinding
 import ipvc.gymbuddy.app.utils.StringUtils
-import ipvc.gymbuddy.app.viewmodels.GenerateUserViewModel
+import ipvc.gymbuddy.app.viewmodels.admin.AdminGenerateUserViewModel
 
 class AdminGenerateUserFragment : BaseFragment<FragmentAdminGenerateUserBinding>(
     FragmentAdminGenerateUserBinding::inflate
 ) {
-    private lateinit var viewModel: GenerateUserViewModel
+    private lateinit var viewModel: AdminGenerateUserViewModel
     private lateinit var rolesAdapter: ArrayAdapter<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {

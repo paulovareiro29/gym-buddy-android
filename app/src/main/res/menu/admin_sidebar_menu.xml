@@ -10,6 +10,10 @@
         <menu>
             <group>
                 <item
+                    android:id="@+id/sidebar_item_admin_users_overview"
+                    android:icon="@drawable/baseline_people_24"
+                    android:title="@string/users" />
+                <item
                     android:id="@+id/sidebar_item_admin_generate_user"
                     android:icon="@drawable/baseline_person_24"
                     android:title="@string/generate_new_user" />
