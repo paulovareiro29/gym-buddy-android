@@ -45,4 +45,6 @@
     <string name="create_machine">Create Machine</string>
     <string name="categories_overview">Categories Overview</string>
     <string name="categories">Categories</string>
+    <string name="create_category">Create Category</string>
+    <string name="created_successfully">Created successfully</string>
 </resources>

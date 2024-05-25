@@ -1,22 +1,18 @@
-package ipvc.gymbuddy.app.fragments.admin.user
+package ipvc.gymbuddy.app.fragments.admin.category
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ArrayAdapter
 import ipvc.gymbuddy.app.R
-import ipvc.gymbuddy.app.adapters.SpinnerAdapter
 import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.core.Validator
-import ipvc.gymbuddy.app.databinding.FragmentAdminGenerateUserBinding
-import ipvc.gymbuddy.app.utils.StringUtils
-import ipvc.gymbuddy.app.viewmodels.admin.user.AdminGenerateUserViewModel
+import ipvc.gymbuddy.app.databinding.FragmentAdminCategoryCreateBinding
+import ipvc.gymbuddy.app.viewmodels.admin.category.AdminCategoryCreateViewModel
 
-class AdminGenerateUserFragment : BaseFragment<FragmentAdminGenerateUserBinding>(
-    FragmentAdminGenerateUserBinding::inflate
+class AdminCategoryCreateFragment : BaseFragment<FragmentAdminCategoryCreateBinding>(
+    FragmentAdminCategoryCreateBinding::inflate
 ) {
-    private lateinit var viewModel: AdminGenerateUserViewModel
-    private lateinit var rolesAdapter: ArrayAdapter<String>
+    private lateinit var viewModel: AdminCategoryCreateViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,12 +21,11 @@ class AdminGenerateUserFragment : BaseFragment<FragmentAdminGenerateUserBinding>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadToolbar(getString(R.string.generate_new_user))
-
+        loadToolbar(getString(R.string.create_category))
         resetView()
-        loadRoles()
-        binding.submit.setOnClickListener { handleGenerateUser() }
-        viewModel.registerData.observe(viewLifecycleOwner) {
+
+        binding.submit.setOnClickListener { handleSubmit() }
+        viewModel.postData.observe(viewLifecycleOwner) {
             when (it.status) {
                 AsyncData.Status.IDLE -> resetView()
                 AsyncData.Status.LOADING -> {
@@ -39,7 +34,7 @@ class AdminGenerateUserFragment : BaseFragment<FragmentAdminGenerateUserBinding>
                 }
                 AsyncData.Status.SUCCESS -> {
                     resetView()
-                    binding.message.text = getString(R.string.user_created_successfully, it.data!!.register_code)
+                    binding.message.text = getString(R.string.created_successfully)
                     binding.message.setTextColor(requireActivity().getColor(R.color.secondaryDarkColor))
                     binding.message.visibility = View.VISIBLE
                 }
@@ -54,41 +49,16 @@ class AdminGenerateUserFragment : BaseFragment<FragmentAdminGenerateUserBinding>
         }
     }
 
-
-    private fun loadRoles() {
-        viewModel.getRoles()
-
-        viewModel.roles.observe(viewLifecycleOwner) { roles ->
-            rolesAdapter.clear()
-            roles.forEach { role ->
-                rolesAdapter.add(StringUtils.capitalize(role.name))
-            }
-            rolesAdapter.notifyDataSetChanged()
-        }
-
-        rolesAdapter = SpinnerAdapter(requireContext(),mutableListOf())
-        binding.role.adapter = rolesAdapter
-    }
-
-    private fun handleGenerateUser() {
-        val name = binding.name.editText
-        val email = binding.email.editText
-        val role = binding.role.selectedItem.toString()
-
-        if (name == null || email == null) return
+    private fun handleSubmit() {
+        val name = binding.name.editText ?: return
 
         if (!Validator.validateRequiredField(name, requireContext())) return
-        if (!Validator.validateRequiredField(email, requireContext())) return
-        if (!Validator.validateEmailField(email, requireContext())) return
-
-        viewModel.generateUser(name.text.toString(), email.text.toString(), role)
+        viewModel.createCategory(name.text.toString())
     }
 
     private fun resetView() {
         binding.name.error = null
         binding.name.editText?.text = null
-        binding.email.error = null
-        binding.email.editText?.text = null
         binding.submit.isEnabled = true
         binding.submit.setBackgroundColor(requireContext().getColor(R.color.primaryColor))
         binding.message.visibility = View.INVISIBLE

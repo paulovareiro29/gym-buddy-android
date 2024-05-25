@@ -36,6 +36,7 @@ class AdminCategoryOverviewFragment : BaseFragment<FragmentAdminCategoryOverview
             }
         }
 
+        binding.createCategory.setOnClickListener { navController.navigate(R.id.admin_category_create_fragment) }
         binding.searchInput.editText?.addTextChangedListener { handleSearch(it.toString()) }
     }
 
