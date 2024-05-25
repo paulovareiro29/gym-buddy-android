@@ -17,6 +17,10 @@
                     android:id="@+id/sidebar_item_admin_machines_overview"
                     android:icon="@drawable/baseline_pedal_bike_24"
                     android:title="@string/machines" />
+                <item
+                    android:id="@+id/sidebar_item_admin_categories_overview"
+                    android:icon="@drawable/baseline_label_24"
+                    android:title="@string/categories" />
             </group>
         </menu>
     </item>

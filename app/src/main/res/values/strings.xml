@@ -43,4 +43,6 @@
     <string name="machines">Machines</string>
     <string name="machines_overview">Machines Overview</string>
     <string name="create_machine">Create Machine</string>
+    <string name="categories_overview">Categories Overview</string>
+    <string name="categories">Categories</string>
 </resources>
