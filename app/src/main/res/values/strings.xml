@@ -50,4 +50,5 @@
     <string name="search_category">Search Category</string>
     <string name="exercises">Exercises</string>
     <string name="exercises_overview">Exercises Overview</string>
+    <string name="create_exercise">Create Exercise</string>
 </resources>

@@ -87,5 +87,14 @@
         android:id="@+id/admin_exercises_overview_fragment"
         android:name="ipvc.gymbuddy.app.fragments.admin.exercise.AdminExerciseOverviewFragment"
         android:label="fragment_admin_exercise_overview"
-        tools:layout="@layout/fragment_admin_exercise_overview" />
+        tools:layout="@layout/fragment_admin_exercise_overview" >
+        <action
+            android:id="@+id/action_admin_exercises_overview_fragment_to_adminExerciseCreateFragment"
+            app:destination="@id/admin_exercise_create_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/admin_exercise_create_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.exercise.AdminExerciseCreateFragment"
+        android:label="fragment_admin_exercise_create"
+        tools:layout="@layout/fragment_admin_exercise_create" />
 </navigation>

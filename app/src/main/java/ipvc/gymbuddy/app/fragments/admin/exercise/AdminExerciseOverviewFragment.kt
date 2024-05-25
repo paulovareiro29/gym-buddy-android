@@ -36,7 +36,7 @@ class AdminExerciseOverviewFragment : BaseFragment<FragmentAdminExerciseOverview
             }
         }
 
-        // binding.createExercise.setOnClickListener { navController.navigate(R.id.admin_machine_create_fragment) }
+        binding.createExercise.setOnClickListener { navController.navigate(R.id.admin_exercise_create_fragment) }
         binding.searchInput.editText?.addTextChangedListener { handleSearch(it.toString()) }
     }
 
