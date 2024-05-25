@@ -5,5 +5,6 @@ import com.google.android.material.button.MaterialButton
 
 data class Toolbar(
     val title: TextView?,
+    val menuButton: MaterialButton?,
     val backButton: MaterialButton?
 )
