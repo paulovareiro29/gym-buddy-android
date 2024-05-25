@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/adapter_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="16dp"
-    android:layout_marginTop="24dp"
-    android:background="@color/secondaryLightColor">
+    android:gravity="center_vertical"
+    android:background="@drawable/input"
+    android:padding="8dp"
+    android:layout_marginBottom="8dp">
 
     <ImageView
         android:id="@+id/image_view_plan"
@@ -15,26 +17,28 @@
         android:scaleType="centerCrop" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="vertical"
+        android:gravity="center_vertical">
 
         <TextView
             android:id="@+id/plan_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            style="@style/Theme.Typography.Title"
-            android:layout_gravity="center_vertical" />
+            style="@style/Theme.Typography.BodyLarge"
+            android:fontFamily="sans-serif-medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/linked_employees"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            style="@style/Theme.Typography.Label"
-            android:text="Linked Employees: 3"
-            android:layout_gravity="center_vertical" />
+            android:textColor="@color/textSecondary"
+            android:layout_marginTop="4dp"
+            android:text="Clients: 3" />
 
     </LinearLayout>
 
