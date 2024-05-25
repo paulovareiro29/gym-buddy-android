@@ -45,4 +45,12 @@
     <string name="arrow_right">Arrow Right</string>
     <string name="user_photo">User Photo</string>
     <string name="search">Search</string>
+    <string name="machines">Machines</string>
+    <string name="machines_overview">Machines Overview</string>
+    <string name="create_machine">Create Machine</string>
+    <string name="categories_overview">Categories Overview</string>
+    <string name="categories">Categories</string>
+    <string name="create_category">Create Category</string>
+    <string name="created_successfully">Created successfully</string>
+    <string name="search_category">Search Category</string>
 </resources>

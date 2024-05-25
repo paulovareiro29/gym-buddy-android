@@ -1,4 +1,4 @@
-package ipvc.gymbuddy.app.fragments.admin
+package ipvc.gymbuddy.app.fragments.admin.user
 
 import android.os.Bundle
 import android.view.View
@@ -10,7 +10,7 @@ import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.core.Validator
 import ipvc.gymbuddy.app.databinding.FragmentAdminGenerateUserBinding
 import ipvc.gymbuddy.app.utils.StringUtils
-import ipvc.gymbuddy.app.viewmodels.admin.AdminGenerateUserViewModel
+import ipvc.gymbuddy.app.viewmodels.admin.user.AdminGenerateUserViewModel
 
 class AdminGenerateUserFragment : BaseFragment<FragmentAdminGenerateUserBinding>(
     FragmentAdminGenerateUserBinding::inflate
@@ -27,6 +27,7 @@ class AdminGenerateUserFragment : BaseFragment<FragmentAdminGenerateUserBinding>
         super.onViewCreated(view, savedInstanceState)
         loadToolbar(getString(R.string.generate_new_user))
 
+        resetView()
         loadRoles()
         binding.submit.setOnClickListener { handleGenerateUser() }
         viewModel.registerData.observe(viewLifecycleOwner) {
