@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import ipvc.gymbuddy.app.R
-import ipvc.gymbuddy.app.adapters.SpinnerAdapter
 import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.core.Validator
@@ -16,7 +15,6 @@ class AdminGenerateUserFragment : BaseFragment<FragmentAdminGenerateUserBinding>
     FragmentAdminGenerateUserBinding::inflate
 ) {
     private lateinit var viewModel: AdminGenerateUserViewModel
-    private lateinit var rolesAdapter: ArrayAdapter<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,29 +57,21 @@ class AdminGenerateUserFragment : BaseFragment<FragmentAdminGenerateUserBinding>
         viewModel.getRoles()
 
         viewModel.roles.observe(viewLifecycleOwner) { roles ->
-            rolesAdapter.clear()
-            roles.forEach { role ->
-                rolesAdapter.add(StringUtils.capitalize(role.name))
-            }
-            rolesAdapter.notifyDataSetChanged()
+            val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_item,  roles.map { role -> StringUtils.capitalize(role.name) }.toTypedArray())
+            binding.role.setAdapter(adapter)
         }
-
-        rolesAdapter = SpinnerAdapter(requireContext(),mutableListOf())
-        binding.role.adapter = rolesAdapter
     }
 
     private fun handleGenerateUser() {
-        val name = binding.name.editText
-        val email = binding.email.editText
-        val role = binding.role.selectedItem.toString()
-
-        if (name == null || email == null) return
+        val name = binding.name.editText ?: return
+        val email = binding.email.editText ?: return
+        val role = binding.role.text ?: return
 
         if (!Validator.validateRequiredField(name, requireContext())) return
         if (!Validator.validateRequiredField(email, requireContext())) return
         if (!Validator.validateEmailField(email, requireContext())) return
 
-        viewModel.generateUser(name.text.toString(), email.text.toString(), role)
+        viewModel.generateUser(name.text.toString(), email.text.toString(), role.toString())
     }
 
     private fun resetView() {

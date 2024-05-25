@@ -4,12 +4,12 @@ import ipvc.gymbuddy.api.core.HttpClient
 import ipvc.gymbuddy.api.core.RequestResult
 import ipvc.gymbuddy.api.core.ResponseParser
 import ipvc.gymbuddy.api.interfaces.IAuthenticationService
-import ipvc.gymbuddy.api.models.requests.ActivateRequest
-import ipvc.gymbuddy.api.models.requests.LoginRequest
-import ipvc.gymbuddy.api.models.requests.RegisterRequest
-import ipvc.gymbuddy.api.models.responses.ActivateResponse
-import ipvc.gymbuddy.api.models.responses.LoginResponse
-import ipvc.gymbuddy.api.models.responses.RegisterResponse
+import ipvc.gymbuddy.api.models.requests.auth.ActivateRequest
+import ipvc.gymbuddy.api.models.requests.auth.LoginRequest
+import ipvc.gymbuddy.api.models.requests.auth.RegisterRequest
+import ipvc.gymbuddy.api.models.responses.auth.ActivateResponse
+import ipvc.gymbuddy.api.models.responses.auth.LoginResponse
+import ipvc.gymbuddy.api.models.responses.auth.RegisterResponse
 
 class AuthenticationService: HttpClient<IAuthenticationService>(IAuthenticationService::class.java) {
     suspend fun login(body: LoginRequest): RequestResult<LoginResponse> {

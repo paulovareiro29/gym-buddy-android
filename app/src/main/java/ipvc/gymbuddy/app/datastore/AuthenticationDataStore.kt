@@ -6,9 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import ipvc.gymbuddy.api.core.RequestResult
 import ipvc.gymbuddy.api.core.TokenStorage
 import ipvc.gymbuddy.api.models.User
-import ipvc.gymbuddy.api.models.requests.ActivateRequest
-import ipvc.gymbuddy.api.models.requests.LoginRequest
-import ipvc.gymbuddy.api.models.requests.RegisterRequest
+import ipvc.gymbuddy.api.models.requests.auth.ActivateRequest
+import ipvc.gymbuddy.api.models.requests.auth.LoginRequest
+import ipvc.gymbuddy.api.models.requests.auth.RegisterRequest
 import ipvc.gymbuddy.api.services.AuthenticationService
 import ipvc.gymbuddy.app.core.AsyncData
 import kotlinx.coroutines.launch
@@ -46,7 +46,7 @@ class AuthenticationDataStore(context: Context) : BaseDataStore(context) {
         }
     }
 
-    fun register(name: String, email: String, roleId: String) {
+    fun register(name: String, email: String, roleId: String?) {
         registerData.postValue(AsyncData(null, AsyncData.Status.LOADING))
         coroutine.launch {
             when (val response = AuthenticationService().register(RegisterRequest(name, email, roleId))) {

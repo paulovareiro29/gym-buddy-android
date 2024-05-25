@@ -1,4 +1,4 @@
-package ipvc.gymbuddy.api.models.responses
+package ipvc.gymbuddy.api.models.responses.auth
 
 import ipvc.gymbuddy.api.models.User
 

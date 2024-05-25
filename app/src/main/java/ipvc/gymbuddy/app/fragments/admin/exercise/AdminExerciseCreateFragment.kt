@@ -1,4 +1,4 @@
-package ipvc.gymbuddy.app.fragments.admin.machine
+package ipvc.gymbuddy.app.fragments.admin.exercise
 
 import android.os.Bundle
 import android.view.View
@@ -7,16 +7,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.AddCategoryAdapter
+import ipvc.gymbuddy.app.adapters.DropdownAdapter
 import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.core.Validator
-import ipvc.gymbuddy.app.databinding.FragmentAdminMachineCreateBinding
-import ipvc.gymbuddy.app.viewmodels.admin.machine.AdminMachineCreateViewModel
+import ipvc.gymbuddy.app.databinding.FragmentAdminExerciseCreateBinding
+import ipvc.gymbuddy.app.models.DropdownItem
+import ipvc.gymbuddy.app.viewmodels.admin.exercise.AdminExerciseCreateViewModel
 
-class AdminMachineCreateFragment : BaseFragment<FragmentAdminMachineCreateBinding>(
-    FragmentAdminMachineCreateBinding::inflate
+class AdminExerciseCreateFragment : BaseFragment<FragmentAdminExerciseCreateBinding>(
+    FragmentAdminExerciseCreateBinding::inflate
 ) {
-    private lateinit var viewModel: AdminMachineCreateViewModel
+    private lateinit var viewModel: AdminExerciseCreateViewModel
     private lateinit var categoriesRecyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,9 +28,10 @@ class AdminMachineCreateFragment : BaseFragment<FragmentAdminMachineCreateBindin
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadToolbar(getString(R.string.create_machine))
+        loadToolbar(getString(R.string.create_exercise))
 
         resetView()
+        loadMachines()
         loadCategories()
 
         categoriesRecyclerView = view.findViewById(R.id.category_recycler)
@@ -62,9 +65,16 @@ class AdminMachineCreateFragment : BaseFragment<FragmentAdminMachineCreateBindin
 
     private fun handleSubmit() {
         val name = binding.name.editText ?: return
+        val machineDropdown = binding.machine
         val searchCategory = binding.searchCategoryInput.editText ?: return
 
         if (!Validator.validateRequiredField(name, requireContext())) return
+
+        val machine = (machineDropdown.adapter as DropdownAdapter).selected
+        if (machine == null) {
+            machineDropdown.error = getString(R.string.field_is_required)
+            return
+        }
 
         val categories = (categoriesRecyclerView.adapter as AddCategoryAdapter).selected
         if (categories.size == 0) {
@@ -72,7 +82,7 @@ class AdminMachineCreateFragment : BaseFragment<FragmentAdminMachineCreateBindin
             return
         }
 
-        viewModel.createMachine(name.text.toString(), "null", categories.map { it.id })
+        viewModel.createExercise(name.text.toString(), "null", machine.id, categories.map { it.id })
     }
 
     private fun handleSearchCategory(search: String) {
@@ -92,6 +102,17 @@ class AdminMachineCreateFragment : BaseFragment<FragmentAdminMachineCreateBindin
         binding.message.visibility = View.INVISIBLE
     }
 
+    private fun loadMachines() {
+        viewModel.getMachines()
+
+        viewModel.machines.observe(viewLifecycleOwner) {
+            if (it.data != null) {
+                val adapter = DropdownAdapter(requireContext(), binding.machine, it.data.map { machine -> DropdownItem(machine.id, machine.name) })
+                binding.machine.setAdapter(adapter)
+            }
+        }
+    }
+
     private fun loadCategories() {
         viewModel.getCategories()
 
@@ -101,5 +122,4 @@ class AdminMachineCreateFragment : BaseFragment<FragmentAdminMachineCreateBindin
             }
         }
     }
-
 }
