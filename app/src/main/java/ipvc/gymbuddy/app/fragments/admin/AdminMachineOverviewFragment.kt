@@ -9,12 +9,12 @@ import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.MachineAdapter
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentAdminMachinesOverviewBinding
-import ipvc.gymbuddy.app.viewmodels.admin.AdminMachinesOverviewViewModel
+import ipvc.gymbuddy.app.viewmodels.admin.AdminMachineOverviewViewModel
 
-class AdminMachinesOverviewFragment : BaseFragment<FragmentAdminMachinesOverviewBinding>(
+class AdminMachineOverviewFragment : BaseFragment<FragmentAdminMachinesOverviewBinding>(
     FragmentAdminMachinesOverviewBinding::inflate
 ) {
-    private lateinit var viewModel: AdminMachinesOverviewViewModel
+    private lateinit var viewModel: AdminMachineOverviewViewModel
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {

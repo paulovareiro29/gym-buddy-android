@@ -42,4 +42,5 @@
     <string name="search">Search</string>
     <string name="machines">Machines</string>
     <string name="machines_overview">Machines Overview</string>
+    <string name="create_machine">Create Machine</string>
 </resources>

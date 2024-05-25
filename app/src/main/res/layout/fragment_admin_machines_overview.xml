@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context=".fragments.admin.AdminMachinesOverviewFragment">
+    tools:context=".fragments.admin.AdminMachineOverviewFragment">
 
     <include layout="@layout/toolbar" />
 
