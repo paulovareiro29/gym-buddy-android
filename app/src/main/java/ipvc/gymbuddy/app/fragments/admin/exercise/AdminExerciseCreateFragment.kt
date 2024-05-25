@@ -2,16 +2,17 @@ package ipvc.gymbuddy.app.fragments.admin.exercise
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ArrayAdapter
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.AddCategoryAdapter
+import ipvc.gymbuddy.app.adapters.DropdownAdapter
 import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.core.Validator
 import ipvc.gymbuddy.app.databinding.FragmentAdminExerciseCreateBinding
+import ipvc.gymbuddy.app.models.DropdownItem
 import ipvc.gymbuddy.app.viewmodels.admin.exercise.AdminExerciseCreateViewModel
 
 class AdminExerciseCreateFragment : BaseFragment<FragmentAdminExerciseCreateBinding>(
@@ -64,9 +65,16 @@ class AdminExerciseCreateFragment : BaseFragment<FragmentAdminExerciseCreateBind
 
     private fun handleSubmit() {
         val name = binding.name.editText ?: return
+        val machineDropdown = binding.machine
         val searchCategory = binding.searchCategoryInput.editText ?: return
 
         if (!Validator.validateRequiredField(name, requireContext())) return
+
+        val machine = (machineDropdown.adapter as DropdownAdapter).selected
+        if (machine == null) {
+            machineDropdown.error = getString(R.string.field_is_required)
+            return
+        }
 
         val categories = (categoriesRecyclerView.adapter as AddCategoryAdapter).selected
         if (categories.size == 0) {
@@ -74,7 +82,7 @@ class AdminExerciseCreateFragment : BaseFragment<FragmentAdminExerciseCreateBind
             return
         }
 
-        // viewModel.createExercise(name.text.toString(), "null", categories.map { it.id })
+        viewModel.createExercise(name.text.toString(), "null", machine.id, categories.map { it.id })
     }
 
     private fun handleSearchCategory(search: String) {
@@ -99,7 +107,7 @@ class AdminExerciseCreateFragment : BaseFragment<FragmentAdminExerciseCreateBind
 
         viewModel.machines.observe(viewLifecycleOwner) {
             if (it.data != null) {
-                val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_item,  it.data.map { machine -> machine.name }.toTypedArray())
+                val adapter = DropdownAdapter(requireContext(), binding.machine, it.data.map { machine -> DropdownItem(machine.id, machine.name) })
                 binding.machine.setAdapter(adapter)
             }
         }
