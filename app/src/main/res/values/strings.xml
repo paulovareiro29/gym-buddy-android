@@ -48,4 +48,6 @@
     <string name="create_category">Create Category</string>
     <string name="created_successfully">Created successfully</string>
     <string name="search_category">Search Category</string>
+    <string name="exercises">Exercises</string>
+    <string name="exercises_overview">Exercises Overview</string>
 </resources>
