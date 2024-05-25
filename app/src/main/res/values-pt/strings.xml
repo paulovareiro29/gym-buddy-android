@@ -19,4 +19,6 @@
     <string name="settings">Definições</string>
     <string name="personal_information">Informação pessoal</string>
     <string name="edit">Editar</string>
+    <string name="change_language">Mudar Idioma</string>
+    <string name="logout">Terminar Sessão</string>
 </resources>
