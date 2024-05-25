@@ -2,6 +2,7 @@ package ipvc.gymbuddy.app.fragments.admin.exercise
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,6 +30,7 @@ class AdminExerciseCreateFragment : BaseFragment<FragmentAdminExerciseCreateBind
         loadToolbar(getString(R.string.create_exercise))
 
         resetView()
+        loadMachines()
         loadCategories()
 
         categoriesRecyclerView = view.findViewById(R.id.category_recycler)
@@ -92,6 +94,17 @@ class AdminExerciseCreateFragment : BaseFragment<FragmentAdminExerciseCreateBind
         binding.message.visibility = View.INVISIBLE
     }
 
+    private fun loadMachines() {
+        viewModel.getMachines()
+
+        viewModel.machines.observe(viewLifecycleOwner) {
+            if (it.data != null) {
+                val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_item,  it.data.map { machine -> machine.name }.toTypedArray())
+                binding.machine.setAdapter(adapter)
+            }
+        }
+    }
+
     private fun loadCategories() {
         viewModel.getCategories()
 
@@ -101,5 +114,4 @@ class AdminExerciseCreateFragment : BaseFragment<FragmentAdminExerciseCreateBind
             }
         }
     }
-
 }

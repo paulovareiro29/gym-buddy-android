@@ -46,7 +46,7 @@ class AuthenticationDataStore(context: Context) : BaseDataStore(context) {
         }
     }
 
-    fun register(name: String, email: String, roleId: String) {
+    fun register(name: String, email: String, roleId: String?) {
         registerData.postValue(AsyncData(null, AsyncData.Status.LOADING))
         coroutine.launch {
             when (val response = AuthenticationService().register(RegisterRequest(name, email, roleId))) {

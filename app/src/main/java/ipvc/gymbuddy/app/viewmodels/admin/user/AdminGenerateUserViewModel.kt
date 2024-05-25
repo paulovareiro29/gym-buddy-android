@@ -17,8 +17,8 @@ class AdminGenerateUserViewModel(application: Application) : BaseViewModel(appli
         roleDataStore.getRoles()
     }
 
-    fun generateUser(name: String, email: String, rolename: String) {
-        val role = roles.value?.find { it.name.lowercase() == rolename.lowercase() } ?: return
-        authenticationDataStore.register(name, email, role.id)
+    fun generateUser(name: String, email: String, roleName: String?) {
+        val role = roles.value?.find { it.name.lowercase() == roleName?.lowercase() }
+        authenticationDataStore.register(name, email, role?.id)
     }
 }

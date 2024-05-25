@@ -30,6 +30,21 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Theme.Dropdown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:hint="@string/machine"
+            android:labelFor="@+id/machine">
+
+            <AutoCompleteTextView
+                android:id="@+id/machine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/search_category_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
