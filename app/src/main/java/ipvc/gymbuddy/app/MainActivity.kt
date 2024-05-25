@@ -87,6 +87,7 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
             when (it.itemId) {
                 // ADMIN
                 R.id.sidebar_item_admin_users_overview -> navController.navigate(R.id.admin_users_overview_fragment)
+                R.id.sidebar_item_admin_exercises_overview -> navController.navigate(R.id.admin_exercises_overview_fragment)
                 R.id.sidebar_item_admin_machines_overview -> navController.navigate(R.id.admin_machines_overview_fragment)
                 R.id.sidebar_item_admin_categories_overview -> navController.navigate(R.id.admin_categories_overview_fragment)
 

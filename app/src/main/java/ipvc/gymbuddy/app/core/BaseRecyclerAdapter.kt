@@ -9,9 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 abstract class BaseRecyclerAdapter<T, VH : BaseViewHolder>(private var dataset: List<T>) :
     RecyclerView.Adapter<VH>() {
 
+        protected lateinit var parent: ViewGroup
     override fun getItemCount() = dataset.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
+        this.parent = parent
         val view = LayoutInflater.from(parent.context).inflate(getItemLayout(), parent, false)
         return createViewHolder(view)
     }
