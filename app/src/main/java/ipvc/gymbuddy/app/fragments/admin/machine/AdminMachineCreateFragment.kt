@@ -32,7 +32,7 @@ class AdminMachineCreateFragment : BaseFragment<FragmentAdminMachineCreateBindin
         loadCategories()
 
         categoriesRecyclerView = view.findViewById(R.id.category_recycler)
-        categoriesRecyclerView.layoutManager = LinearLayoutManager(context)
+        categoriesRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         binding.submit.setOnClickListener { handleSubmit() }
         binding.searchCategoryInput.editText?.addTextChangedListener { handleSearchCategory(it.toString()) }

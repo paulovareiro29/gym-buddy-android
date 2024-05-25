@@ -1,8 +1,7 @@
 package ipvc.gymbuddy.app.adapters
 
 import android.view.View
-import android.widget.Button
-import android.widget.TextView
+import com.google.android.material.chip.Chip
 import ipvc.gymbuddy.api.models.Category
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.core.BaseRecyclerAdapter
@@ -12,9 +11,7 @@ class AddCategoryAdapter(dataset: List<Category>) : BaseRecyclerAdapter<Category
 
     val selected: MutableList<Category> = mutableListOf()
     class ViewHolder(view: View) : BaseViewHolder(view) {
-        val name: TextView = view.findViewById(R.id.name)
-        val add: Button = view.findViewById(R.id.add)
-        val remove: Button = view.findViewById(R.id.remove)
+        val category: Chip = view.findViewById(R.id.add_category)
     }
 
     override fun getItemLayout(): Int = R.layout.recycler_adapter_add_category
@@ -24,23 +21,31 @@ class AddCategoryAdapter(dataset: List<Category>) : BaseRecyclerAdapter<Category
     }
 
     override fun bindViewHolder(holder: ViewHolder, item: Category) {
-        holder.name.text = item.name
-        val isAdded = selected.contains(item)
-        updateButtonVisibility(holder, isAdded)
+        holder.category.text = item.name
+        updateViewHolder(holder, item)
 
-        holder.add.setOnClickListener {
-            selected.add(item)
-            updateButtonVisibility(holder, true)
-        }
+        holder.category.setOnClickListener {
+            if (selected.contains(item)) {
+                selected.remove(item)
+            } else {
+                selected.add(item)
+            }
 
-        holder.remove.setOnClickListener {
-            selected.remove(item)
-            updateButtonVisibility(holder, false)
+            updateViewHolder(holder, item)
         }
     }
 
-    private fun updateButtonVisibility(holder: ViewHolder, isAdded: Boolean) {
-        holder.add.visibility = if (isAdded) View.GONE else View.VISIBLE
-        holder.remove.visibility = if (isAdded) View.VISIBLE else View.GONE
+    private fun updateViewHolder(holder: ViewHolder, item: Category) {
+        if (selected.contains(item)) {
+            holder.category.setChipIconResource(R.drawable.baseline_remove_24)
+            holder.category.setChipBackgroundColorResource(R.color.primaryLightColor)
+            holder.category.setChipIconTintResource(R.color.white)
+            holder.category.setTextColor(parent.context.getColor(R.color.white))
+        } else {
+            holder.category.setChipIconResource(R.drawable.baseline_add_24)
+            holder.category.setChipBackgroundColorResource(R.color.white)
+            holder.category.setChipIconTintResource(R.color.textPrimary)
+            holder.category.setTextColor(parent.context.getColor(R.color.textPrimary))
+        }
     }
 }
