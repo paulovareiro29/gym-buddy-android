@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.TrainingPlanAdapter
 import ipvc.gymbuddy.app.core.BaseFragment
-import ipvc.gymbuddy.app.databinding.FragmentTrainerTrainingPlansBinding
+import ipvc.gymbuddy.app.databinding.FragmentTrainerTrainingPlansOverviewBinding
 import ipvc.gymbuddy.app.viewmodels.trainer.TrainingPlanOverviewViewModel
 
-class TrainingPlansOverviewFragment : BaseFragment<FragmentTrainerTrainingPlansBinding>(
-    FragmentTrainerTrainingPlansBinding::inflate) {
+class TrainingPlansOverviewFragment : BaseFragment<FragmentTrainerTrainingPlansOverviewBinding>(
+    FragmentTrainerTrainingPlansOverviewBinding::inflate) {
 
     private lateinit var viewModel: TrainingPlanOverviewViewModel
     private lateinit var recyclerView: RecyclerView

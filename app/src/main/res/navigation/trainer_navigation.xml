@@ -9,7 +9,11 @@
         android:id="@+id/trainer_home_fragment"
         android:name="ipvc.gymbuddy.app.fragments.trainer.TrainerHomeFragment"
         android:label="fragment_trainer_home"
-        tools:layout="@layout/fragment_trainer_home" />
+        tools:layout="@layout/fragment_trainer_home" >
+        <action
+            android:id="@+id/action_trainer_home_fragment_to_trainingPlansOverviewFragment"
+            app:destination="@id/trainingPlansOverviewFragment" />
+    </fragment>
     <fragment
         android:id="@+id/trainer_not_found_fragment"
         android:name="ipvc.gymbuddy.app.fragments.NotFoundFragment"
@@ -25,4 +29,9 @@
         android:name="ipvc.gymbuddy.app.fragments.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/trainingPlansOverviewFragment"
+        android:name="ipvc.gymbuddy.app.fragments.trainer.trainingPlans.TrainingPlansOverviewFragment"
+        android:label="fragment_trainer_training_plans_overview"
+        tools:layout="@layout/fragment_trainer_training_plans_overview" />
 </navigation>

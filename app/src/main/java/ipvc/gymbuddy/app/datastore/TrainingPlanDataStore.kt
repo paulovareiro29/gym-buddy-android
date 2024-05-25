@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import ipvc.gymbuddy.api.core.RequestResult
 import ipvc.gymbuddy.api.models.TrainingPlan
 import ipvc.gymbuddy.api.services.TrainingPlanService
+import ipvc.gymbuddy.app.core.AsyncData
 import kotlinx.coroutines.launch
 
 
@@ -21,36 +22,29 @@ class TrainingPlanDataStore(context: Context) : BaseDataStore(context) {
     }
 
     private val authenticationDataStore = AuthenticationDataStore.getInstance(context)
-    var trainingPlans = MutableLiveData<List<TrainingPlan>>(listOf())
-    var userTrainingPlans = MutableLiveData<List<TrainingPlan>>(listOf())
-    var trainingPlanStatus = MutableLiveData("idle")
+    var trainingPlans = MutableLiveData<AsyncData<List<TrainingPlan>>>(AsyncData(listOf()))
 
     fun getTrainingPlans() {
+        trainingPlans.postValue(AsyncData(trainingPlans.value?.data ?: listOf(), AsyncData.Status.LOADING))
         coroutine.launch {
-            trainingPlanStatus.postValue("loading")
-            when (val response = TrainingPlanService().getTrainingPlans()) {
+            when(val response = TrainingPlanService().getTrainingPlans())  {
                 is RequestResult.Success -> {
                     val allTrainingPlans = response.data.trainingPlans
-                    trainingPlans.postValue(allTrainingPlans)
-                    filterUserTrainingPlans(allTrainingPlans)
-                    trainingPlanStatus.postValue("success")
+                    val userPlans = filterUserTrainingPlans(allTrainingPlans)
+                    trainingPlans.postValue(AsyncData(userPlans, AsyncData.Status.SUCCESS))
                 }
                 is RequestResult.Error -> {
-                    trainingPlans.postValue(listOf())
-                    userTrainingPlans.postValue(listOf())
-                    trainingPlanStatus.postValue("error")
+                    trainingPlans.postValue(AsyncData(trainingPlans.value?.data ?: listOf(), AsyncData.Status.ERROR))
                 }
             }
         }
     }
-
-    private fun filterUserTrainingPlans(allTrainingPlans: List<TrainingPlan>) {
+    private fun filterUserTrainingPlans(allTrainingPlans: List<TrainingPlan>): List<TrainingPlan> {
         val user = authenticationDataStore.user.value
-        if (user != null) {
-            val userPlans = allTrainingPlans.filter { it.creatorId == user}
-            userTrainingPlans.postValue(userPlans)
+        return if (user != null) {
+            allTrainingPlans.filter { it.creator.id == user.id }
         } else {
-            userTrainingPlans.postValue(listOf())
+            listOf()
         }
     }
 

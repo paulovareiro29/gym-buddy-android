@@ -91,6 +91,9 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
                 R.id.sidebar_item_admin_machines_overview -> navController.navigate(R.id.admin_machines_overview_fragment)
                 R.id.sidebar_item_admin_categories_overview -> navController.navigate(R.id.admin_categories_overview_fragment)
 
+                //TRAINER
+                R.id.sidebar_item_trainer_trainingPlans_overview -> navController.navigate(R.id.action_trainer_home_fragment_to_trainingPlansOverviewFragment)
+
                 // COMMON ROUTES
                 R.id.sidebar_item_home -> {
                     when (viewModel.user.value!!.role.name) {

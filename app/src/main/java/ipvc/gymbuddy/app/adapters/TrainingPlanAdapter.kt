@@ -1,38 +1,25 @@
 package ipvc.gymbuddy.app.adapters
 
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
 import ipvc.gymbuddy.api.models.TrainingPlan
 import ipvc.gymbuddy.app.R
+import ipvc.gymbuddy.app.core.BaseRecyclerAdapter
+import ipvc.gymbuddy.app.core.BaseViewHolder
 
-class TrainingPlanAdapter : RecyclerView.Adapter<TrainingPlanAdapter.ViewHolder>() {
+class TrainingPlanAdapter(dataset: List<TrainingPlan>): BaseRecyclerAdapter<TrainingPlan, TrainingPlanAdapter.ViewHolder>(dataset) {
 
-    private var trainingPlans: List<TrainingPlan> = ArrayList()
+    class ViewHolder(view: View) : BaseViewHolder(view){
+        val name: TextView = view.findViewById(R.id.plan_name)
+    }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.card_training_plan, parent, false)
+    override fun getItemLayout(): Int = R.layout.recycle_adapter_training_plan
+
+    override fun createViewHolder(view: View): ViewHolder {
         return ViewHolder(view)
     }
-    // adicionar mais informações
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val currentTrainingPlan = trainingPlans[position]
-        holder.textViewPlanName.text = currentTrainingPlan.name
 
-    }
-
-    override fun getItemCount(): Int {
-        return trainingPlans.size
-    }
-
-    fun setTrainingPlans(trainingPlans: List<TrainingPlan>) {
-        this.trainingPlans = trainingPlans
-        notifyDataSetChanged()
-    }
-
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val textViewPlanName: TextView = itemView.findViewById(R.id.plan_name)
+    override fun bindViewHolder(holder: ViewHolder, item: TrainingPlan) {
+        holder.name.text = item.name
     }
 }
