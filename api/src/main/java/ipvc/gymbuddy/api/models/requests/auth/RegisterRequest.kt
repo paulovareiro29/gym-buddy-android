@@ -1,4 +1,4 @@
-package ipvc.gymbuddy.api.models.requests
+package ipvc.gymbuddy.api.models.requests.auth
 
 data class RegisterRequest(
     var name: String,
