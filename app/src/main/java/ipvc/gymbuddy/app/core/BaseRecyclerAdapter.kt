@@ -1,11 +1,12 @@
 package ipvc.gymbuddy.app.core
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class BaseRecyclerAdapter<T, VH : BaseViewHolder>(private val dataset: List<T>) :
+abstract class BaseRecyclerAdapter<T, VH : BaseViewHolder>(private var dataset: List<T>) :
     RecyclerView.Adapter<VH>() {
 
     override fun getItemCount() = dataset.size
@@ -17,6 +18,12 @@ abstract class BaseRecyclerAdapter<T, VH : BaseViewHolder>(private val dataset: 
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         bindViewHolder(holder, dataset[position])
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateDataset(updated: List<T>) {
+        dataset = updated
+        notifyDataSetChanged()
     }
 
     protected abstract fun getItemLayout(): Int

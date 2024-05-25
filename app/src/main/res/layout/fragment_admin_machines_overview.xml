@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context=".fragments.admin.user.AdminUsersOverviewFragment">
+    tools:context=".fragments.admin.machine.AdminMachineOverviewFragment">
 
     <include layout="@layout/toolbar" />
 
@@ -39,7 +39,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/generate_user"
+                android:id="@+id/create_machine"
                 style="?attr/materialIconButtonFilledStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

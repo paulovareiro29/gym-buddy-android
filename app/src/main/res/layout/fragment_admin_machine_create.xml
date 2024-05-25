@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context=".fragments.admin.user.AdminGenerateUserFragment">
+    tools:context=".fragments.admin.machine.AdminMachineCreateFragment">
 
     <include layout="@layout/toolbar" />
 
@@ -22,18 +22,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/name"
-            android:layout_marginBottom="8dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/email"
             android:layout_marginBottom="12dp">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -41,13 +29,23 @@
                 android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Spinner
-            android:id="@+id/role"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/search_category_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/input"
-            android:spinnerMode="dropdown"
-            android:layout_marginBottom="8dp"/>
+            android:hint="@string/search_category">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/category_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="236dp"
+            android:layout_marginTop="8dp"
+            android:clipToPadding="false" />
 
         <TextView
             android:id="@+id/message"

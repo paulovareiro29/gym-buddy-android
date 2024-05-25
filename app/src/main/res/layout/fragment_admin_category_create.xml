@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context=".fragments.admin.user.AdminGenerateUserFragment">
+    tools:context=".fragments.admin.category.AdminCategoryCreateFragment">
 
     <include layout="@layout/toolbar" />
 
@@ -22,32 +22,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/name"
-            android:layout_marginBottom="8dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/email"
             android:layout_marginBottom="12dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
-
-        <Spinner
-            android:id="@+id/role"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/input"
-            android:spinnerMode="dropdown"
-            android:layout_marginBottom="8dp"/>
 
         <TextView
             android:id="@+id/message"

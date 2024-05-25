@@ -1,4 +1,4 @@
-package ipvc.gymbuddy.app.fragments.admin
+package ipvc.gymbuddy.app.fragments.admin.user
 
 import android.os.Bundle
 import android.view.View
@@ -9,7 +9,7 @@ import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.UserAdapter
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentAdminUsersOverviewBinding
-import ipvc.gymbuddy.app.viewmodels.admin.AdminUsersOverviewViewModel
+import ipvc.gymbuddy.app.viewmodels.admin.user.AdminUsersOverviewViewModel
 
 class AdminUsersOverviewFragment : BaseFragment<FragmentAdminUsersOverviewBinding>(
     FragmentAdminUsersOverviewBinding::inflate
@@ -41,9 +41,9 @@ class AdminUsersOverviewFragment : BaseFragment<FragmentAdminUsersOverviewBindin
     }
 
     private fun handleSearch(search: String) {
-        val filteredUsers = viewModel.usersData.value?.data?.filter {
+        val filtered = viewModel.usersData.value?.data?.filter {
             it.name.contains(search, true) || it.email.contains(search, true)
         } ?: listOf()
-        recyclerView.adapter = UserAdapter(filteredUsers)
+        (recyclerView.adapter as UserAdapter).updateDataset(filtered)
     }
 }
