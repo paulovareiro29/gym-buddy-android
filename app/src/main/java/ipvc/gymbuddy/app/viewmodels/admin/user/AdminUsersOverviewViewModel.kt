@@ -1,4 +1,4 @@
-package ipvc.gymbuddy.app.viewmodels.admin
+package ipvc.gymbuddy.app.viewmodels.admin.user
 
 import android.app.Application
 import ipvc.gymbuddy.app.datastore.UserDataStore

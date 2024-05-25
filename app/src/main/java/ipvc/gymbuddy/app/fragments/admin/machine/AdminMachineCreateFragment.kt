@@ -1,11 +1,11 @@
-package ipvc.gymbuddy.app.fragments.admin
+package ipvc.gymbuddy.app.fragments.admin.machine
 
 import android.os.Bundle
 import android.view.View
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentAdminMachineCreateBinding
-import ipvc.gymbuddy.app.viewmodels.admin.AdminMachineCreateViewModel
+import ipvc.gymbuddy.app.viewmodels.admin.machine.AdminMachineCreateViewModel
 
 class AdminMachineCreateFragment : BaseFragment<FragmentAdminMachineCreateBinding>(
     FragmentAdminMachineCreateBinding::inflate

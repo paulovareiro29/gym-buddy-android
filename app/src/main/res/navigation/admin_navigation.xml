@@ -37,12 +37,12 @@
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/admin_generate_user_fragment"
-        android:name="ipvc.gymbuddy.app.fragments.admin.AdminGenerateUserFragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.user.AdminGenerateUserFragment"
         android:label="fragment_admin_generate_user"
         tools:layout="@layout/fragment_admin_generate_user" />
     <fragment
         android:id="@+id/admin_users_overview_fragment"
-        android:name="ipvc.gymbuddy.app.fragments.admin.AdminUsersOverviewFragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.user.AdminUsersOverviewFragment"
         android:label="fragment_admin_users"
         tools:layout="@layout/fragment_admin_users_overview" >
         <action
@@ -51,7 +51,7 @@
     </fragment>
     <fragment
         android:id="@+id/admin_machines_overview_fragment"
-        android:name="ipvc.gymbuddy.app.fragments.admin.AdminMachineOverviewFragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.machine.AdminMachineOverviewFragment"
         android:label="fragment_admin_machines_overview"
         tools:layout="@layout/fragment_admin_machines_overview" />
 </navigation>

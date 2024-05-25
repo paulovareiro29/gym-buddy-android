@@ -1,4 +1,4 @@
-package ipvc.gymbuddy.app.fragments.admin
+package ipvc.gymbuddy.app.fragments.admin.user
 
 import android.os.Bundle
 import android.view.View
@@ -6,15 +6,15 @@ import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ipvc.gymbuddy.app.R
-import ipvc.gymbuddy.app.adapters.MachineAdapter
+import ipvc.gymbuddy.app.adapters.UserAdapter
 import ipvc.gymbuddy.app.core.BaseFragment
-import ipvc.gymbuddy.app.databinding.FragmentAdminMachinesOverviewBinding
-import ipvc.gymbuddy.app.viewmodels.admin.AdminMachineOverviewViewModel
+import ipvc.gymbuddy.app.databinding.FragmentAdminUsersOverviewBinding
+import ipvc.gymbuddy.app.viewmodels.admin.user.AdminUsersOverviewViewModel
 
-class AdminMachineOverviewFragment : BaseFragment<FragmentAdminMachinesOverviewBinding>(
-    FragmentAdminMachinesOverviewBinding::inflate
+class AdminUsersOverviewFragment : BaseFragment<FragmentAdminUsersOverviewBinding>(
+    FragmentAdminUsersOverviewBinding::inflate
 ) {
-    private lateinit var viewModel: AdminMachineOverviewViewModel
+    private lateinit var viewModel: AdminUsersOverviewViewModel
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,25 +24,26 @@ class AdminMachineOverviewFragment : BaseFragment<FragmentAdminMachinesOverviewB
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadToolbar(getString(R.string.machines_overview))
+        loadToolbar(getString(R.string.users_overview))
 
         recyclerView = view.findViewById(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        viewModel.getMachines()
-        viewModel.machinesData.observe(viewLifecycleOwner) {
+        viewModel.getUsers()
+        viewModel.usersData.observe(viewLifecycleOwner) {
             if (it.data != null) {
-                recyclerView.adapter = MachineAdapter(it.data)
+                recyclerView.adapter = UserAdapter(it.data)
             }
         }
 
+        binding.generateUser.setOnClickListener { navController.navigate(R.id.admin_generate_user_fragment) }
         binding.searchInput.editText?.addTextChangedListener { handleSearch(it.toString()) }
     }
 
     private fun handleSearch(search: String) {
-        val filteredUsers = viewModel.machinesData.value?.data?.filter {
-            it.name.contains(search, true)
+        val filteredUsers = viewModel.usersData.value?.data?.filter {
+            it.name.contains(search, true) || it.email.contains(search, true)
         } ?: listOf()
-        recyclerView.adapter = MachineAdapter(filteredUsers)
+        recyclerView.adapter = UserAdapter(filteredUsers)
     }
 }
