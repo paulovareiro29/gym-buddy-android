@@ -40,4 +40,6 @@
     <string name="arrow_right">Arrow Right</string>
     <string name="user_photo">User Photo</string>
     <string name="search">Search</string>
+    <string name="machines">Machines</string>
+    <string name="machines_overview">Machines Overview</string>
 </resources>

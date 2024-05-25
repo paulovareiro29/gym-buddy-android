@@ -86,6 +86,7 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
         sidebar.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.sidebar_item_admin_users_overview -> navController.navigate(R.id.admin_users_overview_fragment)
+                R.id.sidebar_item_admin_machines_overview -> navController.navigate(R.id.admin_machines_overview_fragment)
 
                 // COMMON ROUTES
                 R.id.sidebar_item_home -> {

@@ -9,14 +9,14 @@ import ipvc.gymbuddy.api.services.UserService
 import ipvc.gymbuddy.app.core.AsyncData
 import kotlinx.coroutines.launch
 
-class UsersDataStore(context: Context) : BaseDataStore(context) {
+class UserDataStore(context: Context) : BaseDataStore(context) {
 
     @SuppressLint("StaticFieldLeak")
     companion object{
-        @Volatile private var instance: UsersDataStore? = null
+        @Volatile private var instance: UserDataStore? = null
 
         fun getInstance(context: Context) = instance ?: synchronized(this) {
-            instance ?: UsersDataStore(context).also { instance = it }
+            instance ?: UserDataStore(context).also { instance = it }
         }
     }
 
