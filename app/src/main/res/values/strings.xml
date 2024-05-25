@@ -47,4 +47,5 @@
     <string name="categories">Categories</string>
     <string name="create_category">Create Category</string>
     <string name="created_successfully">Created successfully</string>
+    <string name="search_category">Search Category</string>
 </resources>

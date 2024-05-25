@@ -36,6 +36,7 @@ class AdminMachineOverviewFragment : BaseFragment<FragmentAdminMachinesOverviewB
             }
         }
 
+        binding.createMachine.setOnClickListener { navController.navigate(R.id.admin_machine_create_fragment) }
         binding.searchInput.editText?.addTextChangedListener { handleSearch(it.toString()) }
     }
 

@@ -44,6 +44,6 @@ class AdminCategoryOverviewFragment : BaseFragment<FragmentAdminCategoryOverview
         val filtered = viewModel.categoriesData.value?.data?.filter {
             it.name.contains(search, true)
         } ?: listOf()
-        recyclerView.adapter = CategoryAdapter(filtered)
+        (recyclerView.adapter as CategoryAdapter).updateDataset(filtered)
     }
 }

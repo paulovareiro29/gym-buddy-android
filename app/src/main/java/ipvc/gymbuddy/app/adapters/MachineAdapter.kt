@@ -11,6 +11,7 @@ class MachineAdapter(dataset: List<Machine>) : BaseRecyclerAdapter<Machine, Mach
 
     class ViewHolder(view: View) : BaseViewHolder(view) {
         val name: TextView = view.findViewById(R.id.name)
+        val categories: TextView = view.findViewById(R.id.categories)
     }
 
     override fun getItemLayout(): Int = R.layout.recycler_adapter_machine
@@ -21,5 +22,6 @@ class MachineAdapter(dataset: List<Machine>) : BaseRecyclerAdapter<Machine, Mach
 
     override fun bindViewHolder(holder: ViewHolder, item: Machine) {
         holder.name.text = item.name
+        holder.categories.text = item.categories.joinToString(", ") { it.name }
     }
 }

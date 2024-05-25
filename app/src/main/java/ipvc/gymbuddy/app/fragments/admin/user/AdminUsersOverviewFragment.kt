@@ -41,9 +41,9 @@ class AdminUsersOverviewFragment : BaseFragment<FragmentAdminUsersOverviewBindin
     }
 
     private fun handleSearch(search: String) {
-        val filteredUsers = viewModel.usersData.value?.data?.filter {
+        val filtered = viewModel.usersData.value?.data?.filter {
             it.name.contains(search, true) || it.email.contains(search, true)
         } ?: listOf()
-        recyclerView.adapter = UserAdapter(filteredUsers)
+        (recyclerView.adapter as UserAdapter).updateDataset(filtered)
     }
 }
