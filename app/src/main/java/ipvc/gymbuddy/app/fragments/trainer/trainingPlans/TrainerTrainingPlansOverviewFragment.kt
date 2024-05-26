@@ -9,12 +9,12 @@ import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.TrainingPlanAdapter
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentTrainerTrainingPlansOverviewBinding
-import ipvc.gymbuddy.app.viewmodels.trainer.TrainingPlanOverviewViewModel
+import ipvc.gymbuddy.app.viewmodels.trainer.TrainerTrainingPlanOverviewViewModel
 
-class TrainingPlansOverviewFragment : BaseFragment<FragmentTrainerTrainingPlansOverviewBinding>(
+class TrainerTrainingPlansOverviewFragment : BaseFragment<FragmentTrainerTrainingPlansOverviewBinding>(
     FragmentTrainerTrainingPlansOverviewBinding::inflate) {
 
-    private lateinit var viewModel: TrainingPlanOverviewViewModel
+    private lateinit var viewModel: TrainerTrainingPlanOverviewViewModel
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +36,8 @@ class TrainingPlansOverviewFragment : BaseFragment<FragmentTrainerTrainingPlansO
             }
         }
         binding.searchInput.editText?.addTextChangedListener { handleSearch(it.toString()) }
+
+        binding.createTrainingPlan.setOnClickListener { navController.navigate(R.id.action_trainingPlansOverviewFragment_to_trainerTrainingPlanCreateFragment) }
     }
     private fun handleSearch(search: String) {
         val filtered = viewModel.trainingPlansData.value?.data?.filter {

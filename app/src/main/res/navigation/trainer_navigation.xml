@@ -31,7 +31,16 @@
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/trainingPlansOverviewFragment"
-        android:name="ipvc.gymbuddy.app.fragments.trainer.trainingPlans.TrainingPlansOverviewFragment"
+        android:name="ipvc.gymbuddy.app.fragments.trainer.trainingPlans.TrainerTrainingPlansOverviewFragment"
         android:label="fragment_trainer_training_plans_overview"
-        tools:layout="@layout/fragment_trainer_training_plans_overview" />
+        tools:layout="@layout/fragment_trainer_training_plans_overview" >
+        <action
+            android:id="@+id/action_trainingPlansOverviewFragment_to_trainerTrainingPlanCreateFragment"
+            app:destination="@id/trainerTrainingPlanCreateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/trainerTrainingPlanCreateFragment"
+        android:name="ipvc.gymbuddy.app.fragments.trainer.trainingPlans.TrainerTrainingPlanCreateFragment"
+        android:label="fragment_trainer_training_plan_create"
+        tools:layout="@layout/fragment_trainer_training_plan_create" />
 </navigation>
