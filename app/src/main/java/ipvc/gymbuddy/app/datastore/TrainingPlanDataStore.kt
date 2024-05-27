@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import ipvc.gymbuddy.api.core.RequestResult
 import ipvc.gymbuddy.api.models.TrainingPlan
 import ipvc.gymbuddy.api.models.requests.trainingPlan.CreateTrainingPlanRequest
+import ipvc.gymbuddy.api.models.requests.trainingPlan.UpdateTrainingPlanRequest
 import ipvc.gymbuddy.api.services.TrainingPlanService
 import ipvc.gymbuddy.app.core.AsyncData
 import kotlinx.coroutines.delay
@@ -26,6 +27,7 @@ class TrainingPlanDataStore(context: Context) : BaseDataStore(context) {
     private val authenticationDataStore = AuthenticationDataStore.getInstance(context)
     var trainingPlans = MutableLiveData<AsyncData<List<TrainingPlan>>>(AsyncData(listOf()))
     var post = MutableLiveData<AsyncData<CreateTrainingPlanRequest>>(AsyncData())
+    var update = MutableLiveData<AsyncData<UpdateTrainingPlanRequest>>(AsyncData())
     fun getTrainingPlans() {
         trainingPlans.postValue(AsyncData(trainingPlans.value?.data ?: listOf(), AsyncData.Status.LOADING))
         coroutine.launch {
@@ -58,15 +60,15 @@ class TrainingPlanDataStore(context: Context) : BaseDataStore(context) {
     }
 
     fun updateTrainingPlan(id: String, name: String) {
-        val entity = CreateTrainingPlanRequest(name)
-        post.postValue(AsyncData(entity, AsyncData.Status.LOADING))
+        val entity = UpdateTrainingPlanRequest(name)
+        update.postValue(AsyncData(entity, AsyncData.Status.LOADING))
         coroutine.launch {
             when(val response = TrainingPlanService().updateTrainingPlan(id, entity)) {
-                is RequestResult.Success -> post.postValue(AsyncData(null, AsyncData.Status.SUCCESS))
-                is RequestResult.Error -> post.postValue(AsyncData(null, AsyncData.Status.ERROR))
+                is RequestResult.Success -> update.postValue(AsyncData(null, AsyncData.Status.SUCCESS))
+                is RequestResult.Error -> update.postValue(AsyncData(null, AsyncData.Status.ERROR))
             }
             delay(2500)
-            post.postValue(AsyncData(null, AsyncData.Status.IDLE))
+            update.postValue(AsyncData(null, AsyncData.Status.IDLE))
         }
     }
 

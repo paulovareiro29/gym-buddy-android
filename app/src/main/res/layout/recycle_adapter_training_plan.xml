@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/textSecondary"
             android:layout_marginTop="4dp"
-            android:text="Clients: 3" />
+            android:text="@string/clients" />
 
     </LinearLayout>
 

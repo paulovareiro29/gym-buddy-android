@@ -57,7 +57,7 @@ class TrainerTrainingPlanCreateFragment : BaseFragment<FragmentTrainerTrainingPl
 
         if (!Validator.validateRequiredField(name, requireContext())) return
 
-        viewModel.createMachine(name.text.toString())
+        viewModel.createTrainingPlan(name.text.toString())
     }
 
     private fun resetView() {

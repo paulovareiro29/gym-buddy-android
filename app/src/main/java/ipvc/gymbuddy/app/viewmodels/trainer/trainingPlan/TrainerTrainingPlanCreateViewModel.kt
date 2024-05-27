@@ -9,7 +9,7 @@ class TrainerTrainingPlanCreateViewModel(application: Application) : BaseViewMod
 
     val postData = trainingPlanDataStore.post
 
-    fun createMachine(name: String) {
+    fun createTrainingPlan(name: String) {
         trainingPlanDataStore.createTrainingPlan(name)
     }
 }
