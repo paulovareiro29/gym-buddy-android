@@ -56,6 +56,20 @@ class TrainingPlanDataStore(context: Context) : BaseDataStore(context) {
             post.postValue(AsyncData(null, AsyncData.Status.IDLE))
         }
     }
+
+    fun updateTrainingPlan(id: String, name: String) {
+        val entity = CreateTrainingPlanRequest(name)
+        post.postValue(AsyncData(entity, AsyncData.Status.LOADING))
+        coroutine.launch {
+            when(val response = TrainingPlanService().updateTrainingPlan(id, entity)) {
+                is RequestResult.Success -> post.postValue(AsyncData(null, AsyncData.Status.SUCCESS))
+                is RequestResult.Error -> post.postValue(AsyncData(null, AsyncData.Status.ERROR))
+            }
+            delay(2500)
+            post.postValue(AsyncData(null, AsyncData.Status.IDLE))
+        }
+    }
+
     private fun filterUserTrainingPlans(allTrainingPlans: List<TrainingPlan>): List<TrainingPlan> {
         val user = authenticationDataStore.user.value
         return if (user != null) {

@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_trainer_home" >
         <action
             android:id="@+id/action_trainer_home_fragment_to_trainingPlansOverviewFragment"
-            app:destination="@id/trainingPlansOverviewFragment" />
+            app:destination="@id/trainer_trainingplans_overview_fragment" />
     </fragment>
     <fragment
         android:id="@+id/trainer_not_found_fragment"
@@ -30,17 +30,25 @@
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
     <fragment
-        android:id="@+id/trainingPlansOverviewFragment"
+        android:id="@+id/trainer_trainingplans_overview_fragment"
         android:name="ipvc.gymbuddy.app.fragments.trainer.trainingPlans.TrainerTrainingPlansOverviewFragment"
         android:label="fragment_trainer_training_plans_overview"
         tools:layout="@layout/fragment_trainer_training_plans_overview" >
         <action
             android:id="@+id/action_trainingPlansOverviewFragment_to_trainerTrainingPlanCreateFragment"
-            app:destination="@id/trainerTrainingPlanCreateFragment" />
+            app:destination="@id/trainer_trainingplans_create_fragment" />
+        <action
+            android:id="@+id/action_trainingPlansOverviewFragment_to_trainerTrainingPlanUpdateFragment"
+            app:destination="@id/trainer_trainingplans_update_fragment" />
     </fragment>
     <fragment
-        android:id="@+id/trainerTrainingPlanCreateFragment"
+        android:id="@+id/trainer_trainingplans_create_fragment"
         android:name="ipvc.gymbuddy.app.fragments.trainer.trainingPlans.TrainerTrainingPlanCreateFragment"
         android:label="fragment_trainer_training_plan_create"
         tools:layout="@layout/fragment_trainer_training_plan_create" />
+    <fragment
+        android:id="@+id/trainer_trainingplans_update_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.trainer.trainingPlans.TrainerTrainingPlanUpdateFragment"
+        android:label="fragment_trainer_training_plan_update"
+        tools:layout="@layout/fragment_trainer_training_plan_update" />
 </navigation>

@@ -30,8 +30,8 @@
     <string name="edit">Edit</string>
     <string name="list_clients">List Of Clients</string>
     <string name="training_plans">Training Plans</string>
-    <string name="trainingPlans_overview">Training Plans Overview</string>
-    <string name="create_trainingPlan">Create Training Plan</string>
+    <string name="training_plans_overview">Training Plans Overview</string>
+    <string name="create_training_plan">Create Training Plan</string>
     <string name="clients">Clients</string>
     <string name="overview">Overview</string>
     <string name="shortcuts">Shortcuts</string>

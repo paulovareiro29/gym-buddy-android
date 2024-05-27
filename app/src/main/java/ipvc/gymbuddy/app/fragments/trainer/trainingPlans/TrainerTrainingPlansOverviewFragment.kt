@@ -24,7 +24,7 @@ class TrainerTrainingPlansOverviewFragment : BaseFragment<FragmentTrainerTrainin
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadToolbar(getString(R.string.trainingPlans_overview))
+        loadToolbar(getString(R.string.training_plans_overview))
 
         recyclerView = view.findViewById(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -37,7 +37,7 @@ class TrainerTrainingPlansOverviewFragment : BaseFragment<FragmentTrainerTrainin
         }
         binding.searchInput.editText?.addTextChangedListener { handleSearch(it.toString()) }
 
-        binding.createTrainingPlan.setOnClickListener { navController.navigate(R.id.action_trainingPlansOverviewFragment_to_trainerTrainingPlanCreateFragment) }
+        binding.createTrainingPlan.setOnClickListener { navController.navigate(R.id.trainer_trainingplans_create_fragment) }
     }
     private fun handleSearch(search: String) {
         val filtered = viewModel.trainingPlansData.value?.data?.filter {

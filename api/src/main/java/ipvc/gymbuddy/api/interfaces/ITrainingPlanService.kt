@@ -8,6 +8,8 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Path
 
 interface ITrainingPlanService {
     @GET("plans")
@@ -15,4 +17,8 @@ interface ITrainingPlanService {
 
     @POST("plans")
     fun createTrainingPlan(@Body body: CreateTrainingPlanRequest): Call<RequestResult.Success<CreateTrainingPlanResponse>>
+
+
+    @PUT("plans/{id}")
+    fun updateTrainingPlan(@Body body: CreateTrainingPlanRequest, @Path("id") id: String): Call<RequestResult.Success<CreateTrainingPlanResponse>>
 }

@@ -49,24 +49,27 @@
         android:layout_gravity="end|bottom"
         android:gravity="end">
 
-        <ImageView
-            android:id="@+id/image_view_add_client"
+        <ImageButton
+            android:id="@+id/add_client"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/baseline_add_reaction_24"
-            android:layout_marginEnd="12dp"/>
+            android:layout_marginEnd="12dp" />
 
-        <ImageView
-            android:id="@+id/image_view_edit_plan"
+        <ImageButton
+            android:id="@+id/edit_plan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/baseline_edit_24"
-            android:layout_marginEnd="12dp"/>
+            android:layout_marginEnd="12dp" />
 
-        <ImageView
-            android:id="@+id/image_view_delete_plan"
+        <ImageButton
+            android:id="@+id/delete_plan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/baseline_delete_24" />
 
     </LinearLayout>

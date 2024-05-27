@@ -22,7 +22,7 @@ class TrainerTrainingPlanCreateFragment : BaseFragment<FragmentTrainerTrainingPl
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadToolbar(getString(R.string.create_trainingPlan))
+        loadToolbar(getString(R.string.create_training_plan))
 
         resetView()
 
