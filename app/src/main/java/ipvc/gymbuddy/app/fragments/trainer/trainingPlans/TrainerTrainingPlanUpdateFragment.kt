@@ -1,13 +1,10 @@
 package ipvc.gymbuddy.app.fragments.trainer.trainingPlans
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentTrainerTrainingPlanUpdateBinding
-import ipvc.gymbuddy.app.viewmodels.trainer.TrainerTrainingPlanUpdateViewModel
+import ipvc.gymbuddy.app.viewmodels.trainer.trainingPlan.TrainerTrainingPlanUpdateViewModel
 
 class TrainerTrainingPlanUpdateFragment : BaseFragment<FragmentTrainerTrainingPlanUpdateBinding>(
     FragmentTrainerTrainingPlanUpdateBinding::inflate) {

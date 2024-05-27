@@ -7,7 +7,7 @@ import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.core.Validator
 import ipvc.gymbuddy.app.databinding.FragmentTrainerTrainingPlanCreateBinding
-import ipvc.gymbuddy.app.viewmodels.trainer.TrainerTrainingPlanCreateViewModel
+import ipvc.gymbuddy.app.viewmodels.trainer.trainingPlan.TrainerTrainingPlanCreateViewModel
 
 class TrainerTrainingPlanCreateFragment : BaseFragment<FragmentTrainerTrainingPlanCreateBinding>(
     FragmentTrainerTrainingPlanCreateBinding::inflate

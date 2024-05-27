@@ -9,7 +9,7 @@ import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.TrainingPlanAdapter
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentTrainerTrainingPlansOverviewBinding
-import ipvc.gymbuddy.app.viewmodels.trainer.TrainerTrainingPlanOverviewViewModel
+import ipvc.gymbuddy.app.viewmodels.trainer.trainingPlan.TrainerTrainingPlanOverviewViewModel
 
 class TrainerTrainingPlansOverviewFragment : BaseFragment<FragmentTrainerTrainingPlansOverviewBinding>(
     FragmentTrainerTrainingPlansOverviewBinding::inflate) {

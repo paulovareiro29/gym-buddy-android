@@ -5,6 +5,7 @@ import ipvc.gymbuddy.api.core.RequestResult
 import ipvc.gymbuddy.api.core.ResponseParser
 import ipvc.gymbuddy.api.interfaces.ITrainingPlanService
 import ipvc.gymbuddy.api.models.requests.trainingPlan.CreateTrainingPlanRequest
+import ipvc.gymbuddy.api.models.requests.trainingPlan.UpdateTrainingPlanRequest
 import ipvc.gymbuddy.api.models.responses.TrainingPlan.CreateTrainingPlanResponse
 import ipvc.gymbuddy.api.models.responses.TrainingPlan.GetAllTrainingPlansResponse
 import ipvc.gymbuddy.api.models.responses.TrainingPlan.UpdateTrainingPlanResponse
@@ -33,7 +34,7 @@ class TrainingPlanService : HttpClient<ITrainingPlanService>(ITrainingPlanServic
         }
     }
 
-    suspend fun updateTrainingPlan(id: String, body: CreateTrainingPlanRequest): RequestResult<UpdateTrainingPlanResponse> {
+    suspend fun updateTrainingPlan(id: String, body: UpdateTrainingPlanRequest): RequestResult<UpdateTrainingPlanResponse> {
         return when(val response = request(api.updateTrainingPlan(body, id))) {
             is RequestResult.Success -> RequestResult.Success(
                 code = response.code,

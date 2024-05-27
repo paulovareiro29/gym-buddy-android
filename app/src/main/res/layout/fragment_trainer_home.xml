@@ -131,7 +131,6 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textStyle="bold"
-                        android:text="37"
                         android:textSize="36sp"/>
 
                     <TextView
@@ -162,7 +161,6 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textStyle="bold"
-                        android:text="10"
                         android:textSize="36sp" />
 
                     <TextView

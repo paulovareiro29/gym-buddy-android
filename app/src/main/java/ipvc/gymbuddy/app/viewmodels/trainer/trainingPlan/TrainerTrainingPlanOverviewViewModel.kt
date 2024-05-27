@@ -1,4 +1,4 @@
-package ipvc.gymbuddy.app.viewmodels.trainer
+package ipvc.gymbuddy.app.viewmodels.trainer.trainingPlan
 
 import android.app.Application
 import ipvc.gymbuddy.app.datastore.TrainingPlanDataStore
@@ -8,8 +8,8 @@ class TrainerTrainingPlanOverviewViewModel(application: Application) : BaseViewM
     private val trainingPlanDataStore = TrainingPlanDataStore.getInstance(application)
     val trainingPlansData = trainingPlanDataStore.trainingPlans
 
-
     fun getTrainingPlans() {
         trainingPlanDataStore.getTrainingPlans()
     }
+
 }
