@@ -9,7 +9,10 @@
     <item android:title="@string/trainer">
         <menu>
             <group>
-
+                <item
+                    android:id="@+id/sidebar_item_trainer_trainingplans_overview"
+                    android:icon="@drawable/baseline_assignment_24"
+                    android:title="@string/training_plans" />
             </group>
         </menu>
     </item>
