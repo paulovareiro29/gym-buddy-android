@@ -93,6 +93,7 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
 
                 //TRAINER
                 R.id.sidebar_item_trainer_trainingplans_overview -> navController.navigate(R.id.trainer_trainingplans_overview_fragment)
+                R.id.sidebar_item_trainer_listclients_overview -> navController.navigate(R.id.trainer_listclients_overview_fragment)
 
                 // COMMON ROUTES
                 R.id.sidebar_item_home -> {

@@ -28,7 +28,7 @@
     <string name="role">Role</string>
     <string name="personal_information">Personal Information</string>
     <string name="edit">Edit</string>
-    <string name="list_clients">List Of Clients</string>
+    <string name="list_clients">List Clients</string>
     <string name="training_plans">Training Plans</string>
     <string name="training_plans_overview">Training Plans Overview</string>
     <string name="create_training_plan">Create Training Plan</string>
@@ -59,4 +59,8 @@
     <string name="exercises_overview">Exercises Overview</string>
     <string name="create_exercise">Create Exercise</string>
     <string name="machine">Machine</string>
+    <string name="clients_overview">Clients Overview</string>
+    <string name="contract">Contract</string>
+    <string name="end_date">End Date</string>
+    <string name="start_date">Start Date</string>
 </resources>
