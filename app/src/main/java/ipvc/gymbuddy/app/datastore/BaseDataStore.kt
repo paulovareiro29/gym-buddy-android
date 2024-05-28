@@ -9,4 +9,5 @@ import kotlinx.coroutines.Job
 open class BaseDataStore(val context: Context) {
     private val parentJob = Job()
     val coroutine = CoroutineScope(Dispatchers.Main + parentJob)
+
 }

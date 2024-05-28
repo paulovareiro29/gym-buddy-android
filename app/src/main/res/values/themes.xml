@@ -19,9 +19,8 @@
         <item name="android:colorBackground">@color/background</item>
 
         <!-- Status bar and navigation bar colors -->
-        <item name="android:statusBarColor">@color/primaryDarkColor</item>
+        <item name="android:statusBarColor">@color/primaryColor</item>
         <item name="android:navigationBarColor">@color/black</item>
-
         <!-- Accent color -->
         <item name="colorAccent">@color/accentColor</item>
 
@@ -39,6 +38,7 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textViewStyle">@style/Theme.Typography.Body</item>
         <item name="textInputStyle">@style/Theme.Input</item>
+        <item name="android:spinnerStyle">@style/Theme.Spinner</item>
     </style>
 
     <!-- No ActionBar theme. -->
@@ -102,6 +102,18 @@
         <item name="boxBackgroundColor">@color/white</item>
     </style>
 
+    <style name="Theme.Spinner" parent="Theme.Input">
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">6dp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Theme.Dropdown" parent="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxBackgroundColor">@color/white</item>
+    </style>
 
     <!-- Typography -->
     <style name="Theme.GymBuddy.Typography" parent="Widget.MaterialComponents.TextView">

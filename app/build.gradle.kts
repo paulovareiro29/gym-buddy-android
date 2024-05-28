@@ -51,6 +51,7 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.flexbox)
+    implementation("androidx.security:security-crypto:1.1.0-alpha03")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

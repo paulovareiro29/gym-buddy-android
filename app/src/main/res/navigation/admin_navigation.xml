@@ -9,7 +9,23 @@
         android:id="@+id/admin_home_fragment"
         android:name="ipvc.gymbuddy.app.fragments.admin.AdminHomeFragment"
         android:label="fragment_admin_home"
-        tools:layout="@layout/fragment_admin_home" />
+        tools:layout="@layout/fragment_admin_home" >
+        <action
+            android:id="@+id/action_admin_home_fragment_to_adminGenerateUserFragment"
+            app:destination="@id/admin_generate_user_fragment" />
+        <action
+            android:id="@+id/action_admin_home_fragment_to_adminUsersFragment"
+            app:destination="@id/admin_users_overview_fragment" />
+        <action
+            android:id="@+id/action_admin_home_fragment_to_adminMachinesOverviewFragment"
+            app:destination="@id/admin_machines_overview_fragment" />
+        <action
+            android:id="@+id/action_admin_home_fragment_to_adminCategoryOverviewFragment"
+            app:destination="@id/admin_categories_overview_fragment" />
+        <action
+            android:id="@+id/action_admin_home_fragment_to_adminExerciseOverviewFragment"
+            app:destination="@id/admin_exercises_overview_fragment" />
+    </fragment>
     <fragment
         android:id="@+id/admin_not_found_fragment"
         android:name="ipvc.gymbuddy.app.fragments.NotFoundFragment"
@@ -25,4 +41,60 @@
         android:name="ipvc.gymbuddy.app.fragments.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/admin_generate_user_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.user.AdminGenerateUserFragment"
+        android:label="fragment_admin_generate_user"
+        tools:layout="@layout/fragment_admin_generate_user" />
+    <fragment
+        android:id="@+id/admin_users_overview_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.user.AdminUsersOverviewFragment"
+        android:label="fragment_admin_users"
+        tools:layout="@layout/fragment_admin_users_overview" >
+        <action
+            android:id="@+id/action_admin_users_overview_fragment_to_admin_generate_user_fragment"
+            app:destination="@id/admin_generate_user_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/admin_machines_overview_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.machine.AdminMachineOverviewFragment"
+        android:label="fragment_admin_machines_overview"
+        tools:layout="@layout/fragment_admin_machines_overview" >
+        <action
+            android:id="@+id/action_admin_machines_overview_fragment_to_adminMachineCreateFragment"
+            app:destination="@id/admin_machine_create_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/admin_categories_overview_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.category.AdminCategoryOverviewFragment"
+        android:label="fragment_admin_category_overview"
+        tools:layout="@layout/fragment_admin_category_overview" >
+        <action
+            android:id="@+id/action_admin_categories_overview_fragment_to_adminCategoryCreateFragment"
+            app:destination="@id/admin_category_create_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/admin_category_create_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.category.AdminCategoryCreateFragment"
+        android:label="fragment_admin_category_create"
+        tools:layout="@layout/fragment_admin_category_create" />
+    <fragment
+        android:id="@+id/admin_machine_create_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.machine.AdminMachineCreateFragment"
+        android:label="fragment_admin_machine_create"
+        tools:layout="@layout/fragment_admin_machine_create" />
+    <fragment
+        android:id="@+id/admin_exercises_overview_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.exercise.AdminExerciseOverviewFragment"
+        android:label="fragment_admin_exercise_overview"
+        tools:layout="@layout/fragment_admin_exercise_overview" >
+        <action
+            android:id="@+id/action_admin_exercises_overview_fragment_to_adminExerciseCreateFragment"
+            app:destination="@id/admin_exercise_create_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/admin_exercise_create_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.exercise.AdminExerciseCreateFragment"
+        android:label="fragment_admin_exercise_create"
+        tools:layout="@layout/fragment_admin_exercise_create" />
 </navigation>
