@@ -61,6 +61,5 @@
     <string name="machine">Machine</string>
     <string name="clients_overview">Clients Overview</string>
     <string name="contract">Contract</string>
-    <string name="end_date">End Date</string>
-    <string name="start_date">Start Date</string>
+    <string name="contract_end_date">Contract ends on: %s</string>
 </resources>

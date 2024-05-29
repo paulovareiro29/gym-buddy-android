@@ -25,18 +25,16 @@ class ContractDataStore(context: Context) : BaseDataStore(context) {
 
 
     fun getContracts() {
-        val user = authenticationDataStore.user.value
+        val user = authenticationDataStore.user.value ?: return
         contracts.postValue(AsyncData(contracts.value?.data, AsyncData.Status.LOADING))
         coroutine.launch {
-            if (user != null) {
-                when (val response = ContractService().getContract(user.id)) {
-                    is RequestResult.Success -> {
-                        contracts.postValue(AsyncData(response.data.contracts, AsyncData.Status.SUCCESS))
-                    }
+            when (val response = ContractService().getContract(user.id)) {
+                is RequestResult.Success -> {
+                    contracts.postValue(AsyncData(response.data.contracts, AsyncData.Status.SUCCESS))
+                }
 
-                    is RequestResult.Error -> {
-                        contracts.postValue(AsyncData(contracts.value?.data, AsyncData.Status.ERROR))
-                    }
+                is RequestResult.Error -> {
+                    contracts.postValue(AsyncData(contracts.value?.data, AsyncData.Status.ERROR))
                 }
             }
         }

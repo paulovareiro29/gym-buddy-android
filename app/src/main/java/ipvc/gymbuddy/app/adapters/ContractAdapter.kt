@@ -1,6 +1,5 @@
 package ipvc.gymbuddy.app.adapters
 
-import android.annotation.SuppressLint
 import android.view.View
 import android.widget.TextView
 import ipvc.gymbuddy.api.models.Contract
@@ -27,14 +26,13 @@ class ContractAdapter(dataset: List<Contract>): BaseRecyclerAdapter<Contract, Co
         return ViewHolder(view)
     }
 
-    @SuppressLint("SetTextI18n")
     override fun bindViewHolder(holder: ViewHolder, item: Contract) {
         val endDate = originalFormat.parse(item.end_date)
         val formattedEndDate = endDate?.let { targetFormat.format(it) }
 
         holder.name.text = item.beneficiary.name
         holder.email.text = item.beneficiary.email
-        holder.contractEndDate.text = "Contract ends on $formattedEndDate"
+        holder.contractEndDate.text = holder.itemView.context.getString(R.string.contract_end_date, formattedEndDate)
 
     }
 }
