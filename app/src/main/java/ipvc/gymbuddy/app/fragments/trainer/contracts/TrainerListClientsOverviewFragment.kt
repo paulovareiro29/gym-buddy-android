@@ -41,7 +41,7 @@ class TrainerListClientsOverviewFragment : BaseFragment<FragmentTrainerListClien
 
     private fun handleSearch(search: String) {
         val filtered = viewModel.contractsData.value?.data?.filter {
-            it.provider.name.contains(search, true)
+            it.beneficiary.name.contains(search, true)
         } ?: listOf()
         recyclerView.adapter = ContractAdapter(filtered)
     }

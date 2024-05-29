@@ -18,8 +18,6 @@ class ContractAdapter(dataset: List<Contract>): BaseRecyclerAdapter<Contract, Co
     class ViewHolder(view: View) : BaseViewHolder(view){
         val name: TextView = view.findViewById(R.id.name)
         val email: TextView = view.findViewById(R.id.email)
-        val contract: TextView = view.findViewById(R.id.contract)
-        val contractStartDate: TextView = view.findViewById(R.id.contract_startDate)
         val contractEndDate: TextView = view.findViewById(R.id.contract_endDate)
     }
 
@@ -31,17 +29,12 @@ class ContractAdapter(dataset: List<Contract>): BaseRecyclerAdapter<Contract, Co
 
     @SuppressLint("SetTextI18n")
     override fun bindViewHolder(holder: ViewHolder, item: Contract) {
-        val startDate = originalFormat.parse(item.end_date)
         val endDate = originalFormat.parse(item.end_date)
-        val formattedStartDate = startDate?.let { targetFormat.format(it) }
         val formattedEndDate = endDate?.let { targetFormat.format(it) }
-
 
         holder.name.text = item.beneficiary.name
         holder.email.text = item.beneficiary.email
-        holder.contract.text = "Contract: ${item.category.name}"
-        holder.contractStartDate.text = "Start: $formattedStartDate"
-        holder.contractEndDate.text = "End: $formattedEndDate"
+        holder.contractEndDate.text = "Contract ends on $formattedEndDate"
 
     }
 }
