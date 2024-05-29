@@ -36,7 +36,36 @@
                 android:paddingVertical="16dp"
                 android:paddingHorizontal="12dp"
                 android:textColor="@color/primaryColor"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:onClick="toggleLanguageSelection" />
+
+            <LinearLayout
+                android:id="@+id/language_options"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/english_option"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/en"
+                    android:gravity="center_vertical"
+                    android:paddingVertical="12dp"
+                    android:paddingHorizontal="24dp"
+                    android:background="?attr/selectableItemBackground" />
+
+                <TextView
+                    android:id="@+id/portuguese_option"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pt"
+                    android:gravity="center_vertical"
+                    android:paddingVertical="12dp"
+                    android:paddingHorizontal="24dp"
+                    android:background="?attr/selectableItemBackground" />
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
