@@ -32,6 +32,7 @@
     <string name="training_plans">Training Plans</string>
     <string name="training_plans_overview">Training Plans Overview</string>
     <string name="create_training_plan">Create Training Plan</string>
+    <string name="edit_training_plan">Edit Training Plan</string>
     <string name="clients">Clients</string>
     <string name="overview">Overview</string>
     <string name="shortcuts">Shortcuts</string>
@@ -54,6 +55,7 @@
     <string name="categories">Categories</string>
     <string name="create_category">Create Category</string>
     <string name="created_successfully">Created successfully</string>
+    <string name="updated_successfully">Updated successfully</string>
     <string name="search_category">Search Category</string>
     <string name="exercises">Exercises</string>
     <string name="exercises_overview">Exercises Overview</string>

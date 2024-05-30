@@ -8,6 +8,7 @@ import ipvc.gymbuddy.api.models.requests.trainingPlan.CreateTrainingPlanRequest
 import ipvc.gymbuddy.api.models.requests.trainingPlan.UpdateTrainingPlanRequest
 import ipvc.gymbuddy.api.models.responses.TrainingPlan.CreateTrainingPlanResponse
 import ipvc.gymbuddy.api.models.responses.TrainingPlan.GetAllTrainingPlansResponse
+import ipvc.gymbuddy.api.models.responses.TrainingPlan.GetTrainingPlanResponse
 import ipvc.gymbuddy.api.models.responses.TrainingPlan.UpdateTrainingPlanResponse
 
 class TrainingPlanService : HttpClient<ITrainingPlanService>(ITrainingPlanService::class.java){
@@ -18,6 +19,17 @@ class TrainingPlanService : HttpClient<ITrainingPlanService>(ITrainingPlanServic
                 code = response.code,
                 message = response.message,
                 data = ResponseParser.payload<GetAllTrainingPlansResponse>(response)
+            )
+            is RequestResult.Error -> response
+        }
+    }
+
+    suspend fun getTrainingPlan(id: String): RequestResult<GetTrainingPlanResponse> {
+        return when (val response = request(api.getTrainingPlan(id))) {
+            is RequestResult.Success -> RequestResult.Success(
+                code = response.code,
+                message = response.message,
+                data = ResponseParser.payload<GetTrainingPlanResponse>(response)
             )
             is RequestResult.Error -> response
         }
