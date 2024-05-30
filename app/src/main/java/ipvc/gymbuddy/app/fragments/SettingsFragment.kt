@@ -7,8 +7,11 @@ import android.content.res.Configuration
 import java.util.Locale
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentSettingsBinding
+import android.animation.ObjectAnimator
+import android.view.animation.AccelerateDecelerateInterpolator
 
 class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsBinding::inflate) {
+    private var isOptionsVisible = false
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -16,29 +19,36 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
             toggleLanguageOptions()
         }
 
-        binding.englishOption.setOnClickListener { selectLanguage(it) }
-        binding.portugueseOption.setOnClickListener { selectLanguage(it) }
+        binding.englishOption.setOnClickListener { selectLanguage("en") }
+        binding.portugueseOption.setOnClickListener { selectLanguage("pt") }
+        binding.logout.setOnClickListener { handleLogout() }
     }
 
     private fun toggleLanguageOptions() {
-        if (binding.languageOptions.visibility == View.GONE) {
+        if (!isOptionsVisible) {
             binding.languageOptions.visibility = View.VISIBLE
-            binding.changeLanguage.setCompoundDrawablesWithIntrinsicBounds(R.drawable.globe, 0, R.drawable.baseline_arrow_drop_up_24, 0)
+            rotateArrow(0f, 90f)
         } else {
             binding.languageOptions.visibility = View.GONE
-            binding.changeLanguage.setCompoundDrawablesWithIntrinsicBounds(R.drawable.globe, 0, R.drawable.baseline_arrow_drop_down_24, 0)
+            rotateArrow(90f, 0f)
         }
+        isOptionsVisible = !isOptionsVisible
     }
 
-    fun selectLanguage(view: View) {
-        val languageCode = when (view.id) {
-            R.id.english_option -> "en"
-            R.id.portuguese_option -> "pt"
-            else -> return
-        }
-        changeLanguage(languageCode)
+    private fun rotateArrow(fromDegrees: Float, toDegrees: Float) {
+        val animator = ObjectAnimator.ofFloat(binding.arrowIcon, "rotation", fromDegrees, toDegrees)
+        animator.duration = 300
+        animator.interpolator = AccelerateDecelerateInterpolator()
+        animator.start()
+    }
+
+    private fun selectLanguage(language: String) {
+        changeLanguage(language)
         binding.languageOptions.visibility = View.GONE
-        binding.changeLanguage.setCompoundDrawablesWithIntrinsicBounds(R.drawable.globe, 0, R.drawable.baseline_arrow_drop_down_24, 0)
+        if (isOptionsVisible) {
+            rotateArrow(90f, 0f)
+            isOptionsVisible = false
+        }
         updateViews()
     }
 
@@ -54,9 +64,10 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
     private fun updateViews() {
         binding.changeLanguage.text = getString(R.string.change_language)
         binding.logout.text = getString(R.string.logout)
+        //TODO: Remove or verify if needed after recreated() is fixed
     }
 
-    private fun endOfSession(){
+    private fun handleLogout(){
     }
 
 }

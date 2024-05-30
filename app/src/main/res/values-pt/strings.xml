@@ -51,4 +51,6 @@
     <string name="exercises_overview">Vista Exercícios</string>
     <string name="create_exercise">Criar Exercício</string>
     <string name="machine">Máquina</string>
+    <string name="en">Inglês</string>
+    <string name="pt">Português</string>
 </resources>

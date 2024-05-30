@@ -59,6 +59,6 @@
     <string name="exercises_overview">Exercises Overview</string>
     <string name="create_exercise">Create Exercise</string>
     <string name="machine">Machine</string>
-    <string name="en" translatable="false">English</string>
-    <string name="pt" translatable="false">Português</string>
+    <string name="en">English</string>
+    <string name="pt">Portuguese</string>
 </resources>
