@@ -61,4 +61,8 @@
     <string name="exercises_overview">Exercises Overview</string>
     <string name="create_exercise">Create Exercise</string>
     <string name="machine">Machine</string>
+    <string name="confirm_delete">Confirm Delete</string>
+    <string name="delete_message">Are you sure do you want to delete %s</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
 </resources>

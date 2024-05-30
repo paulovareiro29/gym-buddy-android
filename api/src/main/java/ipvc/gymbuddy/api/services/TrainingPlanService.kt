@@ -57,4 +57,23 @@ class TrainingPlanService : HttpClient<ITrainingPlanService>(ITrainingPlanServic
         }
     }
 
+    suspend fun deleteTrainingPlan(id: String): RequestResult<UpdateTrainingPlanResponse> {
+        return when(val response = request(api.deleteTrainingPlan(id))) {
+            is RequestResult.Success -> RequestResult.Success(
+                code = response.code,
+                message = response.message,
+                data = ResponseParser.payload<UpdateTrainingPlanResponse>(response)
+            )
+            is RequestResult.Error -> response
+        }
+    }
+
+
+
+
+
+
+
+
+
 }

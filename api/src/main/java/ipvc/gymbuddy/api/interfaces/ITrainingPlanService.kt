@@ -9,6 +9,7 @@ import ipvc.gymbuddy.api.models.responses.TrainingPlan.GetTrainingPlanResponse
 import ipvc.gymbuddy.api.models.responses.TrainingPlan.UpdateTrainingPlanResponse
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
@@ -26,4 +27,7 @@ interface ITrainingPlanService {
 
     @PUT("plans/{id}")
     fun updateTrainingPlan(@Body body: UpdateTrainingPlanRequest, @Path("id") id: String): Call<RequestResult.Success<UpdateTrainingPlanResponse>>
+
+    @DELETE("plans/{id}")
+    fun deleteTrainingPlan(@Path("id") id: String): Call<RequestResult.Success<UpdateTrainingPlanResponse>>
 }

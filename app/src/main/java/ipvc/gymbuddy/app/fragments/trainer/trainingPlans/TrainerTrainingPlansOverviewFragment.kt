@@ -1,25 +1,30 @@
 package ipvc.gymbuddy.app.fragments.trainer.trainingPlans
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ipvc.gymbuddy.api.models.TrainingPlan
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.TrainingPlanAdapter
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentTrainerTrainingPlansOverviewBinding
+import ipvc.gymbuddy.app.viewmodels.trainer.trainingPlan.TrainerTrainingPlanDeleteViewModel
 import ipvc.gymbuddy.app.viewmodels.trainer.trainingPlan.TrainerTrainingPlanOverviewViewModel
 
 class TrainerTrainingPlansOverviewFragment : BaseFragment<FragmentTrainerTrainingPlansOverviewBinding>(
     FragmentTrainerTrainingPlansOverviewBinding::inflate) {
 
     private lateinit var viewModel: TrainerTrainingPlanOverviewViewModel
+    private lateinit var deleteViewModel: TrainerTrainingPlanDeleteViewModel
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = getViewModel()
+        deleteViewModel = getViewModel()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,7 +37,11 @@ class TrainerTrainingPlansOverviewFragment : BaseFragment<FragmentTrainerTrainin
         viewModel.getTrainingPlans()
         viewModel.trainingPlansData.observe(viewLifecycleOwner) {
             if (it.data != null) {
-                recyclerView.adapter = TrainingPlanAdapter(it.data)
+                val adapter = TrainingPlanAdapter(it.data)
+                adapter.setOnTrainingPlanDeleteListener { trainingPlan ->
+                    showDeleteConfirmationDialog(trainingPlan)
+                }
+                recyclerView.adapter = adapter
             }
         }
         binding.searchInput.editText?.addTextChangedListener { handleSearch(it.toString()) }
@@ -44,5 +53,20 @@ class TrainerTrainingPlansOverviewFragment : BaseFragment<FragmentTrainerTrainin
             it.name.contains(search, true)
         } ?: listOf()
         recyclerView.adapter = TrainingPlanAdapter(filtered)
+    }
+
+    private fun showDeleteConfirmationDialog(trainingPlan: TrainingPlan) {
+        val alertDialogBuilder = AlertDialog.Builder(requireContext())
+        alertDialogBuilder.apply {
+            setTitle(getString(R.string.confirm_delete))
+            setMessage(getString(R.string.delete_message, trainingPlan.name))
+            setPositiveButton(getString(R.string.delete) ) { _, _ ->
+                deleteViewModel.deleteTrainingPlan(trainingPlan.id)
+            }
+            setNegativeButton(getString(R.string.cancel) ) { dialog, _ ->
+                dialog.dismiss()
+            }
+        }
+        alertDialogBuilder.create().show()
     }
 }
