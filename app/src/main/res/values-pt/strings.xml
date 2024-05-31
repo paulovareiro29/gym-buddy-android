@@ -61,5 +61,8 @@
     <string name="start_date">Data de Início</string>
     <string name="end_date">Data de Fim</string>
     <string name="cancel">Cancelar</string>
-    <string name="add_client_to">"Adicionar cliente a "</string>
+    <string name="add_client_to">"Adicionar cliente a "%s"</string>
+    <string name="confirm_delete">Confirmar Eliminação</string>
+    <string name="delete_message">Tem a certeza que deseja eliminar %s</string>
+    <string name="delete">Eliminar</string>
 </resources>

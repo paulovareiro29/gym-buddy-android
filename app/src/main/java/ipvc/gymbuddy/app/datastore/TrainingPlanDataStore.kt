@@ -30,6 +30,7 @@ class TrainingPlanDataStore(context: Context) : BaseDataStore(context) {
     var trainingPlan = MutableLiveData<AsyncData<TrainingPlan>>(AsyncData())
     var post = MutableLiveData<AsyncData<CreateTrainingPlanRequest>>(AsyncData())
     var update = MutableLiveData<AsyncData<UpdateTrainingPlanRequest>>(AsyncData())
+    var delete = MutableLiveData<AsyncData<Unit>>(AsyncData())
     fun getTrainingPlans() {
         trainingPlans.postValue(AsyncData(trainingPlans.value?.data ?: listOf(), AsyncData.Status.LOADING))
         coroutine.launch {
@@ -86,6 +87,23 @@ class TrainingPlanDataStore(context: Context) : BaseDataStore(context) {
             }
             delay(2500)
             update.postValue(AsyncData(null, AsyncData.Status.IDLE))
+        }
+    }
+
+    fun deleteTrainingPlan(id: String) {
+        delete.postValue(AsyncData(null, AsyncData.Status.LOADING))
+        coroutine.launch {
+            when (TrainingPlanService().deleteTrainingPlan(id)) {
+                is RequestResult.Success -> {
+                    delete.postValue(AsyncData(null, AsyncData.Status.SUCCESS))
+                    getTrainingPlans()
+                }
+                is RequestResult.Error -> {
+                    delete.postValue(AsyncData(null, AsyncData.Status.ERROR))
+                }
+            }
+            delay(2500)
+            delete.postValue(AsyncData(null, AsyncData.Status.IDLE))
         }
     }
 

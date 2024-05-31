@@ -61,6 +61,10 @@
     <string name="exercises_overview">Exercises Overview</string>
     <string name="create_exercise">Create Exercise</string>
     <string name="machine">Machine</string>
+    <string name="confirm_delete">Confirm Delete</string>
+    <string name="delete_message">Are you sure do you want to delete %s</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
     <string name="en">English</string>
     <string name="pt">Portuguese</string>
     <string name="clients_overview">Clients Overview</string>
@@ -68,8 +72,5 @@
     <string name="contract_end_date">Contract ends on: %s</string>
     <string name="start_date">Start Date</string>
     <string name="end_date">End Date</string>
-    <string name="cancel">Cancel</string>
     <string name="add_client_to">Add client to </string>
-
-
 </resources>
