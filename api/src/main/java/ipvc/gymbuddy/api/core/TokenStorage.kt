@@ -7,7 +7,7 @@ class TokenStorage {
     lateinit var context: Context
     lateinit var secureStorage: SecureStorage
 
-    private val TOKEN_KEY = "TOKEN"
+    private val TOKEN_KEY = "API_TOKEN_KEY"
 
     @SuppressLint("StaticFieldLeak")
     companion object {

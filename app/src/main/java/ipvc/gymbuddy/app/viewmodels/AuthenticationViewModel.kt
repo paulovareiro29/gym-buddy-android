@@ -9,6 +9,10 @@ class AuthenticationViewModel(application: Application) : BaseViewModel(applicat
     val loginStatus = authenticationDataStore.loginStatus
     val activateStatus = authenticationDataStore.activateStatus
 
+    fun init() {
+        authenticationDataStore.init()
+    }
+
     fun login(email: String, password: String) {
         authenticationDataStore.login(email, password)
     }
