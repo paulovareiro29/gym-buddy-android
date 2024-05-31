@@ -39,8 +39,7 @@ class TrainingPlanAdapter(dataset: List<TrainingPlan>): BaseRecyclerAdapter<Trai
         holder.addClientButton.setOnClickListener {
             val activity = it.context as FragmentActivity
             val modalFragment = Modal.newInstance(R.layout.fragment_trainer_add_client_to_plan_modal)
-            val title = activity.getString(R.string.add_client_to)
-            modalFragment.setTitle(title + " " + item.name)
+            modalFragment.setTitle(activity.getString(R.string.add_client_to, item.name))
             modalFragment.show(activity.supportFragmentManager, "TrainerAddClientToPlanModalFragment")
         }
 

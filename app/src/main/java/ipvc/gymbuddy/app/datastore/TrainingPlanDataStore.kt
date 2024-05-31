@@ -31,13 +31,13 @@ class TrainingPlanDataStore(context: Context) : BaseDataStore(context) {
     var post = MutableLiveData<AsyncData<CreateTrainingPlanRequest>>(AsyncData())
     var update = MutableLiveData<AsyncData<UpdateTrainingPlanRequest>>(AsyncData())
     var delete = MutableLiveData<AsyncData<Unit>>(AsyncData())
+
     fun getTrainingPlans() {
         trainingPlans.postValue(AsyncData(trainingPlans.value?.data ?: listOf(), AsyncData.Status.LOADING))
         coroutine.launch {
             when(val response = TrainingPlanService().getTrainingPlans())  {
                 is RequestResult.Success -> {
-                    val allTrainingPlans = response.data.trainingPlans
-                    val userPlans = filterUserTrainingPlans(allTrainingPlans)
+                    val userPlans = filterUserTrainingPlans(response.data.trainingPlans)
                     trainingPlans.postValue(AsyncData(userPlans, AsyncData.Status.SUCCESS))
                 }
                 is RequestResult.Error -> {
@@ -52,7 +52,7 @@ class TrainingPlanDataStore(context: Context) : BaseDataStore(context) {
         coroutine.launch {
             when (val response = TrainingPlanService().getTrainingPlan(id)) {
                 is RequestResult.Success -> {
-                    trainingPlan.postValue(AsyncData(response.data.trainingPlan, AsyncData.Status.SUCCESS))
+                   trainingPlan.postValue(AsyncData(response.data.trainingPlan, AsyncData.Status.SUCCESS))
                 }
                 is RequestResult.Error -> {
                     trainingPlan.postValue(AsyncData(trainingPlan.value?.data, AsyncData.Status.ERROR))
