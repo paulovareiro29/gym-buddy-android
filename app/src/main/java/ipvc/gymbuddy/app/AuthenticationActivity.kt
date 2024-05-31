@@ -12,10 +12,6 @@ class AuthenticationActivity : BaseActivity(R.layout.activity_authentication, R.
         super.onCreate(savedInstanceState)
         viewModel = getViewModel()
 
-        if (viewModel.user.value != null) {
-            Navigator.resetNavigationTo(MainActivity::class.java, this)
-        }
-
         viewModel.user.observe(this) {
             if (it != null) {
                 Navigator.resetNavigationTo(MainActivity::class.java, this)

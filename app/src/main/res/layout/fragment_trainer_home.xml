@@ -78,8 +78,10 @@
                     style="@style/Theme.Button.Primary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/list_clients"
-                    android:textSize="15dp"/>
+                    android:textSize="15sp"
+                    tools:ignore="VisualLintButtonSize" />
 
                 <View
                     android:layout_width="0dp"
@@ -92,7 +94,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/training_plans"
-                    android:textSize="15dp"/>
+                    android:textSize="15sp"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -113,6 +115,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:baselineAligned="false"
                 android:orientation="horizontal">
 
                 <!-- Clients Card -->
@@ -135,13 +138,14 @@
 
                     <TextView
                         android:id="@+id/clients"
+                        style="@style/Theme.Typography.Body"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/Theme.Typography.Body"
-                        android:textStyle="bold"
-                        android:textColor="@color/white"
+                        android:layout_marginTop="8dp"
                         android:text="@string/clients"
-                        android:layout_marginTop="8dp"/>
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        tools:ignore="TextContrastCheck" />
 
                 </LinearLayout>
 
@@ -165,13 +169,14 @@
 
                     <TextView
                         android:id="@+id/trainingPlansTitle"
+                        style="@style/Theme.Typography.Body"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
                         android:text="@string/training_plans"
-                        android:textStyle="bold"
                         android:textColor="@color/white"
-                        style="@style/Theme.Typography.Body"
-                        android:layout_marginTop="8dp"/>
+                        android:textStyle="bold"
+                        tools:ignore="TextContrastCheck" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
