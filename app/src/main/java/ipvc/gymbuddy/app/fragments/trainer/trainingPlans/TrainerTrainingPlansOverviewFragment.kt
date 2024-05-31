@@ -46,7 +46,7 @@ class TrainerTrainingPlansOverviewFragment : BaseFragment<FragmentTrainerTrainin
         }
         binding.searchInput.editText?.addTextChangedListener { handleSearch(it.toString()) }
 
-        binding.createTrainingPlan.setOnClickListener { navController.navigate(R.id.trainer_trainingplans_create_fragment) }
+        binding.createPlan.setOnClickListener { navController.navigate(R.id.trainer_trainingplans_create_fragment) }
     }
     private fun handleSearch(search: String) {
         val filtered = viewModel.trainingPlansData.value?.data?.filter {

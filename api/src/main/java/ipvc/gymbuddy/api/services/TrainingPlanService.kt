@@ -6,10 +6,11 @@ import ipvc.gymbuddy.api.core.ResponseParser
 import ipvc.gymbuddy.api.interfaces.ITrainingPlanService
 import ipvc.gymbuddy.api.models.requests.trainingPlan.CreateTrainingPlanRequest
 import ipvc.gymbuddy.api.models.requests.trainingPlan.UpdateTrainingPlanRequest
-import ipvc.gymbuddy.api.models.responses.TrainingPlan.CreateTrainingPlanResponse
-import ipvc.gymbuddy.api.models.responses.TrainingPlan.GetAllTrainingPlansResponse
-import ipvc.gymbuddy.api.models.responses.TrainingPlan.GetTrainingPlanResponse
-import ipvc.gymbuddy.api.models.responses.TrainingPlan.UpdateTrainingPlanResponse
+import ipvc.gymbuddy.api.models.responses.trainingPlan.CreateTrainingPlanResponse
+import ipvc.gymbuddy.api.models.responses.trainingPlan.DeleteTrainingPlanResponse
+import ipvc.gymbuddy.api.models.responses.trainingPlan.GetAllTrainingPlansResponse
+import ipvc.gymbuddy.api.models.responses.trainingPlan.GetTrainingPlanResponse
+import ipvc.gymbuddy.api.models.responses.trainingPlan.UpdateTrainingPlanResponse
 
 class TrainingPlanService : HttpClient<ITrainingPlanService>(ITrainingPlanService::class.java){
 
@@ -57,23 +58,14 @@ class TrainingPlanService : HttpClient<ITrainingPlanService>(ITrainingPlanServic
         }
     }
 
-    suspend fun deleteTrainingPlan(id: String): RequestResult<UpdateTrainingPlanResponse> {
+    suspend fun deleteTrainingPlan(id: String): RequestResult<DeleteTrainingPlanResponse> {
         return when(val response = request(api.deleteTrainingPlan(id))) {
             is RequestResult.Success -> RequestResult.Success(
                 code = response.code,
                 message = response.message,
-                data = ResponseParser.payload<UpdateTrainingPlanResponse>(response)
+                data = ResponseParser.payload<DeleteTrainingPlanResponse>(response)
             )
             is RequestResult.Error -> response
         }
     }
-
-
-
-
-
-
-
-
-
 }
