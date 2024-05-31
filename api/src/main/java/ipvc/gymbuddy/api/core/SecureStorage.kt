@@ -24,7 +24,7 @@ class SecureStorage(sharedPreferencesName: String, context: Context) {
         return sharedPreferences.getString(key, null)
     }
 
-    fun setString(key: String, value: String): Boolean {
+    fun setString(key: String, value: String?): Boolean {
         return sharedPreferences.edit().putString(key, value).commit()
     }
 
@@ -35,7 +35,7 @@ class SecureStorage(sharedPreferencesName: String, context: Context) {
         }
     }
 
-    fun setObject(key: String, value: Any): Boolean {
+    fun setObject(key: String, value: Any?): Boolean {
         val json = gson.toJson(value)
         return sharedPreferences.edit().putString(key, json).commit()
     }

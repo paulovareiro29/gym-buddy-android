@@ -17,6 +17,10 @@ class AuthenticationViewModel(application: Application) : BaseViewModel(applicat
         authenticationDataStore.login(email, password)
     }
 
+    fun logout() {
+        authenticationDataStore.logout()
+    }
+
     fun activate(email: String, password: String, code: String) {
         authenticationDataStore.activate(email, password, code)
     }

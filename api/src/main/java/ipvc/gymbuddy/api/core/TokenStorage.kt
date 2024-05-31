@@ -24,7 +24,7 @@ class TokenStorage {
         secureStorage = SecureStorage("TOKEN_STORAGE", context)
     }
 
-    fun setToken(token: String): Boolean {
+    fun setToken(token: String?): Boolean {
         if (!this::secureStorage.isInitialized) throw Error("Secure Storage has not been initialized")
         return secureStorage.setString(TOKEN_KEY, token)
     }

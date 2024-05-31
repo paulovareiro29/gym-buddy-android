@@ -55,6 +55,12 @@ class AuthenticationDataStore(context: Context) : BaseDataStore(context) {
         }
     }
 
+    fun logout() {
+        TokenStorage.getInstance().setToken(null)
+        secureStorage.setObject(USER_KEY, null)
+        user.postValue(null)
+    }
+
     fun register(name: String, email: String, roleId: String?) {
         registerData.postValue(AsyncData(null, AsyncData.Status.LOADING))
         coroutine.launch {
