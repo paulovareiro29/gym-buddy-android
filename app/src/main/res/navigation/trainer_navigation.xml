@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_to_editTrainingPlanFragment"
             app:destination="@id/editTrainingPlanFragment" />
+        <action
+            android:id="@+id/action_trainer_trainingplans_overview_fragment_to_trainerAddClientToPlanModalFragment"
+            app:destination="@id/trainerAddClientToPlanModalFragment" />
     </fragment>
     <fragment
         android:id="@+id/trainer_trainingplans_create_fragment"
@@ -54,4 +57,9 @@
             android:name="trainingPlanId"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/trainerAddClientToPlanModalFragment"
+        android:name="ipvc.gymbuddy.app.fragments.trainer.trainingPlans.TrainerAddClientToPlanModalFragment"
+        android:label="fragment_trainer_add_client_to_plan_modal"
+        tools:layout="@layout/fragment_trainer_add_client_to_plan_modal" />
 </navigation>

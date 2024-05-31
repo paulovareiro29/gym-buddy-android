@@ -61,4 +61,10 @@
     <string name="exercises_overview">Exercises Overview</string>
     <string name="create_exercise">Create Exercise</string>
     <string name="machine">Machine</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
+    <string name="cancel">Cancel</string>
+    <string name="add_client_to">Add client to </string>
+
+
 </resources>
