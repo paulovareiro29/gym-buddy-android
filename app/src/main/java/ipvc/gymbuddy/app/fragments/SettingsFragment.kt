@@ -3,17 +3,16 @@ package ipvc.gymbuddy.app.fragments
 import android.os.Bundle
 import android.view.View
 import ipvc.gymbuddy.app.R
-import android.content.res.Configuration
-import java.util.Locale
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentSettingsBinding
 import android.animation.ObjectAnimator
 import android.view.animation.AccelerateDecelerateInterpolator
 
 class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsBinding::inflate) {
-    private var isOptionsVisible = false
+    private var isLanguageOptionsVisible = false
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        loadToolbar(getString(R.string.settings), true)
 
         binding.changeLanguage.setOnClickListener {
             toggleLanguageOptions()
@@ -25,14 +24,14 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
     }
 
     private fun toggleLanguageOptions() {
-        if (!isOptionsVisible) {
+        if (!isLanguageOptionsVisible) {
             binding.languageOptions.visibility = View.VISIBLE
             rotateArrow(0f, 90f)
         } else {
             binding.languageOptions.visibility = View.GONE
             rotateArrow(90f, 0f)
         }
-        isOptionsVisible = !isOptionsVisible
+        isLanguageOptionsVisible = !isLanguageOptionsVisible
     }
 
     private fun rotateArrow(fromDegrees: Float, toDegrees: Float) {
@@ -43,28 +42,13 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
     }
 
     private fun selectLanguage(language: String) {
-        changeLanguage(language)
         binding.languageOptions.visibility = View.GONE
-        if (isOptionsVisible) {
+        if (isLanguageOptionsVisible) {
             rotateArrow(90f, 0f)
-            isOptionsVisible = false
+            isLanguageOptionsVisible = false
         }
-        updateViews()
-    }
 
-    private fun changeLanguage(languageCode: String) {
-        val locale = Locale(languageCode)
-        Locale.setDefault(locale)
-        val config = Configuration()
-        config.setLocale(locale)
-        requireContext().resources.updateConfiguration(config, requireContext().resources.displayMetrics)
-        //requireActivity().recreate()
-    }
-
-    private fun updateViews() {
-        binding.changeLanguage.text = getString(R.string.change_language)
-        binding.logout.text = getString(R.string.logout)
-        //TODO: Remove or verify if needed after recreated() is fixed
+        super.changeLanguage(language)
     }
 
     private fun handleLogout(){
