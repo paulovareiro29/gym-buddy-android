@@ -2,6 +2,7 @@ package ipvc.gymbuddy.app.datastore
 
 import android.annotation.SuppressLint
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ipvc.gymbuddy.api.core.RequestResult
 import ipvc.gymbuddy.api.models.TrainingPlan
@@ -26,6 +27,7 @@ class TrainingPlanDataStore(context: Context) : BaseDataStore(context) {
 
     private val authenticationDataStore = AuthenticationDataStore.getInstance(context)
     var trainingPlans = MutableLiveData<AsyncData<List<TrainingPlan>>>(AsyncData(listOf()))
+    var trainingPlan = MutableLiveData<AsyncData<TrainingPlan>>(AsyncData())
     var post = MutableLiveData<AsyncData<CreateTrainingPlanRequest>>(AsyncData())
     var update = MutableLiveData<AsyncData<UpdateTrainingPlanRequest>>(AsyncData())
     fun getTrainingPlans() {
@@ -42,6 +44,21 @@ class TrainingPlanDataStore(context: Context) : BaseDataStore(context) {
                 }
             }
         }
+    }
+
+    fun getTrainingPlan(id: String): LiveData<AsyncData<TrainingPlan>> {
+        trainingPlan.postValue(AsyncData(trainingPlan.value?.data, AsyncData.Status.LOADING))
+        coroutine.launch {
+            when (val response = TrainingPlanService().getTrainingPlan(id)) {
+                is RequestResult.Success -> {
+                    trainingPlan.postValue(AsyncData(response.data.trainingPlan, AsyncData.Status.SUCCESS))
+                }
+                is RequestResult.Error -> {
+                    trainingPlan.postValue(AsyncData(trainingPlan.value?.data, AsyncData.Status.ERROR))
+                }
+            }
+        }
+        return trainingPlan
     }
 
     fun createTrainingPlan(name: String){
@@ -63,7 +80,7 @@ class TrainingPlanDataStore(context: Context) : BaseDataStore(context) {
         val entity = UpdateTrainingPlanRequest(name)
         update.postValue(AsyncData(entity, AsyncData.Status.LOADING))
         coroutine.launch {
-            when(val response = TrainingPlanService().updateTrainingPlan(id, entity)) {
+            when(TrainingPlanService().updateTrainingPlan(id, entity)) {
                 is RequestResult.Success -> update.postValue(AsyncData(null, AsyncData.Status.SUCCESS))
                 is RequestResult.Error -> update.postValue(AsyncData(null, AsyncData.Status.ERROR))
             }

@@ -9,27 +9,29 @@ import ipvc.gymbuddy.app.core.Navigator
 import ipvc.gymbuddy.app.viewmodels.AuthenticationViewModel
 
 class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment) {
-    private lateinit var viewModel: AuthenticationViewModel
+    private lateinit var authViewModel: AuthenticationViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = getViewModel()
+        authViewModel = getViewModel()
+        authViewModel.init()
 
-        if (viewModel.user.value == null) {
-            Navigator.resetNavigationTo(AuthenticationActivity::class.java, this)
-            return
+        authViewModel.user.observe(this) {
+            if (it == null) {
+                Navigator.resetNavigationTo(AuthenticationActivity::class.java, this)
+            } else {
+                initializeNavigation()
+                initializeBottomMenu()
+                initializeSidebar()
+            }
         }
-
-        initializeNavigation()
-        initializeBottomMenu()
-        initializeSidebar()
     }
 
     private fun initializeNavigation() {
-        when (viewModel.user.value!!.role.name) {
+        when (authViewModel.user.value!!.role.name) {
             "admin" -> navController.setGraph(R.navigation.admin_navigation)
             "trainer" -> navController.setGraph(R.navigation.trainer_navigation)
-            "client" -> navController.setGraph(R.navigation.client_navigation)
+            "default" -> navController.setGraph(R.navigation.client_navigation)
             else -> navController.setGraph(R.navigation.not_found_navigation)
         }
     }
@@ -41,28 +43,28 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
         menu.setOnItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.home_bottom_navigation -> {
-                    when (viewModel.user.value!!.role.name) {
+                    when (authViewModel.user.value!!.role.name) {
                         "admin" -> navController.navigate(R.id.admin_home_fragment)
                         "trainer" -> navController.navigate(R.id.trainer_home_fragment)
-                        "client" -> navController.navigate(R.id.client_home_fragment)
+                        "default" -> navController.navigate(R.id.client_home_fragment)
                         else -> navController.setGraph(R.navigation.not_found_navigation)
                     }
                     true
                 }
                 R.id.profile_bottom_navigation -> {
-                    when (viewModel.user.value!!.role.name) {
+                    when (authViewModel.user.value!!.role.name) {
                         "admin" -> navController.navigate(R.id.admin_profile_fragment)
                         "trainer" -> navController.navigate(R.id.trainer_profile_fragment)
-                        "client" -> navController.navigate(R.id.client_profile_fragment)
+                        "default" -> navController.navigate(R.id.client_profile_fragment)
                         else -> navController.setGraph(R.navigation.not_found_navigation)
                     }
                     true
                 }
                 R.id.settings_bottom_navigation -> {
-                    when (viewModel.user.value!!.role.name) {
+                    when (authViewModel.user.value!!.role.name) {
                         "admin" -> navController.navigate(R.id.admin_settings_fragment)
                         "trainer" -> navController.navigate(R.id.trainer_settings_fragment)
-                        "client" -> navController.navigate(R.id.client_settings_fragment)
+                        "default" -> navController.navigate(R.id.client_settings_fragment)
                         else -> navController.setGraph(R.navigation.not_found_navigation)
                     }
                     true
@@ -77,10 +79,10 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
         val sidebar = findViewById<NavigationView>(R.id.sidebar_navigation)
 
         sidebar.menu.clear()
-        when (viewModel.user.value!!.role.name) {
+        when (authViewModel.user.value!!.role.name) {
             "admin" -> sidebar.inflateMenu(R.menu.admin_sidebar_menu)
             "trainer" -> sidebar.inflateMenu(R.menu.trainer_sidebar_menu)
-            "client" -> sidebar.inflateMenu(R.menu.client_sidebar_menu)
+            "default" -> sidebar.inflateMenu(R.menu.client_sidebar_menu)
         }
 
         sidebar.setNavigationItemSelectedListener {
@@ -97,26 +99,26 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
 
                 // COMMON ROUTES
                 R.id.sidebar_item_home -> {
-                    when (viewModel.user.value!!.role.name) {
+                    when (authViewModel.user.value!!.role.name) {
                         "admin" -> navController.navigate(R.id.admin_home_fragment)
                         "trainer" -> navController.navigate(R.id.trainer_home_fragment)
-                        "client" -> navController.navigate(R.id.client_home_fragment)
+                        "default" -> navController.navigate(R.id.client_home_fragment)
                         else -> navController.setGraph(R.navigation.not_found_navigation)
                     }
                 }
                 R.id.sidebar_item_profile -> {
-                    when (viewModel.user.value!!.role.name) {
+                    when (authViewModel.user.value!!.role.name) {
                         "admin" -> navController.navigate(R.id.admin_profile_fragment)
                         "trainer" -> navController.navigate(R.id.trainer_profile_fragment)
-                        "client" -> navController.navigate(R.id.client_profile_fragment)
+                        "default" -> navController.navigate(R.id.client_profile_fragment)
                         else -> navController.setGraph(R.navigation.not_found_navigation)
                     }
                 }
                 R.id.sidebar_item_settings -> {
-                    when (viewModel.user.value!!.role.name) {
+                    when (authViewModel.user.value!!.role.name) {
                         "admin" -> navController.navigate(R.id.admin_settings_fragment)
                         "trainer" -> navController.navigate(R.id.trainer_settings_fragment)
-                        "client" -> navController.navigate(R.id.client_settings_fragment)
+                        "default" -> navController.navigate(R.id.client_settings_fragment)
                         else -> navController.setGraph(R.navigation.not_found_navigation)
                     }
                 }
