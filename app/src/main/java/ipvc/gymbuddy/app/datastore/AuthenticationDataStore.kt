@@ -28,13 +28,17 @@ class AuthenticationDataStore(context: Context) : BaseDataStore(context) {
     private var secureStorage = SecureStorage("AUTH_STORAGE", context)
     val USER_KEY = "USER"
 
+    var initialized = false
     var user = MutableLiveData<User?>()
     var loginStatus = MutableLiveData("idle")
     var activateStatus = MutableLiveData("idle")
     var registerData = MutableLiveData<AsyncData<User?>>(AsyncData())
 
     fun init() {
+        if (initialized) return
+
         user.postValue(secureStorage.getObject(USER_KEY, User::class.java))
+        initialized = true
     }
 
     fun login(email: String, password: String) {
