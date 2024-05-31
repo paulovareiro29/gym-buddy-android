@@ -32,8 +32,12 @@ class TrainingPlanAdapter(dataset: List<TrainingPlan>): BaseRecyclerAdapter<Trai
     override fun bindViewHolder(holder: ViewHolder, item: TrainingPlan) {
         holder.name.text = item.name
         holder.editButton.setOnClickListener {
-            val bundle = bundleOf("trainingPlanId" to item.id)
-            holder.itemView.findNavController().navigate(R.id.trainer_trainingplans_update_fragment, bundle)
+            holder.itemView
+                .findNavController()
+                .navigate(
+                    R.id.trainer_trainingplans_update_fragment,
+                    bundleOf("trainingPlanId" to item.id)
+                )
         }
 
         holder.addClientButton.setOnClickListener {

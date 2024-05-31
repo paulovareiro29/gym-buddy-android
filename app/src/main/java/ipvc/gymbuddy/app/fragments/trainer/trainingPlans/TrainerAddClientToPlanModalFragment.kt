@@ -13,10 +13,6 @@ import ipvc.gymbuddy.app.R
 
 class TrainerAddClientToPlanModalFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,12 +43,7 @@ class TrainerAddClientToPlanModalFragment : Fragment() {
             // Handle end date selection
         }
 
-        val cancelButton = view.findViewById<Button>(R.id.cancel_button)
         val submitButton = view.findViewById<Button>(R.id.submit_button)
-
-        cancelButton.setOnClickListener {
-            // Handle cancel action
-        }
 
         submitButton.setOnClickListener {
             // Handle submit action
