@@ -30,7 +30,7 @@ class TrainingPlanAdapter(dataset: List<TrainingPlan>): BaseRecyclerAdapter<Trai
         holder.name.text = item.name
         holder.editButton.setOnClickListener {
             val bundle = bundleOf("trainingPlanId" to item.id)
-            holder.itemView.findNavController().navigate(R.id.action_to_editTrainingPlanFragment, bundle)
+            holder.itemView.findNavController().navigate(R.id.trainer_trainingplans_update_fragment, bundle)
         }
 
         holder.addClientButton.setOnClickListener {

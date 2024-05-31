@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
@@ -14,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.models.Toolbar
+import java.util.Locale
 
 abstract class BaseFragment<VB : ViewBinding>(
     private val bindingInflater: (inflater: LayoutInflater, container: ViewGroup?, attachToRoot: Boolean) -> VB
@@ -75,5 +78,11 @@ abstract class BaseFragment<VB : ViewBinding>(
         } else {
             toolbar.backButton?.setOnClickListener { handleBackButton() }
         }
+    }
+
+    protected fun changeLanguage(language: String) {
+        AppCompatDelegate.setApplicationLocales(
+            LocaleListCompat.create(Locale.forLanguageTag(language))
+        )
     }
 }
