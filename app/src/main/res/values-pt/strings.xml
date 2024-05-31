@@ -58,4 +58,8 @@
     <string name="clients_overview">Vista Clientes</string>
     <string name="contract">Contrato</string>
     <string name="contract_end_date">Contrato acaba em: %s</string>
+    <string name="confirm_delete">Confirmar Eliminação</string>
+    <string name="delete_message">Tem a certeza que deseja eliminar %s</string>
+    <string name="delete">Eliminar</string>
+    <string name="cancel">Cancelar</string>
 </resources>
