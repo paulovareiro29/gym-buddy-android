@@ -7,9 +7,18 @@ import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentSettingsBinding
 import android.animation.ObjectAnimator
 import android.view.animation.AccelerateDecelerateInterpolator
+import ipvc.gymbuddy.app.viewmodels.AuthenticationViewModel
 
 class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsBinding::inflate) {
+
+    private lateinit var authViewModel: AuthenticationViewModel
     private var isLanguageOptionsVisible = false
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        authViewModel = getViewModel()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadToolbar(getString(R.string.settings), true)
@@ -52,6 +61,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
     }
 
     private fun handleLogout(){
+        authViewModel.logout()
     }
 
 }

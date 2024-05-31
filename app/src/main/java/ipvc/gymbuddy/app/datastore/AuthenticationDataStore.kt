@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import ipvc.gymbuddy.api.core.RequestResult
+import ipvc.gymbuddy.api.core.SecureStorage
 import ipvc.gymbuddy.api.core.TokenStorage
 import ipvc.gymbuddy.api.models.User
 import ipvc.gymbuddy.api.models.requests.auth.ActivateRequest
@@ -24,10 +25,17 @@ class AuthenticationDataStore(context: Context) : BaseDataStore(context) {
             }
     }
 
+    private var secureStorage = SecureStorage("AUTH_STORAGE", context)
+    val USER_KEY = "USER"
+
     var user = MutableLiveData<User?>()
     var loginStatus = MutableLiveData("idle")
     var activateStatus = MutableLiveData("idle")
     var registerData = MutableLiveData<AsyncData<User?>>(AsyncData())
+
+    fun init() {
+        user.postValue(secureStorage.getObject(USER_KEY, User::class.java))
+    }
 
     fun login(email: String, password: String) {
         coroutine.launch {
@@ -35,6 +43,7 @@ class AuthenticationDataStore(context: Context) : BaseDataStore(context) {
             when (val response = AuthenticationService().login(LoginRequest(email, password))) {
                 is RequestResult.Success -> {
                     TokenStorage.getInstance().setToken(response.data.token)
+                    secureStorage.setObject(USER_KEY, response.data.user)
                     user.postValue(response.data.user)
                     loginStatus.postValue("success")
                 }
@@ -44,6 +53,12 @@ class AuthenticationDataStore(context: Context) : BaseDataStore(context) {
                 }
             }
         }
+    }
+
+    fun logout() {
+        TokenStorage.getInstance().setToken(null)
+        secureStorage.setObject(USER_KEY, null)
+        user.postValue(null)
     }
 
     fun register(name: String, email: String, roleId: String?) {

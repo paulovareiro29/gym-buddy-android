@@ -7,7 +7,7 @@ class TokenStorage {
     lateinit var context: Context
     lateinit var secureStorage: SecureStorage
 
-    private val TOKEN_KEY = "TOKEN"
+    private val TOKEN_KEY = "API_TOKEN_KEY"
 
     @SuppressLint("StaticFieldLeak")
     companion object {
@@ -24,7 +24,7 @@ class TokenStorage {
         secureStorage = SecureStorage("TOKEN_STORAGE", context)
     }
 
-    fun setToken(token: String): Boolean {
+    fun setToken(token: String?): Boolean {
         if (!this::secureStorage.isInitialized) throw Error("Secure Storage has not been initialized")
         return secureStorage.setString(TOKEN_KEY, token)
     }
