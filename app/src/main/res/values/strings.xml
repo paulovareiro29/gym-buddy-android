@@ -63,4 +63,7 @@
     <string name="machine">Machine</string>
     <string name="en">English</string>
     <string name="pt">Portuguese</string>
+    <string name="clients_overview">Clients Overview</string>
+    <string name="contract">Contract</string>
+    <string name="contract_end_date">Contract ends on: %s</string>
 </resources>

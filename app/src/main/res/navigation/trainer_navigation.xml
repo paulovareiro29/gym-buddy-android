@@ -38,8 +38,8 @@
             android:id="@+id/action_trainingPlansOverviewFragment_to_trainerTrainingPlanCreateFragment"
             app:destination="@id/trainer_trainingplans_create_fragment" />
         <action
-            android:id="@+id/action_to_editTrainingPlanFragment"
-            app:destination="@id/editTrainingPlanFragment" />
+            android:id="@+id/action_trainingPlansOverviewFragment_to_trainerTrainingPlanUpdateFragment"
+            app:destination="@id/trainer_trainingplans_update_fragment" />
     </fragment>
     <fragment
         android:id="@+id/trainer_trainingplans_create_fragment"
@@ -47,11 +47,14 @@
         android:label="fragment_trainer_training_plan_create"
         tools:layout="@layout/fragment_trainer_training_plan_create" />
     <fragment
-        android:id="@+id/editTrainingPlanFragment"
+        android:id="@+id/trainer_trainingplans_update_fragment"
         android:name="ipvc.gymbuddy.app.fragments.trainer.trainingPlans.TrainerTrainingPlanUpdateFragment"
-        tools:layout="@layout/fragment_trainer_training_plan_update">
-        <argument
-            android:name="trainingPlanId"
-            app:argType="string" />
-    </fragment>
+        android:label="fragment_trainer_training_plan_update"
+        tools:layout="@layout/fragment_trainer_training_plan_update" />
+
+    <fragment
+        android:id="@+id/trainer_listclients_overview_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.trainer.contracts.TrainerListClientsOverviewFragment"
+        android:label="fragment_trainer_list_clients_overview"
+        tools:layout="@layout/fragment_trainer_list_clients_overview" />
 </navigation>

@@ -30,6 +30,7 @@ class TrainerHomeFragment : BaseFragment<FragmentTrainerHomeBinding>(
         loadMetrics()
 
         binding.trainingPlans.setOnClickListener { navController.navigate(R.id.trainer_trainingplans_overview_fragment) }
+        binding.listClients.setOnClickListener { navController.navigate(R.id.trainer_listclients_overview_fragment) }
     }
 
     private fun loadMetrics() {

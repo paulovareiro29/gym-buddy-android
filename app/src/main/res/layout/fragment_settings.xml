@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
@@ -34,14 +35,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:drawableStart="@drawable/globe"
                     android:text="@string/change_language"
                     android:drawablePadding="8dp"
                     android:gravity="center_vertical"
                     android:paddingVertical="16dp"
                     android:paddingHorizontal="12dp"
                     android:textColor="@color/primaryColor"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:drawableStartCompat="@drawable/globe" />
 
                 <ImageView
                     android:id="@+id/arrow_icon"
@@ -75,7 +76,7 @@
 
                     <TextView
                         android:id="@+id/english_option"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/en"
                         android:gravity="center_vertical"
@@ -100,7 +101,7 @@
 
                     <TextView
                         android:id="@+id/portuguese_option"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/pt"
                         android:gravity="center_vertical"
@@ -120,15 +121,15 @@
                 style="@style/Theme.Typography.TitleLarge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/logout_button"
                 android:text="@string/logout"
-                android:drawableEnd="@drawable/baseline_navigate_next_24"
                 android:drawablePadding="8dp"
                 android:gravity="center_vertical"
                 android:paddingVertical="16dp"
                 android:paddingHorizontal="12dp"
                 android:textColor="@color/primaryColor"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:drawableStartCompat="@drawable/logout_button"
+                app:drawableEndCompat="@drawable/baseline_navigate_next_24" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

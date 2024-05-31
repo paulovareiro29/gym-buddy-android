@@ -13,6 +13,10 @@
                     android:id="@+id/sidebar_item_trainer_trainingplans_overview"
                     android:icon="@drawable/baseline_assignment_24"
                     android:title="@string/training_plans" />
+                <item
+                    android:id="@+id/sidebar_item_trainer_listclients_overview"
+                    android:icon="@drawable/baseline_person_24"
+                    android:title="@string/list_clients" />
             </group>
         </menu>
     </item>

@@ -53,4 +53,9 @@
     <string name="machine">Máquina</string>
     <string name="en">Inglês</string>
     <string name="pt">Português</string>
+    <string name="edit_training_plan">Editar Plano Treino</string>
+    <string name="updated_successfully">Atualizado com successo</string>
+    <string name="clients_overview">Vista Clientes</string>
+    <string name="contract">Contrato</string>
+    <string name="contract_end_date">Contrato acaba em: %s</string>
 </resources>
