@@ -29,7 +29,7 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
         when (viewModel.user.value!!.role.name) {
             "admin" -> navController.setGraph(R.navigation.admin_navigation)
             "trainer" -> navController.setGraph(R.navigation.trainer_navigation)
-            "client" -> navController.setGraph(R.navigation.client_navigation)
+            "default" -> navController.setGraph(R.navigation.client_navigation)
             else -> navController.setGraph(R.navigation.not_found_navigation)
         }
     }
@@ -44,7 +44,7 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
                     when (viewModel.user.value!!.role.name) {
                         "admin" -> navController.navigate(R.id.admin_home_fragment)
                         "trainer" -> navController.navigate(R.id.trainer_home_fragment)
-                        "client" -> navController.navigate(R.id.client_home_fragment)
+                        "default" -> navController.navigate(R.id.client_home_fragment)
                         else -> navController.setGraph(R.navigation.not_found_navigation)
                     }
                     true
@@ -53,7 +53,7 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
                     when (viewModel.user.value!!.role.name) {
                         "admin" -> navController.navigate(R.id.admin_profile_fragment)
                         "trainer" -> navController.navigate(R.id.trainer_profile_fragment)
-                        "client" -> navController.navigate(R.id.client_profile_fragment)
+                        "default" -> navController.navigate(R.id.client_profile_fragment)
                         else -> navController.setGraph(R.navigation.not_found_navigation)
                     }
                     true
@@ -62,7 +62,7 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
                     when (viewModel.user.value!!.role.name) {
                         "admin" -> navController.navigate(R.id.admin_settings_fragment)
                         "trainer" -> navController.navigate(R.id.trainer_settings_fragment)
-                        "client" -> navController.navigate(R.id.client_settings_fragment)
+                        "default" -> navController.navigate(R.id.client_settings_fragment)
                         else -> navController.setGraph(R.navigation.not_found_navigation)
                     }
                     true
@@ -80,7 +80,7 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
         when (viewModel.user.value!!.role.name) {
             "admin" -> sidebar.inflateMenu(R.menu.admin_sidebar_menu)
             "trainer" -> sidebar.inflateMenu(R.menu.trainer_sidebar_menu)
-            "client" -> sidebar.inflateMenu(R.menu.client_sidebar_menu)
+            "default" -> sidebar.inflateMenu(R.menu.client_sidebar_menu)
         }
 
         sidebar.setNavigationItemSelectedListener {
@@ -99,7 +99,7 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
                     when (viewModel.user.value!!.role.name) {
                         "admin" -> navController.navigate(R.id.admin_home_fragment)
                         "trainer" -> navController.navigate(R.id.trainer_home_fragment)
-                        "client" -> navController.navigate(R.id.client_home_fragment)
+                        "default" -> navController.navigate(R.id.client_home_fragment)
                         else -> navController.setGraph(R.navigation.not_found_navigation)
                     }
                 }
@@ -107,7 +107,7 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
                     when (viewModel.user.value!!.role.name) {
                         "admin" -> navController.navigate(R.id.admin_profile_fragment)
                         "trainer" -> navController.navigate(R.id.trainer_profile_fragment)
-                        "client" -> navController.navigate(R.id.client_profile_fragment)
+                        "default" -> navController.navigate(R.id.client_profile_fragment)
                         else -> navController.setGraph(R.navigation.not_found_navigation)
                     }
                 }
@@ -115,7 +115,7 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
                     when (viewModel.user.value!!.role.name) {
                         "admin" -> navController.navigate(R.id.admin_settings_fragment)
                         "trainer" -> navController.navigate(R.id.trainer_settings_fragment)
-                        "client" -> navController.navigate(R.id.client_settings_fragment)
+                        "default" -> navController.navigate(R.id.client_settings_fragment)
                         else -> navController.setGraph(R.navigation.not_found_navigation)
                     }
                 }

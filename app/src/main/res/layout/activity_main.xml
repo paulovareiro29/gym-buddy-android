@@ -26,8 +26,7 @@
                 android:name="androidx.navigation.fragment.NavHostFragment"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                app:navGraph="@navigation/not_found_navigation" />
+                android:layout_weight="1" />
 
 
             <LinearLayout
