@@ -32,12 +32,12 @@ class TrainingPlanAdapter(dataset: List<TrainingPlan>): BaseRecyclerAdapter<Trai
     override fun bindViewHolder(holder: ViewHolder, item: TrainingPlan) {
         holder.name.text = item.name
         holder.editButton.setOnClickListener {
-            val bundle = bundleOf("trainingPlanId" to item.id)
-            holder.itemView.findNavController().navigate(R.id.trainer_trainingplans_update_fragment, bundle)
-        }
-
-        holder.deleteButton.setOnClickListener {
-            onTrainingPlanDeleteListener?.invoke(item)
+            holder.itemView
+                .findNavController()
+                .navigate(
+                    R.id.trainer_trainingplans_update_fragment,
+                    bundleOf("trainingPlanId" to item.id)
+                )
         }
 
         holder.addClientButton.setOnClickListener {
@@ -46,6 +46,10 @@ class TrainingPlanAdapter(dataset: List<TrainingPlan>): BaseRecyclerAdapter<Trai
             val title = activity.getString(R.string.add_client_to)
             modalFragment.setTitle(title + " " + item.name)
             modalFragment.show(activity.supportFragmentManager, "TrainerAddClientToPlanModalFragment")
+        }
+
+        holder.deleteButton.setOnClickListener {
+            onTrainingPlanDeleteListener?.invoke(item)
         }
     }
 

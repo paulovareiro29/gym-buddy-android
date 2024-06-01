@@ -72,7 +72,5 @@
     <string name="contract_end_date">Contract ends on: %s</string>
     <string name="start_date">Start Date</string>
     <string name="end_date">End Date</string>
-    <string name="add_client_to">Add client to </string>
-
-
+    <string name="add_client_to">Add client to "%s"</string>
 </resources>
