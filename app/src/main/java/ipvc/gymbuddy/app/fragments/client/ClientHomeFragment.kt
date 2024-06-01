@@ -36,7 +36,7 @@ class ClientHomeFragment : BaseFragment<FragmentClientHomeBinding>(
             if (asyncData.status == AsyncData.Status.SUCCESS && asyncData.data != null) {
                 val metrics = asyncData.data
                 binding.trainingPlansCount.text = metrics.number_of_associated_plans.toString()
-                //binding.metricsCount.text = metrics.number_of_metrics.toString()
+                binding.metricsCount.text = metrics.number_of_metrics.toString()
             }
         }
     }
