@@ -2,7 +2,6 @@ package ipvc.gymbuddy.app.fragments.client
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.viewModels
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.core.BaseFragment
@@ -14,11 +13,12 @@ class ClientHomeFragment : BaseFragment<FragmentClientHomeBinding>(
     FragmentClientHomeBinding::inflate
 ) {
     private lateinit var authViewModel: AuthenticationViewModel
-    private val viewModel: ClientHomeViewModel by viewModels()
+    private lateinit var viewModel: ClientHomeViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         authViewModel = getViewModel()
+        viewModel = getViewModel()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
