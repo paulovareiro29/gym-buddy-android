@@ -12,9 +12,12 @@ import ipvc.gymbuddy.app.core.BaseViewHolder
 
 class TrainingPlanAdapter(dataset: List<TrainingPlan>): BaseRecyclerAdapter<TrainingPlan, TrainingPlanAdapter.ViewHolder>(dataset) {
 
+    private var onTrainingPlanDeleteListener: ((TrainingPlan) -> Unit)? = null
+
     class ViewHolder(view: View) : BaseViewHolder(view){
         val name: TextView = view.findViewById(R.id.plan_name)
         val editButton: ImageButton = view.findViewById(R.id.edit_plan)
+        val deleteButton: ImageButton = view.findViewById(R.id.delete_plan)
     }
 
     override fun getItemLayout(): Int = R.layout.recycle_adapter_training_plan
@@ -29,5 +32,13 @@ class TrainingPlanAdapter(dataset: List<TrainingPlan>): BaseRecyclerAdapter<Trai
             val bundle = bundleOf("trainingPlanId" to item.id)
             holder.itemView.findNavController().navigate(R.id.trainer_trainingplans_update_fragment, bundle)
         }
+
+        holder.deleteButton.setOnClickListener {
+            onTrainingPlanDeleteListener?.invoke(item)
+        }
+    }
+
+    fun setOnTrainingPlanDeleteListener(listener: (TrainingPlan) -> Unit) {
+        onTrainingPlanDeleteListener = listener
     }
 }
