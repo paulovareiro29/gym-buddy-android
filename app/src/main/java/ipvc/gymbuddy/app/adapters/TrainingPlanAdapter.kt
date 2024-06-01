@@ -14,9 +14,12 @@ import ipvc.gymbuddy.app.models.Modal
 
 class TrainingPlanAdapter(dataset: List<TrainingPlan>): BaseRecyclerAdapter<TrainingPlan, TrainingPlanAdapter.ViewHolder>(dataset) {
 
+    private var onTrainingPlanDeleteListener: ((TrainingPlan) -> Unit)? = null
+
     class ViewHolder(view: View) : BaseViewHolder(view){
         val name: TextView = view.findViewById(R.id.plan_name)
         val editButton: ImageButton = view.findViewById(R.id.edit_plan)
+        val deleteButton: ImageButton = view.findViewById(R.id.delete_plan)
         val addClientButton: ImageButton = view.findViewById(R.id.add_client)
     }
 
@@ -33,6 +36,10 @@ class TrainingPlanAdapter(dataset: List<TrainingPlan>): BaseRecyclerAdapter<Trai
             holder.itemView.findNavController().navigate(R.id.trainer_trainingplans_update_fragment, bundle)
         }
 
+        holder.deleteButton.setOnClickListener {
+            onTrainingPlanDeleteListener?.invoke(item)
+        }
+
         holder.addClientButton.setOnClickListener {
             val activity = it.context as FragmentActivity
             val modalFragment = Modal.newInstance(R.layout.fragment_trainer_add_client_to_plan_modal)
@@ -40,5 +47,9 @@ class TrainingPlanAdapter(dataset: List<TrainingPlan>): BaseRecyclerAdapter<Trai
             modalFragment.setTitle(title + " " + item.name)
             modalFragment.show(activity.supportFragmentManager, "TrainerAddClientToPlanModalFragment")
         }
+    }
+
+    fun setOnTrainingPlanDeleteListener(listener: (TrainingPlan) -> Unit) {
+        onTrainingPlanDeleteListener = listener
     }
 }
