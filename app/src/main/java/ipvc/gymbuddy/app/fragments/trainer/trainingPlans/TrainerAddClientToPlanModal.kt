@@ -1,20 +1,17 @@
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.DropdownAdapter
 import ipvc.gymbuddy.app.models.DropdownItem
 import ipvc.gymbuddy.app.viewmodels.trainer.contract.TrainerListClientsOverviewViewModel
 
-class TrainerAddClientToPlanModal : DialogFragment() {
+class TrainerAddClientToPlanModal : Modal(R.layout.fragment_trainer_add_client_to_plan_modal) {
 
     private lateinit var viewModel: TrainerListClientsOverviewViewModel
 
@@ -24,8 +21,8 @@ class TrainerAddClientToPlanModal : DialogFragment() {
     private var titleEditText: TextView? = null
     private var submitButton: Button? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_trainer_add_client_to_plan_modal, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(this)[TrainerListClientsOverviewViewModel::class.java]
         clientAutoCompleteTextView = view.findViewById(R.id.client)
@@ -34,10 +31,7 @@ class TrainerAddClientToPlanModal : DialogFragment() {
         titleEditText = view.findViewById(R.id.modal_title)
         submitButton = view.findViewById(R.id.submit_button)
 
-
         loadClients()
-
-        return view
     }
 
     private fun loadClients() {

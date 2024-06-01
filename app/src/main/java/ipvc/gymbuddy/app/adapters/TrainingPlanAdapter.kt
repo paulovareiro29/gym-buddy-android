@@ -1,6 +1,6 @@
 package ipvc.gymbuddy.app.adapters
 
-import TrainerAddClientToPlanModal
+import Modal
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
@@ -42,7 +42,8 @@ class TrainingPlanAdapter(dataset: List<TrainingPlan>): BaseRecyclerAdapter<Trai
 
         holder.addClientButton.setOnClickListener {
             val activity = it.context as FragmentActivity
-            val dialogFragment = TrainerAddClientToPlanModal()
+            val title = activity.getString(R.string.add_client_to, item.name)
+            val dialogFragment = Modal.newInstance(title, "TrainerAddClientToPlanModal")
             dialogFragment.show(activity.supportFragmentManager, "TrainerAddClientToPlanModal")
         }
 

@@ -1,76 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:id="@+id/modal_content"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:minWidth="1000dp"
-android:orientation="vertical"
-android:gravity="center"
-android:padding="16dp"
-android:layout_marginStart="24dp"
-android:layout_marginEnd="24dp">
-
-<TextView
-    android:id="@+id/modal_title"
+    android:id="@+id/modal_content"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textSize="18sp"
-    android:textStyle="bold"
-    android:paddingBottom="8dp"
-    android:visibility="gone"
-    android:elevation="6dp"/>
+    android:layout_height="match_parent"
+    android:minWidth="1000dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp">
 
-<com.google.android.material.textfield.TextInputLayout
-    style="@style/Theme.Dropdown"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="12dp"
-    android:hint="@string/client"
-    android:labelFor="@+id/client">
-
-    <AutoCompleteTextView
-        android:id="@+id/client"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-</com.google.android.material.textfield.TextInputLayout>
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-
-    <EditText
-        android:id="@+id/edit_text_start_date"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:autofillHints=""
-        android:hint="@string/start_date"
-        android:inputType="date" />
-
-    <EditText
-        android:id="@+id/edit_text_end_date"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:autofillHints=""
-        android:hint="@string/end_date"
-        android:inputType="date" />
-
-</LinearLayout>
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="16dp">
-
-    <Button
-        style="@style/Theme.Button.Primary"
-        android:id="@+id/submit_button"
+    <TextView
+        android:id="@+id/modal_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/submit"/>
-</LinearLayout>
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingBottom="8dp"
+        android:visibility="gone"
+        android:elevation="6dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Theme.Dropdown"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:hint="@string/client"
+        android:labelFor="@+id/client">
+
+        <AutoCompleteTextView
+            android:id="@+id/client"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edit_text_start_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:autofillHints=""
+            android:hint="@string/start_date"
+            android:inputType="date" />
+
+        <EditText
+            android:id="@+id/edit_text_end_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:autofillHints=""
+            android:hint="@string/end_date"
+            android:inputType="date" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+
+        <Button
+            style="@style/Theme.Button.Primary"
+            android:id="@+id/submit_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/submit"/>
+    </LinearLayout>
 
 </LinearLayout>
