@@ -13,5 +13,5 @@ interface IExerciseDao {
     suspend fun getAll(): List<DBExercise>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(users: List<DBExercise>)
+    suspend fun insertAll(exercises: List<DBExercise>)
 }

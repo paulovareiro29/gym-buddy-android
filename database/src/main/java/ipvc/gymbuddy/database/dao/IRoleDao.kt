@@ -13,5 +13,5 @@ interface IRoleDao {
     suspend fun getAll(): List<DBRole>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(users: List<DBRole>)
+    suspend fun insertAll(roles: List<DBRole>)
 }

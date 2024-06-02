@@ -13,5 +13,5 @@ interface IMachineDao {
     suspend fun getAll(): List<DBMachine>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(users: List<DBMachine>)
+    suspend fun insertAll(machines: List<DBMachine>)
 }

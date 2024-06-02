@@ -13,5 +13,5 @@ interface ICategoryDao {
     suspend fun getAll(): List<DBCategory>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(users: List<DBCategory>)
+    suspend fun insertAll(categories: List<DBCategory>)
 }

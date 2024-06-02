@@ -5,12 +5,14 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import ipvc.gymbuddy.database.dao.ICategoryDao
+import ipvc.gymbuddy.database.dao.IContractDao
 import ipvc.gymbuddy.database.dao.IExerciseDao
 import ipvc.gymbuddy.database.dao.IMachineDao
 import ipvc.gymbuddy.database.dao.IRoleDao
 import ipvc.gymbuddy.database.dao.ITrainingPlanDao
 import ipvc.gymbuddy.database.dao.IUserDao
 import ipvc.gymbuddy.database.entities.DBCategory
+import ipvc.gymbuddy.database.entities.DBContract
 import ipvc.gymbuddy.database.entities.DBExercise
 import ipvc.gymbuddy.database.entities.DBMachine
 import ipvc.gymbuddy.database.entities.DBRole
@@ -26,6 +28,7 @@ import ipvc.gymbuddy.database.entities.DBUserStatistic
     DBMachine::class,
     DBExercise::class,
     DBTrainingPlan::class,
+    DBContract::class
 ], version = 1)
 abstract class LocalDatabase : RoomDatabase() {
     companion object {
@@ -37,7 +40,7 @@ abstract class LocalDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     LocalDatabase::class.java,
-                    "local-database-5" // TODO: Change name when all models are migrated
+                    "local-database-6" // TODO: Change name when all models are migrated
                 ).build()
                 INSTANCE = instance
                 instance
@@ -51,4 +54,5 @@ abstract class LocalDatabase : RoomDatabase() {
     abstract fun machine(): IMachineDao
     abstract fun exercise(): IExerciseDao
     abstract fun trainingPlan(): ITrainingPlanDao
+    abstract fun contract(): IContractDao
 }
