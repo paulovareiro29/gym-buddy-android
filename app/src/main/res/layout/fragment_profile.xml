@@ -63,6 +63,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -74,19 +75,14 @@
                     android:textColor="@color/primaryColor"
                     android:layout_weight="1" />
 
-                <TextView
+                <Button
+                    android:id="@+id/edit_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Theme.Typography.LabelLarge"
                     android:text="@string/edit"
-                    android:textStyle="bold"
-                    android:textColor="@color/primaryColor"
-                    android:drawablePadding="8dp"
                     android:gravity="center_vertical"
-                    app:drawableEndCompat="@drawable/baseline_navigate_next_24" />
+                    app:icon="@drawable/baseline_edit_24"/>
             </LinearLayout>
-
-
 
             <TableLayout
                 android:layout_width="wrap_content"
