@@ -1,10 +1,14 @@
 package ipvc.gymbuddy.app.adapters
 
+import Modal
+import android.annotation.SuppressLint
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.core.os.bundleOf
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
+import com.google.gson.Gson
 import ipvc.gymbuddy.api.models.TrainingPlan
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.core.BaseRecyclerAdapter
@@ -18,6 +22,8 @@ class TrainingPlanAdapter(dataset: List<TrainingPlan>): BaseRecyclerAdapter<Trai
         val name: TextView = view.findViewById(R.id.plan_name)
         val editButton: ImageButton = view.findViewById(R.id.edit_plan)
         val deleteButton: ImageButton = view.findViewById(R.id.delete_plan)
+        val addClientButton: ImageButton = view.findViewById(R.id.add_client)
+        val clients: TextView = view.findViewById(R.id.linked_clients)
     }
 
     override fun getItemLayout(): Int = R.layout.recycle_adapter_training_plan
@@ -29,9 +35,28 @@ class TrainingPlanAdapter(dataset: List<TrainingPlan>): BaseRecyclerAdapter<Trai
     override fun bindViewHolder(holder: ViewHolder, item: TrainingPlan) {
         holder.name.text = item.name
         holder.editButton.setOnClickListener {
-            val bundle = bundleOf("trainingPlanId" to item.id)
-            holder.itemView.findNavController().navigate(R.id.trainer_trainingplans_update_fragment, bundle)
+            holder.itemView
+                .findNavController()
+                .navigate(
+                    R.id.trainer_trainingplans_update_fragment,
+                    bundleOf("trainingPlanId" to item.id)
+                )
         }
+
+        if (item.clients.isNotEmpty()) {
+            holder.clients.visibility = View.VISIBLE
+            @SuppressLint("SetTextI18n")
+            holder.clients.text = "${holder.itemView.context.getString(R.string.associated_clients)}:${item.clients.joinToString(",") { "\n - ${it.email}" }}"
+        }
+
+        holder.addClientButton.setOnClickListener {
+            val activity = it.context as FragmentActivity
+            val title = activity.getString(R.string.add_client_to, item.name)
+            val bundle = bundleOf("trainingPlan" to Gson().toJson(item))
+            val dialogFragment = Modal.newInstance(title, "TrainerAddClientToPlanModal", bundle)
+            dialogFragment.show(activity.supportFragmentManager, "TrainerAddClientToPlanModal")
+        }
+
 
         holder.deleteButton.setOnClickListener {
             onTrainingPlanDeleteListener?.invoke(item)
