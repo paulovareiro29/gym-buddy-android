@@ -128,8 +128,7 @@
                 android:paddingHorizontal="12dp"
                 android:textColor="@color/primaryColor"
                 android:textStyle="bold"
-                app:drawableStartCompat="@drawable/logout_button"
-                app:drawableEndCompat="@drawable/baseline_navigate_next_24" />
+                app:drawableStartCompat="@drawable/logout_button" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

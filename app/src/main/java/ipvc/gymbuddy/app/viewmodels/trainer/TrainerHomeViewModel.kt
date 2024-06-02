@@ -6,9 +6,9 @@ import ipvc.gymbuddy.app.viewmodels.BaseViewModel
 
 class TrainerHomeViewModel(application: Application) : BaseViewModel(application) {
     private val userDataStore = UserDataStore.getInstance(application)
-    val userMetricsData = userDataStore.userMetrics
+    val userStatistics = userDataStore.userStatistics
 
-    fun getUserMetrics() {
-        userDataStore.getUserMetrics()
+    fun getStatistics() {
+        userDataStore.getUserStatistics()
     }
 }
