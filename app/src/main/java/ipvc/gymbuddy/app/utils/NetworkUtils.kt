@@ -5,13 +5,13 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 
 object NetworkUtils {
-    fun isOnline(context: Context): Boolean {
+    fun isOffline(context: Context): Boolean {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-        val network = connectivityManager.activeNetwork ?: return false
+        val network = connectivityManager.activeNetwork ?: return true
         val networkCapabilities =
-            connectivityManager.getNetworkCapabilities(network) ?: return false
-        return networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+            connectivityManager.getNetworkCapabilities(network) ?: return true
+        return !networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
 }

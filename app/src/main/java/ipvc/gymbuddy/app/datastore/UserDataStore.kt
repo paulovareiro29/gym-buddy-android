@@ -32,7 +32,7 @@ class UserDataStore(context: Context) : BaseDataStore(context) {
     fun getUsers() {
         users.postValue(AsyncData(users.value?.data ?: listOf(), AsyncData.Status.LOADING))
         coroutine.launch {
-            if (!NetworkUtils.isOnline(context)) {
+            if (NetworkUtils.isOffline(context)) {
                 users.postValue(AsyncData(LocalDatabase.getInstance(context).user().getAll().map { it.toAPIModel() }, AsyncData.Status.SUCCESS))
                 return@launch
             }
