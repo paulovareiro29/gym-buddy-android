@@ -12,6 +12,7 @@ import ipvc.gymbuddy.api.models.requests.auth.LoginRequest
 import ipvc.gymbuddy.api.models.requests.auth.RegisterRequest
 import ipvc.gymbuddy.api.services.AuthenticationService
 import ipvc.gymbuddy.app.core.AsyncData
+import ipvc.gymbuddy.app.utils.NetworkUtils
 import kotlinx.coroutines.launch
 
 class AuthenticationDataStore(context: Context) : BaseDataStore(context) {
@@ -28,17 +29,36 @@ class AuthenticationDataStore(context: Context) : BaseDataStore(context) {
     private var secureStorage = SecureStorage("AUTH_STORAGE", context)
     val USER_KEY = "USER"
 
-    var initialized = false
+    var initialized = MutableLiveData<Boolean>(false)
     var user = MutableLiveData<User?>()
     var loginStatus = MutableLiveData("idle")
     var activateStatus = MutableLiveData("idle")
     var registerData = MutableLiveData<AsyncData<User?>>(AsyncData())
 
     fun init() {
-        if (initialized) return
+        if (initialized.value == true) return
 
-        user.postValue(secureStorage.getObject(USER_KEY, User::class.java))
-        initialized = true
+       if (NetworkUtils.isOffline(context)) {
+            user.postValue(secureStorage.getObject(USER_KEY, User::class.java))
+            initialized.postValue(true)
+        } else {
+           getAuthenticated()
+        }
+    }
+
+    private fun getAuthenticated() {
+        coroutine.launch {
+            when(val response = AuthenticationService().me()) {
+                is RequestResult.Success -> {
+                    user.postValue(response.data.user)
+                    initialized.postValue(true)
+                }
+                is RequestResult.Error -> {
+                    user.postValue(null)
+                    initialized.postValue(true)
+                }
+            }
+        }
     }
 
     fun login(email: String, password: String) {
@@ -49,6 +69,7 @@ class AuthenticationDataStore(context: Context) : BaseDataStore(context) {
                     TokenStorage.getInstance().setToken(response.data.token)
                     secureStorage.setObject(USER_KEY, response.data.user)
                     user.postValue(response.data.user)
+                    initialized.postValue(true)
                     loginStatus.postValue("success")
                 }
                 is RequestResult.Error -> {
@@ -63,6 +84,7 @@ class AuthenticationDataStore(context: Context) : BaseDataStore(context) {
         TokenStorage.getInstance().setToken(null)
         secureStorage.setObject(USER_KEY, null)
         user.postValue(null)
+        initialized.postValue(false)
     }
 
     fun register(name: String, email: String, roleId: String?) {

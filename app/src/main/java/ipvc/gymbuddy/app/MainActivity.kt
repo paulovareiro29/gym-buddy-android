@@ -1,6 +1,7 @@
 package ipvc.gymbuddy.app
 
 import android.os.Bundle
+import android.view.View
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
@@ -15,6 +16,14 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
         super.onCreate(savedInstanceState)
         authViewModel = getViewModel()
         authViewModel.init()
+
+        authViewModel.initialized.observe(this) {
+            if (it == true) {
+                findViewById<NavigationBarView>(R.id.bottom_navigation).visibility = View.VISIBLE
+            } else {
+                findViewById<NavigationBarView>(R.id.bottom_navigation).visibility = View.GONE
+            }
+        }
 
         authViewModel.user.observe(this) {
             if (it == null) {
