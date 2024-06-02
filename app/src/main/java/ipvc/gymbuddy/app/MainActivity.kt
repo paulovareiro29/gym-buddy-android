@@ -76,6 +76,7 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
 
     private fun initializeSidebar() {
         val drawer = findViewById<DrawerLayout>(R.id.root)
+        val bottomMenu = findViewById<NavigationBarView>(R.id.bottom_navigation)
         val sidebar = findViewById<NavigationView>(R.id.sidebar_navigation)
 
         sidebar.menu.clear()
@@ -99,6 +100,7 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
 
                 // COMMON ROUTES
                 R.id.sidebar_item_home -> {
+                    bottomMenu.selectedItemId = R.id.home_bottom_navigation
                     when (authViewModel.user.value!!.role.name) {
                         "admin" -> navController.navigate(R.id.admin_home_fragment)
                         "trainer" -> navController.navigate(R.id.trainer_home_fragment)
@@ -107,6 +109,7 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
                     }
                 }
                 R.id.sidebar_item_profile -> {
+                    bottomMenu.selectedItemId = R.id.profile_bottom_navigation
                     when (authViewModel.user.value!!.role.name) {
                         "admin" -> navController.navigate(R.id.admin_profile_fragment)
                         "trainer" -> navController.navigate(R.id.trainer_profile_fragment)
@@ -115,6 +118,7 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
                     }
                 }
                 R.id.sidebar_item_settings -> {
+                    bottomMenu.selectedItemId = R.id.settings_bottom_navigation
                     when (authViewModel.user.value!!.role.name) {
                         "admin" -> navController.navigate(R.id.admin_settings_fragment)
                         "trainer" -> navController.navigate(R.id.trainer_settings_fragment)
