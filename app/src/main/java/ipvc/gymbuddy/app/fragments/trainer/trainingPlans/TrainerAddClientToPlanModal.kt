@@ -1,5 +1,4 @@
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AutoCompleteTextView
 import android.widget.Button
@@ -95,11 +94,6 @@ class TrainerAddClientToPlanModal : Modal(R.layout.fragment_trainer_add_client_t
             endDateButton.error = getString(R.string.field_is_required)
             return
         }
-
-        Log.d("TrainerAddClientToPlanModal", "Client ID: ${client.id}")
-        Log.d("TrainerAddClientToPlanModal", "Training Plan ID: ${trainingPlan!!.id}")
-        Log.d("TrainerAddClientToPlanModal", "Start Date: $startDate")
-        Log.d("TrainerAddClientToPlanModal", "End Date: $endDate")
 
         viewModel.createUserPlan(client.id, trainingPlan!!.id, startDate, endDate)
     }

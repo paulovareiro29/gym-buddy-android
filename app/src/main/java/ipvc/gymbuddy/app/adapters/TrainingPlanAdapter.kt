@@ -1,6 +1,7 @@
 package ipvc.gymbuddy.app.adapters
 
 import Modal
+import android.annotation.SuppressLint
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
@@ -22,6 +23,7 @@ class TrainingPlanAdapter(dataset: List<TrainingPlan>): BaseRecyclerAdapter<Trai
         val editButton: ImageButton = view.findViewById(R.id.edit_plan)
         val deleteButton: ImageButton = view.findViewById(R.id.delete_plan)
         val addClientButton: ImageButton = view.findViewById(R.id.add_client)
+        val clients: TextView = view.findViewById(R.id.linked_clients)
     }
 
     override fun getItemLayout(): Int = R.layout.recycle_adapter_training_plan
@@ -39,6 +41,12 @@ class TrainingPlanAdapter(dataset: List<TrainingPlan>): BaseRecyclerAdapter<Trai
                     R.id.trainer_trainingplans_update_fragment,
                     bundleOf("trainingPlanId" to item.id)
                 )
+        }
+
+        if (item.clients.isNotEmpty()) {
+            holder.clients.visibility = View.VISIBLE
+            @SuppressLint("SetTextI18n")
+            holder.clients.text = "${holder.itemView.context.getString(R.string.associated_clients)}:${item.clients.joinToString(",") { "\n - ${it.email}" }}"
         }
 
         holder.addClientButton.setOnClickListener {
