@@ -8,6 +8,10 @@ import ipvc.gymbuddy.api.models.Machine
 import ipvc.gymbuddy.api.models.requests.machine.CreateMachineRequest
 import ipvc.gymbuddy.api.services.MachineService
 import ipvc.gymbuddy.app.core.AsyncData
+import ipvc.gymbuddy.app.extensions.toAPIModel
+import ipvc.gymbuddy.app.extensions.toDatabaseModel
+import ipvc.gymbuddy.app.utils.NetworkUtils
+import ipvc.gymbuddy.database.LocalDatabase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -28,9 +32,18 @@ class MachineDataStore(context: Context) : BaseDataStore(context) {
     fun getMachines() {
         machines.postValue(AsyncData(machines.value?.data ?: listOf(), AsyncData.Status.LOADING))
         coroutine.launch {
+            if (NetworkUtils.isOffline(context)) {
+                machines.postValue(AsyncData(
+                    LocalDatabase.getInstance(context).machine().getAll().map { it.toAPIModel() },
+                    AsyncData.Status.SUCCESS
+                ))
+                return@launch
+            }
+
             when(val response = MachineService().getMachines())  {
                 is RequestResult.Success -> {
                     machines.postValue(AsyncData(response.data.machines, AsyncData.Status.SUCCESS))
+                    LocalDatabase.getInstance(context).machine().insertAll(response.data.machines.map { it.toDatabaseModel() })
                 }
                 is RequestResult.Error -> {
                     machines.postValue(AsyncData(machines.value?.data ?: listOf(), AsyncData.Status.ERROR))
