@@ -11,7 +11,7 @@ import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.DropdownAdapter
 import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.models.DropdownItem
-import ipvc.gymbuddy.app.viewmodels.userPlan.TrainerUserPlanCreateViewModel
+import ipvc.gymbuddy.app.viewmodels.trainer.userPlan.TrainerUserPlanCreateViewModel
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Date
