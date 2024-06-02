@@ -9,6 +9,7 @@ import ipvc.gymbuddy.api.models.requests.auth.LoginRequest
 import ipvc.gymbuddy.api.models.requests.auth.RegisterRequest
 import ipvc.gymbuddy.api.models.responses.auth.ActivateResponse
 import ipvc.gymbuddy.api.models.responses.auth.LoginResponse
+import ipvc.gymbuddy.api.models.responses.auth.MeResponse
 import ipvc.gymbuddy.api.models.responses.auth.RegisterResponse
 
 class AuthenticationService: HttpClient<IAuthenticationService>(IAuthenticationService::class.java) {
@@ -40,6 +41,17 @@ class AuthenticationService: HttpClient<IAuthenticationService>(IAuthenticationS
                 code = response.code,
                 message = response.message,
                 data = ResponseParser.payload<ActivateResponse>(response)
+            )
+            is RequestResult.Error -> response
+        }
+    }
+
+    suspend fun me(): RequestResult<MeResponse> {
+        return when (val response = request(api.me())) {
+            is RequestResult.Success -> RequestResult.Success(
+                code = response.code,
+                message = response.message,
+                data = ResponseParser.payload<MeResponse>(response)
             )
             is RequestResult.Error -> response
         }

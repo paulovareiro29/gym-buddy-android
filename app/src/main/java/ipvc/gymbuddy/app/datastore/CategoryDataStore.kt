@@ -8,6 +8,10 @@ import ipvc.gymbuddy.api.models.Category
 import ipvc.gymbuddy.api.models.requests.category.CreateCategoryRequest
 import ipvc.gymbuddy.api.services.CategoryService
 import ipvc.gymbuddy.app.core.AsyncData
+import ipvc.gymbuddy.app.extensions.toAPIModel
+import ipvc.gymbuddy.app.extensions.toDatabaseModel
+import ipvc.gymbuddy.app.utils.NetworkUtils
+import ipvc.gymbuddy.database.LocalDatabase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -28,9 +32,18 @@ class CategoryDataStore(context: Context) : BaseDataStore(context) {
     fun getCategories() {
         categories.postValue(AsyncData(categories.value?.data ?: listOf(), AsyncData.Status.LOADING))
         coroutine.launch {
+            if (NetworkUtils.isOffline(context)) {
+                categories.postValue(AsyncData(
+                    LocalDatabase.getInstance(context).category().getAll().map { it.toAPIModel() },
+                    AsyncData.Status.SUCCESS
+                ))
+                return@launch
+            }
+
             when(val response = CategoryService().getCategories())  {
                 is RequestResult.Success -> {
                     categories.postValue(AsyncData(response.data.categories, AsyncData.Status.SUCCESS))
+                    LocalDatabase.getInstance(context).category().insertAll(response.data.categories.map { it.toDatabaseModel() })
                 }
                 is RequestResult.Error -> {
                     categories.postValue(AsyncData(categories.value?.data ?: listOf(), AsyncData.Status.ERROR))

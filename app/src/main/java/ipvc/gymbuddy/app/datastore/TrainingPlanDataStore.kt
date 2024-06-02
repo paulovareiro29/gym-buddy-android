@@ -10,6 +10,10 @@ import ipvc.gymbuddy.api.models.requests.trainingPlan.CreateTrainingPlanRequest
 import ipvc.gymbuddy.api.models.requests.trainingPlan.UpdateTrainingPlanRequest
 import ipvc.gymbuddy.api.services.TrainingPlanService
 import ipvc.gymbuddy.app.core.AsyncData
+import ipvc.gymbuddy.app.extensions.toAPIModel
+import ipvc.gymbuddy.app.extensions.toDatabaseModel
+import ipvc.gymbuddy.app.utils.NetworkUtils
+import ipvc.gymbuddy.database.LocalDatabase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -35,10 +39,19 @@ class TrainingPlanDataStore(context: Context) : BaseDataStore(context) {
     fun getTrainingPlans() {
         trainingPlans.postValue(AsyncData(trainingPlans.value?.data ?: listOf(), AsyncData.Status.LOADING))
         coroutine.launch {
+            if (NetworkUtils.isOffline(context)) {
+                trainingPlans.postValue(AsyncData(
+                    LocalDatabase.getInstance(context).trainingPlan().getAll().map { it.toAPIModel() },
+                    AsyncData.Status.SUCCESS
+                ))
+                return@launch
+            }
+
             when(val response = TrainingPlanService().getTrainingPlans())  {
                 is RequestResult.Success -> {
                     val userPlans = filterUserTrainingPlans(response.data.trainingPlans)
                     trainingPlans.postValue(AsyncData(userPlans, AsyncData.Status.SUCCESS))
+                    LocalDatabase.getInstance(context).trainingPlan().insertAll(response.data.trainingPlans.map { it.toDatabaseModel() })
                 }
                 is RequestResult.Error -> {
                     trainingPlans.postValue(AsyncData(trainingPlans.value?.data ?: listOf(), AsyncData.Status.ERROR))
@@ -50,9 +63,18 @@ class TrainingPlanDataStore(context: Context) : BaseDataStore(context) {
     fun getTrainingPlan(id: String): LiveData<AsyncData<TrainingPlan>> {
         trainingPlan.postValue(AsyncData(trainingPlan.value?.data, AsyncData.Status.LOADING))
         coroutine.launch {
+            if (NetworkUtils.isOffline(context)) {
+                trainingPlan.postValue(AsyncData(
+                    LocalDatabase.getInstance(context).trainingPlan().get(id).toAPIModel(),
+                    AsyncData.Status.SUCCESS
+                ))
+                return@launch
+            }
+
             when (val response = TrainingPlanService().getTrainingPlan(id)) {
                 is RequestResult.Success -> {
                    trainingPlan.postValue(AsyncData(response.data.trainingPlan, AsyncData.Status.SUCCESS))
+                    LocalDatabase.getInstance(context).trainingPlan().insert(response.data.trainingPlan.toDatabaseModel())
                 }
                 is RequestResult.Error -> {
                     trainingPlan.postValue(AsyncData(trainingPlan.value?.data, AsyncData.Status.ERROR))

@@ -42,6 +42,7 @@ android {
 dependencies {
 
     implementation(project(":api"))
+    implementation(project(":database"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

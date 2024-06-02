@@ -12,7 +12,7 @@ class DropdownAdapter(context: Context, dropdown: AutoCompleteTextView, private 
         var selected: DropdownItem? = null
 
     init {
-        dropdown.setOnItemClickListener { parent, view, position, id ->
+        dropdown.setOnItemClickListener { _, _, position, _ ->
             selected = getItem(position)
         }
     }

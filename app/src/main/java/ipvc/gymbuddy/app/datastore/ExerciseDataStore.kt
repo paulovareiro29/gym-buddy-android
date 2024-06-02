@@ -8,6 +8,10 @@ import ipvc.gymbuddy.api.models.Exercise
 import ipvc.gymbuddy.api.models.requests.exercise.CreateExerciseRequest
 import ipvc.gymbuddy.api.services.ExerciseService
 import ipvc.gymbuddy.app.core.AsyncData
+import ipvc.gymbuddy.app.extensions.toAPIModel
+import ipvc.gymbuddy.app.extensions.toDatabaseModel
+import ipvc.gymbuddy.app.utils.NetworkUtils
+import ipvc.gymbuddy.database.LocalDatabase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -28,9 +32,18 @@ class ExerciseDataStore(context: Context) : BaseDataStore(context) {
     fun getExercises() {
         exercises.postValue(AsyncData(exercises.value?.data ?: listOf(), AsyncData.Status.LOADING))
         coroutine.launch {
+            if (NetworkUtils.isOffline(context)) {
+                exercises.postValue(AsyncData(
+                    LocalDatabase.getInstance(context).exercise().getAll().map { it.toAPIModel() },
+                    AsyncData.Status.SUCCESS
+                ))
+                return@launch
+            }
+
             when(val response = ExerciseService().getExercises())  {
                 is RequestResult.Success -> {
                     exercises.postValue(AsyncData(response.data.exercises, AsyncData.Status.SUCCESS))
+                    LocalDatabase.getInstance(context).exercise().insertAll(response.data.exercises.map { it.toDatabaseModel() })
                 }
                 is RequestResult.Error -> {
                     exercises.postValue(AsyncData(exercises.value?.data ?: listOf(), AsyncData.Status.ERROR))
