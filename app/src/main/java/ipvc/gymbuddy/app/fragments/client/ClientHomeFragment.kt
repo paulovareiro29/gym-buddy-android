@@ -31,8 +31,8 @@ class ClientHomeFragment : BaseFragment<FragmentClientHomeBinding>(
     }
 
     private fun loadMetrics() {
-        viewModel.getClientMetrics()
-        viewModel.clientMetricsData.observe(viewLifecycleOwner) { asyncData ->
+        viewModel.getStatistics()
+        viewModel.clientStatisticsData.observe(viewLifecycleOwner) { asyncData ->
             if (asyncData.status == AsyncData.Status.SUCCESS && asyncData.data != null) {
                 val metrics = asyncData.data
                 binding.trainingPlansCount.text = metrics.number_of_associated_plans.toString()

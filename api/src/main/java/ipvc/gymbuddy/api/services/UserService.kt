@@ -4,8 +4,8 @@ import ipvc.gymbuddy.api.core.HttpClient
 import ipvc.gymbuddy.api.core.RequestResult
 import ipvc.gymbuddy.api.core.ResponseParser
 import ipvc.gymbuddy.api.interfaces.IUserService
-import ipvc.gymbuddy.api.models.responses.user.GetAllMetricsResponse
 import ipvc.gymbuddy.api.models.responses.user.GetAllUsersResponse
+import ipvc.gymbuddy.api.models.responses.user.GetStatisticsResponse
 
 class UserService : HttpClient<IUserService>(IUserService::class.java) {
 
@@ -19,12 +19,12 @@ class UserService : HttpClient<IUserService>(IUserService::class.java) {
             is RequestResult.Error -> response
         }
     }
-    suspend fun getMetrics(userId: String): RequestResult<GetAllMetricsResponse> {
-        return when (val response = request(api.getMetrics(userId))) {
+    suspend fun getStatistics(userId: String): RequestResult<GetStatisticsResponse> {
+        return when (val response = request(api.getStatistics(userId))) {
             is RequestResult.Success -> RequestResult.Success(
                 code = response.code,
                 message = response.message,
-                data = ResponseParser.payload<GetAllMetricsResponse>(response)
+                data = ResponseParser.payload<GetStatisticsResponse>(response)
             )
             is RequestResult.Error -> response
         }

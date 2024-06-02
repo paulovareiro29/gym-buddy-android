@@ -6,9 +6,9 @@ import ipvc.gymbuddy.app.datastore.UserDataStore
 
 class ClientHomeViewModel(application: Application) : AndroidViewModel(application) {
     private val userDataStore = UserDataStore.getInstance(application)
-    val clientMetricsData = userDataStore.userMetrics
+    val clientStatisticsData = userDataStore.userStatistics
 
-    fun getClientMetrics() {
-        userDataStore.getUserMetrics()
+    fun getStatistics() {
+        userDataStore.getUserStatistics()
     }
 }

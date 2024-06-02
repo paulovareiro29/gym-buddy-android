@@ -5,7 +5,7 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import ipvc.gymbuddy.api.core.RequestResult
 import ipvc.gymbuddy.api.models.User
-import ipvc.gymbuddy.api.models.responses.user.GetAllMetricsResponse
+import ipvc.gymbuddy.api.models.responses.user.GetStatisticsResponse
 import ipvc.gymbuddy.api.services.UserService
 import ipvc.gymbuddy.app.core.AsyncData
 import kotlinx.coroutines.launch
@@ -23,7 +23,7 @@ class UserDataStore(context: Context) : BaseDataStore(context) {
 
     private val authenticationDataStore = AuthenticationDataStore.getInstance(context)
     var users = MutableLiveData<AsyncData<List<User>>>(AsyncData(listOf()))
-    var userMetrics = MutableLiveData<AsyncData<GetAllMetricsResponse>>(AsyncData(null))
+    var userStatistics = MutableLiveData<AsyncData<GetStatisticsResponse>>(AsyncData(null))
 
     fun getUsers() {
         users.postValue(AsyncData(users.value?.data ?: listOf(), AsyncData.Status.LOADING))
@@ -39,18 +39,18 @@ class UserDataStore(context: Context) : BaseDataStore(context) {
         }
     }
 
-    fun getUserMetrics() {
+    fun getUserStatistics() {
         val user = authenticationDataStore.user.value
-        userMetrics.postValue(AsyncData(userMetrics.value?.data, AsyncData.Status.LOADING))
+        userStatistics.postValue(AsyncData(userStatistics.value?.data, AsyncData.Status.LOADING))
         coroutine.launch {
             if (user != null) {
-                when (val response = UserService().getMetrics(user.id)) {
+                when (val response = UserService().getStatistics(user.id)) {
                     is RequestResult.Success -> {
-                        userMetrics.postValue(AsyncData(response.data, AsyncData.Status.SUCCESS))
+                        userStatistics.postValue(AsyncData(response.data, AsyncData.Status.SUCCESS))
                     }
 
                     is RequestResult.Error -> {
-                        userMetrics.postValue(AsyncData(userMetrics.value?.data, AsyncData.Status.ERROR))
+                        userStatistics.postValue(AsyncData(userStatistics.value?.data, AsyncData.Status.ERROR))
                     }
                 }
             }
