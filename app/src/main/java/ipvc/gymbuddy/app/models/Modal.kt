@@ -1,3 +1,4 @@
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +8,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import ipvc.gymbuddy.app.R
 
-open class Modal(private val layoutId: Int) : DialogFragment() {
+open class Modal(private val layoutId: Int, private var arguments: Bundle? = null) : DialogFragment() {
 
     private var title: String? = null
     private var contentFragmentClassName: String? = null
@@ -16,11 +17,12 @@ open class Modal(private val layoutId: Int) : DialogFragment() {
         private const val ARG_TITLE = "title"
         private const val ARG_CONTENT_FRAGMENT_CLASS_NAME = "contentFragmentClassName"
 
-        fun newInstance(title: String, contentFragmentClassName: String): Modal {
-            val fragment = Modal(R.layout.modal)
+        fun newInstance(title: String, contentFragmentClassName: String, arguments: Bundle? = null): Modal {
+            val fragment = Modal(R.layout.modal, arguments)
             val args = Bundle()
             args.putString(ARG_TITLE, title)
             args.putString(ARG_CONTENT_FRAGMENT_CLASS_NAME, contentFragmentClassName)
+            args.putAll(arguments)
             fragment.arguments = args
             return fragment
         }
@@ -47,9 +49,11 @@ open class Modal(private val layoutId: Int) : DialogFragment() {
 
         contentFragmentClassName?.let {
             val contentFragment = createFragment(it)
+            contentFragment.arguments = arguments
             childFragmentManager.beginTransaction().replace(R.id.modal_content, contentFragment).commit()
         }
     }
+
 
     private fun createFragment(className: String): Fragment {
         return childFragmentManager.fragmentFactory.instantiate(requireActivity().classLoader, className)

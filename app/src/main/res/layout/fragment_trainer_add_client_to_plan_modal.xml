@@ -29,7 +29,8 @@
         <AutoCompleteTextView
             android:id="@+id/client"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="none"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -44,8 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:autofillHints=""
-            android:hint="@string/start_date"
-            android:inputType="date" />
+            android:hint="@string/start_date" />
 
         <EditText
             android:id="@+id/edit_text_end_date"
@@ -53,15 +53,19 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:autofillHints=""
-            android:hint="@string/end_date"
-            android:inputType="date" />
+            android:hint="@string/end_date" />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/information_message"
+            style="@style/Theme.Typography.Body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:textAlignment="center" />
 
         <Button
             style="@style/Theme.Button.Primary"
@@ -69,6 +73,5 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/submit"/>
-    </LinearLayout>
 
 </LinearLayout>
