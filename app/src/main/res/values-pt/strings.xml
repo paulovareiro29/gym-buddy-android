@@ -68,4 +68,6 @@
     <string name="select_date">Selecione a Data</string>
     <string name="add_client_to">"Adicionar cliente a %s"</string>
     <string name="associated_clients">Clientes Associados</string>
+    <string name="edit_profile">Editar Perfil</string>
+    <string name="address">Morada</string>
 </resources>
