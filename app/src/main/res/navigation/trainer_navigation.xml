@@ -50,8 +50,11 @@
         android:id="@+id/trainer_trainingplans_update_fragment"
         android:name="ipvc.gymbuddy.app.fragments.trainer.trainingPlans.TrainerTrainingPlanUpdateFragment"
         android:label="fragment_trainer_training_plan_update"
-        tools:layout="@layout/fragment_trainer_training_plan_update" />
-
+        tools:layout="@layout/fragment_trainer_training_plan_update" >
+        <argument
+            android:name="trainingPlanId"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/trainer_listclients_overview_fragment"
         android:name="ipvc.gymbuddy.app.fragments.trainer.contracts.TrainerListClientsOverviewFragment"

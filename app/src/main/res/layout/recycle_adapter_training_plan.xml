@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/adapter_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,11 +15,12 @@
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:src="@drawable/baseline_assignment_24"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/app_name" />
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="8dp"
@@ -30,22 +32,24 @@
             style="@style/Theme.Typography.BodyLarge"
             android:fontFamily="sans-serif-medium"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:text="Training Plan" />
 
         <TextView
-            android:id="@+id/linked_employees"
+            android:id="@+id/linked_clients"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/textSecondary"
             android:layout_marginTop="4dp"
-            android:text="@string/clients" />
+            android:text="@string/associated_clients"
+            android:visibility="gone"
+            tools:visibility="visible"/>
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:layout_gravity="end|bottom"
         android:gravity="end">
 
@@ -55,7 +59,8 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/baseline_add_reaction_24"
-            android:layout_marginEnd="12dp" />
+            android:layout_marginEnd="12dp"
+            android:contentDescription="@string/add_client_to" />
 
         <ImageButton
             android:id="@+id/edit_plan"
@@ -63,14 +68,16 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/baseline_edit_24"
-            android:layout_marginEnd="12dp" />
+            android:layout_marginEnd="12dp"
+            android:contentDescription="@string/edit_training_plan" />
 
         <ImageButton
             android:id="@+id/delete_plan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/baseline_delete_24" />
+            android:src="@drawable/baseline_delete_24"
+            android:contentDescription="@string/delete"/>
 
     </LinearLayout>
 

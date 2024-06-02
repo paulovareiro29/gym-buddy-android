@@ -6,7 +6,6 @@ import ipvc.gymbuddy.app.viewmodels.BaseViewModel
 
 class TrainerTrainingPlanDeleteViewModel (application: Application) : BaseViewModel(application) {
     private val trainingPlanDataStore = TrainingPlanDataStore.getInstance(application)
-    val deleteData = trainingPlanDataStore.delete
 
     fun deleteTrainingPlan(id: String) {
         trainingPlanDataStore.deleteTrainingPlan(id)

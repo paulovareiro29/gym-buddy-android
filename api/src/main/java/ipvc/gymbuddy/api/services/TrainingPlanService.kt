@@ -6,11 +6,11 @@ import ipvc.gymbuddy.api.core.ResponseParser
 import ipvc.gymbuddy.api.interfaces.ITrainingPlanService
 import ipvc.gymbuddy.api.models.requests.trainingPlan.CreateTrainingPlanRequest
 import ipvc.gymbuddy.api.models.requests.trainingPlan.UpdateTrainingPlanRequest
-import ipvc.gymbuddy.api.models.responses.trainingPlan.CreateTrainingPlanResponse
-import ipvc.gymbuddy.api.models.responses.trainingPlan.DeleteTrainingPlanResponse
-import ipvc.gymbuddy.api.models.responses.trainingPlan.GetAllTrainingPlansResponse
-import ipvc.gymbuddy.api.models.responses.trainingPlan.GetTrainingPlanResponse
-import ipvc.gymbuddy.api.models.responses.trainingPlan.UpdateTrainingPlanResponse
+import ipvc.gymbuddy.api.models.responses.TrainingPlan.CreateTrainingPlanResponse
+import ipvc.gymbuddy.api.models.responses.TrainingPlan.DeleteTrainingPlanResponse
+import ipvc.gymbuddy.api.models.responses.TrainingPlan.GetAllTrainingPlansResponse
+import ipvc.gymbuddy.api.models.responses.TrainingPlan.UpdateTrainingPlanResponse
+import ipvc.gymbuddy.api.models.responses.TrainingPlan.GetTrainingPlanResponse
 
 class TrainingPlanService : HttpClient<ITrainingPlanService>(ITrainingPlanService::class.java){
 

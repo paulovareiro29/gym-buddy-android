@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ipvc.gymbuddy.api.models.TrainingPlan
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.TrainingPlanAdapter
+import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentTrainerTrainingPlansOverviewBinding
 import ipvc.gymbuddy.app.viewmodels.trainer.trainingPlan.TrainerTrainingPlanDeleteViewModel
@@ -34,6 +35,13 @@ class TrainerTrainingPlansOverviewFragment : BaseFragment<FragmentTrainerTrainin
         recyclerView = view.findViewById(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
+        viewModel.userPlanPost.observe(viewLifecycleOwner) {
+            when (it.status) {
+                AsyncData.Status.SUCCESS -> viewModel.getTrainingPlans()
+                else -> {}
+            }
+        }
+
         viewModel.getTrainingPlans()
         viewModel.trainingPlansData.observe(viewLifecycleOwner) {
             if (it.data != null) {
@@ -45,7 +53,6 @@ class TrainerTrainingPlansOverviewFragment : BaseFragment<FragmentTrainerTrainin
             }
         }
         binding.searchInput.editText?.addTextChangedListener { handleSearch(it.toString()) }
-
         binding.createPlan.setOnClickListener { navController.navigate(R.id.trainer_trainingplans_create_fragment) }
     }
     private fun handleSearch(search: String) {
