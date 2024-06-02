@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
+import com.google.gson.Gson
 import ipvc.gymbuddy.api.models.TrainingPlan
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.core.BaseRecyclerAdapter
@@ -43,7 +44,7 @@ class TrainingPlanAdapter(dataset: List<TrainingPlan>): BaseRecyclerAdapter<Trai
         holder.addClientButton.setOnClickListener {
             val activity = it.context as FragmentActivity
             val title = activity.getString(R.string.add_client_to, item.name)
-            val bundle = bundleOf("trainingPlanId" to item.id)
+            val bundle = bundleOf("trainingPlan" to Gson().toJson(item))
             val dialogFragment = Modal.newInstance(title, "TrainerAddClientToPlanModal", bundle)
             dialogFragment.show(activity.supportFragmentManager, "TrainerAddClientToPlanModal")
         }

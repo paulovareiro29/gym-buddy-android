@@ -7,6 +7,7 @@ import ipvc.gymbuddy.api.core.RequestResult
 import ipvc.gymbuddy.api.models.requests.userPlan.CreateUserPlanRequest
 import ipvc.gymbuddy.api.services.UserPlanService
 import ipvc.gymbuddy.app.core.AsyncData
+import ipvc.gymbuddy.app.utils.DateUtils
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Date
@@ -25,17 +26,23 @@ class UserPlanDataStore(context: Context) : BaseDataStore(context) {
     var post = MutableLiveData<AsyncData<CreateUserPlanRequest>>(AsyncData())
 
     fun createUserPlan(userId: String, planId: String, startDate: Date, endDate: Date) {
-        val entity = CreateUserPlanRequest(userId, planId, startDate, endDate)
+        val entity = CreateUserPlanRequest(
+            planId,
+            DateUtils.parseToUTC(startDate),
+            DateUtils.parseToUTC(endDate)
+        )
 
         post.postValue(AsyncData(entity, AsyncData.Status.LOADING))
         coroutine.launch {
             when(UserPlanService().createUserPlan(userId, entity)) {
-                is RequestResult.Success -> post.postValue(AsyncData(null, AsyncData.Status.SUCCESS))
+                is RequestResult.Success -> {
+                    post.postValue(AsyncData(null, AsyncData.Status.SUCCESS))
+
+                    delay(2500)
+                    post.postValue(AsyncData(null, AsyncData.Status.IDLE))
+                }
                 is RequestResult.Error -> post.postValue(AsyncData(null, AsyncData.Status.ERROR))
             }
-
-            delay(2500)
-            post.postValue(AsyncData(null, AsyncData.Status.IDLE))
         }
     }
 }

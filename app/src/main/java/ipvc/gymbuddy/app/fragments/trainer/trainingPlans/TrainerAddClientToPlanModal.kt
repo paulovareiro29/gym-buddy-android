@@ -3,10 +3,11 @@ import android.util.Log
 import android.view.View
 import android.widget.AutoCompleteTextView
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.gson.Gson
+import ipvc.gymbuddy.api.models.TrainingPlan
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.DropdownAdapter
 import ipvc.gymbuddy.app.core.AsyncData
@@ -16,35 +17,36 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import java.util.TimeZone
 
 class TrainerAddClientToPlanModal : Modal(R.layout.fragment_trainer_add_client_to_plan_modal) {
 
     private lateinit var viewModel: TrainerUserPlanCreateViewModel
-    private var trainingPlanId: String? = null
+    private var trainingPlan: TrainingPlan? = null
 
     private lateinit var clientAutoCompleteTextView: AutoCompleteTextView
-    private lateinit var startDateEditText: EditText
-    private lateinit var endDateEditText: EditText
-    private lateinit var titleTextView: TextView
+    private lateinit var startDateButton: Button
+    private lateinit var endDateButton: Button
     private lateinit var submitButton: Button
     private lateinit var messageTextView: TextView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[TrainerUserPlanCreateViewModel::class.java]
-        trainingPlanId = arguments?.getString("trainingPlanId")
-        Log.d("TrainerAddClientToPlanModal", "Training Plan ID: $trainingPlanId")
+        trainingPlan = Gson().fromJson(arguments?.getString("trainingPlan"), TrainingPlan::class.java)
+
+        if (trainingPlan == null) {
+            this.dismiss()
+            return
+        }
 
         clientAutoCompleteTextView = view.findViewById(R.id.client)
-        startDateEditText = view.findViewById(R.id.edit_text_start_date)
-        endDateEditText = view.findViewById(R.id.edit_text_end_date)
-        titleTextView = view.findViewById(R.id.modal_title)
+        startDateButton = view.findViewById(R.id.start_date)
+        endDateButton = view.findViewById(R.id.end_date)
         submitButton = view.findViewById(R.id.submit_button)
-        messageTextView = view.findViewById(R.id.information_message)
+        messageTextView = view.findViewById(R.id.message)
 
-        setUpDatePicker(startDateEditText)
-        setUpDatePicker(endDateEditText)
+        setUpDatePicker(startDateButton)
+        setUpDatePicker(endDateButton)
         resetView()
         loadClients()
 
@@ -71,69 +73,60 @@ class TrainerAddClientToPlanModal : Modal(R.layout.fragment_trainer_add_client_t
     }
 
     private fun handleSubmit() {
-        val clientDropdown = clientAutoCompleteTextView
-        val startDateText = startDateEditText.text.toString()
-        val endDateText = endDateEditText.text.toString()
+        val client = (clientAutoCompleteTextView.adapter as DropdownAdapter).selected
+        val startDate = parseDate(startDateButton.text.toString())
+        val endDate = parseDate(endDateButton.text.toString())
 
-        val client = (clientDropdown.adapter as DropdownAdapter).selected
+        clientAutoCompleteTextView.error = null
+        startDateButton.error = null
+        endDateButton.error = null
+
         if (client == null) {
-            showMessage(getString(R.string.field_is_required), R.color.error)
+            clientAutoCompleteTextView.error = getString(R.string.field_is_required)
             return
         }
 
-        if (trainingPlanId == null) {
-            showMessage(getString(R.string.field_is_required), R.color.error)
+        if (startDate == null) {
+            startDateButton.error = getString(R.string.field_is_required)
             return
         }
 
-        val startDate = parseDate(startDateText)
-        val endDate = parseDate(endDateText)
-
-        if (startDate == null || endDate == null) {
-            showMessage(getString(R.string.field_is_required), R.color.error)
-            startDateEditText.error = getString(R.string.field_is_required)
-            endDateEditText.error = getString(R.string.field_is_required)
+        if (endDate == null) {
+            endDateButton.error = getString(R.string.field_is_required)
             return
         }
-
-        val utcStartDate = formatToUtc(startDate)
-        val utcEndDate = formatToUtc(endDate)
 
         Log.d("TrainerAddClientToPlanModal", "Client ID: ${client.id}")
-        Log.d("TrainerAddClientToPlanModal", "Training Plan ID: $trainingPlanId")
-        Log.d("TrainerAddClientToPlanModal", "Start Date: $utcStartDate")
-        Log.d("TrainerAddClientToPlanModal", "End Date: $utcEndDate")
+        Log.d("TrainerAddClientToPlanModal", "Training Plan ID: ${trainingPlan!!.id}")
+        Log.d("TrainerAddClientToPlanModal", "Start Date: $startDate")
+        Log.d("TrainerAddClientToPlanModal", "End Date: $endDate")
 
-        viewModel.createUserPlan(client.id, trainingPlanId!!, utcStartDate, utcEndDate)
-    }
-
-    private fun formatToUtc(date: Date): String {
-        val utcFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-        utcFormat.timeZone = TimeZone.getTimeZone("UTC")
-        return utcFormat.format(date)
+        viewModel.createUserPlan(client.id, trainingPlan!!.id, startDate, endDate)
     }
 
     private fun resetView() {
         clientAutoCompleteTextView.error = null
-        startDateEditText.text = null
-        endDateEditText.text = null
+        startDateButton.text = getString(R.string.start_date)
+        startDateButton.error = null
+        endDateButton.text = getString(R.string.end_date)
+        endDateButton.error = null
         submitButton.isEnabled = true
         submitButton.setBackgroundColor(requireContext().getColor(R.color.primaryColor))
         messageTextView.visibility = View.INVISIBLE
     }
 
-    private fun setUpDatePicker(editText: EditText) {
-        editText.setOnClickListener {
-            val datePicker = MaterialDatePicker.Builder.datePicker()
-                .setTitleText(R.string.select_date)
-                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
-                .build()
+    private fun setUpDatePicker(button: Button) {
+        val datePicker = MaterialDatePicker.Builder.datePicker()
+            .setTitleText(R.string.select_date)
+            .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+            .build()
 
-            datePicker.addOnPositiveButtonClickListener { selection ->
-                val format = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
-                editText.setText(format.format(selection))
-            }
+        datePicker.addOnPositiveButtonClickListener { selection ->
+            val format = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
+            button.text = format.format(selection)
+        }
 
+        button.setOnClickListener {
             datePicker.show(childFragmentManager, DATE_PICKER_TAG)
         }
     }
@@ -156,7 +149,11 @@ class TrainerAddClientToPlanModal : Modal(R.layout.fragment_trainer_add_client_t
                 val adapter = DropdownAdapter(
                     requireContext(),
                     clientAutoCompleteTextView,
-                    data.map { contract ->
+                    data
+                        .filter { contract ->
+                            trainingPlan?.clients?.find { user -> user.id == contract.beneficiary.id } == null
+                        }
+                        .map { contract ->
                         DropdownItem(contract.beneficiary.id, contract.beneficiary.name)
                     }
                 )
@@ -174,7 +171,5 @@ class TrainerAddClientToPlanModal : Modal(R.layout.fragment_trainer_add_client_t
     companion object {
         private const val DATE_PICKER_TAG = "DATE_PICKER"
         private const val DATE_FORMAT = "yyyy-MM-dd"
-        private const val UTC_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-        private const val UTC_TIME_ZONE = "UTC"
     }
 }

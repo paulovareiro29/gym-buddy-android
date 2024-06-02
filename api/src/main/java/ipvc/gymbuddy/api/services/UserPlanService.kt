@@ -10,7 +10,7 @@ import ipvc.gymbuddy.api.models.responses.userPlan.CreateUserPlanResponse
 class UserPlanService : HttpClient<IUserPlanService>(IUserPlanService::class.java) {
 
     suspend fun createUserPlan(id: String, body: CreateUserPlanRequest): RequestResult<CreateUserPlanResponse> {
-        return when (val response = request(api.createUserPlan(body, id))) {
+        return when (val response = request(api.createUserPlan(id, body))) {
             is RequestResult.Success -> RequestResult.Success(
                 code = response.code,
                 message =  response.message,

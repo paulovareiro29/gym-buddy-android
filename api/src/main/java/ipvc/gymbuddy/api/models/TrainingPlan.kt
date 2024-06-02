@@ -3,5 +3,6 @@ package ipvc.gymbuddy.api.models
 data class TrainingPlan (
     val id: String,
     val name: String,
-    val creator: SimplifiedUser
+    val creator: SimplifiedUser,
+    val clients: List<SimplifiedUser>
 )

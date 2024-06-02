@@ -10,6 +10,6 @@ import retrofit2.http.Path
 
 interface IUserPlanService {
 
-    @POST("/users/{id}/plans")
-    fun createUserPlan(@Body body: CreateUserPlanRequest, @Path("id") id: String): Call<RequestResult.Success<CreateUserPlanResponse>>
+    @POST("users/{id}/plans")
+    fun createUserPlan(@Path("id") id: String, @Body body: CreateUserPlanRequest): Call<RequestResult.Success<CreateUserPlanResponse>>
 }
