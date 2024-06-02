@@ -6,9 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import ipvc.gymbuddy.database.dao.IUserDao
 import ipvc.gymbuddy.database.entities.DBUser
+import ipvc.gymbuddy.database.entities.DBUserStatistic
 
 @Database(entities = [
-    DBUser::class
+    DBUser::class,
+    DBUserStatistic::class,
 ], version = 1)
 abstract class LocalDatabase : RoomDatabase() {
     companion object {
@@ -20,7 +22,7 @@ abstract class LocalDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     LocalDatabase::class.java,
-                    "local-database-2"
+                    "local-database-3"
                 ).build()
                 INSTANCE = instance
                 instance
