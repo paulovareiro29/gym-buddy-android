@@ -76,25 +76,19 @@
                 <Button
                     android:id="@+id/myMetricsButton"
                     style="@style/Theme.Button.Primary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/my_metrics"
-                    android:textSize="15sp"
-                    tools:ignore="VisualLintButtonSize" />
-
-                <View
+                    android:layout_height="match_parent"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:text="@string/metrics"
+                    android:layout_marginEnd="16dp"/>
 
                 <Button
                     android:id="@+id/trainingPlansButton"
                     style="@style/Theme.Button.Primary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/training_plans"
-                    android:textSize="15sp"/>
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/training_plans"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -134,7 +128,8 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textStyle="bold"
-                        android:textSize="36sp"/>
+                        android:textSize="36sp"
+                        tools:text="99" />
 
                     <TextView
                         android:id="@+id/metrics"
@@ -142,7 +137,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@string/my_metrics"
+                        android:text="@string/metrics"
                         android:textColor="@color/white"
                         android:textStyle="bold"
                         tools:ignore="TextContrastCheck" />
@@ -165,7 +160,8 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textStyle="bold"
-                        android:textSize="36sp" />
+                        android:textSize="36sp"
+                        tools:text="99" />
 
                     <TextView
                         android:id="@+id/trainingPlansTitle"
