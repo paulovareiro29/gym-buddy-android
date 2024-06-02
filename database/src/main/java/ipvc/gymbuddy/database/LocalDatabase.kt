@@ -40,7 +40,7 @@ abstract class LocalDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     LocalDatabase::class.java,
-                    "local-database-6" // TODO: Change name when all models are migrated
+                    "gym-buddy"
                 ).build()
                 INSTANCE = instance
                 instance
