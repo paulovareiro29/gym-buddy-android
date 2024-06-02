@@ -74,27 +74,22 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/listClients"
                     style="@style/Theme.Button.Primary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/list_clients"
-                    android:textSize="15sp"
-                    tools:ignore="VisualLintButtonSize" />
-
-                <View
+                    android:id="@+id/listClients"
+                    android:layout_height="match_parent"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:text="@string/clients"
+                    android:layout_marginEnd="16dp" />
+
 
                 <Button
-                    android:id="@+id/trainingPlans"
                     style="@style/Theme.Button.Primary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/training_plans"
-                    android:textSize="15sp"/>
+                    android:id="@+id/trainingPlans"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/training_plans" />
             </LinearLayout>
         </LinearLayout>
 
