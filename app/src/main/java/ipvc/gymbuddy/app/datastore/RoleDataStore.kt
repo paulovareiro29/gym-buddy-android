@@ -6,6 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import ipvc.gymbuddy.api.core.RequestResult
 import ipvc.gymbuddy.api.models.Role
 import ipvc.gymbuddy.api.services.RoleService
+import ipvc.gymbuddy.app.extensions.toAPIModel
+import ipvc.gymbuddy.app.extensions.toDatabaseModel
+import ipvc.gymbuddy.app.utils.NetworkUtils
+import ipvc.gymbuddy.database.LocalDatabase
 import kotlinx.coroutines.launch
 
 class RoleDataStore(context: Context) : BaseDataStore(context) {
@@ -23,12 +27,19 @@ class RoleDataStore(context: Context) : BaseDataStore(context) {
     var roleStatus = MutableLiveData("idle")
 
     fun getRoles() {
+        roleStatus.postValue("loading")
         coroutine.launch {
-            roleStatus.postValue("loading")
+            if (NetworkUtils.isOffline(context)) {
+                roles.postValue(LocalDatabase.getInstance(context).role().getAll().map { it.toAPIModel() })
+                roleStatus.postValue("success")
+                return@launch
+            }
+
             when(val response = RoleService().getRoles())  {
                 is RequestResult.Success -> {
                     roles.postValue(response.data.roles)
                     roleStatus.postValue("success")
+                    LocalDatabase.getInstance(context).role().insertAll(response.data.roles.map { it.toDatabaseModel() })
                 }
                 is RequestResult.Error -> {
                     roles.postValue(listOf())
