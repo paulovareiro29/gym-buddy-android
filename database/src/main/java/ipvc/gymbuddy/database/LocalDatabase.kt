@@ -8,11 +8,13 @@ import ipvc.gymbuddy.database.dao.ICategoryDao
 import ipvc.gymbuddy.database.dao.IExerciseDao
 import ipvc.gymbuddy.database.dao.IMachineDao
 import ipvc.gymbuddy.database.dao.IRoleDao
+import ipvc.gymbuddy.database.dao.ITrainingPlanDao
 import ipvc.gymbuddy.database.dao.IUserDao
 import ipvc.gymbuddy.database.entities.DBCategory
 import ipvc.gymbuddy.database.entities.DBExercise
 import ipvc.gymbuddy.database.entities.DBMachine
 import ipvc.gymbuddy.database.entities.DBRole
+import ipvc.gymbuddy.database.entities.DBTrainingPlan
 import ipvc.gymbuddy.database.entities.DBUser
 import ipvc.gymbuddy.database.entities.DBUserStatistic
 
@@ -23,6 +25,7 @@ import ipvc.gymbuddy.database.entities.DBUserStatistic
     DBCategory::class,
     DBMachine::class,
     DBExercise::class,
+    DBTrainingPlan::class,
 ], version = 1)
 abstract class LocalDatabase : RoomDatabase() {
     companion object {
@@ -34,7 +37,7 @@ abstract class LocalDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     LocalDatabase::class.java,
-                    "local-database-3" // TODO: Change name when all models are migrated
+                    "local-database-5" // TODO: Change name when all models are migrated
                 ).build()
                 INSTANCE = instance
                 instance
@@ -47,4 +50,5 @@ abstract class LocalDatabase : RoomDatabase() {
     abstract fun category(): ICategoryDao
     abstract fun machine(): IMachineDao
     abstract fun exercise(): IExerciseDao
+    abstract fun trainingPlan(): ITrainingPlanDao
 }
