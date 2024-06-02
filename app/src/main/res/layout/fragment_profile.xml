@@ -50,7 +50,17 @@
                 android:textColor="@color/gray"
                 android:textStyle="bold" />
 
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.Material3.Chip.Suggestion"
+                android:id="@+id/role"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                tools:text="@string/administrator"
+                android:checkable="false" />
+
         </LinearLayout>
+
 
 
         <!-- PERSONAL INFORMATION -->
@@ -84,53 +94,15 @@
                     app:icon="@drawable/baseline_edit_24"/>
             </LinearLayout>
 
-            <TableLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <TableRow>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="15dp"
-                        android:drawablePadding="8dp"
-                        android:gravity="center_vertical"
-                        app:drawableStartCompat="@drawable/baseline_supervisor_account_24"/>
-
-                    <TextView
-                        android:id="@+id/role"
-                        style="@style/Theme.Typography.Body"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingHorizontal="12dp"/>
-                </TableRow>
-                <View
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/gray" />
+                    android:layout_height="wrap_content">
 
-                <TableRow>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="15dp"
-                        android:drawablePadding="8dp"
-                        android:gravity="center_vertical"
-                        app:drawableStartCompat="@drawable/baseline_cake_24"/>
-
-                    <TextView
-                        android:id="@+id/birthdate"
-                        style="@style/Theme.Typography.Body"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingHorizontal="12dp"/>
-                </TableRow>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/gray" />
-
-                <TableRow>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -145,8 +117,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="12dp"/>
-                </TableRow>
-            </TableLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
+
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

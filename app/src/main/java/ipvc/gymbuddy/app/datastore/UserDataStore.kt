@@ -87,8 +87,8 @@ class UserDataStore(context: Context) : BaseDataStore(context) {
         }
     }
 
-    fun updateUser(id: String, name: String?, email: String?) {
-        val entity = UpdateUserRequest(name, email)
+    fun updateUser(id: String, name: String?, address: String?) {
+        val entity = UpdateUserRequest(name, address)
         update.postValue(AsyncData(entity, AsyncData.Status.LOADING))
         coroutine.launch {
             when(UserService().updateUser(id, entity)) {

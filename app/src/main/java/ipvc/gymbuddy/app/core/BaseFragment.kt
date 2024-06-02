@@ -16,6 +16,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.models.Toolbar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
 import java.util.Locale
 
 abstract class BaseFragment<VB : ViewBinding>(
@@ -29,6 +33,9 @@ abstract class BaseFragment<VB : ViewBinding>(
 
     private var _isRootFragment: Boolean = false
     protected lateinit var toolbar: Toolbar
+
+    private val parentJob = Job()
+    protected val coroutine = CoroutineScope(Dispatchers.Main + parentJob)
 
     protected inline fun <reified T : ViewModel> getViewModel(): T = ViewModelProvider(this)[T::class.java]
 
@@ -49,6 +56,7 @@ abstract class BaseFragment<VB : ViewBinding>(
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        coroutine.cancel()
     }
 
     private fun handleBackButton() {
