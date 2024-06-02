@@ -42,7 +42,7 @@ class AdminUsersOverviewFragment : BaseFragment<FragmentAdminUsersOverviewBindin
 
     private fun handleSearch(search: String) {
         val filtered = viewModel.usersData.value?.data?.filter {
-            it.name.contains(search, true) || it.email.contains(search, true)
+            it.name?.contains(search, true) == true || it.email.contains(search, true)
         } ?: listOf()
         (recyclerView.adapter as UserAdapter).updateDataset(filtered)
     }

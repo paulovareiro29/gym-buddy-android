@@ -8,6 +8,9 @@ import ipvc.gymbuddy.api.models.User
 import ipvc.gymbuddy.api.models.responses.user.GetAllMetricsResponse
 import ipvc.gymbuddy.api.services.UserService
 import ipvc.gymbuddy.app.core.AsyncData
+import ipvc.gymbuddy.app.extensions.toAPIModel
+import ipvc.gymbuddy.app.extensions.toDatabaseModel
+import ipvc.gymbuddy.database.LocalDatabase
 import kotlinx.coroutines.launch
 
 class UserDataStore(context: Context) : BaseDataStore(context) {
@@ -30,7 +33,9 @@ class UserDataStore(context: Context) : BaseDataStore(context) {
         coroutine.launch {
             when(val response = UserService().getUsers())  {
                 is RequestResult.Success -> {
-                    users.postValue(AsyncData(response.data.users, AsyncData.Status.SUCCESS))
+                    // users.postValue(AsyncData(response.data.users, AsyncData.Status.SUCCESS))
+                    LocalDatabase.getInstance(context).user().insertAll(response.data.users.map { it.toDatabaseModel() })
+                    users.postValue(AsyncData(LocalDatabase.getInstance(context).user().getAll().map { it.toAPIModel() }, AsyncData.Status.SUCCESS))
                 }
                 is RequestResult.Error -> {
                     users.postValue(AsyncData(users.value?.data ?: listOf(), AsyncData.Status.ERROR))
