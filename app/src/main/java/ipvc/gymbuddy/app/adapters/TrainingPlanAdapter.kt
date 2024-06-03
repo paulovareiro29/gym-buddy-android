@@ -64,7 +64,7 @@ class TrainingPlanAdapter(dataset: List<TrainingPlan>): BaseRecyclerAdapter<Trai
         holder.name.setOnClickListener {
             val trainingPlanJson = Gson().toJson(item)
             holder.itemView.findNavController().navigate(
-                R.id.trainerTrainingPlanExercisesOverviewFragment,
+                R.id.trainer_trainingplan_exercises_overview_fragment,
                 bundleOf("trainingPlan" to trainingPlanJson)
             )
         }

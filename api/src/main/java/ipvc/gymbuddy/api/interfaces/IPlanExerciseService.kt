@@ -9,5 +9,5 @@ import retrofit2.http.Path
 interface IPlanExerciseService {
 
     @GET("plans/{plan_id}/exercises")
-        fun getPlanExercises(@Path("plan_id") planId: String) : Call<RequestResult.Success<GetAllPlanExercisesResponse>>
+    fun getPlanExercises(@Path("plan_id") planId: String) : Call<RequestResult.Success<GetAllPlanExercisesResponse>>
 }
