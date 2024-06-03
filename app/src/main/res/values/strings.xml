@@ -80,4 +80,5 @@
     <string name="address">"Address</string>
     <string name="sets">sets</string>
     <string name="reps">reps</string>
+    <string name="day">Day</string>
 </resources>

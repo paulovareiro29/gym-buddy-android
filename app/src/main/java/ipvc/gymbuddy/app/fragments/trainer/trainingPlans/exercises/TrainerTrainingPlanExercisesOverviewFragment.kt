@@ -1,6 +1,7 @@
 package ipvc.gymbuddy.app.fragments.trainer.trainingPlans.exercises
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,14 +36,18 @@ class TrainerTrainingPlanExercisesOverviewFragment : BaseFragment<FragmentTraine
 
         recyclerView = view.findViewById(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(context)
+        Log.d("Training Plan id", trainingPlan!!.id)
+
 
         trainingPlan?.id?.let { planId ->
             viewModel.getPlanExercises(planId)
-        } ?: run {
         }
-        viewModel.planExerciseData.observe(viewLifecycleOwner) {
-            if (it.data != null) {
-                val adapter = TrainingPlanExerciseAdapter(it.data)
+
+        viewModel.planExerciseData.observe(viewLifecycleOwner) { resource ->
+            resource.data?.let { exercises ->
+                val groupedExercises = exercises.groupBy { it.day }
+                val sortedExercises = groupedExercises.toSortedMap().values.flatten()
+                val adapter = TrainingPlanExerciseAdapter(sortedExercises)
                 recyclerView.adapter = adapter
             }
         }

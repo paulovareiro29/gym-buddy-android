@@ -45,6 +45,8 @@ class PlanExerciseDataStore(context: Context) : BaseDataStore(context) {
                 is RequestResult.Error -> {
                     planExercises.postValue(AsyncData(planExercises.value?.data ?: listOf(), AsyncData.Status.ERROR))
                 }
+
+                else -> {}
             }
         }
     }
