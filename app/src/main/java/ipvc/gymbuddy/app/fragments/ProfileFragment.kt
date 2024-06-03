@@ -29,5 +29,13 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 role.text  = StringUtils.capitalize(user.role.name)
             }
         }
+
+        binding.editButton.setOnClickListener {
+            when (viewModel.user.value!!.role.name) {
+                "admin" -> navController.navigate(R.id.admin_edit_profile_fragment)
+                "trainer" -> navController.navigate(R.id.trainer_edit_profile_fragment)
+                "default" -> navController.navigate(R.id.client_edit_profile_fragment)
+            }
+        }
     }
 }

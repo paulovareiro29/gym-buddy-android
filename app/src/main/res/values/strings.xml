@@ -76,6 +76,8 @@
     <string name="select_date">Select Date</string>
     <string name="add_client_to">Add client to %S</string>
     <string name="associated_clients">Associated Clients</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="address">"Address</string>
     <string name="sets">sets</string>
     <string name="reps">reps</string>
 </resources>

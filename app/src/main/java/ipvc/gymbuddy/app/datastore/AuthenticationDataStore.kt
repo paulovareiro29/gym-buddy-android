@@ -29,7 +29,7 @@ class AuthenticationDataStore(context: Context) : BaseDataStore(context) {
     private var secureStorage = SecureStorage("AUTH_STORAGE", context)
     val USER_KEY = "USER"
 
-    var initialized = MutableLiveData<Boolean>(false)
+    var initialized = MutableLiveData(false)
     var user = MutableLiveData<User?>()
     var loginStatus = MutableLiveData("idle")
     var activateStatus = MutableLiveData("idle")
@@ -42,20 +42,23 @@ class AuthenticationDataStore(context: Context) : BaseDataStore(context) {
             user.postValue(secureStorage.getObject(USER_KEY, User::class.java))
             initialized.postValue(true)
         } else {
-           getAuthenticated()
+           getAuthenticated {
+               initialized.postValue(true)
+           }
         }
     }
 
-    private fun getAuthenticated() {
+    fun getAuthenticated(callback: ((user: User?) -> Unit)?) {
         coroutine.launch {
             when(val response = AuthenticationService().me()) {
                 is RequestResult.Success -> {
                     user.postValue(response.data.user)
-                    initialized.postValue(true)
+                    callback?.invoke(response.data.user)
+
                 }
                 is RequestResult.Error -> {
                     user.postValue(null)
-                    initialized.postValue(true)
+                    callback?.invoke(null)
                 }
             }
         }

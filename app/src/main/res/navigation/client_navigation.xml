@@ -25,4 +25,8 @@
         android:name="ipvc.gymbuddy.app.fragments.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/client_edit_profile_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.EditProfileFragment"
+        android:label="EditProfileFragment" />
 </navigation>
