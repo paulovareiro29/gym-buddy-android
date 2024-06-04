@@ -9,7 +9,10 @@
     <item android:title="@string/client">
         <menu>
             <group>
-
+                <item
+                    android:id="@+id/clientMetricsOverviewFragment"
+                    android:icon="@drawable/baseline_assignment_24"
+                    android:title="@string/metrics" />
             </group>
         </menu>
     </item>
