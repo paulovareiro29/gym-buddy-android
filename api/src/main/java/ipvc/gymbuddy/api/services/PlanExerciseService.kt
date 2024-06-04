@@ -6,6 +6,7 @@ import ipvc.gymbuddy.api.core.ResponseParser
 import ipvc.gymbuddy.api.interfaces.IPlanExerciseService
 import ipvc.gymbuddy.api.models.requests.planExercise.CreatePlanExerciseRequest
 import ipvc.gymbuddy.api.models.responses.planExercise.CreatePlanExerciseResponse
+import ipvc.gymbuddy.api.models.responses.planExercise.DeletePlanExerciseResponse
 import ipvc.gymbuddy.api.models.responses.planExercise.GetAllPlanExercisesResponse
 
 class PlanExerciseService: HttpClient<IPlanExerciseService>(IPlanExerciseService::class.java) {
@@ -31,6 +32,19 @@ class PlanExerciseService: HttpClient<IPlanExerciseService>(IPlanExerciseService
                 code = response.code,
                 message = response.message,
                 data = ResponseParser.payload<CreatePlanExerciseResponse>(response)
+            )
+            is RequestResult.Error -> response
+        }
+    }
+
+
+
+    suspend fun deletePlanExercise(planId: String, exerciseId: String): RequestResult<DeletePlanExerciseResponse> {
+        return when(val response = request(api.deletePlanExercise(planId, exerciseId))) {
+            is RequestResult.Success -> RequestResult.Success(
+                code = response.code,
+                message = response.message,
+                data = ResponseParser.payload<DeletePlanExerciseResponse>(response)
             )
             is RequestResult.Error -> response
         }

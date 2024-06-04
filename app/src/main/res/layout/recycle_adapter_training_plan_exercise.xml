@@ -64,7 +64,7 @@
 
 
         <ImageButton
-            android:id="@+id/edit_trainingPlan_exercise"
+            android:id="@+id/edit_plan_exercise"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackgroundBorderless"
@@ -73,7 +73,7 @@
             android:contentDescription="@string/edit_training_plan" />
 
         <ImageButton
-            android:id="@+id/delete_trainingPlan_exercise"
+            android:id="@+id/delete_plan_exercise"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackgroundBorderless"
