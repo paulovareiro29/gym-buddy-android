@@ -30,4 +30,6 @@
     <!-- Error Colors -->
     <color name="error">#B00020</color>
     <color name="errorRipple">#29B00020</color>
+
+    <color name="transparent">#00000000</color>
 </resources>

@@ -56,7 +56,7 @@ class PlanExerciseDataStore(context: Context) : BaseDataStore(context) {
     }
 
 
-    fun createPlanExercise(planId:String, exerciseId: String, repetitions: Int, sets: Int, restBetweenSets: Int, day: Int){
+    fun createPlanExercise(planId:String, exerciseId: String, repetitions: Int, sets: Int, restBetweenSets: Int, day: String){
         val entity = CreatePlanExerciseRequest(exerciseId, repetitions, sets, restBetweenSets, day)
 
         post.postValue(AsyncData(entity, AsyncData.Status.LOADING))

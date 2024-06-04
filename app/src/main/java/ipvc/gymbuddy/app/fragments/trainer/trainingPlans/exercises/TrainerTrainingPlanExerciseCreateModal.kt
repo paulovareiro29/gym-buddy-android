@@ -83,7 +83,7 @@ class TrainerTrainingPlanExerciseCreateModal : Modal(R.layout.fragment_trainer_t
         val exerciseSets = Integer.parseInt(sets.editText!!.text.toString())
         val exerciseReps = Integer.parseInt(repetitions.editText!!.text.toString())
         val exerciseRest =Integer.parseInt(restBetweenSets.editText!!.text.toString())
-        val exerciseDay = Integer.parseInt(day.editText!!.text.toString())
+        val exerciseDay = day.editText!!.text.toString()
 
         exercise.error = null
         sets.error = null

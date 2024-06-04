@@ -13,7 +13,7 @@ class TrainerTrainingPlanExerciseCreateViewModel(application: Application) : Bas
     val exercisesData = exerciseDataStore.exercises
     val postData = planExerciseDataStore.post
 
-    fun createPlanExercise(planId: String, exerciseId: String, repetitions: Int, sets: Int, restBetweenSets: Int, day: Int) {
+    fun createPlanExercise(planId: String, exerciseId: String, repetitions: Int, sets: Int, restBetweenSets: Int, day: String) {
         planExerciseDataStore.createPlanExercise(planId, exerciseId, repetitions, sets, restBetweenSets, day)
     }
 
