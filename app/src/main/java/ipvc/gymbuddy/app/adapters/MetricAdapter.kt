@@ -10,9 +10,10 @@ import ipvc.gymbuddy.app.core.BaseViewHolder
 class MetricAdapter(dataset: List<Metric>): BaseRecyclerAdapter<Metric, MetricAdapter.ViewHolder>(dataset) {
 
     class ViewHolder(view: View) : BaseViewHolder(view) {
-        val metricName: TextView = view.findViewById(R.id.metric_name)
-        val metricCreator: TextView = view.findViewById(R.id.metric_creator)
-        val metricValue: TextView = view.findViewById(R.id.metric_value)
+        val name: TextView = view.findViewById(R.id.name)
+        val creator: TextView = view.findViewById(R.id.creator)
+        val value: TextView = view.findViewById(R.id.value)
+        val date: TextView = view.findViewById(R.id.date)
     }
 
     override fun getItemLayout(): Int = R.layout.recycle_adapter_metrics
@@ -22,8 +23,9 @@ class MetricAdapter(dataset: List<Metric>): BaseRecyclerAdapter<Metric, MetricAd
     }
 
     override fun bindViewHolder(holder: ViewHolder, item: Metric) {
-        holder.metricName.text = item.metricType?.name ?: "Unknown Type"
-        holder.metricCreator.text = item.creator.name
-        holder.metricValue.text = item.value.toString()
+        holder.name.text = item.type?.name ?: "Unknown Type" // TODO: Place text on translation
+        holder.creator.text = holder.itemView.context.getString(R.string.submitted_by, item.creator.name)
+        holder.value.text = item.value.toString()
+        holder.date.text = item.date // TODO: Parse correctly to readable date
     }
 }

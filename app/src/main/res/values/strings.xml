@@ -81,8 +81,6 @@
     <string name="sets">sets</string>
     <string name="reps">reps</string>
     <string name="day">Day</string>
-    <string name="added_by">Added By: %s</string>
-    <string name="value">Value: %s</string>
-    <string name="metric_name">Metric: %s</string>
     <string name="metrics_overview">Metrics Overview</string>
+    <string name="submitted_by">Submitted by %s</string>
 </resources>
