@@ -11,6 +11,7 @@ import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.TrainingPlanExerciseAdapter
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentTrainerTrainingPlanExercisesOverviewBinding
+import ipvc.gymbuddy.app.fragments.trainer.trainingPlans.exercises.TrainerTrainingPlanExerciseCreateModal.ExerciseCreationListener
 import ipvc.gymbuddy.app.viewmodels.trainer.planExercise.TrainerTrainingPlanExerciseOverviewModel
 
 class TrainerTrainingPlanExercisesOverviewFragment : BaseFragment<FragmentTrainerTrainingPlanExercisesOverviewBinding>(
@@ -31,6 +32,7 @@ class TrainerTrainingPlanExercisesOverviewFragment : BaseFragment<FragmentTraine
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         trainingPlan?.let { loadToolbar(it.name) }
 
         recyclerView = view.findViewById(R.id.recycler_view)
@@ -38,13 +40,27 @@ class TrainerTrainingPlanExercisesOverviewFragment : BaseFragment<FragmentTraine
 
         trainingPlan?.id?.let { planId ->
             viewModel.getPlanExercises(planId)
-        } ?: run {
         }
         viewModel.planExerciseData.observe(viewLifecycleOwner) {
             if (it.data != null) {
                 val adapter = TrainingPlanExerciseAdapter(it.data)
                 recyclerView.adapter = adapter
             }
+        }
+
+        binding.createExercise.setOnClickListener {
+            val bundle = Bundle().apply {
+                putString("trainingPlanId", trainingPlan?.id)
+            }
+            val dialogFragment = TrainerTrainingPlanExerciseCreateModal().apply {
+                arguments = bundle
+                setExerciseCreationListener(object : ExerciseCreationListener {
+                    override fun onExerciseCreated() {
+                        updateExerciseList()
+                    }
+                })
+            }
+            dialogFragment.show(childFragmentManager, "TrainerTrainingPlanExerciseCreateModal")
         }
 
         binding.searchInput.editText?.addTextChangedListener { handleSearch(it.toString()) }
@@ -57,4 +73,9 @@ class TrainerTrainingPlanExercisesOverviewFragment : BaseFragment<FragmentTraine
         recyclerView.adapter = TrainingPlanExerciseAdapter(filtered)
     }
 
+    private fun updateExerciseList() {
+        trainingPlan?.id?.let { planId ->
+            viewModel.getPlanExercises(planId)
+        }
+    }
 }

@@ -72,4 +72,8 @@
     <string name="address">Morada</string>
     <string name="sets">series</string>
     <string name="reps">reps</string>
+    <string name="repetitions">Repetições</string>
+    <string name="rest_between_sets">Descanso entre séries</string>
+    <string name="day">Dia</string>
+    <string name="exercise">Exercício</string>
 </resources>
