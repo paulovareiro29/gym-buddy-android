@@ -76,4 +76,8 @@
     <string name="select_date">Select Date</string>
     <string name="add_client_to">Add client to %S</string>
     <string name="associated_clients">Associated Clients</string>
+    <string name="added_by">Added By: %s</string>
+    <string name="value">Value: %s</string>
+    <string name="metric_name">Metric: %s</string>
+    <string name="metrics_overview">Metrics Overview</string>
 </resources>
