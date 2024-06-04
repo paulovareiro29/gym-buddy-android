@@ -6,12 +6,14 @@ import androidx.lifecycle.MutableLiveData
 import ipvc.gymbuddy.api.core.RequestResult
 import ipvc.gymbuddy.api.models.User
 import ipvc.gymbuddy.api.models.UserStatistic
+import ipvc.gymbuddy.api.models.requests.user.UpdateUserRequest
 import ipvc.gymbuddy.api.services.UserService
 import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.extensions.toAPIModel
 import ipvc.gymbuddy.app.extensions.toDatabaseModel
 import ipvc.gymbuddy.app.utils.NetworkUtils
 import ipvc.gymbuddy.database.LocalDatabase
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class UserDataStore(context: Context) : BaseDataStore(context) {
@@ -28,6 +30,7 @@ class UserDataStore(context: Context) : BaseDataStore(context) {
     private val authenticationDataStore = AuthenticationDataStore.getInstance(context)
     var users = MutableLiveData<AsyncData<List<User>>>(AsyncData(listOf()))
     var userStatistics = MutableLiveData<AsyncData<UserStatistic>>(AsyncData(null))
+    var update = MutableLiveData<AsyncData<UpdateUserRequest>>(AsyncData())
 
     fun getUsers() {
         users.postValue(AsyncData(users.value?.data ?: listOf(), AsyncData.Status.LOADING))
@@ -84,4 +87,17 @@ class UserDataStore(context: Context) : BaseDataStore(context) {
         }
     }
 
+    fun updateUser(id: String, name: String?, address: String?) {
+        val entity = UpdateUserRequest(name, address)
+        update.postValue(AsyncData(entity, AsyncData.Status.LOADING))
+        coroutine.launch {
+            when(UserService().updateUser(id, entity)) {
+                is RequestResult.Success -> update.postValue(AsyncData(null, AsyncData.Status.SUCCESS))
+                is RequestResult.Error -> update.postValue(AsyncData(null, AsyncData.Status.ERROR))
+            }
+
+            delay(2500)
+            update.postValue(AsyncData(null, AsyncData.Status.IDLE))
+        }
+    }
 }

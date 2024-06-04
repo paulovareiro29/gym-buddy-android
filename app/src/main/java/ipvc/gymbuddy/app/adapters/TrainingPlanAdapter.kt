@@ -57,9 +57,16 @@ class TrainingPlanAdapter(dataset: List<TrainingPlan>): BaseRecyclerAdapter<Trai
             dialogFragment.show(activity.supportFragmentManager, "TrainerAddClientToPlanModal")
         }
 
-
         holder.deleteButton.setOnClickListener {
             onTrainingPlanDeleteListener?.invoke(item)
+        }
+
+        holder.name.setOnClickListener {
+            val trainingPlanJson = Gson().toJson(item)
+            holder.itemView.findNavController().navigate(
+                R.id.trainer_trainingplan_exercises_overview_fragment,
+                bundleOf("trainingPlan" to trainingPlanJson)
+            )
         }
     }
 
