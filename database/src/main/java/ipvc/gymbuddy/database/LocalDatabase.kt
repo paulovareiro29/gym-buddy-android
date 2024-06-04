@@ -8,6 +8,7 @@ import ipvc.gymbuddy.database.dao.ICategoryDao
 import ipvc.gymbuddy.database.dao.IContractDao
 import ipvc.gymbuddy.database.dao.IExerciseDao
 import ipvc.gymbuddy.database.dao.IMachineDao
+import ipvc.gymbuddy.database.dao.IPlanExerciseDao
 import ipvc.gymbuddy.database.dao.IRoleDao
 import ipvc.gymbuddy.database.dao.ITrainingPlanDao
 import ipvc.gymbuddy.database.dao.IUserDao
@@ -15,6 +16,7 @@ import ipvc.gymbuddy.database.entities.DBCategory
 import ipvc.gymbuddy.database.entities.DBContract
 import ipvc.gymbuddy.database.entities.DBExercise
 import ipvc.gymbuddy.database.entities.DBMachine
+import ipvc.gymbuddy.database.entities.DBPlanExercise
 import ipvc.gymbuddy.database.entities.DBRole
 import ipvc.gymbuddy.database.entities.DBTrainingPlan
 import ipvc.gymbuddy.database.entities.DBUser
@@ -28,8 +30,9 @@ import ipvc.gymbuddy.database.entities.DBUserStatistic
     DBMachine::class,
     DBExercise::class,
     DBTrainingPlan::class,
-    DBContract::class
-], version = 1)
+    DBContract::class,
+    DBPlanExercise::class
+], version = 2)
 abstract class LocalDatabase : RoomDatabase() {
     companion object {
         @Volatile
@@ -41,7 +44,9 @@ abstract class LocalDatabase : RoomDatabase() {
                     context.applicationContext,
                     LocalDatabase::class.java,
                     "gym-buddy"
-                ).build()
+                )
+                .fallbackToDestructiveMigration()
+                .build()
                 INSTANCE = instance
                 instance
             }
@@ -55,4 +60,5 @@ abstract class LocalDatabase : RoomDatabase() {
     abstract fun exercise(): IExerciseDao
     abstract fun trainingPlan(): ITrainingPlanDao
     abstract fun contract(): IContractDao
+    abstract fun planExercise(): IPlanExerciseDao
 }

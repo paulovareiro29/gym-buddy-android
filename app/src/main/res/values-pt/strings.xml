@@ -70,4 +70,7 @@
     <string name="associated_clients">Clientes Associados</string>
     <string name="edit_profile">Editar Perfil</string>
     <string name="address">Morada</string>
+    <string name="sets">series</string>
+    <string name="reps">reps</string>
+    <string name="day">Dia</string>
 </resources>
