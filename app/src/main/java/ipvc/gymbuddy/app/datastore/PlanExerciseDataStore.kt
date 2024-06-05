@@ -8,6 +8,7 @@ import androidx.lifecycle.map
 import ipvc.gymbuddy.api.core.RequestResult
 import ipvc.gymbuddy.api.models.PlanExercise
 import ipvc.gymbuddy.api.models.requests.planExercise.CreatePlanExerciseRequest
+import ipvc.gymbuddy.api.models.requests.planExercise.UpdatePlanExerciseRequest
 import ipvc.gymbuddy.api.services.PlanExerciseService
 import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.extensions.toAPIModel
@@ -31,6 +32,7 @@ class PlanExerciseDataStore(context: Context) : BaseDataStore(context) {
     private val _planExercises = MutableLiveData<AsyncData<List<PlanExercise>>>(AsyncData(listOf()))
     val planExercises: LiveData<AsyncData<List<PlanExercise>>> get() = _planExercises
     val post = MutableLiveData<AsyncData<CreatePlanExerciseRequest>>(AsyncData())
+    var update = MutableLiveData<AsyncData<UpdatePlanExerciseRequest>>(AsyncData())
     val delete = MutableLiveData<AsyncData<Unit>>(AsyncData())
 
     fun getPlanExercises(planId: String): LiveData<List<PlanExercise>> {
@@ -73,10 +75,23 @@ class PlanExerciseDataStore(context: Context) : BaseDataStore(context) {
         }
     }
 
-    fun deletePlanExercise(planId: String, exerciseId: String) {
+    fun updatePlanExercise(planId: String, id: String, exerciseId: String, repetitions: Int, sets: Int, restBetweenSets: Int, day: String) {
+        val entity = UpdatePlanExerciseRequest(exerciseId, repetitions, sets, restBetweenSets, day)
+        update.postValue(AsyncData(entity, AsyncData.Status.LOADING))
+        coroutine.launch {
+            when(PlanExerciseService().updatePlanExercise(planId, id, entity)) {
+                is RequestResult.Success -> update.postValue(AsyncData(null, AsyncData.Status.SUCCESS))
+                is RequestResult.Error -> update.postValue(AsyncData(null, AsyncData.Status.ERROR))
+            }
+            delay(2500)
+            update.postValue(AsyncData(null, AsyncData.Status.IDLE))
+        }
+    }
+
+    fun deletePlanExercise(planId: String, id: String) {
         delete.postValue(AsyncData(null, AsyncData.Status.LOADING))
         coroutine.launch {
-            when (PlanExerciseService().deletePlanExercise(planId, exerciseId)) {
+            when (PlanExerciseService().deletePlanExercise(planId, id)) {
                 is RequestResult.Success -> {
                     delete.postValue(AsyncData(null, AsyncData.Status.SUCCESS))
                     getPlanExercises(planId)
