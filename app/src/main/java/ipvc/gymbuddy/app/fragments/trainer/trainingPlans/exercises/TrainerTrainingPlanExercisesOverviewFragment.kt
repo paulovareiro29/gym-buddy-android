@@ -57,5 +57,27 @@ class TrainerTrainingPlanExercisesOverviewFragment : BaseFragment<FragmentTraine
                 tab.text = uniqueDays[position].toString()
             }.attach()
         }
+
+        binding.createExercise.setOnClickListener {
+            val bundle = Bundle().apply {
+                putString("trainingPlanId", trainingPlan?.id)
+            }
+            val dialogFragment = TrainerTrainingPlanExerciseCreateModal().apply {
+                arguments = bundle
+                setExerciseCreationListener(object :
+                    TrainerTrainingPlanExerciseCreateModal.ExerciseCreationListener {
+                    override fun onExerciseCreated() {
+                        updateExerciseList()
+                    }
+                })
+            }
+            dialogFragment.show(childFragmentManager, "TrainerTrainingPlanExerciseCreateModal")
+        }
+    }
+
+    private fun updateExerciseList() {
+        trainingPlan?.id?.let { planId ->
+            viewModel.getPlanExercises(planId)
+        }
     }
 }
