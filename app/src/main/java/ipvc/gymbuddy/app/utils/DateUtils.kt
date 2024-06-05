@@ -13,4 +13,20 @@ object DateUtils {
         return utcFormat.format(date)
     }
 
+    fun formatDateFromIso8601(dateStr: String): String {
+        val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+        parser.timeZone = TimeZone.getTimeZone("UTC")
+        val formatter = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
+        return try {
+            val date = parser.parse(dateStr)
+            if (date != null) {
+                formatter.format(date)
+            } else {
+                "Invalid date"
+            }
+        } catch (e: Exception) {
+            "Invalid date"
+        }
+    }
+
 }

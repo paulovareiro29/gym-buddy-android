@@ -29,7 +29,7 @@ class ClientHomeFragment : BaseFragment<FragmentClientHomeBinding>(
 
         loadMetrics()
 
-        binding.myMetricsButton.setOnClickListener { navController.navigate(R.id.clientMetricsOverviewFragment) }
+        binding.myMetricsButton.setOnClickListener { navController.navigate(R.id.client_metrics_overview_fragment) }
     }
 
     private fun loadMetrics() {

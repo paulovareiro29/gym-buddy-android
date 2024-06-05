@@ -1,6 +1,5 @@
 package ipvc.gymbuddy.api.services
 
-import android.util.Log
 import ipvc.gymbuddy.api.core.HttpClient
 import ipvc.gymbuddy.api.core.RequestResult
 import ipvc.gymbuddy.api.core.ResponseParser
@@ -12,11 +11,9 @@ class MetricService : HttpClient<IMetricsService>(IMetricsService::class.java) {
 
     suspend fun getMetrics(): RequestResult<GetAllMetricsResponse> {
         val response = request(api.getMetrics())
-        Log.d("MetricService", "Raw API response: $response")
         return when (response) {
             is RequestResult.Success -> {
                 val parsedData = ResponseParser.payload<GetAllMetricsResponse>(response)
-                Log.d("MetricService", "Parsed data: $parsedData")
                 RequestResult.Success(response.code, response.message, parsedData)
             }
             is RequestResult.Error -> response

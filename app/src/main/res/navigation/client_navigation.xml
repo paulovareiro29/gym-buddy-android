@@ -30,7 +30,7 @@
         android:name="ipvc.gymbuddy.app.fragments.EditProfileFragment"
         android:label="EditProfileFragment" />
     <fragment
-        android:id="@+id/clientMetricsOverviewFragment"
+        android:id="@+id/client_metrics_overview_fragment"
         android:name="ipvc.gymbuddy.app.fragments.client.ClientMetricsOverviewFragment"
         android:label="fragment_client_metrics"
         tools:layout="@layout/fragment_client_metrics" />

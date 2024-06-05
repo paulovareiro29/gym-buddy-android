@@ -2,7 +2,6 @@ package ipvc.gymbuddy.app.datastore
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import ipvc.gymbuddy.api.core.RequestResult
 import ipvc.gymbuddy.api.models.Metric
@@ -31,13 +30,11 @@ class MetricDataStore(context: Context) : BaseDataStore(context) {
         coroutine.launch {
             when (val response = metricService.getMetrics()) {
                 is RequestResult.Success -> {
-                    Log.d("MetricDataStore", "API Response: ${response.data}")
                     val metricList = response.data.metrics
                     metrics.postValue(AsyncData(metricList, AsyncData.Status.SUCCESS))
                 }
                 is RequestResult.Error -> {
                     metrics.postValue(AsyncData(metrics.value?.data, AsyncData.Status.ERROR))
-                    Log.e("MetricDataStore", "Error fetching metrics: ${response.message}")
                 }
             }
         }

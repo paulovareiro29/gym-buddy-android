@@ -1,7 +1,6 @@
 package ipvc.gymbuddy.app.fragments.client
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import ipvc.gymbuddy.app.R
@@ -31,12 +30,8 @@ class ClientMetricsOverviewFragment : BaseFragment<FragmentClientMetricsBinding>
 
         viewModel.getMetrics()
         viewModel.metricsData.observe(viewLifecycleOwner) { asyncData ->
-            Log.d("MetricsFragment", "Observing data: ${asyncData.status}")
             if (asyncData.status == AsyncData.Status.SUCCESS && asyncData.data != null) {
-                Log.d("MetricsFragment", "Data size: ${asyncData.data.size}")
                 (recyclerView.adapter as MetricAdapter).updateDataset(asyncData.data)
-            } else if (asyncData.status == AsyncData.Status.ERROR) {
-                Log.d("MetricsFragment", "Error loading data")
             }
         }
     }
