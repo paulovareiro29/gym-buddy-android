@@ -114,6 +114,7 @@ class TrainerTrainingPlanExerciseCreateModal : Modal(R.layout.fragment_trainer_t
 
         viewModel.createPlanExercise(trainingPlanId!!, planExercise!!.id, exerciseSets.toInt(), exerciseReps.toInt(), exerciseRest.toInt(), exerciseDay)
     }
+
     private fun loadExercises() {
         viewModel.getExercises()
 

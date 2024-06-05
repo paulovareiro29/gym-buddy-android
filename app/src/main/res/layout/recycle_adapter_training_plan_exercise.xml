@@ -4,82 +4,86 @@
     android:id="@+id/adapter_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:gravity="center_vertical"
+    android:orientation="vertical"
     android:background="@drawable/input"
     android:padding="8dp"
     android:layout_marginBottom="8dp">
 
-    <ImageView
-        android:id="@+id/exercise_image"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:src="@drawable/baseline_assignment_24"
-        android:scaleType="centerCrop"
-        android:background="@null"
-        android:contentDescription="@string/app_name" />
-
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="8dp"
-        android:orientation="vertical"
-        android:gravity="center_vertical">
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="8dp">
 
-        <TextView
-            android:id="@+id/exercise_name"
-            style="@style/Theme.Typography.BodyLarge"
-            android:fontFamily="sans-serif-medium"
-            android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/exercise_image"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:src="@drawable/baseline_assignment_24"
+                android:scaleType="centerCrop"
+                android:background="@null"
+                android:contentDescription="@string/app_name" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/exercise_name"
+                    style="@style/Theme.Typography.BodyLarge"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Training Plan" />
+
+                <TextView
+                    android:id="@+id/machine_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/textSecondary"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/machine" />
+
+                <TextView
+                    android:id="@+id/sets_and_reps"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/textSecondary"
+                    android:layout_marginTop="4dp"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Training Plan" />
-
-        <TextView
-            android:id="@+id/machine_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/textSecondary"
-            android:layout_marginTop="4dp"
-            android:text="@string/machine" />
+            android:layout_gravity="end|bottom"
+            android:gravity="end">
 
 
-
-            <TextView
-                android:id="@+id/sets_and_reps"
+            <ImageButton
+                android:id="@+id/edit_plan_exercise"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/textSecondary"
-                android:layout_marginTop="4dp"/>
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/baseline_edit_24"
+                android:layout_marginEnd="12dp"
+                android:contentDescription="@string/edit_training_plan" />
 
+            <ImageButton
+                android:id="@+id/delete_plan_exercise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/baseline_delete_24"
+                android:contentDescription="@string/delete"/>
 
+        </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:gravity="end">
-
-
-        <ImageButton
-            android:id="@+id/edit_plan_exercise"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/baseline_edit_24"
-            android:layout_marginEnd="12dp"
-            android:contentDescription="@string/edit_training_plan" />
-
-        <ImageButton
-            android:id="@+id/delete_plan_exercise"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/baseline_delete_24"
-            android:contentDescription="@string/delete"/>
-
-    </LinearLayout>
-
 </LinearLayout>

@@ -3,9 +3,10 @@ package ipvc.gymbuddy.app.fragments.trainer.trainingPlans.exercises
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
-import androidx.core.widget.addTextChangedListener
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
 import ipvc.gymbuddy.api.models.PlanExercise
 import ipvc.gymbuddy.api.models.TrainingPlan
@@ -13,7 +14,7 @@ import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.TrainingPlanExerciseAdapter
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentTrainerTrainingPlanExercisesOverviewBinding
-import ipvc.gymbuddy.app.fragments.trainer.trainingPlans.exercises.TrainerTrainingPlanExerciseCreateModal.ExerciseCreationListener
+import ipvc.gymbuddy.app.fragments.ui.TabRecyclerViewFragment
 import ipvc.gymbuddy.app.viewmodels.trainer.planExercise.TrainerTrainingPlanExerciseDeleteViewModel
 import ipvc.gymbuddy.app.viewmodels.trainer.planExercise.TrainerTrainingPlanExerciseOverviewModel
 
@@ -22,7 +23,6 @@ class TrainerTrainingPlanExercisesOverviewFragment : BaseFragment<FragmentTraine
 
     private lateinit var viewModel: TrainerTrainingPlanExerciseOverviewModel
     private lateinit var deleteViewModel: TrainerTrainingPlanExerciseDeleteViewModel
-    private lateinit var recyclerView: RecyclerView
     private var trainingPlan: TrainingPlan? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,30 +30,41 @@ class TrainerTrainingPlanExercisesOverviewFragment : BaseFragment<FragmentTraine
         viewModel = getViewModel()
         deleteViewModel = getViewModel()
         arguments?.let {
-            val trainingPlanJson = it.getString("trainingPlan")
-            trainingPlan = Gson().fromJson(trainingPlanJson, TrainingPlan::class.java)
+            trainingPlan = Gson().fromJson(it.getString("trainingPlan"), TrainingPlan::class.java)
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (trainingPlan == null) navController.navigateUp()
 
-        trainingPlan?.let { loadToolbar(it.name) }
+        loadToolbar(trainingPlan!!.name)
 
-        recyclerView = view.findViewById(R.id.recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        viewModel.getPlanExercises(trainingPlan!!.id)
 
-        trainingPlan?.id?.let { planId ->
-            viewModel.getPlanExercises(planId)
-        }
-        viewModel.planExerciseData.observe(viewLifecycleOwner) {
-            if (it.data != null) {
-                val adapter = TrainingPlanExerciseAdapter(it.data)
+        val viewPager: ViewPager2 = view.findViewById(R.id.view_pager)
+        val tabLayout: TabLayout = view.findViewById(R.id.tab_layout)
+        viewModel.planExerciseData.observe(viewLifecycleOwner) { resource ->
+            val exercises = resource.data ?: return@observe
+            val uniqueDays = exercises.map { it.day }.distinct()
+
+            val fragments = uniqueDays.map { day ->
+                val dayExercises = exercises.filter { it.day == day }
+                val adapter = TrainingPlanExerciseAdapter(dayExercises)
                 adapter.setOnTrainingPlanDeleteListener { planExercise ->
                     showDeleteConfirmationDialog(planExercise)
                 }
-                recyclerView.adapter = adapter
+                TabRecyclerViewFragment(adapter)
             }
+
+            viewPager.adapter = object : FragmentStateAdapter(this) {
+                override fun getItemCount() = fragments.size
+                override fun createFragment(position: Int) = fragments[position]
+            }
+
+            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+                tab.text = uniqueDays[position].toString()
+            }.attach()
         }
 
         binding.createExercise.setOnClickListener {
@@ -62,7 +73,8 @@ class TrainerTrainingPlanExercisesOverviewFragment : BaseFragment<FragmentTraine
             }
             val dialogFragment = TrainerTrainingPlanExerciseCreateModal().apply {
                 arguments = bundle
-                setExerciseCreationListener(object : ExerciseCreationListener {
+                setExerciseCreationListener(object :
+                    TrainerTrainingPlanExerciseCreateModal.ExerciseCreationListener {
                     override fun onExerciseCreated() {
                         updateExerciseList()
                     }
@@ -70,15 +82,6 @@ class TrainerTrainingPlanExercisesOverviewFragment : BaseFragment<FragmentTraine
             }
             dialogFragment.show(childFragmentManager, "TrainerTrainingPlanExerciseCreateModal")
         }
-
-        binding.searchInput.editText?.addTextChangedListener { handleSearch(it.toString()) }
-    }
-
-    private fun handleSearch(search: String) {
-        val filtered = viewModel.planExerciseData.value?.data?.filter {
-            it.exercise.name.contains(search, true)
-        } ?: listOf()
-        recyclerView.adapter = TrainingPlanExerciseAdapter(filtered)
     }
 
     private fun updateExerciseList() {
@@ -102,3 +105,4 @@ class TrainerTrainingPlanExercisesOverviewFragment : BaseFragment<FragmentTraine
         alertDialogBuilder.create().show()
     }
 }
+
