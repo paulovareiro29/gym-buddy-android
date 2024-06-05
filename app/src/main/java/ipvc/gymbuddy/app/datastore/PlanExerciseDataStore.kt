@@ -31,6 +31,8 @@ class PlanExerciseDataStore(context: Context) : BaseDataStore(context) {
     private val _planExercises = MutableLiveData<AsyncData<List<PlanExercise>>>(AsyncData(listOf()))
     val planExercises: LiveData<AsyncData<List<PlanExercise>>> get() = _planExercises
     val post = MutableLiveData<AsyncData<CreatePlanExerciseRequest>>(AsyncData())
+    val delete = MutableLiveData<AsyncData<Unit>>(AsyncData())
+
     fun getPlanExercises(planId: String): LiveData<List<PlanExercise>> {
         _planExercises.postValue(AsyncData(_planExercises.value?.data ?: listOf(), AsyncData.Status.LOADING))
         coroutine.launch {
@@ -68,6 +70,23 @@ class PlanExerciseDataStore(context: Context) : BaseDataStore(context) {
 
             delay(2500)
             post.postValue(AsyncData(null, AsyncData.Status.IDLE))
+        }
+    }
+
+    fun deletePlanExercise(planId: String, exerciseId: String) {
+        delete.postValue(AsyncData(null, AsyncData.Status.LOADING))
+        coroutine.launch {
+            when (PlanExerciseService().deletePlanExercise(planId, exerciseId)) {
+                is RequestResult.Success -> {
+                    delete.postValue(AsyncData(null, AsyncData.Status.SUCCESS))
+                    getPlanExercises(planId)
+                }
+                is RequestResult.Error -> {
+                    delete.postValue(AsyncData(null, AsyncData.Status.ERROR))
+                }
+            }
+            delay(2500)
+            delete.postValue(AsyncData(null, AsyncData.Status.IDLE))
         }
     }
 }
