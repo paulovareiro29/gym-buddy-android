@@ -11,6 +11,7 @@ import com.google.android.material.textfield.TextInputLayout
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.DropdownAdapter
 import ipvc.gymbuddy.app.core.AsyncData
+import ipvc.gymbuddy.app.core.Validator
 import ipvc.gymbuddy.app.models.DropdownItem
 import ipvc.gymbuddy.app.viewmodels.trainer.planExercise.TrainerTrainingPlanExerciseCreateViewModel
 
@@ -80,10 +81,10 @@ class TrainerTrainingPlanExerciseCreateModal : Modal(R.layout.fragment_trainer_t
 
     private fun handleSubmit() {
         val planExercise = (exercise.adapter as DropdownAdapter).selected
-        val exerciseSets = Integer.parseInt(sets.editText!!.text.toString())
-        val exerciseReps = Integer.parseInt(repetitions.editText!!.text.toString())
-        val exerciseRest =Integer.parseInt(restBetweenSets.editText!!.text.toString())
-        val exerciseDay = Integer.parseInt(day.editText!!.text.toString())
+        val exerciseSets = sets.editText!!.text.toString()
+        val exerciseReps = repetitions.editText!!.text.toString()
+        val exerciseRest = restBetweenSets.editText!!.text.toString()
+        val exerciseDay = day.editText!!.text.toString()
 
         exercise.error = null
         sets.error = null
@@ -91,30 +92,28 @@ class TrainerTrainingPlanExerciseCreateModal : Modal(R.layout.fragment_trainer_t
         restBetweenSets.error = null
         day.error = null
 
-        if (planExercise == null) {
-            exercise.error = getString(R.string.field_is_required)
+        if (!Validator.validateRequiredField(exercise, requireContext())) {
             return
         }
 
-        if (exerciseReps == null) {
-            repetitions.error = getString(R.string.field_is_required)
+        if (!Validator.validateRequiredField(sets.editText!!, requireContext())) {
             return
         }
 
-        if (exerciseRest == null) {
-            restBetweenSets.error = getString(R.string.field_is_required)
+        if (!Validator.validateRequiredField(repetitions.editText!!, requireContext())) {
             return
         }
 
-        if (exerciseDay == null) {
-            day.error = getString(R.string.field_is_required)
+        if (!Validator.validateRequiredField(restBetweenSets.editText!!, requireContext())) {
             return
         }
 
+        if (!Validator.validateRequiredField(day.editText!!, requireContext())) {
+            return
+        }
 
-        viewModel.createPlanExercise(trainingPlanId!! , planExercise.id , exerciseSets, exerciseReps, exerciseRest, exerciseDay)
+        viewModel.createPlanExercise(trainingPlanId!!, planExercise!!.id, exerciseSets.toInt(), exerciseReps.toInt(), exerciseRest.toInt(), exerciseDay)
     }
-
     private fun loadExercises() {
         viewModel.getExercises()
 

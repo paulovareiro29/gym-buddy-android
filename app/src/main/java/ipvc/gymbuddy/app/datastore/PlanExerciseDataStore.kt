@@ -31,7 +31,7 @@ class PlanExerciseDataStore(context: Context) : BaseDataStore(context) {
     private val _planExercises = MutableLiveData<AsyncData<List<PlanExercise>>>(AsyncData(listOf()))
     val planExercises: LiveData<AsyncData<List<PlanExercise>>> get() = _planExercises
     val post = MutableLiveData<AsyncData<CreatePlanExerciseRequest>>(AsyncData())
-    var delete = MutableLiveData<AsyncData<Unit>>(AsyncData())
+    val delete = MutableLiveData<AsyncData<Unit>>(AsyncData())
 
     fun getPlanExercises(planId: String): LiveData<List<PlanExercise>> {
         _planExercises.postValue(AsyncData(_planExercises.value?.data ?: listOf(), AsyncData.Status.LOADING))
@@ -58,7 +58,7 @@ class PlanExerciseDataStore(context: Context) : BaseDataStore(context) {
     }
 
 
-    fun createPlanExercise(planId:String, exerciseId: String, repetitions: Int, sets: Int, restBetweenSets: Int, day: Int){
+    fun createPlanExercise(planId:String, exerciseId: String, repetitions: Int, sets: Int, restBetweenSets: Int, day: String){
         val entity = CreatePlanExerciseRequest(exerciseId, repetitions, sets, restBetweenSets, day)
 
         post.postValue(AsyncData(entity, AsyncData.Status.LOADING))
