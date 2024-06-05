@@ -1,25 +1,31 @@
 package ipvc.gymbuddy.app.adapters
 
+import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
 import ipvc.gymbuddy.api.models.PlanExercise
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.core.BaseRecyclerAdapter
 import ipvc.gymbuddy.app.core.BaseViewHolder
+import ipvc.gymbuddy.app.fragments.trainer.trainingPlans.exercises.TrainerTrainingPlanExerciseUpdateModal
 
-class TrainingPlanExerciseAdapter(dataset: List<PlanExercise>)
+class TrainingPlanExerciseAdapter(private val fragmentManager: FragmentManager, private val trainingPlanId: String, dataset: List<PlanExercise>)
     : BaseRecyclerAdapter<PlanExercise, TrainingPlanExerciseAdapter.ViewHolder>(dataset) {
 
     private var onPlanExerciseDeleteListener: ((PlanExercise) -> Unit)? = null
     class ViewHolder(view: View) : BaseViewHolder(view) {
+
         val exerciseName: TextView = view.findViewById(R.id.exercise_name)
         val machineName: TextView = view.findViewById(R.id.machine_name)
         val setsAndReps: TextView = view.findViewById(R.id.sets_and_reps)
         val exercisePhoto: ImageView = view.findViewById(R.id.exercise_image)
         val deleteButton: ImageButton = view.findViewById(R.id.delete_plan_exercise)
+        val editButton: ImageButton = view.findViewById(R.id.edit_plan_exercise)
     }
 
     override fun getItemLayout(): Int = R.layout.recycle_adapter_training_plan_exercise
@@ -43,6 +49,17 @@ class TrainingPlanExerciseAdapter(dataset: List<PlanExercise>)
             .placeholder(R.drawable.baseline_assignment_24)
             .into(holder.exercisePhoto)
 
+        holder.editButton.setOnClickListener {
+            val bundle = Bundle().apply {
+                putString("trainingPlanId", trainingPlanId)
+                putString("planExercise", Gson().toJson(item))
+                putString("title", context.getString(R.string.add_client_to, item.exercise.name))
+            }
+            val dialogFragment = TrainerTrainingPlanExerciseUpdateModal().apply {
+                arguments = bundle
+            }
+            dialogFragment.show(fragmentManager, "TrainerTrainingPlanExerciseCreateModal")
+        }
 
         holder.deleteButton.setOnClickListener {
             onPlanExerciseDeleteListener?.invoke(item)

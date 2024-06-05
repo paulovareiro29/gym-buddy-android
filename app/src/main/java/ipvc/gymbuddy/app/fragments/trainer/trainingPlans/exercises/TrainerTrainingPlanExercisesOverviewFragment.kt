@@ -50,7 +50,7 @@ class TrainerTrainingPlanExercisesOverviewFragment : BaseFragment<FragmentTraine
 
             val fragments = uniqueDays.map { day ->
                 val dayExercises = exercises.filter { it.day == day }
-                val adapter = TrainingPlanExerciseAdapter(dayExercises)
+                val adapter = TrainingPlanExerciseAdapter(childFragmentManager, trainingPlan!!.id, dayExercises)
                 adapter.setOnTrainingPlanDeleteListener { planExercise ->
                     showDeleteConfirmationDialog(planExercise)
                 }
