@@ -80,8 +80,11 @@
     <string name="address">"Address</string>
     <string name="sets">sets</string>
     <string name="reps">reps</string>
+    <string name="repetitions">Repetitions</string>
+    <string name="rest_between_sets">Rest between sets</string>
     <string name="day">Day</string>
     <string name="metrics_overview">Metrics Overview</string>
     <string name="submitted_by">Submitted by %s</string>
     <string name="unknown_type">Unknown Type</string>
+    <string name="exercise">Exercise</string>
 </resources>

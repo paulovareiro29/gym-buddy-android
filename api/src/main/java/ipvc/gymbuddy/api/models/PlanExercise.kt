@@ -7,5 +7,5 @@ data class PlanExercise(
     var repetitions : Int,
     var sets: Int,
     var rest_between_sets: Int,
-    var day: Int
+    var day: String
 )
