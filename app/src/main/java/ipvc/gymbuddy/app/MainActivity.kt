@@ -107,6 +107,9 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
                 R.id.sidebar_item_trainer_trainingplans_overview -> navController.navigate(R.id.trainer_trainingplans_overview_fragment)
                 R.id.sidebar_item_trainer_listclients_overview -> navController.navigate(R.id.trainer_listclients_overview_fragment)
 
+                //CLIENT
+                R.id.sidebar_client_metrics_overview_item -> navController.navigate(R.id.client_metrics_overview_fragment)
+
                 // COMMON ROUTES
                 R.id.sidebar_item_home -> {
                     bottomMenu.selectedItemId = R.id.home_bottom_navigation

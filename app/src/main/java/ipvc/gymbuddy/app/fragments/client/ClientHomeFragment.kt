@@ -28,6 +28,8 @@ class ClientHomeFragment : BaseFragment<FragmentClientHomeBinding>(
         binding.name.text = authViewModel.user.value?.name ?: "Anonymous"
 
         loadMetrics()
+
+        binding.myMetricsButton.setOnClickListener { navController.navigate(R.id.client_metrics_overview_fragment) }
     }
 
     private fun loadMetrics() {

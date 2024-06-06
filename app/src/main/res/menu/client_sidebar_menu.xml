@@ -9,7 +9,10 @@
     <item android:title="@string/client">
         <menu>
             <group>
-
+                <item
+                    android:id="@+id/sidebar_client_metrics_overview_item"
+                    android:icon="@drawable/baseline_assignment_24"
+                    android:title="@string/metrics" />
             </group>
         </menu>
     </item>
