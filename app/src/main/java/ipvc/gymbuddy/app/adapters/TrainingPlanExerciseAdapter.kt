@@ -5,7 +5,9 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import ipvc.gymbuddy.api.models.PlanExercise
@@ -63,6 +65,14 @@ class TrainingPlanExerciseAdapter(private val fragmentManager: FragmentManager, 
 
         holder.deleteButton.setOnClickListener {
             onPlanExerciseDeleteListener?.invoke(item)
+        }
+
+        holder.exerciseName.setOnClickListener {
+            val planExerciseJson = Gson().toJson(item)
+            holder.itemView.findNavController().navigate(
+                R.id.trainer_trainingplan_exercise_overview_fragment,
+                bundleOf("planExercise" to planExerciseJson)
+            )
         }
     }
 

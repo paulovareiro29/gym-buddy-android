@@ -69,4 +69,9 @@
         android:name="ipvc.gymbuddy.app.fragments.trainer.trainingPlans.exercises.TrainerTrainingPlanExercisesOverviewFragment"
         android:label="fragment_trainer_training_plan_exercises_overview"
         tools:layout="@layout/fragment_trainer_training_plan_exercises_overview" />
+    <fragment
+        android:id="@+id/trainer_trainingplan_exercise_overview_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.trainer.trainingPlans.exercises.TrainerTrainingPlanExerciseOverviewFragment"
+        android:label="fragment_trainer_training_plan_exercise_overview"
+        tools:layout="@layout/fragment_trainer_training_plan_exercise_overview" />
 </navigation>
