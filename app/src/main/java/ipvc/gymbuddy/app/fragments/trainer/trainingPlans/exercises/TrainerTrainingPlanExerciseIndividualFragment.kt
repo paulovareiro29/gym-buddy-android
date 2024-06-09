@@ -2,18 +2,19 @@ package ipvc.gymbuddy.app.fragments.trainer.trainingPlans.exercises
 
 import android.os.Bundle
 import android.view.View
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.gson.Gson
 import ipvc.gymbuddy.api.models.PlanExercise
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.CategoryAdapter
 import ipvc.gymbuddy.app.core.BaseFragment
-import ipvc.gymbuddy.app.databinding.FragmentTrainerTrainingPlanExerciseOverviewBinding
+import ipvc.gymbuddy.app.databinding.FragmentTrainerTrainingPlanExerciseIndividualBinding
 
-class TrainerTrainingPlanExerciseOverviewFragment : BaseFragment<FragmentTrainerTrainingPlanExerciseOverviewBinding>(
-    FragmentTrainerTrainingPlanExerciseOverviewBinding::inflate) {
+class TrainerTrainingPlanExerciseIndividualFragment : BaseFragment<FragmentTrainerTrainingPlanExerciseIndividualBinding>(
+    FragmentTrainerTrainingPlanExerciseIndividualBinding::inflate) {
 
     private lateinit var categoriesRecyclerView: RecyclerView
     private var planExercise: PlanExercise? = null
@@ -26,24 +27,24 @@ class TrainerTrainingPlanExerciseOverviewFragment : BaseFragment<FragmentTrainer
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (planExercise == null) navController.navigateUp()
+
+        if (planExercise == null) {
+            navController.navigateUp()
+            return
+        }
 
         loadToolbar(planExercise!!.plan.name)
 
         binding.exerciseName.text = planExercise!!.exercise.name
         binding.machineName.text = planExercise!!.exercise.machine.name
 
-        val repsText = getString(R.string.reps, planExercise!!.repetitions)
-        val setsText = getString(R.string.sets, planExercise!!.sets)
-        val restText = getString(R.string.rest, planExercise!!.rest_between_sets)
-
-        binding.reps.text = repsText
-        binding.sets.text = setsText
-        binding.rest.text = restText
+        binding.reps.text = getString(R.string.reps, planExercise!!.repetitions)
+        binding.sets.text = getString(R.string.sets, planExercise!!.sets)
+        binding.rest.text = getString(R.string.rest, planExercise!!.rest_between_sets)
 
         categoriesRecyclerView = view.findViewById(R.id.category_recycler)
-        categoriesRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        categoriesRecyclerView.adapter = CategoryAdapter(planExercise!!.exercise.categories)
+        categoriesRecyclerView.layoutManager = FlexboxLayoutManager(context, FlexDirection.ROW)
+        categoriesRecyclerView.adapter = CategoryAdapter(planExercise!!.exercise.categories, CategoryAdapter.Direction.ROW)
 
         context?.let {
             Glide.with(it)
