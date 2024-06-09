@@ -24,6 +24,7 @@ class TrainingPlanAdapter(dataset: List<TrainingPlan>): BaseRecyclerAdapter<Trai
         val deleteButton: ImageButton = view.findViewById(R.id.delete_plan)
         val addClientButton: ImageButton = view.findViewById(R.id.add_client)
         val clients: TextView = view.findViewById(R.id.linked_clients)
+        val viewPlan: ImageButton = view.findViewById(R.id.view_plan)
     }
 
     override fun getItemLayout(): Int = R.layout.recycle_adapter_training_plan
@@ -61,7 +62,7 @@ class TrainingPlanAdapter(dataset: List<TrainingPlan>): BaseRecyclerAdapter<Trai
             onTrainingPlanDeleteListener?.invoke(item)
         }
 
-        holder.name.setOnClickListener {
+        holder.viewPlan.setOnClickListener {
             val trainingPlanJson = Gson().toJson(item)
             holder.itemView.findNavController().navigate(
                 R.id.trainer_trainingplan_exercises_overview_fragment,
