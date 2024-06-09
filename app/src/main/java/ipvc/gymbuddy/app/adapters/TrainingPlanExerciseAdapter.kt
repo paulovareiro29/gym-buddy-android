@@ -28,6 +28,7 @@ class TrainingPlanExerciseAdapter(private val fragmentManager: FragmentManager, 
         val exercisePhoto: ImageView = view.findViewById(R.id.exercise_image)
         val deleteButton: ImageButton = view.findViewById(R.id.delete_plan_exercise)
         val editButton: ImageButton = view.findViewById(R.id.edit_plan_exercise)
+        val viewButton: ImageButton = view.findViewById(R.id.view_exercise)
     }
 
     override fun getItemLayout(): Int = R.layout.recycle_adapter_training_plan_exercise
@@ -67,7 +68,7 @@ class TrainingPlanExerciseAdapter(private val fragmentManager: FragmentManager, 
             onPlanExerciseDeleteListener?.invoke(item)
         }
 
-        holder.exerciseName.setOnClickListener {
+        holder.viewButton.setOnClickListener {
             val planExerciseJson = Gson().toJson(item)
             holder.itemView.findNavController().navigate(
                 R.id.trainer_trainingplan_exercise_overview_fragment,

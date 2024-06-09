@@ -80,4 +80,6 @@
     <string name="submitted_by">Criado por %s</string>
     <string name="unknown_type">Tipo Desconhecido</string>
     <string name="exercise">Exercício</string>
+    <string name="view_plan">Visualizar plano</string>
+    <string name="view_exercise">Visualizar exercício</string>
 </resources>

@@ -97,7 +97,7 @@
             android:layout_height="match_parent"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/baseline_arrow_forward_24"
-            android:contentDescription="@string/add_client_to"
+            android:contentDescription="@string/view_plan"
             app:tint="@color/primaryColor"/>
     </LinearLayout>
 
