@@ -15,8 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingHorizontal="24dp"
-        android:paddingTop="32dp"
         android:paddingBottom="8dp">
 
         <com.google.android.material.tabs.TabLayout
@@ -30,7 +28,8 @@
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:layout_marginHorizontal="24dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"

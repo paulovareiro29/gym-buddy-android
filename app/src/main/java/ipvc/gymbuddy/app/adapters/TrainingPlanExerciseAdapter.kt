@@ -38,9 +38,9 @@ class TrainingPlanExerciseAdapter(private val fragmentManager: FragmentManager, 
 
     override fun bindViewHolder(holder: ViewHolder, item: PlanExercise) {
         val context = holder.itemView.context
-        val setsText = context.getString(R.string.sets)
-        val repsText = context.getString(R.string.reps)
-        val setsAndRepsText = "${item.sets} $setsText - ${item.repetitions} $repsText"
+        val sets = context.getString(R.string.sets, item.sets)
+        val repetitions = context.getString(R.string.reps, item.repetitions)
+        val setsAndRepsText = "$sets - $repetitions"
 
         holder.exerciseName.text = item.exercise.name
         holder.machineName.text = item.exercise.machine.name
