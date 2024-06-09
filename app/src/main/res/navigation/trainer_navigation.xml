@@ -23,7 +23,11 @@
         android:id="@+id/trainer_profile_fragment"
         android:name="ipvc.gymbuddy.app.fragments.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_trainer_profile_fragment_to_trainer_edit_profile_fragment"
+            app:destination="@id/trainer_edit_profile_fragment" />
+    </fragment>
     <fragment
         android:id="@+id/trainer_settings_fragment"
         android:name="ipvc.gymbuddy.app.fragments.SettingsFragment"
@@ -40,6 +44,9 @@
         <action
             android:id="@+id/action_trainingPlansOverviewFragment_to_trainerTrainingPlanUpdateFragment"
             app:destination="@id/trainer_trainingplans_update_fragment" />
+        <action
+            android:id="@+id/action_trainer_trainingplans_overview_fragment_to_trainer_trainingplan_exercises_overview_fragment"
+            app:destination="@id/trainer_trainingplan_exercises_overview_fragment" />
     </fragment>
     <fragment
         android:id="@+id/trainer_trainingplans_create_fragment"
@@ -68,5 +75,14 @@
         android:id="@+id/trainer_trainingplan_exercises_overview_fragment"
         android:name="ipvc.gymbuddy.app.fragments.trainer.trainingPlans.exercises.TrainerTrainingPlanExercisesOverviewFragment"
         android:label="fragment_trainer_training_plan_exercises_overview"
-        tools:layout="@layout/fragment_trainer_training_plan_exercises_overview" />
+        tools:layout="@layout/fragment_trainer_training_plan_exercises_overview" >
+        <action
+            android:id="@+id/action_trainer_trainingplan_exercises_overview_fragment_to_trainer_trainingplan_exercise_overview_fragment"
+            app:destination="@id/trainer_trainingplan_exercise_overview_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/trainer_trainingplan_exercise_overview_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.trainer.trainingPlans.exercises.TrainerTrainingPlanExerciseIndividualFragment"
+        android:label="fragment_trainer_training_plan_exercise_overview"
+        tools:layout="@layout/fragment_trainer_training_plan_exercise_individual" />
 </navigation>

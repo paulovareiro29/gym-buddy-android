@@ -63,7 +63,7 @@ class TrainerTrainingPlanExercisesOverviewFragment : BaseFragment<FragmentTraine
             }
 
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-                tab.text = uniqueDays[position].toString()
+                tab.text = uniqueDays[position]
             }.attach()
         }
 
