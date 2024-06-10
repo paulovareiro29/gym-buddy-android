@@ -8,10 +8,8 @@ class ClientMetricOverViewModel(application: Application) : BaseViewModel(applic
     private val metricDataStore = MetricDataStore.getInstance(application)
     val metricsData = metricDataStore.metrics
 
-    fun getMetrics() {
-        metricDataStore.getMetrics()
-        metricsData.observeForever { data ->
-        }
+    fun getMetrics(userId : String) {
+        metricDataStore.getMetrics(userId)
     }
 
 }

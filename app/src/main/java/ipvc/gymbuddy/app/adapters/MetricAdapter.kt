@@ -26,8 +26,8 @@ class MetricAdapter(dataset: List<Metric>): BaseRecyclerAdapter<Metric, MetricAd
     override fun bindViewHolder(holder: ViewHolder, item: Metric) {
         holder.name.text = item.type?.name ?: holder.itemView.context.getString(R.string.unknown_type)
         holder.creator.text = holder.itemView.context.getString(R.string.submitted_by, item.creator.name)
-        holder.value.text = item.value.toString()
-        holder.date.text = DateUtils.formatDateFromIso8601(item.date)
+        holder.value.text = item.value
+        holder.date.text = DateUtils.formatDateFromIso8601(item.date.toString())
     }
 
 }

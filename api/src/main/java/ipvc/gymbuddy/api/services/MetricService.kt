@@ -9,9 +9,8 @@ import ipvc.gymbuddy.api.models.responses.metric.GetMetricResponse
 
 class MetricService : HttpClient<IMetricsService>(IMetricsService::class.java) {
 
-    suspend fun getMetrics(): RequestResult<GetAllMetricsResponse> {
-        val response = request(api.getMetrics())
-        return when (response) {
+    suspend fun getMetrics(userId : String): RequestResult<GetAllMetricsResponse> {
+        return when (val response = request(api.getMetrics(userId))) {
             is RequestResult.Success -> {
                 val parsedData = ResponseParser.payload<GetAllMetricsResponse>(response)
                 RequestResult.Success(response.code, response.message, parsedData)
