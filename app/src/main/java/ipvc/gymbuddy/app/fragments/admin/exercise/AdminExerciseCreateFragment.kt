@@ -1,7 +1,13 @@
 package ipvc.gymbuddy.app.fragments.admin.exercise
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
+import android.widget.ImageView
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,17 +19,24 @@ import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.core.Validator
 import ipvc.gymbuddy.app.databinding.FragmentAdminExerciseCreateBinding
 import ipvc.gymbuddy.app.models.DropdownItem
+import ipvc.gymbuddy.app.utils.ImageUtils
 import ipvc.gymbuddy.app.viewmodels.admin.exercise.AdminExerciseCreateViewModel
+import java.io.IOException
 
 class AdminExerciseCreateFragment : BaseFragment<FragmentAdminExerciseCreateBinding>(
     FragmentAdminExerciseCreateBinding::inflate
 ) {
     private lateinit var viewModel: AdminExerciseCreateViewModel
     private lateinit var categoriesRecyclerView: RecyclerView
+    private lateinit var gallery: ActivityResultLauncher<PickVisualMediaRequest>
+
+    private var selectedPhoto: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = getViewModel()
+
+        gallery = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { handleUploadPhoto(it) }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,6 +51,8 @@ class AdminExerciseCreateFragment : BaseFragment<FragmentAdminExerciseCreateBind
         categoriesRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         binding.submit.setOnClickListener { handleSubmit() }
+        binding.upload.setOnClickListener { launchPhotoGallery() }
+        binding.removePhoto.setOnClickListener { handleRemovePhoto() }
         binding.searchCategoryInput.editText?.addTextChangedListener { handleSearchCategory(it.toString()) }
         viewModel.postData.observe(viewLifecycleOwner) {
             when (it.status) {
@@ -63,6 +78,10 @@ class AdminExerciseCreateFragment : BaseFragment<FragmentAdminExerciseCreateBind
         }
     }
 
+    private fun launchPhotoGallery() {
+        gallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+    }
+
     private fun handleSubmit() {
         val name = binding.name.editText ?: return
         val machineDropdown = binding.machine
@@ -82,7 +101,29 @@ class AdminExerciseCreateFragment : BaseFragment<FragmentAdminExerciseCreateBind
             return
         }
 
-        viewModel.createExercise(name.text.toString(), "null", machine.id, categories.map { it.id })
+        viewModel.createExercise(name.text.toString(), selectedPhoto, machine.id, categories.map { it.id })
+    }
+
+    private fun handleUploadPhoto(uri: Uri?) {
+        val photoImageView = requireView().findViewById<ImageView>(R.id.photo)
+        val removeButton = requireView().findViewById<ImageButton>(R.id.remove_photo)
+
+        if (uri == null) return
+
+        try {
+            val bitmap = ImageUtils.convertUriToBitmap(requireActivity().contentResolver, uri)
+            photoImageView.setImageBitmap(bitmap)
+            photoImageView.visibility = View.VISIBLE
+            removeButton.visibility = View.VISIBLE
+
+            selectedPhoto = ImageUtils.convertBitmapToBase64(bitmap)
+        } catch (_: IOException) { }
+    }
+
+    private fun handleRemovePhoto() {
+        val photoImageView = requireView().findViewById<ImageView>(R.id.photo)
+        photoImageView.visibility = View.GONE
+        requireView().findViewById<ImageButton>(R.id.remove_photo).visibility = View.GONE
     }
 
     private fun handleSearchCategory(search: String) {
