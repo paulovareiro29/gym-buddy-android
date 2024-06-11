@@ -32,7 +32,7 @@ import ipvc.gymbuddy.database.entities.DBUserStatistic
     DBTrainingPlan::class,
     DBContract::class,
     DBPlanExercise::class
-], version = 3)
+], version = 4)
 abstract class LocalDatabase : RoomDatabase() {
     companion object {
         @Volatile

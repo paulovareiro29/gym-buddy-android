@@ -26,4 +26,13 @@ object ImageUtils {
         val byteArray: ByteArray = byteArrayOutputStream.toByteArray()
         return Base64.encodeToString(byteArray, Base64.DEFAULT)
     }
+
+    fun convertBase64ToBitmap(base64Str: String): Bitmap? {
+        val decodedBytes = Base64.decode(base64Str, Base64.DEFAULT)
+        return if (decodedBytes != null) {
+            BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
+        } else {
+            null
+        }
+    }
 }

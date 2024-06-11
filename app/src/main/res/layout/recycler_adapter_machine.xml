@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/adapter_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -40,5 +41,20 @@
             android:textColor="@color/textSecondary"
             android:text="@string/app_name"
             android:layout_marginTop="4dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="48dp"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <ImageButton
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/baseline_arrow_forward_24"
+            android:contentDescription="@string/view_plan"
+            app:tint="@color/primaryColor"/>
     </LinearLayout>
 </LinearLayout>
