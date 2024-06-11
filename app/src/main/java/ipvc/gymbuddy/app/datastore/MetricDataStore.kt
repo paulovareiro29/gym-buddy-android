@@ -49,6 +49,8 @@ class MetricDataStore(context: Context) : BaseDataStore(context) {
                 is RequestResult.Error -> {
                     metrics.postValue(AsyncData(metrics.value?.data ?: listOf(), AsyncData.Status.ERROR))
                 }
+
+                else -> {}
             }
         }
     }
@@ -63,6 +65,8 @@ class MetricDataStore(context: Context) : BaseDataStore(context) {
                 is RequestResult.Error -> {
                     metric.postValue(AsyncData(metric.value?.data, AsyncData.Status.ERROR))
                 }
+
+                else -> {}
             }
         }
     }
