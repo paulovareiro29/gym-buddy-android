@@ -30,27 +30,25 @@ class TrainerClientOverviewFragment : BaseFragment<FragmentTrainerClientOverview
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (contract == null) navController.navigateUp()
+        if (contract == null) {
+            navController.navigateUp()
+            return
+        }
 
         loadToolbar(contract!!.beneficiary.name)
         binding.clientName.text = contract!!.beneficiary.name
 
-        metricViewModel.getMetrics(contract!!.beneficiary.id)
-        planViewModel.getUserPlans(contract!!.beneficiary.id)
+        val userId = contract!!.beneficiary.id
 
-        metricViewModel.metricsData.observe(viewLifecycleOwner) { metrics ->
-            planViewModel.userPlans.observe(viewLifecycleOwner) { userPlans ->
-                val adapter = ViewPagerAdapter(this, userPlans, metrics)
-                binding.viewPager.adapter = adapter
+        val adapter = ViewPagerAdapter(this, userId)
+        binding.viewPager.adapter = adapter
 
-                TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-                    tab.text = when (position) {
-                        0 -> "User Plans"
-                        1 -> "Metrics"
-                        else -> null
-                    }
-                }.attach()
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            tab.text = when (position) {
+                0 -> "User Plans"
+                1 -> "Metrics"
+                else -> null
             }
-        }
+        }.attach()
     }
 }

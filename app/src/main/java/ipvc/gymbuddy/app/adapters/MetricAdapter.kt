@@ -14,7 +14,6 @@ class MetricAdapter(dataset: List<Metric>): BaseRecyclerAdapter<Metric, MetricAd
         val name: TextView = view.findViewById(R.id.name)
         val creator: TextView = view.findViewById(R.id.creator)
         val value: TextView = view.findViewById(R.id.value)
-        val date: TextView = view.findViewById(R.id.date)
     }
 
     override fun getItemLayout(): Int = R.layout.recycle_adapter_metrics
@@ -27,7 +26,6 @@ class MetricAdapter(dataset: List<Metric>): BaseRecyclerAdapter<Metric, MetricAd
         holder.name.text = item.type?.name ?: holder.itemView.context.getString(R.string.unknown_type)
         holder.creator.text = holder.itemView.context.getString(R.string.submitted_by, item.creator.name)
         holder.value.text = item.value
-        holder.date.text = DateUtils.formatDateFromIso8601(item.date.toString())
     }
 
 }
