@@ -6,6 +6,7 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.StyleSpan
 import android.view.View
+import android.widget.Button
 import android.widget.ImageButton
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
@@ -56,6 +57,18 @@ class TrainerClientMetricsFragment : BaseFragment<FragmentTrainerClientMetricsBi
         tabLayout = binding.tabLayout
         val prevButton: ImageButton = binding.prevButton
         val nextButton: ImageButton = binding.nextButton
+        val createMetrics: Button = binding.createMetric
+
+        createMetrics.setOnClickListener {
+            val bundle = Bundle().apply {
+                putString("clientId", userId)
+            }
+            val dialogFragment = TrainerClientMetricsCreateModal().apply {
+                arguments = bundle
+            }
+            dialogFragment.show(childFragmentManager, "TrainerTrainingPlanExerciseCreateModal")
+        }
+
 
         viewModel.metricsData.observe(viewLifecycleOwner) { resource ->
             val metrics = resource.data ?: return@observe
