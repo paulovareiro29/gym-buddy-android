@@ -1,9 +1,12 @@
 package ipvc.gymbuddy.api.models
 
+import java.util.Date
+
 data class Metric (
     val id: String,
+    val user: SimplifiedUser,
     val type: MetricType?,
     val creator: SimplifiedUser,
-    val value: Double,
-    val date: String,
+    val value: String,
+    val date: Date
 )
