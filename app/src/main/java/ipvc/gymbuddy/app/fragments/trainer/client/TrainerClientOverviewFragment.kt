@@ -5,6 +5,7 @@ import android.view.View
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
 import ipvc.gymbuddy.api.models.Contract
+import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.ViewPagerAdapter
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentTrainerClientOverviewBinding
@@ -45,8 +46,8 @@ class TrainerClientOverviewFragment : BaseFragment<FragmentTrainerClientOverview
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = when (position) {
-                0 -> "User Plans"
-                1 -> "Metrics"
+                0 -> getString(R.string.user_plan)
+                1 -> getString(R.string.metrics)
                 else -> null
             }
         }.attach()
