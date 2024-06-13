@@ -12,20 +12,17 @@ import ipvc.gymbuddy.app.adapters.TrainingPlanAdapter
 import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentTrainerTrainingPlansOverviewBinding
-import ipvc.gymbuddy.app.viewmodels.trainer.trainingPlan.TrainerTrainingPlanDeleteViewModel
 import ipvc.gymbuddy.app.viewmodels.trainer.trainingPlan.TrainerTrainingPlanOverviewViewModel
 
 class TrainerTrainingPlansOverviewFragment : BaseFragment<FragmentTrainerTrainingPlansOverviewBinding>(
     FragmentTrainerTrainingPlansOverviewBinding::inflate) {
 
     private lateinit var viewModel: TrainerTrainingPlanOverviewViewModel
-    private lateinit var deleteViewModel: TrainerTrainingPlanDeleteViewModel
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = getViewModel()
-        deleteViewModel = getViewModel()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -68,7 +65,7 @@ class TrainerTrainingPlansOverviewFragment : BaseFragment<FragmentTrainerTrainin
             setTitle(getString(R.string.confirm_delete))
             setMessage(getString(R.string.delete_message, trainingPlan.name))
             setPositiveButton(getString(R.string.delete) ) { _, _ ->
-                deleteViewModel.deleteTrainingPlan(trainingPlan.id)
+                viewModel.deleteTrainingPlan(trainingPlan.id)
             }
             setNegativeButton(getString(R.string.cancel) ) { dialog, _ ->
                 dialog.dismiss()

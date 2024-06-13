@@ -16,7 +16,6 @@ import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentTrainerClientMetricsBinding
 import ipvc.gymbuddy.app.fragments.ui.TabRecyclerViewFragment
 import ipvc.gymbuddy.app.viewmodels.client.TrainerClientMetricOverviewViewModel
-import ipvc.gymbuddy.app.viewmodels.trainer.metrics.TrainerClientMetricDeleteViewModel
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -25,7 +24,6 @@ class TrainerClientMetricsFragment : BaseFragment<FragmentTrainerClientMetricsBi
     FragmentTrainerClientMetricsBinding::inflate), TrainerClientMetricsCreateModal.MetricCreationListener {
 
     private lateinit var viewModel: TrainerClientMetricOverviewViewModel
-    private lateinit var deleteViewModel: TrainerClientMetricDeleteViewModel
     private var currentTabIndex: Int = 0
     private lateinit var visibleDays: List<Date>
     private lateinit var tabLayout: TabLayout
@@ -45,7 +43,6 @@ class TrainerClientMetricsFragment : BaseFragment<FragmentTrainerClientMetricsBi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = getViewModel()
-        deleteViewModel = getViewModel()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -119,7 +116,7 @@ class TrainerClientMetricsFragment : BaseFragment<FragmentTrainerClientMetricsBi
             setTitle(getString(R.string.confirm_delete))
             setMessage(getString(R.string.delete_message, metric.type!!.name))
             setPositiveButton(getString(R.string.delete)) { _, _ ->
-                deleteViewModel.deleteMetric(metric.id)
+                viewModel.deleteMetric(metric.id)
                 val userId = arguments?.getString(ARG_USER_ID)
                 userId?.let {
                     viewModel.getMetrics(it)
