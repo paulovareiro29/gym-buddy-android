@@ -1,4 +1,4 @@
-package ipvc.gymbuddy.app.viewmodels.trainer.client.metrics
+package ipvc.gymbuddy.app.viewmodels.trainer.metrics
 
 import android.app.Application
 import ipvc.gymbuddy.app.datastore.MetricDataStore

@@ -9,12 +9,12 @@ import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentClientMetricsBinding
 import ipvc.gymbuddy.app.viewmodels.AuthenticationViewModel
-import ipvc.gymbuddy.app.viewmodels.client.ClientMetricOverViewModel
+import ipvc.gymbuddy.app.viewmodels.client.TrainerClientMetricOverviewViewModel
 
 class ClientMetricsOverviewFragment : BaseFragment<FragmentClientMetricsBinding>(
     FragmentClientMetricsBinding::inflate
 ) {
-    private lateinit var viewModel: ClientMetricOverViewModel
+    private lateinit var viewModel: TrainerClientMetricOverviewViewModel
     private lateinit var authViewModel: AuthenticationViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -15,8 +15,8 @@ import ipvc.gymbuddy.app.adapters.MetricAdapter
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentTrainerClientMetricsBinding
 import ipvc.gymbuddy.app.fragments.ui.TabRecyclerViewFragment
-import ipvc.gymbuddy.app.viewmodels.client.ClientMetricOverViewModel
-import ipvc.gymbuddy.app.viewmodels.trainer.client.metrics.TrainerClientMetricDeleteViewModel
+import ipvc.gymbuddy.app.viewmodels.client.TrainerClientMetricOverviewViewModel
+import ipvc.gymbuddy.app.viewmodels.trainer.metrics.TrainerClientMetricDeleteViewModel
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -24,7 +24,7 @@ import java.util.Locale
 class TrainerClientMetricsFragment : BaseFragment<FragmentTrainerClientMetricsBinding>(
     FragmentTrainerClientMetricsBinding::inflate), TrainerClientMetricsCreateModal.MetricCreationListener {
 
-    private lateinit var viewModel: ClientMetricOverViewModel
+    private lateinit var viewModel: TrainerClientMetricOverviewViewModel
     private lateinit var deleteViewModel: TrainerClientMetricDeleteViewModel
     private var currentTabIndex: Int = 0
     private lateinit var visibleDays: List<Date>

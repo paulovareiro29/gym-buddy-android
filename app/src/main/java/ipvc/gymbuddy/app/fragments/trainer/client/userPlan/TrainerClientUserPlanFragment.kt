@@ -1,7 +1,6 @@
 package ipvc.gymbuddy.app.fragments.trainer.client.userPlan
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -9,13 +8,13 @@ import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.UserPlanAdapter
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentTrainerClientUserPlanBinding
-import ipvc.gymbuddy.app.viewmodels.client.ClientPlanViewModel
+import ipvc.gymbuddy.app.viewmodels.client.TrainerClientPlanViewModel
 
 class TrainerClientUserPlanFragment : BaseFragment<FragmentTrainerClientUserPlanBinding>(
     FragmentTrainerClientUserPlanBinding::inflate
 ) {
 
-    private lateinit var viewModel: ClientPlanViewModel
+    private lateinit var viewModel: TrainerClientPlanViewModel
     private lateinit var recyclerView: RecyclerView
 
     companion object {
