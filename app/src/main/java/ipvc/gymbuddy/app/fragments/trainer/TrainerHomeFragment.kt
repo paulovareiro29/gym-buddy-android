@@ -6,6 +6,7 @@ import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentTrainerHomeBinding
+import ipvc.gymbuddy.app.utils.ImageUtils
 import ipvc.gymbuddy.app.viewmodels.AuthenticationViewModel
 import ipvc.gymbuddy.app.viewmodels.trainer.TrainerHomeViewModel
 
@@ -25,12 +26,19 @@ class TrainerHomeFragment : BaseFragment<FragmentTrainerHomeBinding>(
         super.onViewCreated(view, savedInstanceState)
         loadToolbar(getString(R.string.home), true)
 
-        binding.name.text = authViewModel.user.value!!.name
-
         loadMetrics()
 
         binding.trainingPlans.setOnClickListener { navController.navigate(R.id.trainer_trainingplans_overview_fragment) }
         binding.listClients.setOnClickListener { navController.navigate(R.id.trainer_listclients_overview_fragment) }
+        authViewModel.user.observe(viewLifecycleOwner) {
+            if (it == null) return@observe
+            binding.name.text = it.name
+
+            if (it.avatar != null) {
+                val bitmap = ImageUtils.convertBase64ToBitmap(it.avatar!!)
+                if (bitmap != null) binding.avatar.setImageBitmap(bitmap)
+            }
+        }
     }
 
     private fun loadMetrics() {

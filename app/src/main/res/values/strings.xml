@@ -94,4 +94,5 @@
     <string name="date">Date</string>
     <string name="value">Value</string>
     <string name="metric_type">Metric Type</string>
+    <string name="upload_photo">Upload Photo</string>
 </resources>

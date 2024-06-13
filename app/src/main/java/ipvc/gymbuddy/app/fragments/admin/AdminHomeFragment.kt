@@ -5,6 +5,7 @@ import android.view.View
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentAdminHomeBinding
+import ipvc.gymbuddy.app.utils.ImageUtils
 import ipvc.gymbuddy.app.viewmodels.AuthenticationViewModel
 
 class AdminHomeFragment : BaseFragment<FragmentAdminHomeBinding>(
@@ -20,8 +21,16 @@ class AdminHomeFragment : BaseFragment<FragmentAdminHomeBinding>(
         super.onViewCreated(view, savedInstanceState)
         loadToolbar(getString(R.string.home), true)
 
-        binding.name.text = viewModel.user.value!!.name
         binding.generateUser.setOnClickListener { handleGenerateNewUserClick() }
+        viewModel.user.observe(viewLifecycleOwner) {
+            if (it == null) return@observe
+            binding.name.text = it.name
+
+            if (it.avatar != null) {
+                val bitmap = ImageUtils.convertBase64ToBitmap(it.avatar!!)
+                if (bitmap != null) binding.avatar.setImageBitmap(bitmap)
+            }
+        }
     }
 
     private fun handleGenerateNewUserClick() {

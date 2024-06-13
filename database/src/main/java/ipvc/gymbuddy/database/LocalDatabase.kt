@@ -43,7 +43,7 @@ import ipvc.gymbuddy.database.entities.DBUserStatistic
     DBMetrics::class,
     DBMetricTypes::class,
     DBUserPlan::class
-], version = 5)
+], version = 6)
 @TypeConverters(DateConverter::class)
 abstract class LocalDatabase : RoomDatabase() {
     companion object {

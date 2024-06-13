@@ -87,7 +87,6 @@ class TrainerClientMetricsCreateModal : Modal(R.layout.fragment_trainer_client_m
         val metricValue = value.editText!!.text.toString()
         val metricDate = parseDate(dateButton.text.toString())
 
-
         metricType.error = null
         value.error = null
         dateButton.error = null
@@ -100,11 +99,11 @@ class TrainerClientMetricsCreateModal : Modal(R.layout.fragment_trainer_client_m
             return
         }
 
-        if (dateButton == null) {
+        if (metricDate == null) {
             dateButton.error = getString(R.string.field_is_required)
             return
         }
-        viewModel.createMetric(clientId!!, metricCategory!!.id, metricValue, metricDate!!)
+        viewModel.createMetric(clientId!!, metricCategory!!.id, metricValue, metricDate)
     }
 
     private fun loadMetricTypes() {

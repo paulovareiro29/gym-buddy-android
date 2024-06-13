@@ -86,4 +86,5 @@
     <string name="date">Data</string>
     <string name="value">Valor</string>
     <string name="metric_type">Tipo de Métrica</string>
+    <string name="upload_photo">Submeter foto</string>
 </resources>

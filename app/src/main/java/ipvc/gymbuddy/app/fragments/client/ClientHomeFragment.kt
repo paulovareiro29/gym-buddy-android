@@ -6,6 +6,7 @@ import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentClientHomeBinding
+import ipvc.gymbuddy.app.utils.ImageUtils
 import ipvc.gymbuddy.app.viewmodels.AuthenticationViewModel
 import ipvc.gymbuddy.app.viewmodels.client.TrainerClientHomeViewModel
 
@@ -25,11 +26,18 @@ class ClientHomeFragment : BaseFragment<FragmentClientHomeBinding>(
         super.onViewCreated(view, savedInstanceState)
         loadToolbar(getString(R.string.home), true)
 
-        binding.name.text = authViewModel.user.value?.name ?: "Anonymous"
-
         loadMetrics()
 
         binding.myMetricsButton.setOnClickListener { navController.navigate(R.id.client_metrics_overview_fragment) }
+        authViewModel.user.observe(viewLifecycleOwner) {
+            if (it == null) return@observe
+            binding.name.text = it.name
+
+            if (it.avatar != null) {
+                val bitmap = ImageUtils.convertBase64ToBitmap(it.avatar!!)
+                if (bitmap != null) binding.avatar.setImageBitmap(bitmap)
+            }
+        }
     }
 
     private fun loadMetrics() {

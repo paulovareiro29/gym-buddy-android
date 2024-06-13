@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
 data class DBExercise(
     @PrimaryKey val id: String,
     @ColumnInfo(name = "name") val name: String,
-    @ColumnInfo(name = "photo") val photo: String,
+    @ColumnInfo(name = "photo") val photo: String?,
     @ColumnInfo(name = "machine") val machine: String,
     @ColumnInfo(name = "categories") val categories: String,
 )
