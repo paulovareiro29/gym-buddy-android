@@ -66,7 +66,8 @@
                 style="@style/Theme.Button.Secondary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/upload_photo" />
+                android:text="@string/upload_photo"
+                app:icon="@drawable/baseline_upload_24" />
 
             <ImageButton
                 android:id="@+id/remove_photo"
@@ -76,7 +77,8 @@
                 android:contentDescription="@string/delete"
                 app:tint="@color/white"
                 app:backgroundTint="@color/error"
-                android:visibility="gone" />
+                android:visibility="gone"
+                tools:visibility="visible"/>
         </LinearLayout>
 
         <TextView

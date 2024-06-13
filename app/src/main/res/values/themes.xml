@@ -78,7 +78,9 @@
         <item name="backgroundTint">@color/primaryColor</item>
     </style>
 
-    <style name="Theme.Button.Secondary" parent="Theme.GymBuddy.Button.Outlined" />
+    <style name="Theme.Button.Secondary" parent="Theme.GymBuddy.Button.Outlined">
+        <item name="backgroundTint">@color/white</item>
+    </style>
 
     <style name="Theme.Button.Accent" parent="Theme.GymBuddy.Button">
         <item name="android:textColor">@color/white</item>
