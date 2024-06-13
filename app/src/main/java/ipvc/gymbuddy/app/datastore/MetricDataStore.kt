@@ -35,6 +35,7 @@ class MetricDataStore(context: Context) : BaseDataStore(context) {
     var metric = MutableLiveData<AsyncData<Metric>>(AsyncData())
     var post = MutableLiveData<AsyncData<CreateMetricRequest>>(AsyncData())
     var update = MutableLiveData<AsyncData<UpdateMetricRequest>>(AsyncData())
+    var delete = MutableLiveData<AsyncData<Unit>>(AsyncData())
 
     fun getMetrics(userId : String) {
         metrics.postValue(AsyncData(metrics.value?.data ?: listOf(), AsyncData.Status.LOADING))
@@ -104,6 +105,22 @@ class MetricDataStore(context: Context) : BaseDataStore(context) {
             }
             delay(2500)
             update.postValue(AsyncData(null, AsyncData.Status.IDLE))
+        }
+    }
+
+    fun deleteMetric(id: String) {
+        delete.postValue(AsyncData(null, AsyncData.Status.LOADING))
+        coroutine.launch {
+            when (MetricService().deleteMetric(id)) {
+                is RequestResult.Success -> {
+                    delete.postValue(AsyncData(null, AsyncData.Status.SUCCESS))
+                }
+                is RequestResult.Error -> {
+                    delete.postValue(AsyncData(null, AsyncData.Status.ERROR))
+                }
+            }
+            delay(2500)
+            delete.postValue(AsyncData(null, AsyncData.Status.IDLE))
         }
     }
 }

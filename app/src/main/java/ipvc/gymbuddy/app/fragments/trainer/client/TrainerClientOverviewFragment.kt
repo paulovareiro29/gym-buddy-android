@@ -9,15 +9,15 @@ import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.ViewPagerAdapter
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentTrainerClientOverviewBinding
-import ipvc.gymbuddy.app.viewmodels.client.ClientMetricOverViewModel
-import ipvc.gymbuddy.app.viewmodels.client.ClientPlanViewModel
+import ipvc.gymbuddy.app.viewmodels.client.TrainerClientMetricOverviewViewModel
+import ipvc.gymbuddy.app.viewmodels.client.TrainerClientPlanViewModel
 
 class TrainerClientOverviewFragment : BaseFragment<FragmentTrainerClientOverviewBinding>(
     FragmentTrainerClientOverviewBinding::inflate
 ) {
 
-    private lateinit var metricViewModel: ClientMetricOverViewModel
-    private lateinit var planViewModel: ClientPlanViewModel
+    private lateinit var metricViewModel: TrainerClientMetricOverviewViewModel
+    private lateinit var planViewModel: TrainerClientPlanViewModel
     private var contract: Contract? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -15,6 +15,8 @@ import ipvc.gymbuddy.app.fragments.trainer.client.metrics.TrainerClientMetricsUp
 
 class MetricAdapter(private val fragmentManager: FragmentManager, private var metrics: List<Metric>) : RecyclerView.Adapter<MetricAdapter.ViewHolder>() {
 
+    private var onMetricDeleteListener: ((Metric) -> Unit)? = null
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.name)
         val creator: TextView = itemView.findViewById(R.id.creator)
@@ -43,6 +45,10 @@ class MetricAdapter(private val fragmentManager: FragmentManager, private var me
             }
             dialogFragment.show(fragmentManager, "TrainerClientMetricUpdateModal")
         }
+
+        holder.deleteButton.setOnClickListener {
+            onMetricDeleteListener?.invoke(item)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -52,5 +58,9 @@ class MetricAdapter(private val fragmentManager: FragmentManager, private var me
     fun updateDataset(newMetrics: List<Metric>) {
         metrics = newMetrics
         notifyDataSetChanged()
+    }
+
+    fun setOnMetricDeleteListener(listener: (Metric) -> Unit) {
+        onMetricDeleteListener = listener
     }
 }

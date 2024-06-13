@@ -15,7 +15,7 @@ import ipvc.gymbuddy.app.adapters.DropdownAdapter
 import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.core.Validator
 import ipvc.gymbuddy.app.models.DropdownItem
-import ipvc.gymbuddy.app.viewmodels.trainer.client.metrics.TrainerClientMetricUpdateViewModel
+import ipvc.gymbuddy.app.viewmodels.trainer.metrics.TrainerClientMetricUpdateViewModel
 
 class TrainerClientMetricsUpdateModal : Modal(R.layout.fragment_trainer_client_metrics_update_modal) {
 
