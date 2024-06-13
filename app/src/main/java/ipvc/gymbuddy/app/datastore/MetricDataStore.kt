@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import ipvc.gymbuddy.api.core.RequestResult
 import ipvc.gymbuddy.api.models.Metric
 import ipvc.gymbuddy.api.models.requests.metric.CreateMetricRequest
+import ipvc.gymbuddy.api.models.requests.metric.UpdateMetricRequest
 import ipvc.gymbuddy.api.services.MetricService
 import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.extensions.toAPIModel
@@ -33,6 +34,7 @@ class MetricDataStore(context: Context) : BaseDataStore(context) {
     var metrics = MutableLiveData<AsyncData<List<Metric>>>(AsyncData(listOf()))
     var metric = MutableLiveData<AsyncData<Metric>>(AsyncData())
     var post = MutableLiveData<AsyncData<CreateMetricRequest>>(AsyncData())
+    var update = MutableLiveData<AsyncData<UpdateMetricRequest>>(AsyncData())
 
     fun getMetrics(userId : String) {
         metrics.postValue(AsyncData(metrics.value?.data ?: listOf(), AsyncData.Status.LOADING))
@@ -89,6 +91,19 @@ class MetricDataStore(context: Context) : BaseDataStore(context) {
 
             delay(2500)
             post.postValue(AsyncData(null, AsyncData.Status.IDLE))
+        }
+    }
+
+    fun updateMetric(id: String, typeId: String, value: String) {
+        val entity = UpdateMetricRequest(typeId, value)
+        update.postValue(AsyncData(entity, AsyncData.Status.LOADING))
+        coroutine.launch {
+            when(MetricService().updateMetric(id, entity)) {
+                is RequestResult.Success -> update.postValue(AsyncData(null, AsyncData.Status.SUCCESS))
+                is RequestResult.Error -> update.postValue(AsyncData(null, AsyncData.Status.ERROR))
+            }
+            delay(2500)
+            update.postValue(AsyncData(null, AsyncData.Status.IDLE))
         }
     }
 }
