@@ -1,7 +1,11 @@
 package ipvc.gymbuddy.app.adapters
 
 import android.view.View
+import android.widget.ImageButton
 import android.widget.TextView
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
+import com.google.gson.Gson
 import ipvc.gymbuddy.api.models.Machine
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.core.BaseRecyclerAdapter
@@ -12,6 +16,7 @@ class MachineAdapter(dataset: List<Machine>) : BaseRecyclerAdapter<Machine, Mach
     class ViewHolder(view: View) : BaseViewHolder(view) {
         val name: TextView = view.findViewById(R.id.name)
         val categories: TextView = view.findViewById(R.id.categories)
+        val view: ImageButton = view.findViewById(R.id.view)
     }
 
     override fun getItemLayout(): Int = R.layout.recycler_adapter_machine
@@ -23,5 +28,13 @@ class MachineAdapter(dataset: List<Machine>) : BaseRecyclerAdapter<Machine, Mach
     override fun bindViewHolder(holder: ViewHolder, item: Machine) {
         holder.name.text = item.name
         holder.categories.text = item.categories.joinToString(", ") { it.name }
+        holder.view.setOnClickListener {handleViewExercise(holder, item) }
+    }
+
+    private fun handleViewExercise(holder: ViewHolder, item: Machine) {
+        holder.itemView.findNavController().navigate(
+            R.id.admin_machine_individual_fragment,
+            bundleOf("data" to Gson().toJson(item))
+        )
     }
 }
