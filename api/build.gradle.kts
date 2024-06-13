@@ -16,7 +16,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
-        buildConfigField("String", "API_URL", "\"http://192.168.1.5:3000\"")
+        buildConfigField("String", "API_URL", "\"http://192.168.1.8:3000\"")
     }
 
     buildTypes {
