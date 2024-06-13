@@ -30,7 +30,7 @@ class TrainerClientMetricsCreateModal : Modal(R.layout.fragment_trainer_client_m
     private lateinit var viewModel: TrainerClientMetricCreateViewModel
     private var clientId: String? = null
 
-    private lateinit var metricCreationListener: MetricCreationListener
+    private var metricCreationListener: MetricCreationListener? = null
 
     private lateinit var title: TextView
     private lateinit var metricType: AutoCompleteTextView
@@ -71,7 +71,7 @@ class TrainerClientMetricsCreateModal : Modal(R.layout.fragment_trainer_client_m
                 AsyncData.Status.SUCCESS -> {
                     resetView()
                     showMessage(getString(R.string.created_successfully), R.color.secondaryDarkColor)
-                    //metricCreationListener.onMetricCreated()
+                    metricCreationListener?.onMetricCreated()
                 }
                 AsyncData.Status.ERROR -> {
                     showMessage(getString(R.string.something_went_wrong), R.color.error)
@@ -165,9 +165,9 @@ class TrainerClientMetricsCreateModal : Modal(R.layout.fragment_trainer_client_m
         messageTextView.visibility = View.VISIBLE
     }
 
-    /*fun setMetricCreationListener(listener: MetricCreationListener) {
+    fun setMetricCreationListener(listener: MetricCreationListener) {
         this.metricCreationListener = listener
-    }*/
+    }
 
     companion object {
         private const val DATE_PICKER_TAG = "DATE_PICKER"

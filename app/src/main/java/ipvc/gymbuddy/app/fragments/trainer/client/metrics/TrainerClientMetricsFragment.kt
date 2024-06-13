@@ -18,7 +18,7 @@ import java.util.Date
 import java.util.Locale
 
 class TrainerClientMetricsFragment : BaseFragment<FragmentTrainerClientMetricsBinding>(
-    FragmentTrainerClientMetricsBinding::inflate) {
+    FragmentTrainerClientMetricsBinding::inflate), TrainerClientMetricsCreateModal.MetricCreationListener {
 
     private lateinit var viewModel: ClientMetricOverViewModel
     private var currentTabIndex: Int = 0
@@ -49,10 +49,11 @@ class TrainerClientMetricsFragment : BaseFragment<FragmentTrainerClientMetricsBi
         viewModel.getMetrics(userId)
 
         val viewPager: ViewPager2 = binding.viewPager
-        tabLayout = binding.tabLayout
         val prevButton: ImageButton = binding.prevButton
         val nextButton: ImageButton = binding.nextButton
         val createMetrics: Button = binding.createMetric
+
+        tabLayout = binding.tabLayout
 
         createMetrics.setOnClickListener {
             val bundle = Bundle().apply {
@@ -61,6 +62,7 @@ class TrainerClientMetricsFragment : BaseFragment<FragmentTrainerClientMetricsBi
             val dialogFragment = TrainerClientMetricsCreateModal().apply {
                 arguments = bundle
             }
+            dialogFragment.setMetricCreationListener(this@TrainerClientMetricsFragment)
             dialogFragment.show(childFragmentManager, "TrainerTrainingPlanExerciseCreateModal")
         }
 
@@ -95,5 +97,10 @@ class TrainerClientMetricsFragment : BaseFragment<FragmentTrainerClientMetricsBi
                 }
             }
         }
+    }
+
+    override fun onMetricCreated() {
+        val userId = arguments?.getString(ARG_USER_ID) ?: return
+        viewModel.getMetrics(userId)
     }
 }
