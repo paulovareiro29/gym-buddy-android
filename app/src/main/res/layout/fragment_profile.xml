@@ -25,14 +25,37 @@
             android:orientation="vertical"
             android:gravity="center_vertical|center_horizontal">
 
-            <ImageButton
-                android:id="@+id/avatar_image_button"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:scaleType="centerCrop"
-                android:background="@drawable/circle"
-                android:src="@drawable/gym_buddy_logo"
-                android:contentDescription="@string/avatar" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:clipToPadding="false">
+
+                <ImageButton
+                    android:id="@+id/avatar_image_button"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/circle"
+                    android:contentDescription="@string/avatar"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/gym_buddy_logo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/upload_avatar_button"
+                    style="?attr/materialIconButtonFilledStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="-15dp"
+                    android:layout_marginBottom="-15dp"
+                    app:icon="@drawable/baseline_upload_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/avatar_image_button"
+                    app:layout_constraintEnd_toEndOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <TextView
                 android:id="@+id/name"
