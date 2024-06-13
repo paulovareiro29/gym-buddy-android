@@ -4,7 +4,7 @@ import android.app.Application
 import ipvc.gymbuddy.app.datastore.UserPlanDataStore
 import ipvc.gymbuddy.app.viewmodels.BaseViewModel
 
-class ClientPlanViewModel(application: Application) : BaseViewModel(application) {
+class TrainerClientPlanViewModel(application: Application) : BaseViewModel(application) {
     private val userPlanDataStore = UserPlanDataStore.getInstance(application)
     val userPlans = userPlanDataStore.userPlans
 

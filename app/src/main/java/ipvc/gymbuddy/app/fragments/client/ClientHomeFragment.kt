@@ -8,13 +8,13 @@ import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentClientHomeBinding
 import ipvc.gymbuddy.app.utils.ImageUtils
 import ipvc.gymbuddy.app.viewmodels.AuthenticationViewModel
-import ipvc.gymbuddy.app.viewmodels.client.ClientHomeViewModel
+import ipvc.gymbuddy.app.viewmodels.client.TrainerClientHomeViewModel
 
 class ClientHomeFragment : BaseFragment<FragmentClientHomeBinding>(
     FragmentClientHomeBinding::inflate
 ) {
     private lateinit var authViewModel: AuthenticationViewModel
-    private lateinit var viewModel: ClientHomeViewModel
+    private lateinit var viewModel: TrainerClientHomeViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

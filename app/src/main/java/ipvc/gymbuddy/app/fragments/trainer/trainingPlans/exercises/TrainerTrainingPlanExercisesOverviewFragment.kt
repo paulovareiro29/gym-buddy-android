@@ -15,20 +15,17 @@ import ipvc.gymbuddy.app.adapters.TrainingPlanExerciseAdapter
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentTrainerTrainingPlanExercisesOverviewBinding
 import ipvc.gymbuddy.app.fragments.ui.TabRecyclerViewFragment
-import ipvc.gymbuddy.app.viewmodels.trainer.planExercise.TrainerTrainingPlanExerciseDeleteViewModel
 import ipvc.gymbuddy.app.viewmodels.trainer.planExercise.TrainerTrainingPlanExerciseOverviewModel
 
 class TrainerTrainingPlanExercisesOverviewFragment : BaseFragment<FragmentTrainerTrainingPlanExercisesOverviewBinding>(
     FragmentTrainerTrainingPlanExercisesOverviewBinding::inflate) {
 
     private lateinit var viewModel: TrainerTrainingPlanExerciseOverviewModel
-    private lateinit var deleteViewModel: TrainerTrainingPlanExerciseDeleteViewModel
     private var trainingPlan: TrainingPlan? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = getViewModel()
-        deleteViewModel = getViewModel()
         arguments?.let {
             trainingPlan = Gson().fromJson(it.getString("trainingPlan"), TrainingPlan::class.java)
         }
@@ -96,7 +93,7 @@ class TrainerTrainingPlanExercisesOverviewFragment : BaseFragment<FragmentTraine
             setTitle(getString(R.string.confirm_delete))
             setMessage(getString(R.string.delete_message, planExercise.exercise.name))
             setPositiveButton(getString(R.string.delete) ) { _, _ ->
-                deleteViewModel.deletePlanExercise(trainingPlan!!.id, planExercise.id)
+                viewModel.deletePlanExercise(trainingPlan!!.id, planExercise.id)
             }
             setNegativeButton(getString(R.string.cancel) ) { dialog, _ ->
                 dialog.dismiss()
