@@ -11,6 +11,7 @@ import ipvc.gymbuddy.database.dao.IContractDao
 import ipvc.gymbuddy.database.dao.IExerciseDao
 import ipvc.gymbuddy.database.dao.IMachineDao
 import ipvc.gymbuddy.database.dao.IMetricDao
+import ipvc.gymbuddy.database.dao.IMetricTypeDao
 import ipvc.gymbuddy.database.dao.IPlanExerciseDao
 import ipvc.gymbuddy.database.dao.IRoleDao
 import ipvc.gymbuddy.database.dao.ITrainingPlanDao
@@ -20,6 +21,7 @@ import ipvc.gymbuddy.database.entities.DBCategory
 import ipvc.gymbuddy.database.entities.DBContract
 import ipvc.gymbuddy.database.entities.DBExercise
 import ipvc.gymbuddy.database.entities.DBMachine
+import ipvc.gymbuddy.database.entities.DBMetricTypes
 import ipvc.gymbuddy.database.entities.DBMetrics
 import ipvc.gymbuddy.database.entities.DBPlanExercise
 import ipvc.gymbuddy.database.entities.DBRole
@@ -39,8 +41,9 @@ import ipvc.gymbuddy.database.entities.DBUserStatistic
     DBContract::class,
     DBPlanExercise::class,
     DBMetrics::class,
+    DBMetricTypes::class,
     DBUserPlan::class
-], version = 4)
+], version = 5)
 @TypeConverters(DateConverter::class)
 abstract class LocalDatabase : RoomDatabase() {
     companion object {
@@ -71,5 +74,6 @@ abstract class LocalDatabase : RoomDatabase() {
     abstract fun contract(): IContractDao
     abstract fun planExercise(): IPlanExerciseDao
     abstract fun metrics(): IMetricDao
+    abstract fun metricTypes(): IMetricTypeDao
     abstract fun userPlan(): IUserPlanDao
 }

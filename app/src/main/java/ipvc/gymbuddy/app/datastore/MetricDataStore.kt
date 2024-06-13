@@ -5,13 +5,17 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import ipvc.gymbuddy.api.core.RequestResult
 import ipvc.gymbuddy.api.models.Metric
+import ipvc.gymbuddy.api.models.requests.metric.CreateMetricRequest
 import ipvc.gymbuddy.api.services.MetricService
 import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.extensions.toAPIModel
 import ipvc.gymbuddy.app.extensions.toDatabaseModel
+import ipvc.gymbuddy.app.utils.DateUtils
 import ipvc.gymbuddy.app.utils.NetworkUtils
 import ipvc.gymbuddy.database.LocalDatabase
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.Date
 
 class MetricDataStore(context: Context) : BaseDataStore(context) {
 
@@ -25,9 +29,10 @@ class MetricDataStore(context: Context) : BaseDataStore(context) {
     }
 
     private val metricService = MetricService()
-
+    private val authenticationDataStore = AuthenticationDataStore.getInstance(context)
     var metrics = MutableLiveData<AsyncData<List<Metric>>>(AsyncData(listOf()))
     var metric = MutableLiveData<AsyncData<Metric>>(AsyncData())
+    var post = MutableLiveData<AsyncData<CreateMetricRequest>>(AsyncData())
 
     fun getMetrics(userId : String) {
         metrics.postValue(AsyncData(metrics.value?.data ?: listOf(), AsyncData.Status.LOADING))
@@ -68,6 +73,22 @@ class MetricDataStore(context: Context) : BaseDataStore(context) {
 
                 else -> {}
             }
+        }
+    }
+
+    fun createMetric(userId: String, typeId: String, value: String, date: Date){
+        val creatorId = authenticationDataStore.user.value
+        val entity = CreateMetricRequest(userId, creatorId!!.id, typeId, value, DateUtils.parseToUTC(date))
+
+        post.postValue(AsyncData(entity, AsyncData.Status.LOADING))
+        coroutine.launch {
+            when(MetricService().createMetric(entity)) {
+                is RequestResult.Success -> post.postValue(AsyncData(null, AsyncData.Status.SUCCESS))
+                is RequestResult.Error -> post.postValue(AsyncData(null, AsyncData.Status.ERROR))
+            }
+
+            delay(2500)
+            post.postValue(AsyncData(null, AsyncData.Status.IDLE))
         }
     }
 }

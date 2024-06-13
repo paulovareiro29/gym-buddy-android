@@ -1,11 +1,8 @@
 package ipvc.gymbuddy.app.fragments.trainer.client.metrics
 
-import android.graphics.Typeface
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.StyleSpan
 import android.view.View
+import android.widget.Button
 import android.widget.ImageButton
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
@@ -21,7 +18,7 @@ import java.util.Date
 import java.util.Locale
 
 class TrainerClientMetricsFragment : BaseFragment<FragmentTrainerClientMetricsBinding>(
-    FragmentTrainerClientMetricsBinding::inflate) {
+    FragmentTrainerClientMetricsBinding::inflate), TrainerClientMetricsCreateModal.MetricCreationListener {
 
     private lateinit var viewModel: ClientMetricOverViewModel
     private var currentTabIndex: Int = 0
@@ -30,7 +27,6 @@ class TrainerClientMetricsFragment : BaseFragment<FragmentTrainerClientMetricsBi
 
     companion object {
         private const val ARG_USER_ID = "userId"
-        private const val MAX_VISIBLE_TABS = 2
 
         fun newInstance(userId: String): TrainerClientMetricsFragment {
             val fragment = TrainerClientMetricsFragment()
@@ -53,17 +49,27 @@ class TrainerClientMetricsFragment : BaseFragment<FragmentTrainerClientMetricsBi
         viewModel.getMetrics(userId)
 
         val viewPager: ViewPager2 = binding.viewPager
-        tabLayout = binding.tabLayout
         val prevButton: ImageButton = binding.prevButton
         val nextButton: ImageButton = binding.nextButton
+        val createMetrics: Button = binding.createMetric
+
+        tabLayout = binding.tabLayout
+
+        createMetrics.setOnClickListener {
+            val bundle = Bundle().apply {
+                putString("clientId", userId)
+            }
+            val dialogFragment = TrainerClientMetricsCreateModal().apply {
+                arguments = bundle
+            }
+            dialogFragment.setMetricCreationListener(this@TrainerClientMetricsFragment)
+            dialogFragment.show(childFragmentManager, "TrainerTrainingPlanExerciseCreateModal")
+        }
 
         viewModel.metricsData.observe(viewLifecycleOwner) { resource ->
             val metrics = resource.data ?: return@observe
             val uniqueDays = metrics.map { it.date }.distinct().sortedBy { it.time }
             visibleDays = uniqueDays
-
-
-            updateTabs()
 
             viewPager.adapter = object : FragmentStateAdapter(this) {
                 override fun getItemCount() = visibleDays.size
@@ -77,13 +83,10 @@ class TrainerClientMetricsFragment : BaseFragment<FragmentTrainerClientMetricsBi
                 tab.text = formattedDate
             }.attach()
 
-            tabLayout.tabMode = TabLayout.MODE_SCROLLABLE
-
             prevButton.setOnClickListener {
                 if (currentTabIndex > 0) {
                     currentTabIndex--
                     viewPager.setCurrentItem(currentTabIndex, true)
-                    updateTabs()
                 }
             }
 
@@ -91,27 +94,13 @@ class TrainerClientMetricsFragment : BaseFragment<FragmentTrainerClientMetricsBi
                 if (currentTabIndex < visibleDays.size - 1) {
                     currentTabIndex++
                     viewPager.setCurrentItem(currentTabIndex, true)
-                    updateTabs()
                 }
             }
         }
     }
 
-    private fun updateTabs() {
-        val startIndex = if (currentTabIndex - MAX_VISIBLE_TABS / 2 < 0) 0 else currentTabIndex - MAX_VISIBLE_TABS / 2
-        val endIndex = if (startIndex + MAX_VISIBLE_TABS >= visibleDays.size) visibleDays.size - 1 else startIndex + MAX_VISIBLE_TABS - 1
-        val newVisibleDays = visibleDays.subList(startIndex, endIndex + 1)
-        tabLayout.removeAllTabs()
-        newVisibleDays.forEachIndexed { index, date ->
-            val formattedDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(date)
-            val tabText = if (index == currentTabIndex - startIndex) {
-                SpannableString(formattedDate).apply { setSpan(StyleSpan(Typeface.BOLD), 0, length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE) }
-            } else {
-                formattedDate
-            }
-            tabLayout.addTab(tabLayout.newTab().setText(tabText))
-        }
-        tabLayout.selectTab(tabLayout.getTabAt(currentTabIndex - startIndex))
+    override fun onMetricCreated() {
+        val userId = arguments?.getString(ARG_USER_ID) ?: return
+        viewModel.getMetrics(userId)
     }
-
 }

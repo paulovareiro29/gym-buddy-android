@@ -91,4 +91,7 @@
     <string name="view_plan">View plan</string>
     <string name="view_exercise">View Exercise</string>
     <string name="user_plan">User Plan</string>
+    <string name="date">Date</string>
+    <string name="value">Value</string>
+    <string name="metric_type">Metric Type</string>
 </resources>

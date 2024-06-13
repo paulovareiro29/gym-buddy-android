@@ -83,4 +83,7 @@
     <string name="view_plan">Visualizar plano</string>
     <string name="view_exercise">Visualizar exercício</string>
     <string name="user_plan">Plano de Treino</string>
+    <string name="date">Data</string>
+    <string name="value">Valor</string>
+    <string name="metric_type">Tipo de Métrica</string>
 </resources>
