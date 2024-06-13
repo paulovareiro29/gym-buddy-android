@@ -87,4 +87,5 @@
     <string name="value">Valor</string>
     <string name="metric_type">Tipo de Métrica</string>
     <string name="upload_photo">Submeter foto</string>
+    <string name="view_machine">Visualizar Máquina</string>
 </resources>
