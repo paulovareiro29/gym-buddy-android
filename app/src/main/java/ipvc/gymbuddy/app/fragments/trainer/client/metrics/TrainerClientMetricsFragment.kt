@@ -74,7 +74,7 @@ class TrainerClientMetricsFragment : BaseFragment<FragmentTrainerClientMetricsBi
             viewPager.adapter = object : FragmentStateAdapter(this) {
                 override fun getItemCount() = visibleDays.size
                 override fun createFragment(position: Int) =
-                    TabRecyclerViewFragment(MetricAdapter(metrics.filter { it.date == visibleDays[position] }))
+                    TabRecyclerViewFragment(MetricAdapter(childFragmentManager, metrics.filter { it.date == visibleDays[position] }))
             }
 
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->
