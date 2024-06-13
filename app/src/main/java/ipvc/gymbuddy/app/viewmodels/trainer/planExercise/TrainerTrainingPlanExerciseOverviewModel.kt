@@ -11,4 +11,8 @@ class TrainerTrainingPlanExerciseOverviewModel(application: Application) : BaseV
     fun getPlanExercises(planId: String) {
         planExerciseDataStore.getPlanExercises(planId)
     }
+
+    fun deletePlanExercise(planId: String, id: String){
+        planExerciseDataStore.deletePlanExercise(planId, id)
+    }
 }

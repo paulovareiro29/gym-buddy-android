@@ -11,6 +11,8 @@ class TrainerClientMetricOverviewViewModel(application: Application) : BaseViewM
     fun getMetrics(userId : String) {
         metricDataStore.getMetrics(userId)
     }
-
+    fun deleteMetric(id: String) {
+        metricDataStore.deleteMetric(id)
+    }
 
 }

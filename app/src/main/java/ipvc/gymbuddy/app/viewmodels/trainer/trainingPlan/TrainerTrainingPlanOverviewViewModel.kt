@@ -15,4 +15,8 @@ class TrainerTrainingPlanOverviewViewModel(application: Application) : BaseViewM
         trainingPlanDataStore.getTrainingPlans()
     }
 
+    fun deleteTrainingPlan(id: String) {
+        trainingPlanDataStore.deleteTrainingPlan(id)
+    }
+
 }
