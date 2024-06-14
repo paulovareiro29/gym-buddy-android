@@ -29,12 +29,12 @@ class ClientMetricsOverviewFragment : BaseFragment<FragmentClientMetricsBinding>
         val userId = authViewModel.user.value!!.id
         val recyclerView = binding.recyclerViewMetrics
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = MetricAdapter(childFragmentManager, listOf())
+        recyclerView.adapter = MetricAdapter(listOf())
 
         viewModel.getMetrics(userId)
-        viewModel.metricsData.observe(viewLifecycleOwner) { asyncData ->
-            if (asyncData.status == AsyncData.Status.SUCCESS && asyncData.data != null) {
-                (recyclerView.adapter as MetricAdapter).updateDataset(asyncData.data)
+        viewModel.metricsData.observe(viewLifecycleOwner) { request ->
+            if (request.status == AsyncData.Status.SUCCESS && request.data != null) {
+                recyclerView.adapter = MetricAdapter(request.data)
             }
         }
     }

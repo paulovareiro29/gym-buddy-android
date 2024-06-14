@@ -84,10 +84,19 @@
         android:id="@+id/trainer_trainingplan_exercise_overview_fragment"
         android:name="ipvc.gymbuddy.app.fragments.trainer.trainingPlans.exercises.TrainerTrainingPlanExerciseIndividualFragment"
         android:label="fragment_trainer_training_plan_exercise_overview"
-        tools:layout="@layout/fragment_trainer_training_plan_exercise_individual" />
+        tools:layout="@layout/fragment_trainer_training_plan_exercise_individual" >
+        <action
+            android:id="@+id/action_trainer_trainingplan_exercise_overview_fragment_to_trainerMachineIndividualFragment"
+            app:destination="@id/trainer_machine_individual_fragment" />
+    </fragment>
     <fragment
         android:id="@+id/trainer_client_overview_fragment"
         android:name="ipvc.gymbuddy.app.fragments.trainer.client.TrainerClientOverviewFragment"
         android:label="fragment_trainer_client_overview"
         tools:layout="@layout/fragment_trainer_client_overview" />
+    <fragment
+        android:id="@+id/trainer_machine_individual_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.trainer.machine.TrainerMachineIndividualFragment"
+        android:label="fragment_trainer_machine_individual"
+        tools:layout="@layout/fragment_trainer_machine_individual" />
 </navigation>

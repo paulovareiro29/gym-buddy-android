@@ -28,7 +28,7 @@ class ExerciseAdapter(dataset: List<Exercise>) : BaseRecyclerAdapter<Exercise, E
         return ViewHolder(view)
     }
 
-    override fun bindViewHolder(holder: ViewHolder, item: Exercise) {
+    override fun bindViewHolder(holder: ViewHolder, item: Exercise, position: Int) {
         if (item.photo != null) {
             val bitmap = ImageUtils.convertBase64ToBitmap(item.photo!!)
             if (bitmap != null) {

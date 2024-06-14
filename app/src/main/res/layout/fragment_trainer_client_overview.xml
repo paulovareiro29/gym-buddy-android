@@ -20,32 +20,28 @@
         <!-- WELCOME BACK -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingBottom="32dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/client_name"
-                    style="@style/Theme.Typography.HeadlineLarge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/app_name"/>
-            </LinearLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
 
             <ImageView
                 android:id="@+id/client_photo"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/gym_buddy_logo"
-                android:adjustViewBounds="true"
-                android:scaleType="centerInside"
-                android:contentDescription="@string/avatar"/>
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/circle"
+                android:contentDescription="@string/avatar"
+                android:scaleType="centerCrop"
+                android:src="@drawable/gym_buddy_logo" />
+
+
+            <TextView
+                android:id="@+id/client_name"
+                style="@style/Theme.Typography.Headline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primaryColor"
+                android:textStyle="bold"
+                tools:text="Gym Buddy"/>
         </LinearLayout>
 
         <com.google.android.material.tabs.TabLayout

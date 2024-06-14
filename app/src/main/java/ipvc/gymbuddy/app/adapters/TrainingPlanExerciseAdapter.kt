@@ -37,7 +37,7 @@ class TrainingPlanExerciseAdapter(private val fragmentManager: FragmentManager, 
         return ViewHolder(view)
     }
 
-    override fun bindViewHolder(holder: ViewHolder, item: PlanExercise) {
+    override fun bindViewHolder(holder: ViewHolder, item: PlanExercise, position: Int) {
         val context = holder.itemView.context
         val sets = context.getString(R.string.sets, item.sets)
         val repetitions = context.getString(R.string.reps, item.repetitions)

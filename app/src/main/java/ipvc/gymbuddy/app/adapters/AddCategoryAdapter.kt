@@ -20,7 +20,7 @@ class AddCategoryAdapter(dataset: List<Category>) : BaseRecyclerAdapter<Category
         return ViewHolder(view)
     }
 
-    override fun bindViewHolder(holder: ViewHolder, item: Category) {
+    override fun bindViewHolder(holder: ViewHolder, item: Category, position: Int) {
         holder.category.text = item.name
         updateViewHolder(holder, item)
 

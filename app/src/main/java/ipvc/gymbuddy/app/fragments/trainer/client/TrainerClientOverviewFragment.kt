@@ -46,7 +46,7 @@ class TrainerClientOverviewFragment : BaseFragment<FragmentTrainerClientOverview
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = when (position) {
-                0 -> getString(R.string.user_plan)
+                0 -> getString(R.string.training_plans)
                 1 -> getString(R.string.metrics)
                 else -> null
             }

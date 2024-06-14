@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.trainer.trainingPlans.exercises.TrainerTrainingPlanExerciseIndividualFragment">
 
     <LinearLayout
@@ -31,12 +31,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="24dp">
-
-                <ipvc.gymbuddy.app.models.FlexRecyclerView
-                    android:id="@+id/category_recycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                android:paddingVertical="12dp"
+                android:paddingHorizontal="24dp">
 
                 <TextView
                     android:id="@+id/exercise_name"
@@ -44,7 +40,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/exercise"
-                    android:textColor="@color/textPrimary"
+                    android:textColor="@color/textPrimary"/>
+
+                <ipvc.gymbuddy.app.models.FlexRecyclerView
+                    android:id="@+id/category_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"/>
 
                 <LinearLayout
@@ -55,7 +56,7 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:padding="8dp"
-                    android:layout_marginTop="8dp">
+                    android:layout_marginTop="16dp">
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -125,29 +126,64 @@
                     </LinearLayout>
                 </LinearLayout>
 
+                <TextView
+                    style="@style/Theme.Typography.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="@string/machine"
+                    android:textColor="@color/textPrimary"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="24dp"/>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginTop="24dp">
-
-                    <TextView
-                        style="@style/Theme.Typography.TitleLarge"
-                        android:id="@+id/machine_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:text="@string/machine"
-                        android:textColor="@color/textPrimary"
-                        android:layout_marginBottom="8dp"/>
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/input"
+                    android:padding="8dp"
+                    android:layout_marginBottom="8dp">
 
                     <ImageView
                         android:id="@+id/machine_image"
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:scaleType="centerCrop"
-                        tools:src="@drawable/portugal_flag_icon"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:src="@drawable/gym_buddy_logo"
                         android:contentDescription="@string/machine"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:orientation="vertical"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/machine_name"
+                            style="@style/Theme.Typography.BodyLarge"
+                            android:fontFamily="sans-serif-medium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/app_name"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="48dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center">
+
+                        <ImageButton
+                            android:id="@+id/view_machine"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:src="@drawable/baseline_arrow_forward_24"
+                            android:contentDescription="@string/view_machine"
+                            app:tint="@color/primaryColor"/>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

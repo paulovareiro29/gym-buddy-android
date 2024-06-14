@@ -19,7 +19,7 @@ abstract class BaseRecyclerAdapter<T, VH : BaseViewHolder>(private var dataset: 
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        bindViewHolder(holder, dataset[position])
+        bindViewHolder(holder, dataset[position], position)
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -30,5 +30,5 @@ abstract class BaseRecyclerAdapter<T, VH : BaseViewHolder>(private var dataset: 
 
     protected abstract fun getItemLayout(): Int
     protected abstract fun createViewHolder(view: View): VH
-    protected abstract fun bindViewHolder(holder: VH, item: T)
+    protected abstract fun bindViewHolder(holder: VH, item: T, position: Int)
 }
