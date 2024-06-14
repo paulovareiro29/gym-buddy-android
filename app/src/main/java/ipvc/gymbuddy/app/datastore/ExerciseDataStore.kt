@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import ipvc.gymbuddy.api.core.RequestResult
 import ipvc.gymbuddy.api.models.Exercise
 import ipvc.gymbuddy.api.models.requests.exercise.CreateExerciseRequest
+import ipvc.gymbuddy.api.models.requests.exercise.UpdateExerciseRequest
 import ipvc.gymbuddy.api.services.ExerciseService
 import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.extensions.toAPIModel
@@ -28,6 +29,8 @@ class ExerciseDataStore(context: Context) : BaseDataStore(context) {
 
     var exercises = MutableLiveData<AsyncData<List<Exercise>>>(AsyncData(listOf()))
     var post = MutableLiveData<AsyncData<CreateExerciseRequest>>(AsyncData())
+    var update = MutableLiveData<AsyncData<UpdateExerciseRequest>>(AsyncData())
+    val delete = MutableLiveData<AsyncData<Unit>>(AsyncData())
 
     fun getExercises() {
         exercises.postValue(AsyncData(exercises.value?.data ?: listOf(), AsyncData.Status.LOADING))
@@ -64,6 +67,38 @@ class ExerciseDataStore(context: Context) : BaseDataStore(context) {
 
             delay(2500)
             post.postValue(AsyncData(null, AsyncData.Status.IDLE))
+        }
+    }
+
+    fun updateExercise(id: String, name: String, photo: String?, machineId: String, categories: List<String>) {
+        val entity = UpdateExerciseRequest(name, photo, machineId, categories)
+
+        update.postValue(AsyncData(entity, AsyncData.Status.LOADING))
+        coroutine.launch {
+            when(ExerciseService().updateExercise(id, entity))  {
+                is RequestResult.Success -> update.postValue(AsyncData(null, AsyncData.Status.SUCCESS))
+                is RequestResult.Error -> update.postValue(AsyncData(null, AsyncData.Status.ERROR))
+            }
+
+            delay(2500)
+            update.postValue(AsyncData(null, AsyncData.Status.IDLE))
+        }
+    }
+
+    fun deleteExercise(id: String) {
+        delete.postValue(AsyncData(null, AsyncData.Status.LOADING))
+        coroutine.launch {
+            when (ExerciseService().deleteExercise(id)) {
+                is RequestResult.Success -> {
+                    delete.postValue(AsyncData(null, AsyncData.Status.SUCCESS))
+                    getExercises()
+                }
+                is RequestResult.Error -> {
+                    delete.postValue(AsyncData(null, AsyncData.Status.ERROR))
+                }
+            }
+            delay(2500)
+            delete.postValue(AsyncData(null, AsyncData.Status.IDLE))
         }
     }
 }

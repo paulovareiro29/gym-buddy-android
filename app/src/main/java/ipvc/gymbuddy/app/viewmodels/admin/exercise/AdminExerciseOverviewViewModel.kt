@@ -10,4 +10,8 @@ class AdminExerciseOverviewViewModel(application: Application) : BaseViewModel(a
     fun getExercises() {
         exerciseDataStore.getExercises()
     }
+
+    fun deleteExercise(id: String){
+        exerciseDataStore.deleteExercise(id)
+    }
 }

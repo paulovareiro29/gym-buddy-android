@@ -15,11 +15,15 @@ import ipvc.gymbuddy.app.utils.ImageUtils
 
 class ExerciseAdapter(dataset: List<Exercise>) : BaseRecyclerAdapter<Exercise, ExerciseAdapter.ViewHolder>(dataset) {
 
+    private var onDeleteListener: ((Exercise) -> Unit)? = null
+
     class ViewHolder(view: View) : BaseViewHolder(view) {
         val photo: ImageView = view.findViewById(R.id.photo)
         val name: TextView = view.findViewById(R.id.name)
         val categories: TextView = view.findViewById(R.id.categories)
         val view: ImageButton = view.findViewById(R.id.view)
+        val edit: ImageButton = view.findViewById(R.id.edit)
+        val delete: ImageButton = view.findViewById(R.id.delete)
     }
 
     override fun getItemLayout(): Int = R.layout.recycler_adapter_machine
@@ -38,7 +42,13 @@ class ExerciseAdapter(dataset: List<Exercise>) : BaseRecyclerAdapter<Exercise, E
         holder.name.text = item.name
         holder.categories.text = item.categories.joinToString(", ") { it.name }
 
-        holder.view.setOnClickListener {handleViewExercise(holder, item) }
+        holder.view.setOnClickListener { handleViewExercise(holder, item) }
+        holder.edit.setOnClickListener { handleEdit(holder, item) }
+        holder.delete.setOnClickListener { onDeleteListener?.let { listener -> listener(item) } }
+    }
+
+    fun setOnDeleteListener(listener: (Exercise) -> Unit) {
+        onDeleteListener = listener
     }
 
     private fun handleViewExercise(holder: ViewHolder, item: Exercise) {
@@ -46,5 +56,14 @@ class ExerciseAdapter(dataset: List<Exercise>) : BaseRecyclerAdapter<Exercise, E
             R.id.admin_exercise_individual_fragment,
             bundleOf("data" to Gson().toJson(item))
         )
+    }
+
+    private fun handleEdit(holder: ViewHolder, item: Exercise) {
+        holder.itemView
+            .findNavController()
+            .navigate(
+                R.id.admin_exercise_update_fragment,
+                bundleOf("data" to Gson().toJson(item))
+            )
     }
 }

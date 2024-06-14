@@ -2,7 +2,6 @@ package ipvc.gymbuddy.app.fragments.trainer.trainingPlans
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputEditText
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.core.AsyncData
@@ -20,6 +19,7 @@ class TrainerTrainingPlanUpdateFragment : BaseFragment<FragmentTrainerTrainingPl
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = getViewModel()
+
         arguments?.let {
             trainingPlanId = it.getString("trainingPlanId")
         }
@@ -32,14 +32,10 @@ class TrainerTrainingPlanUpdateFragment : BaseFragment<FragmentTrainerTrainingPl
 
         resetView()
 
-        viewModel = ViewModelProvider(this)[TrainerTrainingPlanUpdateViewModel::class.java]
-
-        nameInput = view.findViewById(R.id.name_input)
-
         trainingPlanId?.let { id ->
             viewModel.getTrainingPlan(id).observe(viewLifecycleOwner) { trainingPlan ->
                 trainingPlan?.let { plan ->
-                    nameInput.setText(plan.data?.name)
+                    binding.nameInput.setText(plan.data?.name)
                 }
             }
         }
