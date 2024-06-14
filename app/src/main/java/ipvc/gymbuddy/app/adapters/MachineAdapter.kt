@@ -28,7 +28,7 @@ class MachineAdapter(dataset: List<Machine>) : BaseRecyclerAdapter<Machine, Mach
         return ViewHolder(view)
     }
 
-    override fun bindViewHolder(holder: ViewHolder, item: Machine) {
+    override fun bindViewHolder(holder: ViewHolder, item: Machine, position: Int) {
         val bitmap = ImageUtils.convertBase64ToBitmap(item.photo)
         if (bitmap != null) {
             holder.photo.setImageBitmap(bitmap)

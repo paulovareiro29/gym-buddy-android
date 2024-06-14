@@ -96,4 +96,5 @@
     <string name="metric_type">Metric Type</string>
     <string name="upload_photo">Upload Photo</string>
     <string name="view_machine">View Machine</string>
+    <string name="view_user">View User</string>
 </resources>

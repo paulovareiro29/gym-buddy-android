@@ -33,7 +33,7 @@ class TrainingPlanAdapter(dataset: List<TrainingPlan>): BaseRecyclerAdapter<Trai
         return ViewHolder(view)
     }
 
-    override fun bindViewHolder(holder: ViewHolder, item: TrainingPlan) {
+    override fun bindViewHolder(holder: ViewHolder, item: TrainingPlan, position: Int) {
         holder.name.text = item.name
         holder.editButton.setOnClickListener {
             holder.itemView

@@ -39,4 +39,19 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="48dp"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <ImageButton
+            android:id="@+id/view_plan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/baseline_arrow_forward_24"
+            android:contentDescription="@string/view_plan"
+            app:tint="@color/primaryColor"/>
+    </LinearLayout>
+
 </LinearLayout>

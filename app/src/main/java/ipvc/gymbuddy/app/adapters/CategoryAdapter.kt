@@ -27,7 +27,7 @@ class CategoryAdapter(dataset: List<Category>, val direction: Direction = Direct
         return ViewHolder(view)
     }
 
-    override fun bindViewHolder(holder: ViewHolder, item: Category) {
+    override fun bindViewHolder(holder: ViewHolder, item: Category, position: Int) {
         holder.name.text = item.name
 
         val layoutParams = holder.parent.layoutParams as ViewGroup.MarginLayoutParams

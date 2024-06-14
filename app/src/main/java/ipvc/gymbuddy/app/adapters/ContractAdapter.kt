@@ -31,7 +31,7 @@ class ContractAdapter(dataset: List<Contract>): BaseRecyclerAdapter<Contract, Co
         return ViewHolder(view)
     }
 
-    override fun bindViewHolder(holder: ViewHolder, item: Contract) {
+    override fun bindViewHolder(holder: ViewHolder, item: Contract, position: Int) {
         val endDate = originalFormat.parse(item.end_date)
         val formattedEndDate = endDate?.let { targetFormat.format(it) }
 

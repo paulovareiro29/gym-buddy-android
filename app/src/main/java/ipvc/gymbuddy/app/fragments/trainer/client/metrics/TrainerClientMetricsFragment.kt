@@ -3,30 +3,19 @@ package ipvc.gymbuddy.app.fragments.trainer.client.metrics
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.ImageButton
-import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
+import androidx.recyclerview.widget.LinearLayoutManager
 import ipvc.gymbuddy.api.models.Metric
 import ipvc.gymbuddy.app.R
-import ipvc.gymbuddy.app.adapters.MetricAdapter
+import ipvc.gymbuddy.app.adapters.TrainerMetricAdapter
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentTrainerClientMetricsBinding
-import ipvc.gymbuddy.app.fragments.ui.TabRecyclerViewFragment
 import ipvc.gymbuddy.app.viewmodels.client.TrainerClientMetricOverviewViewModel
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 class TrainerClientMetricsFragment : BaseFragment<FragmentTrainerClientMetricsBinding>(
     FragmentTrainerClientMetricsBinding::inflate), TrainerClientMetricsCreateModal.MetricCreationListener {
 
     private lateinit var viewModel: TrainerClientMetricOverviewViewModel
-    private var currentTabIndex: Int = 0
-    private lateinit var visibleDays: List<Date>
-    private lateinit var tabLayout: TabLayout
+    private lateinit var userId: String
 
     companion object {
         private const val ARG_USER_ID = "userId"
@@ -47,59 +36,19 @@ class TrainerClientMetricsFragment : BaseFragment<FragmentTrainerClientMetricsBi
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val userId = arguments?.getString(ARG_USER_ID) ?: return
+        userId = arguments?.getString(ARG_USER_ID) ?: return
 
         viewModel.getMetrics(userId)
 
-        val viewPager: ViewPager2 = binding.viewPager
-        val prevButton: ImageButton = binding.prevButton
-        val nextButton: ImageButton = binding.nextButton
-        val createMetrics: Button = binding.createMetric
+        val recyclerView = binding.recyclerView
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = TrainerMetricAdapter(childFragmentManager, listOf())
 
-        tabLayout = binding.tabLayout
-
-        createMetrics.setOnClickListener {
-            val bundle = Bundle().apply {
-                putString("clientId", userId)
-            }
-            val dialogFragment = TrainerClientMetricsCreateModal().apply {
-                arguments = bundle
-            }
-            dialogFragment.setMetricCreationListener(this@TrainerClientMetricsFragment)
-            dialogFragment.show(childFragmentManager, "TrainerTrainingPlanExerciseCreateModal")
-        }
-
+        binding.createMetric.setOnClickListener { handleCreateMetric() }
         viewModel.metricsData.observe(viewLifecycleOwner) { resource ->
             val metrics = resource.data ?: return@observe
-            val uniqueDays = metrics.map { it.date }.distinct().sortedBy { it.time }
-            visibleDays = uniqueDays
-
-            viewPager.adapter = object : FragmentStateAdapter(this) {
-                override fun getItemCount() = visibleDays.size
-                override fun createFragment(position: Int) =
-                    TabRecyclerViewFragment(MetricAdapter(childFragmentManager, metrics.filter { it.date == visibleDays[position] }).apply {
-                        setOnMetricDeleteListener { metric -> showDeleteConfirmationDialog(metric) }
-                    })
-            }
-
-            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-                val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                val formattedDate = dateFormat.format(visibleDays[position])
-                tab.text = formattedDate
-            }.attach()
-
-            prevButton.setOnClickListener {
-                if (currentTabIndex > 0) {
-                    currentTabIndex--
-                    viewPager.setCurrentItem(currentTabIndex, true)
-                }
-            }
-
-            nextButton.setOnClickListener {
-                if (currentTabIndex < visibleDays.size - 1) {
-                    currentTabIndex++
-                    viewPager.setCurrentItem(currentTabIndex, true)
-                }
+            recyclerView.adapter = TrainerMetricAdapter(childFragmentManager, metrics).apply {
+                setOnMetricDeleteListener { metric -> showDeleteConfirmationDialog(metric) }
             }
         }
 
@@ -108,6 +57,18 @@ class TrainerClientMetricsFragment : BaseFragment<FragmentTrainerClientMetricsBi
     override fun onMetricCreated() {
         val userId = arguments?.getString(ARG_USER_ID) ?: return
         viewModel.getMetrics(userId)
+    }
+
+    private fun handleCreateMetric() {
+        val bundle = Bundle().apply {
+            putString("clientId", userId)
+        }
+        val dialogFragment = TrainerClientMetricsCreateModal().apply {
+            arguments = bundle
+        }
+        dialogFragment.setMetricCreationListener(this@TrainerClientMetricsFragment)
+        dialogFragment.show(childFragmentManager, "TrainerTrainingPlanExerciseCreateModal")
+
     }
 
     private fun showDeleteConfirmationDialog(metric: Metric) {
