@@ -1,10 +1,12 @@
 package ipvc.gymbuddy.app.fragments.admin.machine
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ipvc.gymbuddy.api.models.Machine
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.MachineAdapter
 import ipvc.gymbuddy.app.core.BaseFragment
@@ -32,7 +34,11 @@ class AdminMachineOverviewFragment : BaseFragment<FragmentAdminMachinesOverviewB
         viewModel.getMachines()
         viewModel.machinesData.observe(viewLifecycleOwner) {
             if (it.data != null) {
-                recyclerView.adapter = MachineAdapter(it.data)
+                val adapter = MachineAdapter(it.data)
+                adapter.setOnDeleteListener { delete ->
+                    showDeleteConfirmationDialog(delete)
+                }
+                recyclerView.adapter = adapter
             }
         }
 
@@ -45,5 +51,20 @@ class AdminMachineOverviewFragment : BaseFragment<FragmentAdminMachinesOverviewB
             it.name.contains(search, true)
         } ?: listOf()
         recyclerView.adapter = MachineAdapter(filtered)
+    }
+
+    private fun showDeleteConfirmationDialog(machine: Machine) {
+        val alertDialogBuilder = AlertDialog.Builder(requireContext())
+        alertDialogBuilder.apply {
+            setTitle(getString(R.string.confirm_delete))
+            setMessage(getString(R.string.delete_message, machine.name))
+            setPositiveButton(getString(R.string.delete) ) { _, _ ->
+                viewModel.deleteMachine(machine.id)
+            }
+            setNegativeButton(getString(R.string.cancel) ) { dialog, _ ->
+                dialog.dismiss()
+            }
+        }
+        alertDialogBuilder.create().show()
     }
 }
