@@ -30,6 +30,7 @@ class ExerciseDataStore(context: Context) : BaseDataStore(context) {
     var exercises = MutableLiveData<AsyncData<List<Exercise>>>(AsyncData(listOf()))
     var post = MutableLiveData<AsyncData<CreateExerciseRequest>>(AsyncData())
     var update = MutableLiveData<AsyncData<UpdateExerciseRequest>>(AsyncData())
+    val delete = MutableLiveData<AsyncData<Unit>>(AsyncData())
 
     fun getExercises() {
         exercises.postValue(AsyncData(exercises.value?.data ?: listOf(), AsyncData.Status.LOADING))
@@ -81,6 +82,23 @@ class ExerciseDataStore(context: Context) : BaseDataStore(context) {
 
             delay(2500)
             update.postValue(AsyncData(null, AsyncData.Status.IDLE))
+        }
+    }
+
+    fun deleteExercise(id: String) {
+        delete.postValue(AsyncData(null, AsyncData.Status.LOADING))
+        coroutine.launch {
+            when (ExerciseService().deleteExercise(id)) {
+                is RequestResult.Success -> {
+                    delete.postValue(AsyncData(null, AsyncData.Status.SUCCESS))
+                    getExercises()
+                }
+                is RequestResult.Error -> {
+                    delete.postValue(AsyncData(null, AsyncData.Status.ERROR))
+                }
+            }
+            delay(2500)
+            delete.postValue(AsyncData(null, AsyncData.Status.IDLE))
         }
     }
 }
