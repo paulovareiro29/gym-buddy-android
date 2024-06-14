@@ -29,6 +29,12 @@ class ClientHomeFragment : BaseFragment<FragmentClientHomeBinding>(
         loadMetrics()
 
         binding.myMetricsButton.setOnClickListener { navController.navigate(R.id.client_metrics_overview_fragment) }
+        binding.trainingPlansButton.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("userId", authViewModel.user.value?.id)
+            navController.navigate(R.id.client_user_plan_overview_fragment, bundle)
+        }
+
         authViewModel.user.observe(viewLifecycleOwner) {
             if (it == null) return@observe
             binding.name.text = it.name

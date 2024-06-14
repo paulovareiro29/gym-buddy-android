@@ -34,4 +34,9 @@
         android:name="ipvc.gymbuddy.app.fragments.client.ClientMetricsOverviewFragment"
         android:label="fragment_client_metrics"
         tools:layout="@layout/fragment_client_metrics" />
+    <fragment
+        android:id="@+id/client_user_plan_overview_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.client.ClientTrainingPlansOverviewFragment"
+        android:label="fragment_client_user_plan_overview"
+        tools:layout="@layout/fragment_client_user_plan_overview" />
 </navigation>
