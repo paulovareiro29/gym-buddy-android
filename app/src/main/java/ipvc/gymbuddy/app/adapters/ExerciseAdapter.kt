@@ -20,6 +20,7 @@ class ExerciseAdapter(dataset: List<Exercise>) : BaseRecyclerAdapter<Exercise, E
         val name: TextView = view.findViewById(R.id.name)
         val categories: TextView = view.findViewById(R.id.categories)
         val view: ImageButton = view.findViewById(R.id.view)
+        val edit: ImageButton = view.findViewById(R.id.edit)
     }
 
     override fun getItemLayout(): Int = R.layout.recycler_adapter_machine
@@ -38,7 +39,8 @@ class ExerciseAdapter(dataset: List<Exercise>) : BaseRecyclerAdapter<Exercise, E
         holder.name.text = item.name
         holder.categories.text = item.categories.joinToString(", ") { it.name }
 
-        holder.view.setOnClickListener {handleViewExercise(holder, item) }
+        holder.view.setOnClickListener { handleViewExercise(holder, item) }
+        holder.edit.setOnClickListener { handleEdit(holder, item) }
     }
 
     private fun handleViewExercise(holder: ViewHolder, item: Exercise) {
@@ -46,5 +48,14 @@ class ExerciseAdapter(dataset: List<Exercise>) : BaseRecyclerAdapter<Exercise, E
             R.id.admin_exercise_individual_fragment,
             bundleOf("data" to Gson().toJson(item))
         )
+    }
+
+    private fun handleEdit(holder: ViewHolder, item: Exercise) {
+        holder.itemView
+            .findNavController()
+            .navigate(
+                R.id.admin_exercise_update_fragment,
+                bundleOf("data" to Gson().toJson(item))
+            )
     }
 }

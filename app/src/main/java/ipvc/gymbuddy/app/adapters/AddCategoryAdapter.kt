@@ -9,7 +9,7 @@ import ipvc.gymbuddy.app.core.BaseViewHolder
 
 class AddCategoryAdapter(dataset: List<Category>) : BaseRecyclerAdapter<Category, AddCategoryAdapter.ViewHolder>(dataset) {
 
-    val selected: MutableList<Category> = mutableListOf()
+    var selected: MutableList<Category> = mutableListOf()
     class ViewHolder(view: View) : BaseViewHolder(view) {
         val category: Chip = view.findViewById(R.id.add_category)
     }

@@ -89,4 +89,5 @@
     <string name="upload_photo">Submeter foto</string>
     <string name="view_machine">Visualizar Máquina</string>
     <string name="view_user">Visualizar Utilizador</string>
+    <string name="update_exercise">Atualizar Exercício</string>
 </resources>
