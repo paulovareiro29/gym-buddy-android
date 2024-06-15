@@ -40,7 +40,7 @@ class PlanExerciseDataStore(context: Context) : BaseDataStore(context) {
         coroutine.launch {
             if (NetworkUtils.isOffline(context)) {
                 _planExercises.postValue(AsyncData(
-                    LocalDatabase.getInstance(context).planExercise().getAll().map { it.toAPIModel() },
+                    LocalDatabase.getInstance(context).planExercise().getAll().map { it.toAPIModel() }.filter { it.plan.id == planId },
                     AsyncData.Status.SUCCESS
                 ))
                 return@launch

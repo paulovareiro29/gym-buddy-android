@@ -34,7 +34,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/errorRipple"
                 android:paddingVertical="4dp"
-                android:gravity="center">
+                android:gravity="center"
+                android:visibility="gone">
 
                 <ImageView
                     android:layout_width="24dp"
