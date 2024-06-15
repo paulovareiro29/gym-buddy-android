@@ -40,7 +40,7 @@ class MachineAdapter(dataset: List<Machine>) : BaseRecyclerAdapter<Machine, Mach
 
         holder.name.text = item.name
         holder.categories.text = item.categories.joinToString(", ") { it.name }
-        holder.view.setOnClickListener { handleViewExercise(holder, item) }
+        holder.view.setOnClickListener { handleView(holder, item) }
         holder.edit.setOnClickListener { handleEdit(holder, item) }
         holder.delete.setOnClickListener { onDeleteListener?.let { listener -> listener(item) } }
     }
@@ -49,7 +49,7 @@ class MachineAdapter(dataset: List<Machine>) : BaseRecyclerAdapter<Machine, Mach
         onDeleteListener = listener
     }
 
-    private fun handleViewExercise(holder: ViewHolder, item: Machine) {
+    private fun handleView(holder: ViewHolder, item: Machine) {
         holder.itemView.findNavController().navigate(
             R.id.admin_machine_individual_fragment,
             bundleOf("data" to Gson().toJson(item))
