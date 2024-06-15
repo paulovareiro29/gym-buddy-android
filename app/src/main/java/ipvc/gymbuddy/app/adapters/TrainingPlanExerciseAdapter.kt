@@ -8,13 +8,13 @@ import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
-import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import ipvc.gymbuddy.api.models.PlanExercise
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.core.BaseRecyclerAdapter
 import ipvc.gymbuddy.app.core.BaseViewHolder
 import ipvc.gymbuddy.app.fragments.trainer.trainingPlans.exercises.TrainerTrainingPlanExerciseUpdateModal
+import ipvc.gymbuddy.app.utils.ImageUtils
 import ipvc.gymbuddy.app.utils.NetworkUtils
 
 class TrainingPlanExerciseAdapter(private val fragmentManager: FragmentManager, private val trainingPlanId: String, dataset: List<PlanExercise>)
@@ -48,10 +48,12 @@ class TrainingPlanExerciseAdapter(private val fragmentManager: FragmentManager, 
         holder.machineName.text = item.exercise.machine.name
         holder.setsAndReps.text = setsAndRepsText
 
-        Glide.with(context)
-            .load(item.exercise.photo)
-            .placeholder(R.drawable.baseline_assignment_24)
-            .into(holder.exercisePhoto)
+        if (item.exercise.photo != null) {
+            val bitmap = ImageUtils.convertBase64ToBitmap(item.exercise.photo!!)
+            if (bitmap != null) {
+                holder.exercisePhoto.setImageBitmap(bitmap)
+            }
+        }
 
         holder.editButton.setOnClickListener {
             if (NetworkUtils.isOffline(holder.itemView.context)) {
