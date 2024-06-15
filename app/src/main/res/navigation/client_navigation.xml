@@ -48,5 +48,15 @@
         android:id="@+id/client_trainingplan_exercises_overview_fragment"
         android:name="ipvc.gymbuddy.app.fragments.client.ClientTrainingPlanExercisesOverviewFragment"
         android:label="Training Plan Exercises"
-        tools:layout="@layout/fragment_client_training_plan_exercises_overview" />
+        tools:layout="@layout/fragment_client_training_plan_exercises_overview">
+        <action
+            android:id="@+id/action_clientTrainingPlanExercisesOverviewFragment_to_clientTrainingPlanExerciseIndividualFragment"
+            app:destination="@id/client_trainingplan_exercise_individual_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/client_trainingplan_exercise_individual_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.client.ClientTrainingPlanExerciseIndividualFragment"
+        android:label="Individual Exercise"
+        tools:layout="@layout/fragment_client_training_plan_exercise_individual" />
 </navigation>

@@ -3,10 +3,14 @@ package ipvc.gymbuddy.app.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
 import ipvc.gymbuddy.api.models.PlanExercise
 import ipvc.gymbuddy.app.R
 
@@ -17,6 +21,7 @@ class ClientTrainingPlanExerciseAdapter(private val exercises: List<PlanExercise
         val machineName: TextView = view.findViewById(R.id.machine_name)
         val setsAndReps: TextView = view.findViewById(R.id.sets_and_reps)
         val exerciseImage: ImageView = view.findViewById(R.id.exercise_image)
+        val viewExercise: ImageButton = view.findViewById(R.id.view_exercise)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseViewHolder {
@@ -39,6 +44,14 @@ class ClientTrainingPlanExerciseAdapter(private val exercises: List<PlanExercise
             .load(exercise.exercise.photo)
             .placeholder(R.drawable.baseline_fitness_center_24)
             .into(holder.exerciseImage)
+
+        holder.viewExercise.setOnClickListener {
+            val bundle = bundleOf("planExercise" to Gson().toJson(exercise))
+            holder.itemView.findNavController().navigate(
+                R.id.client_trainingplan_exercise_individual_fragment,
+                bundle
+            )
+        }
     }
 
     override fun getItemCount() = exercises.size
