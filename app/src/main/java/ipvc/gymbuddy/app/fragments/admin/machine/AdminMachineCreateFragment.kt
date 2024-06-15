@@ -18,6 +18,7 @@ import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.core.Validator
 import ipvc.gymbuddy.app.databinding.FragmentAdminMachineCreateBinding
 import ipvc.gymbuddy.app.utils.ImageUtils
+import ipvc.gymbuddy.app.utils.NetworkUtils
 import ipvc.gymbuddy.app.viewmodels.admin.machine.AdminMachineCreateViewModel
 import java.io.IOException
 
@@ -34,6 +35,11 @@ class AdminMachineCreateFragment : BaseFragment<FragmentAdminMachineCreateBindin
         super.onCreate(savedInstanceState)
         viewModel = getViewModel()
         gallery = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { handleUploadPhoto(it) }
+
+        if (NetworkUtils.isOffline(requireContext())) {
+            replaceFragmentBy(R.id.admin_offline_fragment)
+            return
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

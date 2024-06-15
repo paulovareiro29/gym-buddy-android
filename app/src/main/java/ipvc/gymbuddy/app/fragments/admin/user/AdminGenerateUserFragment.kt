@@ -8,6 +8,7 @@ import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.core.Validator
 import ipvc.gymbuddy.app.databinding.FragmentAdminGenerateUserBinding
+import ipvc.gymbuddy.app.utils.NetworkUtils
 import ipvc.gymbuddy.app.utils.StringUtils
 import ipvc.gymbuddy.app.viewmodels.admin.user.AdminGenerateUserViewModel
 
@@ -19,6 +20,10 @@ class AdminGenerateUserFragment : BaseFragment<FragmentAdminGenerateUserBinding>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = getViewModel()
+
+        if (NetworkUtils.isOffline(requireContext())) {
+            replaceFragmentBy(R.id.admin_offline_fragment)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

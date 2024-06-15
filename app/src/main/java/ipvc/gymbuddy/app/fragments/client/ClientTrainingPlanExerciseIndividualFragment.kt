@@ -13,6 +13,7 @@ import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.CategoryAdapter
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentClientTrainingPlanExerciseIndividualBinding
+import ipvc.gymbuddy.app.utils.ImageUtils
 
 class ClientTrainingPlanExerciseIndividualFragment : BaseFragment<FragmentClientTrainingPlanExerciseIndividualBinding>(
     FragmentClientTrainingPlanExerciseIndividualBinding::inflate
@@ -49,17 +50,17 @@ class ClientTrainingPlanExerciseIndividualFragment : BaseFragment<FragmentClient
         categoriesRecyclerView.layoutManager = FlexboxLayoutManager(context, FlexDirection.ROW)
         categoriesRecyclerView.adapter = CategoryAdapter(planExercise!!.exercise.categories, CategoryAdapter.Direction.ROW)
 
-        context?.let {
-            Glide.with(it)
-                .load(planExercise!!.exercise.photo)
+        if (planExercise!!.exercise.photo != null){
+            Glide.with(requireContext())
+                .load(ImageUtils.convertBase64ToBitmap(planExercise!!.exercise.photo!!) ?: planExercise!!.exercise.photo)
                 .placeholder(R.drawable.no_image)
                 .into(binding.exerciseImage)
-
-            Glide.with(it)
-                .load(planExercise!!.exercise.machine.photo)
-                .placeholder(R.drawable.no_image)
-                .into(binding.machineImage)
         }
+
+        Glide.with(requireContext())
+            .load(ImageUtils.convertBase64ToBitmap(planExercise!!.exercise.machine.photo) ?: planExercise!!.exercise.machine.photo)
+            .placeholder(R.drawable.no_image)
+            .into(binding.machineImage)
 
         binding.viewMachine.setOnClickListener {
             navController.navigate(

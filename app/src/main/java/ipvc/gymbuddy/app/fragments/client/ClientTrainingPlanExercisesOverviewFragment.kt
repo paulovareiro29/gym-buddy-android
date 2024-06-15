@@ -1,7 +1,6 @@
 package ipvc.gymbuddy.app.fragments.client
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
@@ -30,8 +29,6 @@ class ClientTrainingPlanExercisesOverviewFragment : BaseFragment<FragmentClientT
 
         try {
             trainingPlan = Gson().fromJson(arguments?.getString("trainingPlan"), TrainingPlan::class.java)
-
-            Log.d("test", trainingPlan.toString())
         } catch (_: JsonSyntaxException) {
             navController.navigateUp()
         }
@@ -68,6 +65,9 @@ class ClientTrainingPlanExercisesOverviewFragment : BaseFragment<FragmentClientT
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->
                 tab.text = uniqueDays[position]
             }.attach()
+
+            viewPager.visibility = View.VISIBLE
+            tabLayout.visibility = View.VISIBLE
         }
     }
 }

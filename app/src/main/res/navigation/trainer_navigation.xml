@@ -99,4 +99,9 @@
         android:name="ipvc.gymbuddy.app.fragments.trainer.machine.TrainerMachineIndividualFragment"
         android:label="fragment_trainer_machine_individual"
         tools:layout="@layout/fragment_trainer_machine_individual" />
+    <fragment
+        android:id="@+id/trainer_offline_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.OfflineFragment"
+        android:label="fragment_offline"
+        tools:layout="@layout/fragment_offline" />
 </navigation>

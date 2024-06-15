@@ -23,6 +23,7 @@ import ipvc.gymbuddy.app.core.Validator
 import ipvc.gymbuddy.app.databinding.FragmentAdminExerciseUpdateBinding
 import ipvc.gymbuddy.app.models.DropdownItem
 import ipvc.gymbuddy.app.utils.ImageUtils
+import ipvc.gymbuddy.app.utils.NetworkUtils
 import ipvc.gymbuddy.app.viewmodels.admin.exercise.AdminExerciseUpdateViewModel
 import java.io.IOException
 
@@ -47,6 +48,11 @@ class AdminExerciseUpdateFragment : BaseFragment<FragmentAdminExerciseUpdateBind
             exercise = Gson().fromJson(arguments?.getString("data"), Exercise::class.java)
         } catch (_: JsonSyntaxException) {
             navController.navigateUp()
+        }
+
+        if (NetworkUtils.isOffline(requireContext())) {
+            replaceFragmentBy(R.id.admin_offline_fragment)
+            return
         }
     }
 

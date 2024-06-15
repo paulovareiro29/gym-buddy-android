@@ -2,7 +2,6 @@ package ipvc.gymbuddy.app.fragments.trainer.trainingPlans.exercises
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
@@ -17,6 +16,7 @@ import ipvc.gymbuddy.app.adapters.TrainingPlanExerciseAdapter
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentTrainerTrainingPlanExercisesOverviewBinding
 import ipvc.gymbuddy.app.fragments.ui.TabRecyclerViewFragment
+import ipvc.gymbuddy.app.utils.NetworkUtils
 import ipvc.gymbuddy.app.viewmodels.trainer.planExercise.TrainerTrainingPlanExerciseOverviewModel
 
 class TrainerTrainingPlanExercisesOverviewFragment : BaseFragment<FragmentTrainerTrainingPlanExercisesOverviewBinding>(
@@ -30,8 +30,6 @@ class TrainerTrainingPlanExercisesOverviewFragment : BaseFragment<FragmentTraine
         viewModel = getViewModel()
         try {
             trainingPlan = Gson().fromJson(arguments?.getString("trainingPlan"), TrainingPlan::class.java)
-
-            Log.d("test", trainingPlan.toString())
         } catch (_: JsonSyntaxException) {
             navController.navigateUp()
         }
@@ -81,6 +79,11 @@ class TrainerTrainingPlanExercisesOverviewFragment : BaseFragment<FragmentTraine
     }
 
     private fun handleCreateExercise() {
+        if (NetworkUtils.isOffline(requireContext())) {
+            navController.navigate(R.id.trainer_offline_fragment)
+            return
+        }
+
         val dialogFragment = TrainerTrainingPlanExerciseCreateModal().apply {
             arguments = Bundle().apply {
                 putString("trainingPlanId", trainingPlan!!.id)
@@ -100,6 +103,11 @@ class TrainerTrainingPlanExercisesOverviewFragment : BaseFragment<FragmentTraine
     }
 
     private fun showDeleteConfirmationDialog(planExercise: PlanExercise) {
+        if (NetworkUtils.isOffline(requireContext())) {
+            navController.navigate(R.id.trainer_offline_fragment)
+            return
+        }
+
         val alertDialogBuilder = AlertDialog.Builder(requireContext())
         alertDialogBuilder.apply {
             setTitle(getString(R.string.confirm_delete))

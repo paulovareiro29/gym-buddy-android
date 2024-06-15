@@ -69,5 +69,10 @@
         android:name="ipvc.gymbuddy.app.fragments.client.ClientMachineIndividualFragment"
         android:label="Individual Machine"
         tools:layout="@layout/fragment_client_machine_individual" />
+    <fragment
+        android:id="@+id/client_offline_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.OfflineFragment"
+        android:label="fragment_offline"
+        tools:layout="@layout/fragment_offline" />
 
 </navigation>
