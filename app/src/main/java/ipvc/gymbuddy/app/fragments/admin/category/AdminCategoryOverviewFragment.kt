@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import ipvc.gymbuddy.api.models.Category
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.AdminCategoryAdapter
-import ipvc.gymbuddy.app.adapters.CategoryAdapter
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentAdminCategoryOverviewBinding
+import ipvc.gymbuddy.app.utils.NetworkUtils
 import ipvc.gymbuddy.app.viewmodels.admin.category.AdminCategoryOverviewViewModel
 
 class AdminCategoryOverviewFragment : BaseFragment<FragmentAdminCategoryOverviewBinding>(
@@ -49,10 +49,15 @@ class AdminCategoryOverviewFragment : BaseFragment<FragmentAdminCategoryOverview
         val filtered = viewModel.categoriesData.value?.data?.filter {
             it.name.contains(search, true)
         } ?: listOf()
-        (recyclerView.adapter as CategoryAdapter).updateDataset(filtered)
+        (recyclerView.adapter as AdminCategoryAdapter).updateDataset(filtered)
     }
 
     private fun showDeleteConfirmationDialog(category: Category) {
+        if (NetworkUtils.isOffline(requireContext())) {
+            navController.navigate(R.id.admin_offline_fragment)
+            return
+        }
+
         val alertDialogBuilder = AlertDialog.Builder(requireContext())
         alertDialogBuilder.apply {
             setTitle(getString(R.string.confirm_delete))
