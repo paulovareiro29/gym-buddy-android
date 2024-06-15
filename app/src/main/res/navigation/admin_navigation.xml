@@ -66,6 +66,9 @@
         <action
             android:id="@+id/action_admin_machines_overview_fragment_to_admin_machine_individual_fragment"
             app:destination="@id/admin_machine_individual_fragment" />
+        <action
+            android:id="@+id/action_admin_machines_overview_fragment_to_adminMachineUpdateFragment"
+            app:destination="@id/admin_machine_update_fragment" />
     </fragment>
     <fragment
         android:id="@+id/admin_categories_overview_fragment"
@@ -125,4 +128,9 @@
         android:name="ipvc.gymbuddy.app.fragments.admin.exercise.AdminExerciseUpdateFragment"
         android:label="fragment_admin_exercise_update"
         tools:layout="@layout/fragment_admin_exercise_update" />
+    <fragment
+        android:id="@+id/admin_machine_update_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.machine.AdminMachineUpdateFragment"
+        android:label="fragment_admin_machine_update"
+        tools:layout="@layout/fragment_admin_machine_update" />
 </navigation>

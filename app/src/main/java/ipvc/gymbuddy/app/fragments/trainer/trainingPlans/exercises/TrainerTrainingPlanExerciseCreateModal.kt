@@ -119,18 +119,9 @@ class TrainerTrainingPlanExerciseCreateModal : Modal(R.layout.fragment_trainer_t
         viewModel.getExercises()
 
         viewModel.exercisesData.observe(viewLifecycleOwner){ response ->
-            response.data?.let { allExercises ->
-                viewModel.getPlanExercises(trainingPlanId!!).observe(viewLifecycleOwner){ planExercises ->
-                    val planExerciseIds = planExercises.map { it.exercise.id }
-                    val availableExercises = allExercises.filterNot { planExerciseIds.contains(it.id) }
-
-                    val adapter = DropdownAdapter(
-                        requireContext(),
-                        exercise,
-                        availableExercises.map { DropdownItem(it.id, it.name) }
-                    )
-                    exercise.setAdapter(adapter)
-                }
+            if (response.data != null) {
+                val adapter = DropdownAdapter(requireContext(), exercise, response.data.map { DropdownItem(it.id, it.name) })
+                exercise.setAdapter(adapter)
             }
         }
     }
