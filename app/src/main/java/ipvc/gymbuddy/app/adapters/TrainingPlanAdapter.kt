@@ -13,6 +13,7 @@ import ipvc.gymbuddy.api.models.TrainingPlan
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.core.BaseRecyclerAdapter
 import ipvc.gymbuddy.app.core.BaseViewHolder
+import ipvc.gymbuddy.app.utils.StringUtils
 
 class TrainingPlanAdapter(dataset: List<TrainingPlan>): BaseRecyclerAdapter<TrainingPlan, TrainingPlanAdapter.ViewHolder>(dataset) {
 
@@ -34,7 +35,7 @@ class TrainingPlanAdapter(dataset: List<TrainingPlan>): BaseRecyclerAdapter<Trai
     }
 
     override fun bindViewHolder(holder: ViewHolder, item: TrainingPlan, position: Int) {
-        holder.name.text = item.name
+        holder.name.text = StringUtils.capitalize(item.name)
         holder.editButton.setOnClickListener {
             holder.itemView
                 .findNavController()

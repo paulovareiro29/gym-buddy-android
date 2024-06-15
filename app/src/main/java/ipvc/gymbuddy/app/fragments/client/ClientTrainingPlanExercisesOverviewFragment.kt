@@ -1,13 +1,14 @@
 package ipvc.gymbuddy.app.fragments.client
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import androidx.activity.OnBackPressedCallback
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 import ipvc.gymbuddy.api.models.TrainingPlan
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.ClientTrainingPlanExerciseAdapter
@@ -26,15 +27,14 @@ class ClientTrainingPlanExercisesOverviewFragment : BaseFragment<FragmentClientT
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = getViewModel()
-        arguments?.let {
-            trainingPlan = Gson().fromJson(it.getString("trainingPlan"), TrainingPlan::class.java)
-        }
 
-        requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                navController.navigate(R.id.client_user_plan_overview_fragment)
-            }
-        })
+        try {
+            trainingPlan = Gson().fromJson(arguments?.getString("trainingPlan"), TrainingPlan::class.java)
+
+            Log.d("test", trainingPlan.toString())
+        } catch (_: JsonSyntaxException) {
+            navController.navigateUp()
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

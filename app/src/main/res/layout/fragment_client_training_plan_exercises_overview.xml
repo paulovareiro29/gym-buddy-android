@@ -22,14 +22,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/transparent"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp"
+            android:visibility="invisible"/>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_marginHorizontal="24dp"/>
+            android:layout_marginHorizontal="24dp"
+            android:visibility="invisible"/>
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -92,5 +92,7 @@
     <string name="update_exercise">Atualizar Exercício</string>
     <string name="update_machine">Atualizar Máquina</string>
     <string name="starts_on">Começa em %s</string>
-    <string name="ends_on">Acaba em %s</string>
+    <string name="ended_on">Acabou em %s</string>
+    <string name="ongoing">A ocorrer</string>
+    <string name="ongoing_until">A ocorrer até %s</string>
 </resources>

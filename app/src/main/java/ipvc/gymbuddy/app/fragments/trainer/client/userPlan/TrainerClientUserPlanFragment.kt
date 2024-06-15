@@ -43,9 +43,9 @@ class TrainerClientUserPlanFragment : BaseFragment<FragmentTrainerClientUserPlan
         val userId = arguments?.getString(ARG_USER_ID) ?: return
 
         viewModel.getUserPlans(userId)
-        viewModel.userPlans.observe(viewLifecycleOwner) {
-            if (it.data != null) {
-                recyclerView.adapter = UserPlanAdapter(it.data)
+        viewModel.userPlans.observe(viewLifecycleOwner) { request ->
+            if (request.data != null) {
+                recyclerView.adapter = UserPlanAdapter(request.data.sortedByDescending { it.start_date })
             }
         }
     }
