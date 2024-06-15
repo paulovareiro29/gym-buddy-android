@@ -1,7 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.client.ClientTrainingPlanExerciseIndividualFragment">
 
     <LinearLayout
@@ -160,9 +162,25 @@
                         <TextView
                             android:id="@+id/machine_name"
                             style="@style/Theme.Typography.BodyLarge"
+                            android:fontFamily="sans-serif-medium"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/app_name"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="48dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center">
+
+                        <ImageButton
+                            android:id="@+id/view_machine"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:src="@drawable/baseline_arrow_forward_24"
+                            android:contentDescription="@string/view_machine"
+                            app:tint="@color/primaryColor"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

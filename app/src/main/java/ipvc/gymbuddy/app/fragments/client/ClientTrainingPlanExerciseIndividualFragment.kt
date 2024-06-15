@@ -2,6 +2,7 @@ package ipvc.gymbuddy.app.fragments.client
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.flexbox.FlexDirection
@@ -58,6 +59,13 @@ class ClientTrainingPlanExerciseIndividualFragment : BaseFragment<FragmentClient
                 .load(planExercise!!.exercise.machine.photo)
                 .placeholder(R.drawable.no_image)
                 .into(binding.machineImage)
+        }
+
+        binding.viewMachine.setOnClickListener {
+            navController.navigate(
+                R.id.client_machine_individual_fragment,
+                bundleOf("data" to Gson().toJson(planExercise!!.exercise.machine))
+            )
         }
     }
 }
