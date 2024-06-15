@@ -36,14 +36,13 @@
             android:layout_height="wrap_content"
             android:gravity="end"
             android:layout_marginHorizontal="24dp">
-            <!-- Remove create_exercise button for client or make it non-clickable -->
             <Button
                 android:id="@+id/create_exercise"
                 style="?attr/materialIconButtonFilledStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:icon="@drawable/baseline_add_24"
-                android:visibility="gone"/> <!-- Set to gone as clients shouldn't add exercises -->
+                android:visibility="gone"/>
         </LinearLayout>
 
     </LinearLayout>

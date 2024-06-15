@@ -2,6 +2,7 @@ package ipvc.gymbuddy.app.fragments.client
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
@@ -28,11 +29,22 @@ class ClientTrainingPlanExercisesOverviewFragment : BaseFragment<FragmentClientT
         arguments?.let {
             trainingPlan = Gson().fromJson(it.getString("trainingPlan"), TrainingPlan::class.java)
         }
+
+        // Callback para o botão de voltar
+        requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // Navega de volta para a visão geral do plano
+                navController.navigate(R.id.client_user_plan_overview_fragment)
+            }
+        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (trainingPlan == null) navController.navigateUp()
+        if (trainingPlan == null) {
+            navController.navigateUp()
+            return
+        }
 
         loadToolbar(trainingPlan!!.name)
 
