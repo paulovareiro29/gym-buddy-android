@@ -54,6 +54,9 @@
         <action
             android:id="@+id/action_admin_users_overview_fragment_to_admin_generate_user_fragment"
             app:destination="@id/admin_generate_user_fragment" />
+        <action
+            android:id="@+id/action_admin_users_overview_fragment_to_adminUserIndividualFragment"
+            app:destination="@id/admin_user_individual_fragment" />
     </fragment>
     <fragment
         android:id="@+id/admin_machines_overview_fragment"
@@ -133,4 +136,8 @@
         android:name="ipvc.gymbuddy.app.fragments.admin.machine.AdminMachineUpdateFragment"
         android:label="fragment_admin_machine_update"
         tools:layout="@layout/fragment_admin_machine_update" />
+    <fragment
+        android:id="@+id/admin_user_individual_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.user.AdminUserIndividualFragment"
+        android:label="AdminUserIndividualFragment" />
 </navigation>
