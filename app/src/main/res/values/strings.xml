@@ -103,4 +103,7 @@
     <string name="ended_on">Ended on %s</string>
     <string name="ongoing">Ongoing</string>
     <string name="ongoing_until">Ongoing until %s</string>
+    <string name="go_back">Go Back</string>
+    <string name="offline">It looks like you\'re offline. Please check your internet connection and try again.</string>
+    <string name="oops" translatable="false">Oops!</string>
 </resources>

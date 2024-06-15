@@ -27,4 +27,8 @@
         android:name="ipvc.gymbuddy.app.fragments.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/welcome_offline_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.WelcomeOfflineFragment"
+        android:label="fragment_welcome_offline" />
 </navigation>

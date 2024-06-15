@@ -140,4 +140,9 @@
         android:id="@+id/admin_user_individual_fragment"
         android:name="ipvc.gymbuddy.app.fragments.admin.user.AdminUserIndividualFragment"
         android:label="AdminUserIndividualFragment" />
+    <fragment
+        android:id="@+id/admin_offline_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.OfflineFragment"
+        android:label="fragment_offline"
+        tools:layout="@layout/fragment_offline" />
 </navigation>
