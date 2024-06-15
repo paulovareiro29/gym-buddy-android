@@ -30,10 +30,8 @@ class ClientTrainingPlanExercisesOverviewFragment : BaseFragment<FragmentClientT
             trainingPlan = Gson().fromJson(it.getString("trainingPlan"), TrainingPlan::class.java)
         }
 
-        // Callback para o botão de voltar
         requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                // Navega de volta para a visão geral do plano
                 navController.navigate(R.id.client_user_plan_overview_fragment)
             }
         })
