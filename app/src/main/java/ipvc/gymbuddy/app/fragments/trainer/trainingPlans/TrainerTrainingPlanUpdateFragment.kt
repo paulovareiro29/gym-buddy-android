@@ -7,6 +7,7 @@ import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentTrainerTrainingPlanUpdateBinding
+import ipvc.gymbuddy.app.utils.NetworkUtils
 import ipvc.gymbuddy.app.viewmodels.trainer.trainingPlan.TrainerTrainingPlanUpdateViewModel
 
 class TrainerTrainingPlanUpdateFragment : BaseFragment<FragmentTrainerTrainingPlanUpdateBinding>(
@@ -22,6 +23,11 @@ class TrainerTrainingPlanUpdateFragment : BaseFragment<FragmentTrainerTrainingPl
 
         arguments?.let {
             trainingPlanId = it.getString("trainingPlanId")
+        }
+
+        if (NetworkUtils.isOffline(requireContext())) {
+            replaceFragmentBy(R.id.trainer_offline_fragment)
+            return
         }
     }
 

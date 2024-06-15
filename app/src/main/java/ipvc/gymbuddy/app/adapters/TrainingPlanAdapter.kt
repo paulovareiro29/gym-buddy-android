@@ -13,6 +13,7 @@ import ipvc.gymbuddy.api.models.TrainingPlan
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.core.BaseRecyclerAdapter
 import ipvc.gymbuddy.app.core.BaseViewHolder
+import ipvc.gymbuddy.app.utils.NetworkUtils
 import ipvc.gymbuddy.app.utils.StringUtils
 
 class TrainingPlanAdapter(dataset: List<TrainingPlan>): BaseRecyclerAdapter<TrainingPlan, TrainingPlanAdapter.ViewHolder>(dataset) {
@@ -52,6 +53,10 @@ class TrainingPlanAdapter(dataset: List<TrainingPlan>): BaseRecyclerAdapter<Trai
         }
 
         holder.addClientButton.setOnClickListener {
+            if (NetworkUtils.isOffline(holder.itemView.context)) {
+                holder.itemView.findNavController().navigate(R.id.trainer_offline_fragment)
+                return@setOnClickListener
+            }
             val activity = it.context as FragmentActivity
             val title = activity.getString(R.string.add_client_to, item.name)
             val bundle = bundleOf("trainingPlan" to Gson().toJson(item))

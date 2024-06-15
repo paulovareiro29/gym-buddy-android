@@ -15,6 +15,7 @@ import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.core.BaseRecyclerAdapter
 import ipvc.gymbuddy.app.core.BaseViewHolder
 import ipvc.gymbuddy.app.fragments.trainer.trainingPlans.exercises.TrainerTrainingPlanExerciseUpdateModal
+import ipvc.gymbuddy.app.utils.NetworkUtils
 
 class TrainingPlanExerciseAdapter(private val fragmentManager: FragmentManager, private val trainingPlanId: String, dataset: List<PlanExercise>)
     : BaseRecyclerAdapter<PlanExercise, TrainingPlanExerciseAdapter.ViewHolder>(dataset) {
@@ -53,6 +54,11 @@ class TrainingPlanExerciseAdapter(private val fragmentManager: FragmentManager, 
             .into(holder.exercisePhoto)
 
         holder.editButton.setOnClickListener {
+            if (NetworkUtils.isOffline(holder.itemView.context)) {
+                holder.itemView.findNavController().navigate(R.id.trainer_offline_fragment)
+                return@setOnClickListener
+            }
+
             val bundle = Bundle().apply {
                 putString("trainingPlanId", trainingPlanId)
                 putString("planExercise", Gson().toJson(item))

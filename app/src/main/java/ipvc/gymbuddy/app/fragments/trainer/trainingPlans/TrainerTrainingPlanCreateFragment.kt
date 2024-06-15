@@ -7,6 +7,7 @@ import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.core.Validator
 import ipvc.gymbuddy.app.databinding.FragmentTrainerTrainingPlanCreateBinding
+import ipvc.gymbuddy.app.utils.NetworkUtils
 import ipvc.gymbuddy.app.viewmodels.trainer.trainingPlan.TrainerTrainingPlanCreateViewModel
 
 class TrainerTrainingPlanCreateFragment : BaseFragment<FragmentTrainerTrainingPlanCreateBinding>(
@@ -14,10 +15,14 @@ class TrainerTrainingPlanCreateFragment : BaseFragment<FragmentTrainerTrainingPl
 ) {
     private lateinit var viewModel : TrainerTrainingPlanCreateViewModel
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = getViewModel()
+
+        if (NetworkUtils.isOffline(requireContext())) {
+            replaceFragmentBy(R.id.trainer_offline_fragment)
+            return
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
