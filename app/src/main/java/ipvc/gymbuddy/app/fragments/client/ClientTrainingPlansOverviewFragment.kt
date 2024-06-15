@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import ipvc.gymbuddy.app.adapters.UserPlanAdapter
+import ipvc.gymbuddy.app.adapters.ClientUserPlanAdapter
 import ipvc.gymbuddy.app.databinding.FragmentClientUserPlanOverviewBinding
 import ipvc.gymbuddy.app.viewmodels.client.TrainerClientPlanViewModel
 
@@ -31,7 +31,7 @@ class ClientTrainingPlansOverviewFragment : Fragment() {
         viewModel.getUserPlans(userId)
         viewModel.userPlans.observe(viewLifecycleOwner) { asyncData ->
             binding.recyclerView.layoutManager = LinearLayoutManager(context)
-            binding.recyclerView.adapter = UserPlanAdapter(asyncData.data ?: emptyList())
+            binding.recyclerView.adapter = ClientUserPlanAdapter(asyncData.data ?: emptyList())
         }
     }
 
