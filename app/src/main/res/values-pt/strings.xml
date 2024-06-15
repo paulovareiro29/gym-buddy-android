@@ -97,4 +97,5 @@
     <string name="ongoing_until">A ocorrer até %s</string>
     <string name="go_back">Voltar</string>
     <string name="offline">Parece que estás sem ligação à internet. Por favor, verifica a tua conexão à internet e tenta novamente.</string>
+    <string name="offline_smaller_message">Parece que estás sem internet.</string>
 </resources>

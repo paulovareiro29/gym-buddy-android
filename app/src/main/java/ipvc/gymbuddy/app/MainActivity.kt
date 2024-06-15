@@ -1,16 +1,22 @@
 package ipvc.gymbuddy.app
 
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
 import ipvc.gymbuddy.app.core.BaseActivity
 import ipvc.gymbuddy.app.core.Navigator
+import ipvc.gymbuddy.app.core.NetworkReceiver
 import ipvc.gymbuddy.app.viewmodels.AuthenticationViewModel
 
 class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment) {
     private lateinit var authViewModel: AuthenticationViewModel
+
+    private var networkListener: NetworkReceiver? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +38,16 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
                 initializeNavigation()
                 initializeBottomMenu()
                 initializeSidebar()
+                initializeNetworkChanges()
             }
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        if (networkListener != null) {
+            unregisterReceiver(networkListener)
         }
     }
 
@@ -149,6 +164,14 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
             drawer.close()
             true
         }
+    }
+
+    private fun initializeNetworkChanges() {
+        networkListener = NetworkReceiver { isOnline ->
+            findViewById<LinearLayout>(R.id.network_status).visibility = if (isOnline) View.GONE else View.VISIBLE
+        }
+
+        registerReceiver(networkListener, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
     }
 }
 
