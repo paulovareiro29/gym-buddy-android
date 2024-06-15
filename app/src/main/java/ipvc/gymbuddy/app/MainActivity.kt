@@ -109,6 +109,12 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
 
                 //CLIENT
                 R.id.sidebar_client_metrics_overview_item -> navController.navigate(R.id.client_metrics_overview_fragment)
+                R.id.sidebar_client_training_plan_overview_item -> {
+                    val bundle = Bundle().apply {
+                        putString("userId", authViewModel.user.value?.id)
+                    }
+                    navController.navigate(R.id.client_user_plan_overview_fragment, bundle)
+                }
 
                 // COMMON ROUTES
                 R.id.sidebar_item_home -> {
