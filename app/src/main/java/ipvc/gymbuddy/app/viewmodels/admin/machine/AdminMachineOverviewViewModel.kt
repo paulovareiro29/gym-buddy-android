@@ -10,4 +10,8 @@ class AdminMachineOverviewViewModel(application: Application) : BaseViewModel(ap
     fun getMachines() {
         machineDataStore.getMachines()
     }
+
+    fun deleteMachine(id: String){
+        machineDataStore.deleteMachine(id)
+    }
 }

@@ -28,6 +28,7 @@ class CategoryDataStore(context: Context) : BaseDataStore(context) {
 
     var categories = MutableLiveData<AsyncData<List<Category>>>(AsyncData(listOf()))
     var post = MutableLiveData<AsyncData<CreateCategoryRequest>>(AsyncData())
+    val delete = MutableLiveData<AsyncData<Unit>>(AsyncData())
 
     fun getCategories() {
         categories.postValue(AsyncData(categories.value?.data ?: listOf(), AsyncData.Status.LOADING))
@@ -64,6 +65,22 @@ class CategoryDataStore(context: Context) : BaseDataStore(context) {
 
             delay(2500)
             post.postValue(AsyncData(null, AsyncData.Status.IDLE))
+        }
+    }
+
+    fun deleteCategory(id: String) {
+        delete.postValue(AsyncData(null, AsyncData.Status.LOADING))
+        coroutine.launch {
+            when(CategoryService().deleteCategory(id))  {
+                is RequestResult.Success -> {
+                    delete.postValue(AsyncData(null, AsyncData.Status.SUCCESS))
+                    getCategories()
+                }
+                is RequestResult.Error -> delete.postValue(AsyncData(null, AsyncData.Status.ERROR))
+            }
+
+            delay(2500)
+            delete.postValue(AsyncData(null, AsyncData.Status.IDLE))
         }
     }
 }

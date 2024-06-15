@@ -10,4 +10,8 @@ class AdminCategoryOverviewViewModel(application: Application) : BaseViewModel(a
     fun getCategories() {
         categoryDataStore.getCategories()
     }
+
+    fun deleteCategory(id: String) {
+        categoryDataStore.deleteCategory(id)
+    }
 }

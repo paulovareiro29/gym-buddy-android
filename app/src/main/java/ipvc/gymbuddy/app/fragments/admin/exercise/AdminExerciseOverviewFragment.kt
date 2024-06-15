@@ -1,10 +1,12 @@
 package ipvc.gymbuddy.app.fragments.admin.exercise
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ipvc.gymbuddy.api.models.Exercise
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.ExerciseAdapter
 import ipvc.gymbuddy.app.core.BaseFragment
@@ -30,9 +32,13 @@ class AdminExerciseOverviewFragment : BaseFragment<FragmentAdminExerciseOverview
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         viewModel.getExercises()
-        viewModel.exercisesData.observe(viewLifecycleOwner) {
+        viewModel.exercisesData.observe(viewLifecycleOwner) { it ->
             if (it.data != null) {
-                recyclerView.adapter = ExerciseAdapter(it.data)
+                val adapter =ExerciseAdapter(it.data)
+                adapter.setOnDeleteListener { delete ->
+                    showDeleteConfirmationDialog(delete)
+                }
+                recyclerView.adapter = adapter
             }
         }
 
@@ -45,5 +51,20 @@ class AdminExerciseOverviewFragment : BaseFragment<FragmentAdminExerciseOverview
             it.name.contains(search, true)
         } ?: listOf()
         recyclerView.adapter = ExerciseAdapter(filtered)
+    }
+
+    private fun showDeleteConfirmationDialog(exercise: Exercise) {
+        val alertDialogBuilder = AlertDialog.Builder(requireContext())
+        alertDialogBuilder.apply {
+            setTitle(getString(R.string.confirm_delete))
+            setMessage(getString(R.string.delete_message, exercise.name))
+            setPositiveButton(getString(R.string.delete) ) { _, _ ->
+                viewModel.deleteExercise(exercise.id)
+            }
+            setNegativeButton(getString(R.string.cancel) ) { dialog, _ ->
+                dialog.dismiss()
+            }
+        }
+        alertDialogBuilder.create().show()
     }
 }
