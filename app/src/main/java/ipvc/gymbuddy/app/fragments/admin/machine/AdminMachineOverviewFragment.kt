@@ -11,6 +11,7 @@ import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.MachineAdapter
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentAdminMachinesOverviewBinding
+import ipvc.gymbuddy.app.utils.NetworkUtils
 import ipvc.gymbuddy.app.viewmodels.admin.machine.AdminMachineOverviewViewModel
 
 class AdminMachineOverviewFragment : BaseFragment<FragmentAdminMachinesOverviewBinding>(
@@ -54,6 +55,11 @@ class AdminMachineOverviewFragment : BaseFragment<FragmentAdminMachinesOverviewB
     }
 
     private fun showDeleteConfirmationDialog(machine: Machine) {
+        if (NetworkUtils.isOffline(requireContext())) {
+            navController.navigate(R.id.admin_offline_fragment)
+            return
+        }
+
         val alertDialogBuilder = AlertDialog.Builder(requireContext())
         alertDialogBuilder.apply {
             setTitle(getString(R.string.confirm_delete))

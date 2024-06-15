@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -86,6 +87,11 @@ abstract class BaseFragment<VB : ViewBinding>(
         } else {
             toolbar.backButton?.setOnClickListener { handleBackButton() }
         }
+    }
+
+    protected fun replaceFragmentBy(@IdRes screen: Int) {
+        navController.popBackStack()
+        navController.navigate(screen)
     }
 
     protected fun changeLanguage(language: String) {

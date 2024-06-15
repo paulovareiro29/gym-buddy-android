@@ -11,6 +11,7 @@ import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentProfileBinding
 import ipvc.gymbuddy.app.utils.ImageUtils
+import ipvc.gymbuddy.app.utils.NetworkUtils
 import ipvc.gymbuddy.app.utils.StringUtils
 import ipvc.gymbuddy.app.viewmodels.AuthenticationViewModel
 import ipvc.gymbuddy.app.viewmodels.ProfileViewModel
@@ -52,6 +53,16 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         binding.avatarImageButton.setOnClickListener { launchPhotoGallery() }
         binding.uploadAvatarButton.setOnClickListener { launchPhotoGallery() }
         binding.editButton.setOnClickListener {
+            if (NetworkUtils.isOffline(requireContext())) {
+                navController.navigate(
+                    when (authenticationViewModel.user.value!!.role.name) {
+                    "admin" -> R.id.admin_offline_fragment
+                    "trainer" -> R.id.trainer_offline_fragment
+                    "default" -> R.id.client_offline_fragment
+                    else -> {R.id.not_found_navigation}
+                })
+                return@setOnClickListener
+            }
             when (authenticationViewModel.user.value!!.role.name) {
                 "admin" -> navController.navigate(R.id.admin_edit_profile_fragment)
                 "trainer" -> navController.navigate(R.id.trainer_edit_profile_fragment)
@@ -70,6 +81,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
     }
 
     private fun launchPhotoGallery() {
+        if (NetworkUtils.isOffline(requireContext())) return
         gallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
     }
 
