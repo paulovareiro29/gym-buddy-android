@@ -2,12 +2,14 @@ package ipvc.gymbuddy.app.fragments.trainer.trainingPlans.exercises
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 import ipvc.gymbuddy.api.models.PlanExercise
 import ipvc.gymbuddy.api.models.TrainingPlan
 import ipvc.gymbuddy.app.R
@@ -26,8 +28,12 @@ class TrainerTrainingPlanExercisesOverviewFragment : BaseFragment<FragmentTraine
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = getViewModel()
-        arguments?.let {
-            trainingPlan = Gson().fromJson(it.getString("trainingPlan"), TrainingPlan::class.java)
+        try {
+            trainingPlan = Gson().fromJson(arguments?.getString("trainingPlan"), TrainingPlan::class.java)
+
+            Log.d("test", trainingPlan.toString())
+        } catch (_: JsonSyntaxException) {
+            navController.navigateUp()
         }
     }
 
@@ -36,11 +42,17 @@ class TrainerTrainingPlanExercisesOverviewFragment : BaseFragment<FragmentTraine
         if (trainingPlan == null) navController.navigateUp()
 
         loadToolbar(trainingPlan!!.name)
+        loadExercises()
 
+        binding.createExercise.setOnClickListener { handleCreateExercise() }
+    }
+
+    private fun loadExercises() {
         viewModel.getPlanExercises(trainingPlan!!.id)
 
-        val viewPager: ViewPager2 = view.findViewById(R.id.view_pager)
-        val tabLayout: TabLayout = view.findViewById(R.id.tab_layout)
+        val viewPager: ViewPager2 = binding.viewPager
+        val tabLayout: TabLayout = binding.tabLayout
+
         viewModel.planExerciseData.observe(viewLifecycleOwner) { resource ->
             val exercises = resource.data ?: return@observe
             val uniqueDays = exercises.map { it.day }.distinct()
@@ -62,29 +74,29 @@ class TrainerTrainingPlanExercisesOverviewFragment : BaseFragment<FragmentTraine
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->
                 tab.text = uniqueDays[position]
             }.attach()
-        }
 
-        binding.createExercise.setOnClickListener {
-            val bundle = Bundle().apply {
-                putString("trainingPlanId", trainingPlan?.id)
-            }
-            val dialogFragment = TrainerTrainingPlanExerciseCreateModal().apply {
-                arguments = bundle
-                setExerciseCreationListener(object :
-                    TrainerTrainingPlanExerciseCreateModal.ExerciseCreationListener {
-                    override fun onExerciseCreated() {
-                        updateExerciseList()
-                    }
-                })
-            }
-            dialogFragment.show(childFragmentManager, "TrainerTrainingPlanExerciseCreateModal")
+            viewPager.visibility = View.VISIBLE
+            tabLayout.visibility = View.VISIBLE
         }
     }
 
-    private fun updateExerciseList() {
-        trainingPlan?.id?.let { planId ->
-            viewModel.getPlanExercises(planId)
+    private fun handleCreateExercise() {
+        val dialogFragment = TrainerTrainingPlanExerciseCreateModal().apply {
+            arguments = Bundle().apply {
+                putString("trainingPlanId", trainingPlan!!.id)
+            }
+            setExerciseCreationListener(object :
+                TrainerTrainingPlanExerciseCreateModal.ExerciseCreationListener {
+                override fun onExerciseCreated() {
+                    updateExerciseList()
+                }
+            })
         }
+        dialogFragment.show(childFragmentManager, "TrainerTrainingPlanExerciseCreateModal")
+    }
+
+    private fun updateExerciseList() {
+        viewModel.getPlanExercises(trainingPlan!!.id)
     }
 
     private fun showDeleteConfirmationDialog(planExercise: PlanExercise) {
