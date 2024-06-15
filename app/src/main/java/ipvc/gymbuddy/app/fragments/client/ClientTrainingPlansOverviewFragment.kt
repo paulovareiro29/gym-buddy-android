@@ -7,26 +7,31 @@ import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.adapters.ClientUserPlanAdapter
 import ipvc.gymbuddy.app.databinding.FragmentClientUserPlanOverviewBinding
+import ipvc.gymbuddy.app.viewmodels.AuthenticationViewModel
 import ipvc.gymbuddy.app.viewmodels.client.TrainerClientPlanViewModel
 
 class ClientTrainingPlansOverviewFragment : BaseFragment<FragmentClientUserPlanOverviewBinding>(
     FragmentClientUserPlanOverviewBinding::inflate
 ) {
 
+    private lateinit var authViewModel: AuthenticationViewModel
     private lateinit var viewModel: TrainerClientPlanViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = getViewModel()
+        authViewModel = getViewModel()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadToolbar(getString(R.string.training_plans_overview))
 
-        val userId = arguments?.getString("userId") ?: throw IllegalStateException("User ID must be passed to ClientTrainingPlansOverviewFragment")
+        loadPlans()
+    }
 
-        viewModel.getUserPlans(userId)
+    private fun loadPlans() {
+        viewModel.getUserPlans(authViewModel.user.value!!.id)
         viewModel.userPlans.observe(viewLifecycleOwner) { asyncData ->
             if (asyncData.data != null) {
                 binding.recyclerView.layoutManager = LinearLayoutManager(context)

@@ -99,4 +99,6 @@
     <string name="view_user">View User</string>
     <string name="update_exercise">Update Exercise</string>
     <string name="update_machine">Update Machine</string>
+    <string name="starts_on">Starts on %s</string>
+    <string name="ends_on">Ends on %s</string>
 </resources>

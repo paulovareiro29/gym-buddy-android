@@ -91,4 +91,6 @@
     <string name="view_user">Visualizar Utilizador</string>
     <string name="update_exercise">Atualizar Exercício</string>
     <string name="update_machine">Atualizar Máquina</string>
+    <string name="starts_on">Começa em %s</string>
+    <string name="ends_on">Acaba em %s</string>
 </resources>

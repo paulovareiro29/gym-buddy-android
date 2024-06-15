@@ -37,6 +37,23 @@
             android:layout_height="wrap_content"
             tools:text="Training Plan" />
 
+        <TextView
+            android:id="@+id/starts_on"
+            style="@style/Theme.Typography.Body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gray"
+            tools:text="Starts on 01-01-2024" />
+
+        <TextView
+            android:id="@+id/ends_on"
+            style="@style/Theme.Typography.Body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gray"
+            tools:text="Ends on 31-12-2024" />
+
+
     </LinearLayout>
 
     <LinearLayout

@@ -10,11 +10,14 @@ import ipvc.gymbuddy.api.models.UserPlan
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.core.BaseRecyclerAdapter
 import ipvc.gymbuddy.app.core.BaseViewHolder
+import ipvc.gymbuddy.app.utils.DateUtils
 
 class ClientUserPlanAdapter(dataset: List<UserPlan>) : BaseRecyclerAdapter<UserPlan, ClientUserPlanAdapter.ViewHolder>(dataset) {
 
     class ViewHolder(view: View) : BaseViewHolder(view) {
         val name: TextView = view.findViewById(R.id.plan_name)
+        val startsOn: TextView = view.findViewById(R.id.starts_on)
+        val endsOn: TextView = view.findViewById(R.id.ends_on)
         val viewPlan: ImageButton = view.findViewById(R.id.view_plan)
     }
 
@@ -26,6 +29,9 @@ class ClientUserPlanAdapter(dataset: List<UserPlan>) : BaseRecyclerAdapter<UserP
 
     override fun bindViewHolder(holder: ViewHolder, item: UserPlan, position: Int) {
         holder.name.text = item.plan.name
+        holder.startsOn.text = holder.itemView.context.getString(R.string.starts_on, DateUtils.formatDateFromIso8601(item.start_date))
+        holder.endsOn.text = holder.itemView.context.getString(R.string.ends_on, DateUtils.formatDateFromIso8601(item.end_date))
+
         holder.viewPlan.setOnClickListener { handleViewPlan(holder, item) }
     }
 
