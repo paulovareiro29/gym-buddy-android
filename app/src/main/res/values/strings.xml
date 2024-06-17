@@ -108,4 +108,10 @@
     <string name="oops" translatable="false">Oops!</string>
     <string name="offline_smaller_message">Looks like you are offline.</string>
     <string name="logout_message">Are you sure you want to logout?</string>
+    <string name="at_least_characters">At least %d characters</string>
+    <string name="at_least_digit">At least %d digit</string>
+    <string name="at_least_uppercase_letter">At least %d uppercase letter</string>
+    <string name="at_least_lowercase_letter">At least %d lowercase letter</string>
+    <string name="at_least_special_character">At least %d special character (!@#$^&amp;*()_-+=?/{}~|)</string>
+    <string name="password_requirements">Password requirements</string>
 </resources>

@@ -99,4 +99,10 @@
     <string name="offline">Parece que está sem ligação à internet. Por favor, verifica a tua conexão à internet e tenta novamente.</string>
     <string name="offline_smaller_message">Parece que está sem internet.</string>
     <string name="logout_message">Tem a certeza que pretende fazer logout?</string>
+    <string name="at_least_characters">Pelo menos %d caracteres</string>
+    <string name="at_least_digit">Pelo menos %d digito</string>
+    <string name="at_least_uppercase_letter">Pelo menos %d maiuscula</string>
+    <string name="at_least_lowercase_letter">Pelo menos %d minuscula</string>
+    <string name="at_least_special_character">Pelo menos %d caracter especial (!@#$^&amp;*()_-+=?/{}~|)</string>
+    <string name="password_requirements">Requisitos da password</string>
 </resources>
