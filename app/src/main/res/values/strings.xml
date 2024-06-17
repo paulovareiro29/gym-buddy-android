@@ -107,4 +107,5 @@
     <string name="offline">It looks like you\'re offline. Please check your internet connection and try again.</string>
     <string name="oops" translatable="false">Oops!</string>
     <string name="offline_smaller_message">Looks like you are offline.</string>
+    <string name="logout_message">Are you sure you want to logout?</string>
 </resources>
