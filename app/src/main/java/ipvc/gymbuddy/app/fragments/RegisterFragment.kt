@@ -1,7 +1,9 @@
 package ipvc.gymbuddy.app.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
+import androidx.core.widget.addTextChangedListener
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.core.Validator
@@ -18,6 +20,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.password.editText?.addTextChangedListener { handlePasswordInput() }
+        binding.passwordRequirements?.setOnClickListener { showPasswordRequirements() }
         binding.submitButton.setOnClickListener { handleRegisterButtonClick() }
         viewModel.activateStatus.observe(requireActivity()) {
             resetView()
@@ -39,7 +44,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(
                 }
             }
         }
-
         viewModel.activateStatus.postValue("idle")
     }
 
@@ -47,6 +51,12 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(
         binding.submitButton.isEnabled = true
         binding.submitButton.setBackgroundColor(requireContext().getColor(R.color.primaryColor))
         binding.message.visibility = View.INVISIBLE
+    }
+
+    private fun handlePasswordInput() {
+        val password = binding.password.editText!!.text.toString()
+        val strength = viewModel.getPasswordStrength(password)
+        binding.passwordProgressBar?.progress = (strength / 5.0 * 100).toInt()
     }
 
     private fun handleRegisterButtonClick() {
@@ -65,5 +75,21 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(
         if (!Validator.validateRequiredField(code, requireContext())) return
 
         viewModel.activate(email.text.toString(), password.text.toString(), code.text.toString())
+    }
+
+    private fun showPasswordRequirements() {
+        val requirements = """
+            - ${requireContext().getString(R.string.at_least_characters, 8)}
+            - ${requireContext().getString(R.string.at_least_digit, 1)}
+            - ${requireContext().getString(R.string.at_least_uppercase_letter, 1)}
+            - ${requireContext().getString(R.string.at_least_lowercase_letter, 1)}
+            - ${requireContext().getString(R.string.at_least_special_character, 1)}
+        """.trimIndent()
+
+        AlertDialog.Builder(requireContext())
+            .setTitle(requireContext().getString(R.string.password_requirements))
+            .setMessage(requirements)
+            .setPositiveButton("OK", null)
+            .show()
     }
 }

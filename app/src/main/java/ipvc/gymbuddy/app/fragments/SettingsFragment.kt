@@ -6,6 +6,7 @@ import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentSettingsBinding
 import android.animation.ObjectAnimator
+import android.app.AlertDialog
 import android.view.animation.AccelerateDecelerateInterpolator
 import ipvc.gymbuddy.app.viewmodels.AuthenticationViewModel
 
@@ -61,7 +62,17 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
     }
 
     private fun handleLogout(){
-        authViewModel.logout()
+        val alertDialogBuilder = AlertDialog.Builder(requireContext())
+        alertDialogBuilder.apply {
+            setTitle(getString(R.string.logout))
+            setMessage(getString(R.string.logout_message))
+            setPositiveButton(getString(R.string.logout) ) { _, _ ->
+                authViewModel.logout()
+            }
+            setNegativeButton(getString(R.string.cancel) ) { dialog, _ ->
+                dialog.dismiss()
+            }
+        }
+        alertDialogBuilder.create().show()
     }
-
 }

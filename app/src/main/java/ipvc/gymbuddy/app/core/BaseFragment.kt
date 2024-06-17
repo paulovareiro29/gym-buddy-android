@@ -95,6 +95,7 @@ abstract class BaseFragment<VB : ViewBinding>(
     }
 
     protected fun changeLanguage(language: String) {
+        LanguageStorage.getInstance().setCurrentLanguage(language)
         AppCompatDelegate.setApplicationLocales(
             LocaleListCompat.create(Locale.forLanguageTag(language))
         )
