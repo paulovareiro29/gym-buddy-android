@@ -6,6 +6,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModel
@@ -13,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import ipvc.gymbuddy.app.R
+import java.util.Locale
 
 abstract class BaseActivity(
     @LayoutRes protected val layoutResId: Int,
@@ -27,6 +30,11 @@ abstract class BaseActivity(
         )
         super.onCreate(savedInstanceState)
         setContentView(layoutResId)
+
+        LanguageStorage.getInstance().init(this)
+        AppCompatDelegate.setApplicationLocales(
+            LocaleListCompat.create(Locale.forLanguageTag(LanguageStorage.getInstance().getCurrentLanguage() ?: "en"))
+        )
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.root)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

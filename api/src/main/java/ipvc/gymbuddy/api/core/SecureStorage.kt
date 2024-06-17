@@ -5,7 +5,7 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.google.gson.Gson
 
-class SecureStorage(sharedPreferencesName: String, context: Context) {
+open class SecureStorage(sharedPreferencesName: String, context: Context) {
     private var masterKey = MasterKey.Builder(context, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
         .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
         .build()
