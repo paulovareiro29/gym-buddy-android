@@ -107,4 +107,8 @@
     <string name="offline">It looks like you\'re offline. Please check your internet connection and try again.</string>
     <string name="oops" translatable="false">Oops!</string>
     <string name="offline_smaller_message">Looks like you are offline.</string>
+    <string name="add_contract">Create Contract</string>
+    <string name="select_trainer">Select Trainer</string>
+    <string name="select_category">Select Contract Category</string>
+    <string name="save_contract">Save Contract</string>
 </resources>

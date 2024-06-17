@@ -98,4 +98,8 @@
     <string name="go_back">Voltar</string>
     <string name="offline">Parece que estás sem ligação à internet. Por favor, verifica a tua conexão à internet e tenta novamente.</string>
     <string name="offline_smaller_message">Parece que estás sem internet.</string>
+    <string name="add_contract">Criar Contrato</string>
+    <string name="select_trainer">Selecionar Trainer</string>
+    <string name="select_category">Selecionar Categoria De Contrato</string>
+    <string name="save_contract">Guardar Contrato</string>
 </resources>
