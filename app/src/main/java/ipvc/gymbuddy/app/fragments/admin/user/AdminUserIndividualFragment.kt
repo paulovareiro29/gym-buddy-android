@@ -25,6 +25,7 @@ class AdminUserIndividualFragment : BaseFragment<FragmentAdminUserIndividualBind
             navController.navigateUp()
         }
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadToolbar(user.name ?: getString(R.string.view_user))
@@ -39,6 +40,13 @@ class AdminUserIndividualFragment : BaseFragment<FragmentAdminUserIndividualBind
             email.text = user.email
             address.text = user.address
             role.text  = StringUtils.capitalize(user.role.name)
+
+            addContractButton.setOnClickListener {
+                val bundle = Bundle().apply {
+                    putString("userId", user.id)
+                }
+                navController.navigate(R.id.action_admin_user_individual_fragment_to_admin_add_contract_fragment, bundle)
+            }
         }
     }
 }

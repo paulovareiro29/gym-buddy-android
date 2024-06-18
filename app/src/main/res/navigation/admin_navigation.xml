@@ -139,7 +139,17 @@
     <fragment
         android:id="@+id/admin_user_individual_fragment"
         android:name="ipvc.gymbuddy.app.fragments.admin.user.AdminUserIndividualFragment"
-        android:label="AdminUserIndividualFragment" />
+        android:label="AdminUserIndividualFragment">
+        <action
+            android:id="@+id/action_admin_user_individual_fragment_to_admin_add_contract_fragment"
+            app:destination="@id/admin_add_contract_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/admin_add_contract_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.contract.AdminContractCreateFragment"
+        android:label="AdminAddContractFragment"
+        tools:layout="@layout/fragment_admin_user_individual_contract_create" />
     <fragment
         android:id="@+id/admin_offline_fragment"
         android:name="ipvc.gymbuddy.app.fragments.OfflineFragment"
