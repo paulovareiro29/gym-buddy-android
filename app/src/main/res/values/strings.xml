@@ -118,4 +118,7 @@
     <string name="select_trainer">Select Trainer</string>
     <string name="select_category">Select Contract Category</string>
     <string name="save_contract">Save Contract</string>
+    <string name="create_contract_category">Create Contract Category</string>
+    <string name="contract_categories_overview">Contract Categories Overview</string>
+    <string name="contract_categories">Contract Categories</string>
 </resources>
