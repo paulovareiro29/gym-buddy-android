@@ -32,10 +32,7 @@
                 <AutoCompleteTextView
                     android:id="@+id/trainer_spinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:minHeight="48dp"
-                    android:inputType="none"/>
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -49,16 +46,14 @@
                 <AutoCompleteTextView
                     android:id="@+id/category_spinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:minHeight="48dp"
-                    android:inputType="none"/>
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginTop="4dp">
 
                 <TextView
                     style="@style/Theme.Typography.LabelLarge"
@@ -71,8 +66,6 @@
                     android:id="@+id/start_date_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="48dp"
-                    android:padding="12dp"
                     android:text="@string/start_date"
                     android:textAllCaps="true"
                     android:gravity="center_vertical"
@@ -83,8 +76,6 @@
                     android:id="@+id/end_date_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="48dp"
-                    android:padding="12dp"
                     android:text="@string/end_date"
                     android:textAllCaps="true"
                     android:gravity="center_vertical"
@@ -106,8 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="12dp"
-                android:text="@string/save_contract"
-                android:layout_marginTop="16dp"/>
+                android:text="@string/save_contract"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
