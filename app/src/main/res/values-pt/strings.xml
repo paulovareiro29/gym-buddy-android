@@ -105,11 +105,8 @@
     <string name="password_requirements">Requisitos da password</string>
     <string name="offline">Parece que estás sem ligação à internet. Por favor, verifica a tua conexão à internet e tenta novamente.</string>
     <string name="offline_smaller_message">Parece que estás sem internet.</string>
-    <string name="add_contract">Criar Contrato</string>
-    <string name="select_trainer">Selecionar Trainer</string>
-    <string name="select_category">Selecionar Categoria De Contrato</string>
-    <string name="save_contract">Guardar Contrato</string>
-    <string name="create_contract_category">Criar Categoria de Contrato</string>
-    <string name="contract_categories_overview">Vista CAtegorias de Contrato</string>
-    <string name="contract_categories">Categorias de Contrato</string>
+    <string name="add_contract">Criar contrato</string>
+    <string name="select_trainer">Selecionar trainer</string>
+    <string name="select_category">Selecionar categoria</string>
+    <string name="save_contract">Guardar contrato</string>
 </resources>

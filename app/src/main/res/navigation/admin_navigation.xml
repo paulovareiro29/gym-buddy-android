@@ -155,14 +155,4 @@
         android:name="ipvc.gymbuddy.app.fragments.OfflineFragment"
         android:label="fragment_offline"
         tools:layout="@layout/fragment_offline" />
-    <fragment
-        android:id="@+id/admin_contract_category_create_fragment"
-        android:name="ipvc.gymbuddy.app.fragments.admin.contractCategory.AdminContractCategoryCreateFragment"
-        android:label="fragment_admin_contract_category_create"
-        tools:layout="@layout/fragment_admin_contract_category_create" />
-    <fragment
-        android:id="@+id/admin_contract_categories_overview_fragment"
-        android:name="ipvc.gymbuddy.app.fragments.admin.contractCategory.AdminContractCategoryOverviewFragment"
-        android:label="fragment_admin_contract_category_overview"
-        tools:layout="@layout/fragment_admin_contract_category_overview" />
 </navigation>

@@ -7,11 +7,13 @@ import ipvc.gymbuddy.api.models.User
 import ipvc.gymbuddy.app.datastore.ContractDataStore
 import ipvc.gymbuddy.app.datastore.UserDataStore
 import ipvc.gymbuddy.app.viewmodels.BaseViewModel
+import java.util.Date
 
 class AdminContractCreateViewModel(application: Application) : BaseViewModel(application) {
 
     private val userDataStore = UserDataStore.getInstance(application)
     private val contractDataStore = ContractDataStore.getInstance(application)
+    val postData = contractDataStore.post
 
     val trainers = MutableLiveData<List<User>>()
     val categories = MutableLiveData<List<ContractCategory>>()
@@ -32,7 +34,7 @@ class AdminContractCreateViewModel(application: Application) : BaseViewModel(app
         }
     }
 
-    fun createContract(beneficiaryId: String, trainerId: String, categoryId: String, startDate: String, endDate: String) {
+    fun createContract(beneficiaryId: String, trainerId: String, categoryId: String, startDate: Date, endDate: Date) {
         contractDataStore.createContract(beneficiaryId, trainerId, categoryId, startDate, endDate)
     }
 }

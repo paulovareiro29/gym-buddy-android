@@ -52,7 +52,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/primaryColor"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:text="Gym Buddy"/>
 
             <TextView
                 android:id="@+id/email"
@@ -60,7 +61,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/gray"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:text="gymbuddy@ipvc.pt"/>
 
             <com.google.android.material.chip.Chip
                 style="@style/Widget.Material3.Chip.Suggestion"
@@ -133,11 +135,11 @@
 
         <!-- ADD CONTRACT BUTTON -->
         <Button
+            style="@style/Theme.Button.Primary"
             android:id="@+id/add_contract_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/add_contract"
-            style="?attr/materialIconButtonFilledStyle"
             android:layout_marginTop="24dp" />
     </LinearLayout>
 </LinearLayout>
