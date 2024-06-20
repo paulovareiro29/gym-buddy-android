@@ -114,8 +114,9 @@
     <string name="at_least_lowercase_letter">At least %d lowercase letter</string>
     <string name="at_least_special_character">At least %d special character (!@#$^&amp;*()_-+=?/{}~|)</string>
     <string name="password_requirements">Password requirements</string>
-    <string name="add_contract">Create Contract</string>
-    <string name="select_trainer">Select Trainer</string>
-    <string name="select_category">Select Contract Category</string>
-    <string name="save_contract">Save Contract</string>
+    <string name="add_contract">Create contract</string>
+    <string name="select_trainer">Select trainer</string>
+    <string name="select_category">Select category</string>
+    <string name="save_contract">Save contract</string>
+    <string name="contracts">Contracts</string>
 </resources>

@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import ipvc.gymbuddy.database.converters.DateConverter
 import ipvc.gymbuddy.database.dao.ICategoryDao
+import ipvc.gymbuddy.database.dao.IContractCategoryDao
 import ipvc.gymbuddy.database.dao.IContractDao
 import ipvc.gymbuddy.database.dao.IExerciseDao
 import ipvc.gymbuddy.database.dao.IMachineDao
@@ -19,6 +20,7 @@ import ipvc.gymbuddy.database.dao.IUserDao
 import ipvc.gymbuddy.database.dao.IUserPlanDao
 import ipvc.gymbuddy.database.entities.DBCategory
 import ipvc.gymbuddy.database.entities.DBContract
+import ipvc.gymbuddy.database.entities.DBContractCategory
 import ipvc.gymbuddy.database.entities.DBExercise
 import ipvc.gymbuddy.database.entities.DBMachine
 import ipvc.gymbuddy.database.entities.DBMetricTypes
@@ -35,6 +37,7 @@ import ipvc.gymbuddy.database.entities.DBUserStatistic
     DBUserStatistic::class,
     DBRole::class,
     DBCategory::class,
+    DBContractCategory::class,
     DBMachine::class,
     DBExercise::class,
     DBTrainingPlan::class,
@@ -43,7 +46,7 @@ import ipvc.gymbuddy.database.entities.DBUserStatistic
     DBMetrics::class,
     DBMetricTypes::class,
     DBUserPlan::class
-], version = 6)
+], version = 7)
 @TypeConverters(DateConverter::class)
 abstract class LocalDatabase : RoomDatabase() {
     companion object {
@@ -76,4 +79,5 @@ abstract class LocalDatabase : RoomDatabase() {
     abstract fun metrics(): IMetricDao
     abstract fun metricTypes(): IMetricTypeDao
     abstract fun userPlan(): IUserPlanDao
+    abstract fun contractCategory(): IContractCategoryDao
 }

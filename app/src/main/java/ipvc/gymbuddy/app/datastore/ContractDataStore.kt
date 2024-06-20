@@ -15,9 +15,9 @@ import ipvc.gymbuddy.app.extensions.toDatabaseModel
 import ipvc.gymbuddy.app.utils.NetworkUtils
 import ipvc.gymbuddy.database.LocalDatabase
 import ipvc.gymbuddy.app.utils.DateUtils
-import java.text.SimpleDateFormat
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.util.Locale
+import java.util.Date
 
 class ContractDataStore(context: Context) : BaseDataStore(context) {
 
@@ -60,6 +60,31 @@ class ContractDataStore(context: Context) : BaseDataStore(context) {
         }
     }
 
+    fun getContractsByBeneficiary(beneficiaryId: String) {
+        contracts.postValue(AsyncData(contracts.value?.data, AsyncData.Status.LOADING))
+        coroutine.launch {
+            if (NetworkUtils.isOffline(context)) {
+                contracts.postValue(AsyncData(
+                    LocalDatabase.getInstance(context).contract().getAll().map { it.toAPIModel() },
+                    AsyncData.Status.SUCCESS
+                ))
+                return@launch
+            }
+
+            when (val response = ContractService().getContractByBeneficiary(beneficiaryId)) {
+                is RequestResult.Success -> {
+                    contracts.postValue(AsyncData(response.data.contracts, AsyncData.Status.SUCCESS))
+                    LocalDatabase.getInstance(context).contract().insertAll(response.data.contracts.map { it.toDatabaseModel() })
+                }
+
+                is RequestResult.Error -> {
+                    contracts.postValue(AsyncData(contracts.value?.data, AsyncData.Status.ERROR))
+                }
+            }
+        }
+    }
+
+
     fun getCategories() {
         categories.postValue(AsyncData(categories.value?.data, AsyncData.Status.LOADING))
         coroutine.launch {
@@ -74,31 +99,17 @@ class ContractDataStore(context: Context) : BaseDataStore(context) {
         }
     }
 
-    fun createContract(beneficiaryId: String, providerId: String, categoryId: String, startDate: String, endDate: String) {
-        val startDateFormatted = try {
-            DateUtils.parseToUTC(SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(startDate)!!)
-        } catch (e: Exception) {
-            return
-        }
-
-        val endDateFormatted = try {
-            DateUtils.parseToUTC(SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(endDate)!!)
-        } catch (e: Exception) {
-            return
-        }
-
-        val entity = CreateContractRequest(beneficiaryId, providerId, categoryId, startDateFormatted, endDateFormatted)
-
+    fun createContract(beneficiaryId: String, providerId: String, categoryId: String, startDate: Date, endDate: Date) {
+        val entity = CreateContractRequest(beneficiaryId, providerId, categoryId, DateUtils.parseToUTC(startDate), DateUtils.parseToUTC(endDate))
+        post.postValue(AsyncData(entity, AsyncData.Status.LOADING))
         coroutine.launch {
-            when (val response = ContractService().createContract(entity)) {
-                is RequestResult.Success -> {
-                    post.postValue(AsyncData(null, AsyncData.Status.SUCCESS))
-                    getContracts()
-                }
-                is RequestResult.Error -> {
-                    post.postValue(AsyncData(null, AsyncData.Status.ERROR))
-                }
+            when(ContractService().createContract(entity)) {
+                is RequestResult.Success -> post.postValue(AsyncData(null, AsyncData.Status.SUCCESS))
+                is RequestResult.Error -> post.postValue(AsyncData(null, AsyncData.Status.ERROR))
             }
+
+            delay(2500)
+            post.postValue(AsyncData(null, AsyncData.Status.IDLE))
         }
     }
 }
