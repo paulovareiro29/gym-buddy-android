@@ -21,6 +21,17 @@ class ContractService: HttpClient<IContractService>(IContractService::class.java
         }
     }
 
+    suspend fun getContractByBeneficiary(beneficiary: String): RequestResult<GetAllContractsResponse> {
+        return when (val response = request(api.getContractsByBeneficiary(beneficiary))) {
+            is RequestResult.Success -> RequestResult.Success(
+                code = response.code,
+                message = response.message,
+                data = ResponseParser.payload<GetAllContractsResponse>(response)
+            )
+            is RequestResult.Error -> response
+        }
+    }
+
     suspend fun createContract(body: CreateContractRequest): RequestResult<CreateContractResponse> {
         return when (val response = request(api.createContract(body))) {
             is RequestResult.Success -> RequestResult.Success(

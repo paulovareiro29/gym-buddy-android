@@ -14,6 +14,9 @@ interface IContractService {
     @GET("contracts")
     fun getContracts(@Query("provider_id") providerId: String?): Call<RequestResult.Success<GetAllContractsResponse>>
 
+    @GET("contracts")
+    fun getContractsByBeneficiary(@Query("beneficiary_id") beneficiaryId: String?): Call<RequestResult.Success<GetAllContractsResponse>>
+
     @POST("contracts")
     fun createContract(@Body body: CreateContractRequest): Call<RequestResult.Success<CreateContractResponse>>
 }

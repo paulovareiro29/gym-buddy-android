@@ -6,7 +6,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ipvc.gymbuddy.app.R
-import ipvc.gymbuddy.app.adapters.ContractAdapter
+import ipvc.gymbuddy.app.adapters.TrainerContractAdapter
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentTrainerListClientsOverviewBinding
 import ipvc.gymbuddy.app.viewmodels.trainer.contract.TrainerListClientsOverviewViewModel
@@ -32,7 +32,7 @@ class TrainerListClientsOverviewFragment : BaseFragment<FragmentTrainerListClien
         viewModel.getContracts()
         viewModel.contractsData.observe(viewLifecycleOwner) {
             if (it.data != null) {
-                recyclerView.adapter = ContractAdapter(it.data)
+                recyclerView.adapter = TrainerContractAdapter(it.data)
             }
         }
         binding.searchInput.editText?.addTextChangedListener { handleSearch(it.toString()) }
@@ -43,6 +43,6 @@ class TrainerListClientsOverviewFragment : BaseFragment<FragmentTrainerListClien
         val filtered = viewModel.contractsData.value?.data?.filter {
             it.beneficiary.name.contains(search, true)
         } ?: listOf()
-        recyclerView.adapter = ContractAdapter(filtered)
+        recyclerView.adapter = TrainerContractAdapter(filtered)
     }
 }

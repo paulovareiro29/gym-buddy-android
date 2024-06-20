@@ -60,6 +60,31 @@ class ContractDataStore(context: Context) : BaseDataStore(context) {
         }
     }
 
+    fun getContractsByBeneficiary(beneficiaryId: String) {
+        contracts.postValue(AsyncData(contracts.value?.data, AsyncData.Status.LOADING))
+        coroutine.launch {
+            if (NetworkUtils.isOffline(context)) {
+                contracts.postValue(AsyncData(
+                    LocalDatabase.getInstance(context).contract().getAll().map { it.toAPIModel() },
+                    AsyncData.Status.SUCCESS
+                ))
+                return@launch
+            }
+
+            when (val response = ContractService().getContractByBeneficiary(beneficiaryId)) {
+                is RequestResult.Success -> {
+                    contracts.postValue(AsyncData(response.data.contracts, AsyncData.Status.SUCCESS))
+                    LocalDatabase.getInstance(context).contract().insertAll(response.data.contracts.map { it.toDatabaseModel() })
+                }
+
+                is RequestResult.Error -> {
+                    contracts.postValue(AsyncData(contracts.value?.data, AsyncData.Status.ERROR))
+                }
+            }
+        }
+    }
+
+
     fun getCategories() {
         categories.postValue(AsyncData(categories.value?.data, AsyncData.Status.LOADING))
         coroutine.launch {
