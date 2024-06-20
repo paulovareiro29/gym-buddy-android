@@ -2,7 +2,6 @@ package ipvc.gymbuddy.app.fragments
 
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
@@ -116,7 +115,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         binding.userContracts.visibility = View.VISIBLE
         viewModel.getContracts()
         viewModel.contracts.observe(viewLifecycleOwner) {
-            Log.d("test", it.data.toString())
             if (!it.data.isNullOrEmpty()) {
                 binding.contractsRecyclerView.adapter = ContractAdapter(it.data)
             }
