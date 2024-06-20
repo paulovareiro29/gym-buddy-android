@@ -43,12 +43,16 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
         }
     }
 
-    override fun onStop() {
-        super.onStop()
-
+    override fun onPause() {
         if (networkListener != null) {
             unregisterReceiver(networkListener)
         }
+        super.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initializeNetworkChanges()
     }
 
     private fun initializeNavigation() {
@@ -168,7 +172,8 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
 
     private fun initializeNetworkChanges() {
         networkListener = NetworkReceiver { isOnline ->
-            findViewById<LinearLayout>(R.id.network_status).visibility = if (isOnline) View.GONE else View.VISIBLE
+            val statusBanner = findViewById<LinearLayout>(R.id.network_status) ?: return@NetworkReceiver
+            statusBanner.visibility = if (isOnline) View.GONE else View.VISIBLE
         }
 
         registerReceiver(networkListener, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
