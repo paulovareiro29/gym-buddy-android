@@ -151,5 +151,31 @@
 
             </LinearLayout>
         </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/user_contracts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="24dp"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                style="@style/Theme.Typography.TitleLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/primaryColor"
+                android:text="@string/contracts"
+                android:layout_marginBottom="8dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/contracts_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

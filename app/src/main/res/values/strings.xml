@@ -118,4 +118,5 @@
     <string name="select_trainer">Select trainer</string>
     <string name="select_category">Select category</string>
     <string name="save_contract">Save contract</string>
+    <string name="contracts">Contracts</string>
 </resources>

@@ -109,4 +109,5 @@
     <string name="select_trainer">Selecionar trainer</string>
     <string name="select_category">Selecionar categoria</string>
     <string name="save_contract">Guardar contrato</string>
+    <string name="contracts">Contratos</string>
 </resources>

@@ -2,11 +2,14 @@ package ipvc.gymbuddy.app.fragments
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.recyclerview.widget.LinearLayoutManager
 import ipvc.gymbuddy.app.R
+import ipvc.gymbuddy.app.adapters.ContractAdapter
 import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentProfileBinding
@@ -28,25 +31,33 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         authenticationViewModel = getViewModel()
         viewModel = getViewModel()
 
-        gallery = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { handleUploadPhoto(it) }
-
+        gallery = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) {
+            handleUploadPhoto(it)
+        }
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadToolbar(getString(R.string.profile), true)
 
         authenticationViewModel.user.observe(viewLifecycleOwner) { user ->
             if (user == null) return@observe
+
+            if (user.role.name == "default") {
+                loadContracts()
+            }
+
             binding.apply {
                 if (user.avatar != null) {
                     val bitmap = ImageUtils.convertBase64ToBitmap(user.avatar!!)
                     if (bitmap != null) avatarImageButton.setImageBitmap(bitmap)
                 }
 
+                binding.contractsRecyclerView.layoutManager = LinearLayoutManager(context)
                 name.text = user.name
                 email.text = user.email
                 address.text = user.address
-                role.text  = StringUtils.capitalize(user.role.name)
+                role.text = StringUtils.capitalize(user.role.name)
             }
         }
 
@@ -56,11 +67,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
             if (NetworkUtils.isOffline(requireContext())) {
                 navController.navigate(
                     when (authenticationViewModel.user.value!!.role.name) {
-                    "admin" -> R.id.admin_offline_fragment
-                    "trainer" -> R.id.trainer_offline_fragment
-                    "default" -> R.id.client_offline_fragment
-                    else -> {R.id.not_found_navigation}
-                })
+                        "admin" -> R.id.admin_offline_fragment
+                        "trainer" -> R.id.trainer_offline_fragment
+                        "default" -> R.id.client_offline_fragment
+                        else -> {
+                            R.id.not_found_navigation
+                        }
+                    }
+                )
                 return@setOnClickListener
             }
             when (authenticationViewModel.user.value!!.role.name) {
@@ -75,6 +89,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 AsyncData.Status.SUCCESS -> {
                     viewModel.refreshAuthenticated()
                 }
+
                 else -> {}
             }
         }
@@ -93,6 +108,19 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
             val base64 = ImageUtils.convertBitmapToBase64(bitmap)
 
             viewModel.updateAvatar(authenticationViewModel.user.value!!.id, base64)
-        } catch (_: IOException) { }
+        } catch (_: IOException) {
+        }
+    }
+
+    private fun loadContracts() {
+        binding.userContracts.visibility = View.VISIBLE
+        viewModel.getContracts()
+        viewModel.contracts.observe(viewLifecycleOwner) {
+            Log.d("test", it.data.toString())
+            if (!it.data.isNullOrEmpty()) {
+                binding.contractsRecyclerView.adapter = ContractAdapter(it.data)
+            }
+        }
     }
 }
+
