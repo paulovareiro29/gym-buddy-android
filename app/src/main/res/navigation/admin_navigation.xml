@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/admin_home_fragment">
+
+    <fragment
+        android:id="@+id/admin_home_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.AdminHomeFragment"
+        android:label="fragment_admin_home"
+        tools:layout="@layout/fragment_admin_home" >
+        <action
+            android:id="@+id/action_admin_home_fragment_to_adminGenerateUserFragment"
+            app:destination="@id/admin_generate_user_fragment" />
+        <action
+            android:id="@+id/action_admin_home_fragment_to_adminUsersFragment"
+            app:destination="@id/admin_users_overview_fragment" />
+        <action
+            android:id="@+id/action_admin_home_fragment_to_adminMachinesOverviewFragment"
+            app:destination="@id/admin_machines_overview_fragment" />
+        <action
+            android:id="@+id/action_admin_home_fragment_to_adminCategoryOverviewFragment"
+            app:destination="@id/admin_categories_overview_fragment" />
+        <action
+            android:id="@+id/action_admin_home_fragment_to_adminExerciseOverviewFragment"
+            app:destination="@id/admin_exercises_overview_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/admin_not_found_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.NotFoundFragment"
+        android:label="fragment_not_found"
+        tools:layout="@layout/fragment_not_found" />
+    <fragment
+        android:id="@+id/admin_profile_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/admin_settings_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/admin_generate_user_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.user.AdminGenerateUserFragment"
+        android:label="fragment_admin_generate_user"
+        tools:layout="@layout/fragment_admin_generate_user" />
+    <fragment
+        android:id="@+id/admin_users_overview_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.user.AdminUsersOverviewFragment"
+        android:label="fragment_admin_users"
+        tools:layout="@layout/fragment_admin_users_overview" >
+        <action
+            android:id="@+id/action_admin_users_overview_fragment_to_admin_generate_user_fragment"
+            app:destination="@id/admin_generate_user_fragment" />
+        <action
+            android:id="@+id/action_admin_users_overview_fragment_to_adminUserIndividualFragment"
+            app:destination="@id/admin_user_individual_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/admin_machines_overview_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.machine.AdminMachineOverviewFragment"
+        android:label="fragment_admin_machines_overview"
+        tools:layout="@layout/fragment_admin_machines_overview" >
+        <action
+            android:id="@+id/action_admin_machines_overview_fragment_to_adminMachineCreateFragment"
+            app:destination="@id/admin_machine_create_fragment" />
+        <action
+            android:id="@+id/action_admin_machines_overview_fragment_to_admin_machine_individual_fragment"
+            app:destination="@id/admin_machine_individual_fragment" />
+        <action
+            android:id="@+id/action_admin_machines_overview_fragment_to_adminMachineUpdateFragment"
+            app:destination="@id/admin_machine_update_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/admin_categories_overview_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.category.AdminCategoryOverviewFragment"
+        android:label="fragment_admin_category_overview"
+        tools:layout="@layout/fragment_admin_category_overview" >
+        <action
+            android:id="@+id/action_admin_categories_overview_fragment_to_adminCategoryCreateFragment"
+            app:destination="@id/admin_category_create_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/admin_category_create_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.category.AdminCategoryCreateFragment"
+        android:label="fragment_admin_category_create"
+        tools:layout="@layout/fragment_admin_category_create" />
+    <fragment
+        android:id="@+id/admin_machine_create_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.machine.AdminMachineCreateFragment"
+        android:label="fragment_admin_machine_create"
+        tools:layout="@layout/fragment_admin_machine_create" />
+    <fragment
+        android:id="@+id/admin_exercises_overview_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.exercise.AdminExerciseOverviewFragment"
+        android:label="fragment_admin_exercise_overview"
+        tools:layout="@layout/fragment_admin_exercise_overview" >
+        <action
+            android:id="@+id/action_admin_exercises_overview_fragment_to_adminExerciseCreateFragment"
+            app:destination="@id/admin_exercise_create_fragment" />
+        <action
+            android:id="@+id/action_admin_exercises_overview_fragment_to_adminExerciseIndividualFragment"
+            app:destination="@id/admin_exercise_individual_fragment" />
+        <action
+            android:id="@+id/action_admin_exercises_overview_fragment_to_admin_exercise_update_fragment"
+            app:destination="@id/admin_exercise_update_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/admin_exercise_create_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.exercise.AdminExerciseCreateFragment"
+        android:label="fragment_admin_exercise_create"
+        tools:layout="@layout/fragment_admin_exercise_create" />
+    <fragment
+        android:id="@+id/admin_edit_profile_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.EditProfileFragment"
+        android:label="EditProfileFragment" />
+    <fragment
+        android:id="@+id/admin_exercise_individual_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.exercise.AdminExerciseIndividualFragment"
+        android:label="fragment_admin_exercise_individual"
+        tools:layout="@layout/fragment_admin_exercise_individual" />
+    <fragment
+        android:id="@+id/admin_machine_individual_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.machine.AdminMachineIndividualFragment"
+        android:label="fragment_admin_machine_individual"
+        tools:layout="@layout/fragment_admin_machine_individual" />
+    <fragment
+        android:id="@+id/admin_exercise_update_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.exercise.AdminExerciseUpdateFragment"
+        android:label="fragment_admin_exercise_update"
+        tools:layout="@layout/fragment_admin_exercise_update" />
+    <fragment
+        android:id="@+id/admin_machine_update_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.machine.AdminMachineUpdateFragment"
+        android:label="fragment_admin_machine_update"
+        tools:layout="@layout/fragment_admin_machine_update" />
+    <fragment
+        android:id="@+id/admin_user_individual_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.user.AdminUserIndividualFragment"
+        android:label="AdminUserIndividualFragment">
+        <action
+            android:id="@+id/action_admin_user_individual_fragment_to_admin_add_contract_fragment"
+            app:destination="@id/admin_add_contract_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/admin_add_contract_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.contract.AdminContractCreateFragment"
+        android:label="AdminAddContractFragment"
+        tools:layout="@layout/fragment_admin_user_individual_contract_create" />
+    <fragment
+        android:id="@+id/admin_offline_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.OfflineFragment"
+        android:label="fragment_offline"
+        tools:layout="@layout/fragment_offline" />
+</navigation>

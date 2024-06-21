@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingVertical="32dp"
+    android:paddingHorizontal="24dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".fragments.NotFoundFragment"
+    tools:ignore="UseCompoundDrawables">
+
+    <ImageView
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/gym_buddy_logo"
+        android:src="@drawable/gym_buddy_logo" />
+
+    <TextView
+        style="@style/Theme.Typography.HeadlineLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/page_not_found"
+        android:textColor="@color/primaryColor"
+        android:layout_marginBottom="64dp" />
+</LinearLayout>
