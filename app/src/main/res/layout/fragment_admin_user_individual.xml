@@ -133,28 +133,38 @@
             </LinearLayout>
         </LinearLayout>
 
-        <TextView
-            style="@style/Theme.Typography.TitleLarge"
+
+        <LinearLayout
+            android:id="@+id/user_contracts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="@color/primaryColor"
-            android:text="@string/contracts"
-            android:layout_marginTop="24dp"/>
+            android:layout_marginTop="24dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
 
-        <!-- ADD CONTRACT BUTTON -->
-        <Button
-            style="@style/Theme.Button.Primary"
-            android:id="@+id/add_contract_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/add_contract"/>
+            <TextView
+                style="@style/Theme.Typography.TitleLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/primaryColor"
+                android:text="@string/contracts"/>
+
+            <!-- ADD CONTRACT BUTTON -->
+            <Button
+                style="@style/Theme.Button.Primary"
+                android:id="@+id/add_contract_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/add_contract"/>
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/contracts_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/contracts_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

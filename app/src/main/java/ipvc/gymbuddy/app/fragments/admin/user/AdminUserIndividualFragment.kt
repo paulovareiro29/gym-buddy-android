@@ -51,7 +51,11 @@ class AdminUserIndividualFragment : BaseFragment<FragmentAdminUserIndividualBind
 
             addContractButton.setOnClickListener { handleCreateContact() }
         }
-        loadContracts()
+
+        if (user.role.name == "default") {
+            binding.userContracts.visibility = View.VISIBLE
+            loadContracts()
+        }
     }
 
     private fun handleCreateContact() {
