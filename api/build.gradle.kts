@@ -26,7 +26,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String", "API_URL", "\"YOUR_API_URL_HERE\"")
+            buildConfigField("String", "API_URL", "\"https://gym-buddy-api.vercel.app\"")
         }
     }
 
