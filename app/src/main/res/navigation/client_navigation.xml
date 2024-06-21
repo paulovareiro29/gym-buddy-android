@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/client_navigation"
+    app:startDestination="@id/client_home_fragment">
+
+    <fragment
+        android:id="@+id/client_home_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.client.ClientHomeFragment"
+        android:label="fragment_client_home"
+        tools:layout="@layout/fragment_client_home" />
+    <fragment
+        android:id="@+id/client_not_found_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.NotFoundFragment"
+        android:label="fragment_not_found"
+        tools:layout="@layout/fragment_not_found" />
+    <fragment
+        android:id="@+id/client_profile_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/client_settings_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/client_edit_profile_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.EditProfileFragment"
+        android:label="EditProfileFragment" />
+    <fragment
+        android:id="@+id/client_metrics_overview_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.client.ClientMetricsOverviewFragment"
+        android:label="fragment_client_metrics"
+        tools:layout="@layout/fragment_client_metrics" />
+    <fragment
+        android:id="@+id/client_user_plan_overview_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.client.ClientTrainingPlansOverviewFragment"
+        android:label="fragment_client_user_plan_overview"
+        tools:layout="@layout/fragment_client_user_plan_overview">
+        <action
+            android:id="@+id/action_clientUserPlanOverviewFragment_to_clientTrainingPlanExercisesOverviewFragment"
+            app:destination="@id/client_trainingplan_exercises_overview_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/client_trainingplan_exercises_overview_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.client.ClientTrainingPlanExercisesOverviewFragment"
+        android:label="Training Plan Exercises"
+        tools:layout="@layout/fragment_client_training_plan_exercises_overview">
+        <action
+            android:id="@+id/action_clientTrainingPlanExercisesOverviewFragment_to_clientTrainingPlanExerciseIndividualFragment"
+            app:destination="@id/client_trainingplan_exercise_individual_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/client_trainingplan_exercise_individual_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.client.ClientTrainingPlanExerciseIndividualFragment"
+        android:label="Individual Exercise"
+        tools:layout="@layout/fragment_client_training_plan_exercise_individual">
+        <action
+            android:id="@+id/action_client_trainingplan_exercise_individual_fragment_to_client_machine_individual_fragment"
+            app:destination="@id/client_machine_individual_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/client_machine_individual_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.client.ClientMachineIndividualFragment"
+        android:label="Individual Machine"
+        tools:layout="@layout/fragment_client_machine_individual" />
+    <fragment
+        android:id="@+id/client_offline_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.OfflineFragment"
+        android:label="fragment_offline"
+        tools:layout="@layout/fragment_offline" />
+
+</navigation>

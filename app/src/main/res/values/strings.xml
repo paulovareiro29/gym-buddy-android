@@ -1,3 +1,122 @@
 <resources>
-    <string name="app_name">gym-buddy-android</string>
+    <string name="app_name" translatable="false">Gym Buddy</string>
+    <string name="gym_buddy_logo" translatable="false">Gym Buddy Logo</string>
+    <string name="log_in_to_your_account">Log in to your account</string>
+    <string name="register">Register</string>
+    <string name="login" translatable="false">Login</string>
+    <string name="submit">Submit</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="password" translatable="false">Password</string>
+    <string name="register_code">Register Code</string>
+    <string name="field_is_required">Field is required</string>
+    <string name="invalid_email_format">Invalid email format</string>
+    <string name="minimum_x_characters">Minimum of %1$d characters</string>
+    <string name="something_went_wrong">Something went wrong!</string>
+    <string name="wrong_credentials">Wrong credentials</string>
+    <string name="account_activated">Account activated!</string>
+    <string name="user_created_successfully">User created successfully! CODE: %s</string>
+    <string name="app_description">Lorem ipsum dolor sit amet, consecrate disciplining elite.</string>
+    <string name="set_up_your_account">Set up your account</string>
+    <string name="page_not_found">Page Not Found</string>
+    <string name="home" translatable="false">Home</string>
+    <string name="welcome_back">Welcome back</string>
+    <string name="avatar" translatable="false">Avatar</string>
+    <string name="generate_new_user">Generate new user</string>
+    <string name="profile">Profile</string>
+    <string name="settings">Settings</string>
+    <string name="name">Name</string>
+    <string name="role">Role</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="edit">Edit</string>
+    <string name="change_language">Change Language</string>
+    <string name="logout">Logout</string>
+    <string name="list_clients">List Of Clients</string>
+    <string name="training_plans">Training Plans</string>
+    <string name="training_plans_overview">Training Plans Overview</string>
+    <string name="create_training_plan">Create Training Plan</string>
+    <string name="edit_training_plan">Edit Training Plan</string>
+    <string name="clients">Clients</string>
+    <string name="overview">Overview</string>
+    <string name="shortcuts">Shortcuts</string>
+    <string name="general">General</string>
+    <string name="account">Account</string>
+    <string name="administrator">Administrator</string>
+    <string name="client">Client</string>
+    <string name="trainer">Trainer</string>
+    <string name="users">Users</string>
+    <string name="users_overview">Users Overview</string>
+    <string name="arrow_right" translatable="false">Arrow Right</string>
+    <string name="user_photo" translatable="false">User Photo</string>
+    <string name="search">Search</string>
+    <string name="machines">Machines</string>
+    <string name="machines_overview">Machines Overview</string>
+    <string name="create_machine">Create Machine</string>
+    <string name="categories_overview">Categories Overview</string>
+    <string name="categories">Categories</string>
+    <string name="create_category">Create Category</string>
+    <string name="created_successfully">Created successfully</string>
+    <string name="updated_successfully">Updated successfully</string>
+    <string name="search_category">Search Category</string>
+    <string name="exercises">Exercises</string>
+    <string name="exercises_overview">Exercises Overview</string>
+    <string name="create_exercise">Create Exercise</string>
+    <string name="machine">Machine</string>
+    <string name="confirm_delete">Confirm Delete</string>
+    <string name="delete_message">Are you sure do you want to delete %s</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="en">English</string>
+    <string name="pt">Portuguese</string>
+    <string name="clients_overview">Clients Overview</string>
+    <string name="contract">Contract</string>
+    <string name="contract_end_date">Contract ends on: %s</string>
+    <string name="metrics">Metrics</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
+    <string name="select_date">Select Date</string>
+    <string name="add_client_to">Add client to %S</string>
+    <string name="associated_clients">Associated Clients</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="address">"Address</string>
+    <string name="sets">%d Sets</string>
+    <string name="rest">%d Rest</string>
+    <string name="reps">%d Reps</string>
+    <string name="repetitions">Repetitions</string>
+    <string name="rest_between_sets">Rest between sets</string>
+    <string name="day">Day</string>
+    <string name="metrics_overview">Metrics Overview</string>
+    <string name="submitted_by">Submitted by %s</string>
+    <string name="unknown_type">Unknown Type</string>
+    <string name="exercise">Exercise</string>
+    <string name="view_plan">View plan</string>
+    <string name="view_exercise">View Exercise</string>
+    <string name="user_plan">User Plan</string>
+    <string name="date">Date</string>
+    <string name="value">Value</string>
+    <string name="metric_type">Metric Type</string>
+    <string name="upload_photo">Upload Photo</string>
+    <string name="view_machine">View Machine</string>
+    <string name="view_user">View User</string>
+    <string name="update_exercise">Update Exercise</string>
+    <string name="update_machine">Update Machine</string>
+    <string name="starts_on">Starts on %s</string>
+    <string name="ended_on">Ended on %s</string>
+    <string name="ongoing">Ongoing</string>
+    <string name="ongoing_until">Ongoing until %s</string>
+    <string name="go_back">Go Back</string>
+    <string name="offline">It looks like you\'re offline. Please check your internet connection and try again.</string>
+    <string name="oops" translatable="false">Oops!</string>
+    <string name="offline_smaller_message">Looks like you are offline.</string>
+    <string name="logout_message">Are you sure you want to logout?</string>
+    <string name="at_least_characters">At least %d characters</string>
+    <string name="at_least_digit">At least %d digit</string>
+    <string name="at_least_uppercase_letter">At least %d uppercase letter</string>
+    <string name="at_least_lowercase_letter">At least %d lowercase letter</string>
+    <string name="at_least_special_character">At least %d special character (!@#$^&amp;*()_-+=?/{}~|)</string>
+    <string name="password_requirements">Password requirements</string>
+    <string name="add_contract">Create contract</string>
+    <string name="select_trainer">Select trainer</string>
+    <string name="select_category">Select category</string>
+    <string name="save_contract">Save contract</string>
+    <string name="contracts">Contracts</string>
 </resources>

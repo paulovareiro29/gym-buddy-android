@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".fragments.admin.contract.AdminContractCreateFragment">
+
+    <include layout="@layout/toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Theme.Dropdown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:hint="@string/select_trainer"
+                android:labelFor="@+id/trainer_spinner">
+
+                <AutoCompleteTextView
+                    android:id="@+id/trainer_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Theme.Dropdown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:hint="@string/select_category"
+                android:labelFor="@+id/category_spinner">
+
+                <AutoCompleteTextView
+                    android:id="@+id/category_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="4dp">
+
+                <TextView
+                    style="@style/Theme.Typography.LabelLarge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/select_date"/>
+
+                <Button
+                    style="@style/Theme.Button.Secondary"
+                    android:id="@+id/start_date_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/start_date"
+                    android:textAllCaps="true"
+                    android:gravity="center_vertical"
+                    app:icon="@drawable/baseline_calendar_24"/>
+
+                <Button
+                    style="@style/Theme.Button.Secondary"
+                    android:id="@+id/end_date_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/end_date"
+                    android:textAllCaps="true"
+                    android:gravity="center_vertical"
+                    app:icon="@drawable/baseline_calendar_24" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/Theme.Typography.Body"
+                android:id="@+id/message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:textAlignment="center" />
+
+            <Button
+                style="@style/Theme.Button.Primary"
+                android:id="@+id/save_contract_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:text="@string/save_contract"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
