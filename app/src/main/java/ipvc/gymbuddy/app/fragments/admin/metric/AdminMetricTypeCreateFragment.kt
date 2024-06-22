@@ -1,4 +1,4 @@
-package ipvc.gymbuddy.app.fragments.trainer.trainingPlans
+package ipvc.gymbuddy.app.fragments.admin.metric
 
 import android.os.Bundle
 import android.view.View
@@ -6,47 +6,32 @@ import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.core.Validator
-import ipvc.gymbuddy.app.databinding.FragmentTrainerTrainingPlanUpdateBinding
+import ipvc.gymbuddy.app.databinding.FragmentAdminMetricTypeCreateBinding
 import ipvc.gymbuddy.app.utils.NetworkUtils
-import ipvc.gymbuddy.app.viewmodels.trainer.trainingPlan.TrainerTrainingPlanUpdateViewModel
+import ipvc.gymbuddy.app.viewmodels.admin.metric.AdminMetricTypeCreateViewModel
 
-class TrainerTrainingPlanUpdateFragment : BaseFragment<FragmentTrainerTrainingPlanUpdateBinding>(
-    FragmentTrainerTrainingPlanUpdateBinding::inflate) {
-
-    private lateinit var viewModel: TrainerTrainingPlanUpdateViewModel
-    private var trainingPlanId: String? = null
+class AdminMetricTypeCreateFragment : BaseFragment<FragmentAdminMetricTypeCreateBinding>(
+    FragmentAdminMetricTypeCreateBinding::inflate
+) {
+    private lateinit var viewModel: AdminMetricTypeCreateViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = getViewModel()
 
-        arguments?.let {
-            trainingPlanId = it.getString("trainingPlanId")
-        }
-
         if (NetworkUtils.isOffline(requireContext())) {
-            replaceFragmentBy(R.id.trainer_offline_fragment)
+            replaceFragmentBy(R.id.admin_offline_fragment)
             return
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        loadToolbar(getString(R.string.edit_training_plan))
-
+        loadToolbar(getString(R.string.create_metric_type))
         resetView()
 
-        trainingPlanId?.let { id ->
-            viewModel.getTrainingPlan(id).observe(viewLifecycleOwner) { trainingPlan ->
-                trainingPlan?.let { plan ->
-                    binding.nameInput.setText(plan.data?.name)
-                }
-            }
-        }
-
         binding.submit.setOnClickListener { handleSubmit() }
-        viewModel.updateData.observe(viewLifecycleOwner) {
+        viewModel.postData.observe(viewLifecycleOwner) {
             when (it.status) {
                 AsyncData.Status.IDLE -> resetView()
                 AsyncData.Status.LOADING -> {
@@ -54,7 +39,8 @@ class TrainerTrainingPlanUpdateFragment : BaseFragment<FragmentTrainerTrainingPl
                     binding.submit.setBackgroundColor(requireContext().getColor(R.color.primaryLightColor))
                 }
                 AsyncData.Status.SUCCESS -> {
-                    binding.message.text = getString(R.string.updated_successfully)
+                    resetView()
+                    binding.message.text = getString(R.string.created_successfully)
                     binding.message.setTextColor(requireActivity().getColor(R.color.secondaryDarkColor))
                     binding.message.visibility = View.VISIBLE
                 }
@@ -67,21 +53,13 @@ class TrainerTrainingPlanUpdateFragment : BaseFragment<FragmentTrainerTrainingPl
                 }
             }
         }
-
     }
 
     private fun handleSubmit() {
-        if (trainingPlanId == null) return
-        val name = binding.nameInput
+        val name = binding.name.editText ?: return
 
-        if (!Validator.validateRequiredField(name, requireContext())) {
-            return
-        }
-
-        viewModel.updateTrainingPlan(
-            trainingPlanId!!,
-            name.text.toString()
-        )
+        if (!Validator.validateRequiredField(name, requireContext())) return
+        viewModel.createMetricType(name.text.toString())
     }
 
     private fun resetView() {
