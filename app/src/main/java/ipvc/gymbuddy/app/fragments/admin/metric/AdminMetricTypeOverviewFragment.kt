@@ -27,7 +27,7 @@ class AdminMetricTypeOverviewFragment : BaseFragment<FragmentAdminMetricTypeOver
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadToolbar(getString(R.string.categories_overview))
+        loadToolbar(getString(R.string.metric_types_overview))
 
         recyclerView = view.findViewById(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -41,7 +41,7 @@ class AdminMetricTypeOverviewFragment : BaseFragment<FragmentAdminMetricTypeOver
             }
         }
 
-        // binding.createMetricType.setOnClickListener { navController.navigate(R.id.admin_metricType_create_fragment) }
+        binding.createMetricType.setOnClickListener { navController.navigate(R.id.admin_metric_type_create_fragment) }
         binding.searchInput.editText?.addTextChangedListener { handleSearch(it.toString()) }
     }
 

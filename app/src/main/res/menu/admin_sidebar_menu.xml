@@ -27,8 +27,8 @@
                     android:title="@string/categories" />
                 <item
                     android:id="@+id/sidebar_item_admin_metric_types_overview"
-                    android:icon="@drawable/baseline_label_24"
-                    android:title="@string/categories" />
+                    android:icon="@drawable/baseline_balance_24"
+                    android:title="@string/metric_types" />
                 </group>
         </menu>
     </item>
