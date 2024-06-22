@@ -110,4 +110,7 @@
     <string name="select_category">Selecionar categoria</string>
     <string name="save_contract">Guardar contrato</string>
     <string name="contracts">Contratos</string>
+    <string name="create_metric_type">Criar Tipo de Métrica</string>
+    <string name="metric_types_overview">Tipos de Métricas</string>
+    <string name="metric_types">Tipos de Métricas</string>
 </resources>

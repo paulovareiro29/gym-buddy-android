@@ -5,12 +5,14 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import ipvc.gymbuddy.api.core.RequestResult
 import ipvc.gymbuddy.api.models.MetricType
+import ipvc.gymbuddy.api.models.requests.metricTypes.CreateMetricTypeRequest
 import ipvc.gymbuddy.api.services.MetricTypeService
 import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.extensions.toAPIModel
 import ipvc.gymbuddy.app.extensions.toDatabaseModel
 import ipvc.gymbuddy.app.utils.NetworkUtils
 import ipvc.gymbuddy.database.LocalDatabase
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class MetricTypeDataStore(context: Context) : BaseDataStore(context) {
@@ -24,6 +26,8 @@ class MetricTypeDataStore(context: Context) : BaseDataStore(context) {
         }
     }
     var metricTypes = MutableLiveData<AsyncData<List<MetricType>>>(AsyncData(listOf()))
+    var post = MutableLiveData<AsyncData<CreateMetricTypeRequest>>(AsyncData())
+    val delete = MutableLiveData<AsyncData<Unit>>(AsyncData())
 
     fun getMetricTypes() {
         metricTypes.postValue(AsyncData(metricTypes.value?.data ?: listOf(), AsyncData.Status.LOADING))
@@ -48,6 +52,37 @@ class MetricTypeDataStore(context: Context) : BaseDataStore(context) {
 
                 else -> {}
             }
+        }
+    }
+
+    fun createMetricType(name: String) {
+        val entity = CreateMetricTypeRequest(name)
+
+        post.postValue(AsyncData(entity, AsyncData.Status.LOADING))
+        coroutine.launch {
+            when(MetricTypeService().createMetricType(entity))  {
+                is RequestResult.Success -> post.postValue(AsyncData(null, AsyncData.Status.SUCCESS))
+                is RequestResult.Error -> post.postValue(AsyncData(null, AsyncData.Status.ERROR))
+            }
+
+            delay(2500)
+            post.postValue(AsyncData(null, AsyncData.Status.IDLE))
+        }
+    }
+
+    fun deleteMetricType(id: String) {
+        delete.postValue(AsyncData(null, AsyncData.Status.LOADING))
+        coroutine.launch {
+            when(MetricTypeService().deleteMetricType(id))  {
+                is RequestResult.Success -> {
+                    delete.postValue(AsyncData(null, AsyncData.Status.SUCCESS))
+                    getMetricTypes()
+                }
+                is RequestResult.Error -> delete.postValue(AsyncData(null, AsyncData.Status.ERROR))
+            }
+
+            delay(2500)
+            delete.postValue(AsyncData(null, AsyncData.Status.IDLE))
         }
     }
 }

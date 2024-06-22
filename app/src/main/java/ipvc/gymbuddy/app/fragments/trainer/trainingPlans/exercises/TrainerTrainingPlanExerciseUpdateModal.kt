@@ -107,7 +107,15 @@ class TrainerTrainingPlanExerciseUpdateModal : Modal(R.layout.fragment_trainer_t
             return
         }
 
-        viewModel.updatePlanExercise(trainingPlanId!!, planExercise!!.id, planExercise!!.exercise.id, exerciseSets.toInt(), exerciseReps.toInt(), exerciseRest.toInt(), exerciseDay)
+        viewModel.updatePlanExercise(
+            trainingPlanId!!,
+            planExercise!!.id,
+            planExercise!!.exercise.id,
+            exerciseReps.toInt(),
+            exerciseSets.toInt(),
+            exerciseRest.toInt(),
+            exerciseDay
+        )
     }
 
     private fun resetView() {

@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_admin_home_fragment_to_adminExerciseOverviewFragment"
             app:destination="@id/admin_exercises_overview_fragment" />
+        <action
+            android:id="@+id/action_admin_home_fragment_to_admin_metric_types_overview_fragment"
+            app:destination="@id/admin_metric_types_overview_fragment" />
     </fragment>
     <fragment
         android:id="@+id/admin_not_found_fragment"
@@ -155,4 +158,17 @@
         android:name="ipvc.gymbuddy.app.fragments.OfflineFragment"
         android:label="fragment_offline"
         tools:layout="@layout/fragment_offline" />
+    <fragment
+        android:id="@+id/admin_metric_types_overview_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.metric.AdminMetricTypeOverviewFragment"
+        android:label="fragment_admin_metric_type_overview"
+        tools:layout="@layout/fragment_admin_metric_type_overview" >
+        <action
+            android:id="@+id/action_admin_metric_types_overview_fragment_to_admin_metric_type_create_fragment"
+            app:destination="@id/admin_metric_type_create_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/admin_metric_type_create_fragment"
+        android:name="ipvc.gymbuddy.app.fragments.admin.metric.AdminMetricTypeCreateFragment"
+        android:label="AdminMetricTypeCreateFragment" />
 </navigation>

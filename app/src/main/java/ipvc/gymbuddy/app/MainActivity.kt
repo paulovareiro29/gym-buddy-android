@@ -121,6 +121,7 @@ class MainActivity : BaseActivity(R.layout.activity_main, R.id.nav_host_fragment
                 R.id.sidebar_item_admin_exercises_overview -> navController.navigate(R.id.admin_exercises_overview_fragment)
                 R.id.sidebar_item_admin_machines_overview -> navController.navigate(R.id.admin_machines_overview_fragment)
                 R.id.sidebar_item_admin_categories_overview -> navController.navigate(R.id.admin_categories_overview_fragment)
+                R.id.sidebar_item_admin_metric_types_overview -> navController.navigate(R.id.admin_metric_types_overview_fragment)
 
                 //TRAINER
                 R.id.sidebar_item_trainer_trainingplans_overview -> navController.navigate(R.id.trainer_trainingplans_overview_fragment)
