@@ -2,10 +2,10 @@ package ipvc.gymbuddy.app.fragments.trainer.trainingPlans
 
 import android.os.Bundle
 import android.view.View
-import com.google.android.material.textfield.TextInputEditText
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.core.BaseFragment
+import ipvc.gymbuddy.app.core.Validator
 import ipvc.gymbuddy.app.databinding.FragmentTrainerTrainingPlanUpdateBinding
 import ipvc.gymbuddy.app.utils.NetworkUtils
 import ipvc.gymbuddy.app.viewmodels.trainer.trainingPlan.TrainerTrainingPlanUpdateViewModel
@@ -15,7 +15,6 @@ class TrainerTrainingPlanUpdateFragment : BaseFragment<FragmentTrainerTrainingPl
 
     private lateinit var viewModel: TrainerTrainingPlanUpdateViewModel
     private var trainingPlanId: String? = null
-    private lateinit var nameInput: TextInputEditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,10 +71,17 @@ class TrainerTrainingPlanUpdateFragment : BaseFragment<FragmentTrainerTrainingPl
     }
 
     private fun handleSubmit() {
-        trainingPlanId?.let { id ->
-            val updatedName = nameInput.text.toString()
-            viewModel.updateTrainingPlan(id, updatedName)
+        if (trainingPlanId == null) return
+        val name = binding.nameInput
+
+        if (!Validator.validateRequiredField(name, requireContext())) {
+            return
         }
+
+        viewModel.updateTrainingPlan(
+            trainingPlanId!!,
+            name.text.toString()
+        )
     }
 
     private fun resetView() {
