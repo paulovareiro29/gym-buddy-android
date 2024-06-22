@@ -1,5 +1,6 @@
 package ipvc.gymbuddy.app.fragments.admin.user
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -48,6 +49,12 @@ class AdminUserIndividualFragment : BaseFragment<FragmentAdminUserIndividualBind
             email.text = user.email
             address.text = user.address
             role.text  = StringUtils.capitalize(user.role.name)
+
+            if (user.register_code.isNotEmpty()) {
+                @SuppressLint("SetTextI18n")
+                registerCode.text = "${getString(R.string.register_code)}: ${user.register_code}"
+            }
+
 
             addContractButton.setOnClickListener { handleCreateContact() }
         }

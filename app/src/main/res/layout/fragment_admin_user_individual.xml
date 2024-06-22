@@ -45,7 +45,6 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
             <TextView
                 android:id="@+id/name"
                 style="@style/Theme.Typography.Headline"
@@ -73,6 +72,11 @@
                 tools:text="@string/administrator"
                 android:checkable="false" />
 
+            <TextView
+                android:id="@+id/register_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="@string/register_code" />
         </LinearLayout>
 
         <!-- PERSONAL INFORMATION -->
