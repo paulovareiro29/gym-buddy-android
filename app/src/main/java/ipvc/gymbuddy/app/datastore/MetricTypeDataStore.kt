@@ -11,6 +11,7 @@ import ipvc.gymbuddy.app.extensions.toAPIModel
 import ipvc.gymbuddy.app.extensions.toDatabaseModel
 import ipvc.gymbuddy.app.utils.NetworkUtils
 import ipvc.gymbuddy.database.LocalDatabase
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class MetricTypeDataStore(context: Context) : BaseDataStore(context) {
@@ -24,6 +25,7 @@ class MetricTypeDataStore(context: Context) : BaseDataStore(context) {
         }
     }
     var metricTypes = MutableLiveData<AsyncData<List<MetricType>>>(AsyncData(listOf()))
+    val delete = MutableLiveData<AsyncData<Unit>>(AsyncData())
 
     fun getMetricTypes() {
         metricTypes.postValue(AsyncData(metricTypes.value?.data ?: listOf(), AsyncData.Status.LOADING))
@@ -48,6 +50,22 @@ class MetricTypeDataStore(context: Context) : BaseDataStore(context) {
 
                 else -> {}
             }
+        }
+    }
+
+    fun deleteMetricType(id: String) {
+        delete.postValue(AsyncData(null, AsyncData.Status.LOADING))
+        coroutine.launch {
+            when(MetricTypeService().deleteMetricType(id))  {
+                is RequestResult.Success -> {
+                    delete.postValue(AsyncData(null, AsyncData.Status.SUCCESS))
+                    getMetricTypes()
+                }
+                is RequestResult.Error -> delete.postValue(AsyncData(null, AsyncData.Status.ERROR))
+            }
+
+            delay(2500)
+            delete.postValue(AsyncData(null, AsyncData.Status.IDLE))
         }
     }
 }
