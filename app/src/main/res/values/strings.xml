@@ -119,4 +119,7 @@
     <string name="select_category">Select category</string>
     <string name="save_contract">Save contract</string>
     <string name="contracts">Contracts</string>
+    <string name="create_metric_type">Create Metric Type</string>
+    <string name="metric_types_overview">Metric Types Overview</string>
+    <string name="metric_types">Metric Types</string>
 </resources>
