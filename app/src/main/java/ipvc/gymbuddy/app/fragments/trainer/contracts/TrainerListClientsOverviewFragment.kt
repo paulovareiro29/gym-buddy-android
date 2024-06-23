@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.TrainerContractAdapter
+import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentTrainerListClientsOverviewBinding
 import ipvc.gymbuddy.app.viewmodels.trainer.contract.TrainerListClientsOverviewViewModel
@@ -31,12 +32,19 @@ class TrainerListClientsOverviewFragment : BaseFragment<FragmentTrainerListClien
 
         viewModel.getContracts()
         viewModel.contractsData.observe(viewLifecycleOwner) {
-            if (it.data != null) {
-                recyclerView.adapter = TrainerContractAdapter(it.data)
+            when (it.status) {
+                AsyncData.Status.LOADING -> {
+                    binding.loading.visibility = View.VISIBLE
+                    binding.recyclerView.visibility = View.INVISIBLE
+                }
+                else -> {
+                    binding.loading.visibility = View.GONE
+                    binding.recyclerView.visibility = View.VISIBLE
+                    recyclerView.adapter = TrainerContractAdapter(it.data ?: listOf())
+                }
             }
         }
         binding.searchInput.editText?.addTextChangedListener { handleSearch(it.toString()) }
-
     }
 
     private fun handleSearch(search: String) {

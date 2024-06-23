@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ipvc.gymbuddy.api.models.Category
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.AdminCategoryAdapter
+import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentAdminCategoryOverviewBinding
 import ipvc.gymbuddy.app.utils.NetworkUtils
@@ -34,10 +35,19 @@ class AdminCategoryOverviewFragment : BaseFragment<FragmentAdminCategoryOverview
 
         viewModel.getCategories()
         viewModel.categoriesData.observe(viewLifecycleOwner) {
-            if (it.data != null) {
-                val adapter = AdminCategoryAdapter(it.data)
-                adapter.setOnDeleteListener { category -> showDeleteConfirmationDialog(category) }
-                recyclerView.adapter = adapter
+            when (it.status) {
+                AsyncData.Status.LOADING -> {
+                    binding.loading.visibility = View.VISIBLE
+                    binding.recyclerView.visibility = View.INVISIBLE
+                }
+                else -> {
+                    binding.loading.visibility = View.GONE
+                    binding.recyclerView.visibility = View.VISIBLE
+
+                    val adapter = AdminCategoryAdapter(it.data ?: listOf())
+                    adapter.setOnDeleteListener { category -> showDeleteConfirmationDialog(category) }
+                    recyclerView.adapter = adapter
+                }
             }
         }
 

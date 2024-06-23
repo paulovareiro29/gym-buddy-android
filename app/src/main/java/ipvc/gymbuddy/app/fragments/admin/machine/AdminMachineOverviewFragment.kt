@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ipvc.gymbuddy.api.models.Machine
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.MachineAdapter
+import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentAdminMachinesOverviewBinding
 import ipvc.gymbuddy.app.utils.NetworkUtils
@@ -34,12 +35,20 @@ class AdminMachineOverviewFragment : BaseFragment<FragmentAdminMachinesOverviewB
 
         viewModel.getMachines()
         viewModel.machinesData.observe(viewLifecycleOwner) {
-            if (it.data != null) {
-                val adapter = MachineAdapter(it.data)
-                adapter.setOnDeleteListener { delete ->
-                    showDeleteConfirmationDialog(delete)
+            when (it.status) {
+                AsyncData.Status.LOADING -> {
+                    binding.loading.visibility = View.VISIBLE
+                    binding.recyclerView.visibility = View.INVISIBLE
                 }
-                recyclerView.adapter = adapter
+                else -> {
+                    binding.loading.visibility = View.GONE
+                    binding.recyclerView.visibility = View.VISIBLE
+                    val adapter = MachineAdapter(it.data ?: listOf())
+                    adapter.setOnDeleteListener { delete ->
+                        showDeleteConfirmationDialog(delete)
+                    }
+                    recyclerView.adapter = adapter
+                }
             }
         }
 

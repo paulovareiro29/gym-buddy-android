@@ -163,6 +163,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/add_contract"/>
 
+            <TextView
+                android:id="@+id/loading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:text="@string/loading"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/contracts_recycler_view"

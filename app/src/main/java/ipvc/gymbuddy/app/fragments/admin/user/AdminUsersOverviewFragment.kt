@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.UserAdapter
+import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentAdminUsersOverviewBinding
 import ipvc.gymbuddy.app.viewmodels.admin.user.AdminUsersOverviewViewModel
@@ -31,8 +32,16 @@ class AdminUsersOverviewFragment : BaseFragment<FragmentAdminUsersOverviewBindin
 
         viewModel.getUsers()
         viewModel.usersData.observe(viewLifecycleOwner) {
-            if (it.data != null) {
-                recyclerView.adapter = UserAdapter(it.data)
+            when (it.status) {
+                AsyncData.Status.LOADING -> {
+                    binding.loading.visibility = View.VISIBLE
+                    binding.recyclerView.visibility = View.INVISIBLE
+                }
+                else -> {
+                    binding.loading.visibility = View.GONE
+                    binding.recyclerView.visibility = View.VISIBLE
+                    recyclerView.adapter = UserAdapter(it.data ?: listOf())
+                }
             }
         }
 
