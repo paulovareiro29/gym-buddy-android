@@ -42,12 +42,21 @@ class TrainerTrainingPlansOverviewFragment : BaseFragment<FragmentTrainerTrainin
 
         viewModel.getTrainingPlans()
         viewModel.trainingPlansData.observe(viewLifecycleOwner) {
-            if (it.data != null) {
-                val adapter = TrainingPlanAdapter(it.data)
-                adapter.setOnTrainingPlanDeleteListener { trainingPlan ->
-                    showDeleteConfirmationDialog(trainingPlan)
+            when (it.status) {
+                AsyncData.Status.LOADING -> {
+                    binding.loading.visibility = View.VISIBLE
+                    binding.recyclerView.visibility = View.INVISIBLE
                 }
-                recyclerView.adapter = adapter
+                else -> {
+                    binding.loading.visibility = View.GONE
+                    binding.recyclerView.visibility = View.VISIBLE
+                    val adapter = TrainingPlanAdapter(it.data ?: listOf())
+                    adapter.setOnTrainingPlanDeleteListener { trainingPlan ->
+                        showDeleteConfirmationDialog(trainingPlan)
+                    }
+                    recyclerView.adapter = adapter
+                }
+
             }
         }
         binding.searchInput.editText?.addTextChangedListener { handleSearch(it.toString()) }

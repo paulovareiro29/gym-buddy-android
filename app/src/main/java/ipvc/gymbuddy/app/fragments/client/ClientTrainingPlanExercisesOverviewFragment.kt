@@ -11,6 +11,7 @@ import com.google.gson.JsonSyntaxException
 import ipvc.gymbuddy.api.models.TrainingPlan
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.ClientTrainingPlanExerciseAdapter
+import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentClientTrainingPlanExercisesOverviewBinding
 import ipvc.gymbuddy.app.fragments.ui.TabRecyclerViewFragment
@@ -48,26 +49,36 @@ class ClientTrainingPlanExercisesOverviewFragment : BaseFragment<FragmentClientT
         val viewPager: ViewPager2 = view.findViewById(R.id.view_pager)
         val tabLayout: TabLayout = view.findViewById(R.id.tab_layout)
         viewModel.planExerciseData.observe(viewLifecycleOwner) { resource ->
-            val exercises = resource.data ?: return@observe
-            val uniqueDays = exercises.map { it.day }.distinct()
+            when(resource.status) {
+                AsyncData.Status.LOADING -> {
+                    binding.loading.visibility = View.VISIBLE
+                    viewPager.visibility = View.INVISIBLE
+                    tabLayout.visibility = View.INVISIBLE
+                }
+                else -> {
+                    binding.loading.visibility = View.GONE
+                    val exercises = resource.data ?: return@observe
+                    val uniqueDays = exercises.map { it.day }.distinct()
 
-            val fragments = uniqueDays.map { day ->
-                val dayExercises = exercises.filter { it.day == day }
-                val adapter = ClientTrainingPlanExerciseAdapter(dayExercises)
-                TabRecyclerViewFragment(adapter)
+                    val fragments = uniqueDays.map { day ->
+                        val dayExercises = exercises.filter { it.day == day }
+                        val adapter = ClientTrainingPlanExerciseAdapter(dayExercises)
+                        TabRecyclerViewFragment(adapter)
+                    }
+
+                    viewPager.adapter = object : FragmentStateAdapter(this) {
+                        override fun getItemCount() = fragments.size
+                        override fun createFragment(position: Int) = fragments[position]
+                    }
+
+                    TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+                        tab.text = uniqueDays[position]
+                    }.attach()
+
+                    viewPager.visibility = View.VISIBLE
+                    tabLayout.visibility = View.VISIBLE
+                }
             }
-
-            viewPager.adapter = object : FragmentStateAdapter(this) {
-                override fun getItemCount() = fragments.size
-                override fun createFragment(position: Int) = fragments[position]
-            }
-
-            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-                tab.text = uniqueDays[position]
-            }.attach()
-
-            viewPager.visibility = View.VISIBLE
-            tabLayout.visibility = View.VISIBLE
         }
     }
 }
