@@ -9,6 +9,7 @@ import com.google.gson.JsonSyntaxException
 import ipvc.gymbuddy.api.models.User
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.ContractAdapter
+import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentAdminUserIndividualBinding
 import ipvc.gymbuddy.app.utils.ImageUtils
@@ -75,8 +76,16 @@ class AdminUserIndividualFragment : BaseFragment<FragmentAdminUserIndividualBind
     private fun loadContracts() {
         viewModel.getContracts(user.id)
         viewModel.contracts.observe(viewLifecycleOwner) {
-            if (!it.data.isNullOrEmpty()) {
-                binding.contractsRecyclerView.adapter = ContractAdapter(it.data)
+            when (it.status) {
+                AsyncData.Status.LOADING -> {
+                    binding.loading.visibility = View.VISIBLE
+                    binding.contractsRecyclerView.visibility = View.INVISIBLE
+                }
+                else -> {
+                    binding.loading.visibility = View.GONE
+                    binding.contractsRecyclerView.visibility = View.VISIBLE
+                    binding.contractsRecyclerView.adapter = ContractAdapter(it.data ?: listOf())
+                }
             }
         }
     }

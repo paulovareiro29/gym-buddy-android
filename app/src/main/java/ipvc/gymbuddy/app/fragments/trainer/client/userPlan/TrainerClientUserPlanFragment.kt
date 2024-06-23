@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.UserPlanAdapter
+import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentTrainerClientUserPlanBinding
 import ipvc.gymbuddy.app.viewmodels.client.TrainerClientPlanViewModel
@@ -44,8 +45,16 @@ class TrainerClientUserPlanFragment : BaseFragment<FragmentTrainerClientUserPlan
 
         viewModel.getUserPlans(userId)
         viewModel.userPlans.observe(viewLifecycleOwner) { request ->
-            if (request.data != null) {
-                recyclerView.adapter = UserPlanAdapter(request.data.sortedByDescending { it.start_date })
+            when (request.status) {
+                AsyncData.Status.LOADING -> {
+                    binding.loading.visibility = View.VISIBLE
+                    binding.recyclerView.visibility = View.INVISIBLE
+                }
+                else -> {
+                    binding.loading.visibility = View.GONE
+                    binding.recyclerView.visibility = View.VISIBLE
+                    recyclerView.adapter = UserPlanAdapter(request.data?.sortedByDescending { it.start_date } ?: listOf())
+                }
             }
         }
     }

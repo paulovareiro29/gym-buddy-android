@@ -13,6 +13,7 @@ import ipvc.gymbuddy.api.models.PlanExercise
 import ipvc.gymbuddy.api.models.TrainingPlan
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.TrainingPlanExerciseAdapter
+import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentTrainerTrainingPlanExercisesOverviewBinding
 import ipvc.gymbuddy.app.fragments.ui.TabRecyclerViewFragment
@@ -52,29 +53,39 @@ class TrainerTrainingPlanExercisesOverviewFragment : BaseFragment<FragmentTraine
         val tabLayout: TabLayout = binding.tabLayout
 
         viewModel.planExerciseData.observe(viewLifecycleOwner) { resource ->
-            val exercises = resource.data ?: return@observe
-            val uniqueDays = exercises.map { it.day }.distinct()
-
-            val fragments = uniqueDays.map { day ->
-                val dayExercises = exercises.filter { it.day == day }
-                val adapter = TrainingPlanExerciseAdapter(childFragmentManager, trainingPlan!!.id, dayExercises)
-                adapter.setOnTrainingPlanDeleteListener { planExercise ->
-                    showDeleteConfirmationDialog(planExercise)
+            when (resource.status) {
+                AsyncData.Status.LOADING -> {
+                    binding.loading.visibility = View.VISIBLE
+                    viewPager.visibility = View.INVISIBLE
+                    tabLayout.visibility = View.INVISIBLE
                 }
-                TabRecyclerViewFragment(adapter)
+                else -> {
+                    binding.loading.visibility = View.GONE
+                    val exercises = resource.data ?: return@observe
+                    val uniqueDays = exercises.map { it.day }.distinct()
+
+                    val fragments = uniqueDays.map { day ->
+                        val dayExercises = exercises.filter { it.day == day }
+                        val adapter = TrainingPlanExerciseAdapter(childFragmentManager, trainingPlan!!.id, dayExercises)
+                        adapter.setOnTrainingPlanDeleteListener { planExercise ->
+                            showDeleteConfirmationDialog(planExercise)
+                        }
+                        TabRecyclerViewFragment(adapter)
+                    }
+
+                    viewPager.adapter = object : FragmentStateAdapter(this) {
+                        override fun getItemCount() = fragments.size
+                        override fun createFragment(position: Int) = fragments[position]
+                    }
+
+                    TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+                        tab.text = uniqueDays[position]
+                    }.attach()
+
+                    viewPager.visibility = View.VISIBLE
+                    tabLayout.visibility = View.VISIBLE
+                }
             }
-
-            viewPager.adapter = object : FragmentStateAdapter(this) {
-                override fun getItemCount() = fragments.size
-                override fun createFragment(position: Int) = fragments[position]
-            }
-
-            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-                tab.text = uniqueDays[position]
-            }.attach()
-
-            viewPager.visibility = View.VISIBLE
-            tabLayout.visibility = View.VISIBLE
         }
     }
 
