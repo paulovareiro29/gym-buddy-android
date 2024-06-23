@@ -11,7 +11,7 @@
             <group>
                 <item
                     android:id="@+id/sidebar_client_metrics_overview_item"
-                    android:icon="@drawable/baseline_assignment_24"
+                    android:icon="@drawable/baseline_balance_24"
                     android:title="@string/metrics" />
                 <item
                     android:id="@+id/sidebar_client_training_plan_overview_item"

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ipvc.gymbuddy.api.models.Exercise
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.ExerciseAdapter
+import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentAdminExerciseOverviewBinding
 import ipvc.gymbuddy.app.utils.NetworkUtils
@@ -33,13 +34,21 @@ class AdminExerciseOverviewFragment : BaseFragment<FragmentAdminExerciseOverview
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         viewModel.getExercises()
-        viewModel.exercisesData.observe(viewLifecycleOwner) { it ->
-            if (it.data != null) {
-                val adapter =ExerciseAdapter(it.data)
-                adapter.setOnDeleteListener { delete ->
-                    showDeleteConfirmationDialog(delete)
+        viewModel.exercisesData.observe(viewLifecycleOwner) {
+            when (it.status) {
+                AsyncData.Status.LOADING -> {
+                    binding.loading.visibility = View.VISIBLE
+                    binding.recyclerView.visibility = View.INVISIBLE
                 }
-                recyclerView.adapter = adapter
+                else -> {
+                    binding.loading.visibility = View.GONE
+                    binding.recyclerView.visibility = View.VISIBLE
+                    val adapter = ExerciseAdapter(it.data ?: listOf())
+                    adapter.setOnDeleteListener { delete ->
+                        showDeleteConfirmationDialog(delete)
+                    }
+                    recyclerView.adapter = adapter
+                }
             }
         }
 

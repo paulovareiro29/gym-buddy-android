@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ipvc.gymbuddy.api.models.Metric
 import ipvc.gymbuddy.app.R
 import ipvc.gymbuddy.app.adapters.TrainerMetricAdapter
+import ipvc.gymbuddy.app.core.AsyncData
 import ipvc.gymbuddy.app.core.BaseFragment
 import ipvc.gymbuddy.app.databinding.FragmentTrainerClientMetricsBinding
 import ipvc.gymbuddy.app.viewmodels.client.TrainerClientMetricOverviewViewModel
@@ -46,9 +47,22 @@ class TrainerClientMetricsFragment : BaseFragment<FragmentTrainerClientMetricsBi
 
         binding.createMetric.setOnClickListener { handleCreateMetric() }
         viewModel.metricsData.observe(viewLifecycleOwner) { resource ->
-            val metrics = resource.data ?: return@observe
-            recyclerView.adapter = TrainerMetricAdapter(childFragmentManager, metrics).apply {
-                setOnMetricDeleteListener { metric -> showDeleteConfirmationDialog(metric) }
+            when (resource.status) {
+                AsyncData.Status.LOADING -> {
+                    binding.loading.visibility = View.VISIBLE
+                    binding.recyclerView.visibility = View.INVISIBLE
+                }
+
+                else -> {
+                    binding.loading.visibility = View.GONE
+                    binding.recyclerView.visibility = View.VISIBLE
+                    recyclerView.adapter = TrainerMetricAdapter(
+                        childFragmentManager,
+                        resource.data ?: listOf()
+                    ).apply {
+                        setOnMetricDeleteListener { metric -> showDeleteConfirmationDialog(metric) }
+                    }
+                }
             }
         }
 

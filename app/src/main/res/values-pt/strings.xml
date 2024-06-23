@@ -113,4 +113,5 @@
     <string name="create_metric_type">Criar Tipo de Métrica</string>
     <string name="metric_types_overview">Tipos de Métricas</string>
     <string name="metric_types">Tipos de Métricas</string>
+    <string name="loading">A carregar..</string>
 </resources>

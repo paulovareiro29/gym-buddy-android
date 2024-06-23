@@ -32,9 +32,17 @@ class ClientMetricsOverviewFragment : BaseFragment<FragmentClientMetricsBinding>
         recyclerView.adapter = MetricAdapter(listOf())
 
         viewModel.getMetrics(userId)
-        viewModel.metricsData.observe(viewLifecycleOwner) { request ->
-            if (request.status == AsyncData.Status.SUCCESS && request.data != null) {
-                recyclerView.adapter = MetricAdapter(request.data)
+        viewModel.metricsData.observe(viewLifecycleOwner) {
+            when (it.status) {
+                AsyncData.Status.LOADING -> {
+                    binding.loading.visibility = View.VISIBLE
+                    binding.recyclerViewMetrics.visibility = View.INVISIBLE
+                }
+                else -> {
+                    binding.loading.visibility = View.GONE
+                    binding.recyclerViewMetrics.visibility = View.VISIBLE
+                    recyclerView.adapter = MetricAdapter(it.data ?: listOf())
+                }
             }
         }
     }
